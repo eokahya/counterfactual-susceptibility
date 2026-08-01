@@ -1,0 +1,13 @@
+# Stage 1A Colab direct-dependency plan.
+#
+# Status: planned/unverified. This is deliberately not presented as an observed
+# transitive lock. The notebook installs torch from the official PyTorch cu124
+# index first, then installs this file from PyPI and verifies every direct pin.
+# A successful Colab run must record the complete resolved environment.
+
+torch==2.6.0
+transformer-lens==3.2.1
+transformers==4.57.3
+nnsight==0.6.1
+huggingface-hub==0.36.2
+circuit-tracer @ git+https://github.com/decoderesearch/circuit-tracer.git@8f1e2438df612464e229e44c4a00ff637bf9379b

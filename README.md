@@ -1,8 +1,10 @@
 # Counterfactual Susceptibility
 
-**Status:** Stage 0 repository scaffold and upstream API audit. No real-model
-experiment has been run, and this repository contains no empirical result or
-claim of mechanistic faithfulness.
+**Status:** Stage 1A / E0 is blocked, not complete. Exact asset pins,
+environment tooling, and a Colab handoff are prepared, but the pinned Gemma
+snapshot returned HTTP 403 for the configured credential and the local MPS
+runtime is unavailable. No real-model experiment has been run, and this
+repository contains no empirical result or claim of mechanistic faithfulness.
 
 This project studies a blind spot in sparse attribution graphs: a feature can be inactive on the baseline prompt yet become causally important after a small intervention removes an inhibitory influence. Active-only graphs cannot display such a feature before it crosses its activation threshold.
 
@@ -24,6 +26,30 @@ The primary empirical question is not whether this local linear score looks
 plausible. It is whether the score predicts actual gate crossings and output
 changes under interventions, with replacement-model and underlying-model
 evidence reported separately.
+
+## Stage 1A status
+
+Stage 1A selected the immutable model snapshot
+`google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the direct
+26-layer-weight download subset from the transcoder repository
+`mwhanna/gemma-scope-transcoders@bd5773156dea09893636c801df1237d0410307d2`.
+The pinned loader must consume the model from its exact-SHA local snapshot
+because the upstream replacement-model constructor has no model-revision
+argument.
+
+The intended local path is the TransformerLens backend with an explicit MPS
+probe, `bfloat16`, and CPU offload. On this machine, PyTorch reports MPS as
+built but unavailable and an actual MPS allocation fails, so the full run must
+not silently fall back to CPU. The Colab fallback handoff requires an explicit
+final project commit, probes CUDA/BF16 and VRAM, and uses the upstream official
+`disk` attribution offload policy.
+
+E0 remains blocked because the configured Hugging Face credential received
+HTTP 403 for the exact Gemma asset and no model/transcoder runtime was loaded.
+Prepared pins, access checks, configuration, environment tooling, or a Colab
+handoff do not constitute an empirical reproduction. No susceptibility
+prediction, intervention-induced gate crossing, behavioral importance,
+mediation, or underlying-model circuit has been established.
 
 ## Stage 0 scope
 

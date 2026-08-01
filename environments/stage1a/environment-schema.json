@@ -1,0 +1,30 @@
+{
+  "lock": {
+    "file": "requirements-lock-macos-arm64-py311.txt",
+    "format": "pip-freeze",
+    "provenance": "observed",
+    "python": "3.11.13"
+  },
+  "observation_scope": "macos-arm64-py311",
+  "planned_cuda": {
+    "requirements_plan": "requirements-colab-py311-cu124-planned.txt",
+    "observed": false,
+    "status": "planned_unverified"
+  },
+  "preflight_artifact": {
+    "artifact_type": "environment_manifest",
+    "required_envelope_fields": [
+      "artifact_type",
+      "schema_version",
+      "run_id",
+      "status",
+      "provenance",
+      "payload",
+      "warnings",
+      "deviations"
+    ],
+    "schema_version": 1
+  },
+  "schema_version": 1,
+  "stage": "stage1a"
+}

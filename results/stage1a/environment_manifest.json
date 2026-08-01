@@ -1,0 +1,612 @@
+{
+  "artifact_type": "environment_manifest",
+  "deviations": [
+    "CUDA/Colab was planned but not observed in this environment.",
+    "Local accelerator execution was unavailable; CPU is limited to metadata, tests, and small semantics."
+  ],
+  "payload": {
+    "accelerators": {
+      "cuda": {
+        "available": false,
+        "compiled_version": null,
+        "device_count": 0
+      },
+      "dtype_support": {
+        "cpu_bfloat16": {
+          "attempted": true,
+          "error": null,
+          "error_type": null,
+          "success": true
+        },
+        "cuda_bfloat16": {
+          "attempted": false,
+          "success": null
+        },
+        "mps_bfloat16": {
+          "attempted": false,
+          "success": null
+        }
+      },
+      "mps": {
+        "allocation_probe": {
+          "attempted": true,
+          "dtype": "float32",
+          "error": "The MPS backend is supported on macOS 14.0+. Current OS version can be queried using `sw_vers`",
+          "error_type": "RuntimeError",
+          "success": false
+        },
+        "available": false,
+        "built": true
+      },
+      "torch_importable": true
+    },
+    "assets": {
+      "model": {
+        "access_status": "manual_gated_access_required",
+        "local_snapshot_present": false,
+        "metadata_reported_bytes": null,
+        "repository_id": "google/gemma-2-2b",
+        "revision": "c5ebcd40d208330abc697524c919956e692655cf"
+      },
+      "transcoder": {
+        "access_status": "public_metadata_only",
+        "local_snapshot_present": false,
+        "metadata_reported_bytes": 7855395600,
+        "repository_id": "mwhanna/gemma-scope-transcoders",
+        "revision": "bd5773156dea09893636c801df1237d0410307d2"
+      }
+    },
+    "execution_policy": {
+      "current_runtime": {
+        "cpu_scope": "metadata_tests_and_small_semantics_only",
+        "fallback_enabled": false,
+        "fallback_used": false,
+        "full_model_execution_allowed": false,
+        "offload": "none",
+        "requested_dtype": "bfloat16",
+        "selected_device": "cpu"
+      },
+      "planned_colab": {
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "observed": false,
+        "offload": "disk"
+      }
+    },
+    "offline_only": true,
+    "packages": {
+      "circuit_tracer": {
+        "direct_url": {
+          "commit_id": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+          "requested_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+          "url": "https://github.com/decoderesearch/circuit-tracer.git",
+          "vcs": "git"
+        },
+        "version": "0.5.2"
+      },
+      "installed_inventory": [
+        {
+          "name": "accelerate",
+          "version": "1.14.0"
+        },
+        {
+          "name": "aiohappyeyeballs",
+          "version": "2.7.1"
+        },
+        {
+          "name": "aiohttp",
+          "version": "3.14.3"
+        },
+        {
+          "name": "aiosignal",
+          "version": "1.4.0"
+        },
+        {
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "name": "appnope",
+          "version": "0.1.4"
+        },
+        {
+          "name": "astor",
+          "version": "0.8.1"
+        },
+        {
+          "name": "asttokens",
+          "version": "3.0.2"
+        },
+        {
+          "name": "attrs",
+          "version": "26.1.0"
+        },
+        {
+          "name": "beartype",
+          "version": "0.22.9"
+        },
+        {
+          "name": "better-abc",
+          "version": "0.0.3"
+        },
+        {
+          "name": "bidict",
+          "version": "0.23.1"
+        },
+        {
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "name": "charset-normalizer",
+          "version": "3.4.9"
+        },
+        {
+          "name": "circuit-tracer",
+          "version": "0.5.2"
+        },
+        {
+          "name": "click",
+          "version": "8.4.2"
+        },
+        {
+          "name": "cloudpickle",
+          "version": "3.1.2"
+        },
+        {
+          "name": "comm",
+          "version": "0.2.3"
+        },
+        {
+          "name": "contourpy",
+          "version": "1.3.3"
+        },
+        {
+          "name": "cycler",
+          "version": "0.12.1"
+        },
+        {
+          "name": "datasets",
+          "version": "5.0.1"
+        },
+        {
+          "name": "debugpy",
+          "version": "1.8.21"
+        },
+        {
+          "name": "dill",
+          "version": "0.4.1"
+        },
+        {
+          "name": "einops",
+          "version": "0.8.2"
+        },
+        {
+          "name": "executing",
+          "version": "2.2.1"
+        },
+        {
+          "name": "fancy-einsum",
+          "version": "0.0.3"
+        },
+        {
+          "name": "filelock",
+          "version": "3.32.2"
+        },
+        {
+          "name": "fonttools",
+          "version": "4.63.0"
+        },
+        {
+          "name": "frozenlist",
+          "version": "1.8.0"
+        },
+        {
+          "name": "fsspec",
+          "version": "2026.6.0"
+        },
+        {
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "name": "hf-xet",
+          "version": "1.5.2"
+        },
+        {
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "name": "huggingface_hub",
+          "version": "0.36.2"
+        },
+        {
+          "name": "idna",
+          "version": "3.18"
+        },
+        {
+          "name": "ipykernel",
+          "version": "6.31.0"
+        },
+        {
+          "name": "ipython",
+          "version": "9.16.0"
+        },
+        {
+          "name": "ipython_pygments_lexers",
+          "version": "1.1.1"
+        },
+        {
+          "name": "ipywidgets",
+          "version": "8.1.8"
+        },
+        {
+          "name": "jaxtyping",
+          "version": "0.3.11"
+        },
+        {
+          "name": "jedi",
+          "version": "0.20.0"
+        },
+        {
+          "name": "Jinja2",
+          "version": "3.1.6"
+        },
+        {
+          "name": "jupyter_client",
+          "version": "8.9.1"
+        },
+        {
+          "name": "jupyter_core",
+          "version": "5.9.1"
+        },
+        {
+          "name": "jupyterlab_widgets",
+          "version": "3.0.16"
+        },
+        {
+          "name": "kiwisolver",
+          "version": "1.5.0"
+        },
+        {
+          "name": "markdown-it-py",
+          "version": "4.2.0"
+        },
+        {
+          "name": "MarkupSafe",
+          "version": "3.0.3"
+        },
+        {
+          "name": "matplotlib",
+          "version": "3.11.1"
+        },
+        {
+          "name": "matplotlib-inline",
+          "version": "0.2.2"
+        },
+        {
+          "name": "mdurl",
+          "version": "0.1.2"
+        },
+        {
+          "name": "mpmath",
+          "version": "1.3.0"
+        },
+        {
+          "name": "multidict",
+          "version": "6.7.1"
+        },
+        {
+          "name": "multiprocess",
+          "version": "0.70.19"
+        },
+        {
+          "name": "nest-asyncio",
+          "version": "1.6.0"
+        },
+        {
+          "name": "networkx",
+          "version": "3.6.1"
+        },
+        {
+          "name": "nnsight",
+          "version": "0.6.1"
+        },
+        {
+          "name": "numpy",
+          "version": "2.4.6"
+        },
+        {
+          "name": "packaging",
+          "version": "26.2"
+        },
+        {
+          "name": "pandas",
+          "version": "3.0.5"
+        },
+        {
+          "name": "parso",
+          "version": "0.8.7"
+        },
+        {
+          "name": "pexpect",
+          "version": "4.9.0"
+        },
+        {
+          "name": "pillow",
+          "version": "12.3.0"
+        },
+        {
+          "name": "pip",
+          "version": "24.0"
+        },
+        {
+          "name": "platformdirs",
+          "version": "4.11.0"
+        },
+        {
+          "name": "prompt_toolkit",
+          "version": "3.0.53"
+        },
+        {
+          "name": "propcache",
+          "version": "0.5.2"
+        },
+        {
+          "name": "protobuf",
+          "version": "7.35.1"
+        },
+        {
+          "name": "psutil",
+          "version": "7.2.2"
+        },
+        {
+          "name": "ptyprocess",
+          "version": "0.7.0"
+        },
+        {
+          "name": "pure_eval",
+          "version": "0.2.3"
+        },
+        {
+          "name": "pyarrow",
+          "version": "25.0.0"
+        },
+        {
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "name": "pydantic_core",
+          "version": "2.46.4"
+        },
+        {
+          "name": "Pygments",
+          "version": "2.20.0"
+        },
+        {
+          "name": "pyparsing",
+          "version": "3.3.2"
+        },
+        {
+          "name": "python-dateutil",
+          "version": "2.9.0.post0"
+        },
+        {
+          "name": "python-engineio",
+          "version": "4.13.4"
+        },
+        {
+          "name": "python-socketio",
+          "version": "5.16.3"
+        },
+        {
+          "name": "PyYAML",
+          "version": "6.0.3"
+        },
+        {
+          "name": "pyzmq",
+          "version": "27.1.0"
+        },
+        {
+          "name": "regex",
+          "version": "2026.7.19"
+        },
+        {
+          "name": "requests",
+          "version": "2.34.2"
+        },
+        {
+          "name": "rich",
+          "version": "15.0.0"
+        },
+        {
+          "name": "safetensors",
+          "version": "0.8.0"
+        },
+        {
+          "name": "seaborn",
+          "version": "0.13.2"
+        },
+        {
+          "name": "sentencepiece",
+          "version": "0.2.2"
+        },
+        {
+          "name": "sentry-sdk",
+          "version": "2.66.1"
+        },
+        {
+          "name": "setuptools",
+          "version": "83.0.0"
+        },
+        {
+          "name": "simple-websocket",
+          "version": "1.1.0"
+        },
+        {
+          "name": "six",
+          "version": "1.17.0"
+        },
+        {
+          "name": "stack-data",
+          "version": "0.6.3"
+        },
+        {
+          "name": "sympy",
+          "version": "1.14.0"
+        },
+        {
+          "name": "tokenizers",
+          "version": "0.22.2"
+        },
+        {
+          "name": "toml",
+          "version": "0.10.2"
+        },
+        {
+          "name": "torch",
+          "version": "2.13.0"
+        },
+        {
+          "name": "tornado",
+          "version": "6.5.7"
+        },
+        {
+          "name": "tqdm",
+          "version": "4.70.0"
+        },
+        {
+          "name": "traitlets",
+          "version": "5.16.0"
+        },
+        {
+          "name": "transformer-lens",
+          "version": "3.2.1"
+        },
+        {
+          "name": "transformers",
+          "version": "4.57.3"
+        },
+        {
+          "name": "transformers-stream-generator",
+          "version": "0.0.5"
+        },
+        {
+          "name": "typeguard",
+          "version": "4.6.0"
+        },
+        {
+          "name": "typing-inspection",
+          "version": "0.4.2"
+        },
+        {
+          "name": "typing_extensions",
+          "version": "4.16.0"
+        },
+        {
+          "name": "urllib3",
+          "version": "2.7.0"
+        },
+        {
+          "name": "wadler_lindig",
+          "version": "0.1.7"
+        },
+        {
+          "name": "wandb",
+          "version": "0.28.1"
+        },
+        {
+          "name": "wcwidth",
+          "version": "0.8.2"
+        },
+        {
+          "name": "websocket-client",
+          "version": "1.9.0"
+        },
+        {
+          "name": "widgetsnbextension",
+          "version": "4.0.15"
+        },
+        {
+          "name": "wsproto",
+          "version": "1.3.2"
+        },
+        {
+          "name": "xxhash",
+          "version": "3.8.1"
+        },
+        {
+          "name": "yarl",
+          "version": "1.24.5"
+        },
+        {
+          "name": "zstandard",
+          "version": "0.25.0"
+        }
+      ],
+      "versions": {
+        "circuit-tracer": "0.5.2",
+        "huggingface-hub": "0.36.2",
+        "nnsight": "0.6.1",
+        "numpy": "2.4.6",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.22.2",
+        "torch": "2.13.0",
+        "transformer-lens": "3.2.1",
+        "transformers": "4.57.3"
+      }
+    },
+    "platform": {
+      "chip": "Apple M2 Max",
+      "cpu_count": 12,
+      "disk": {
+        "free_bytes": 564026503168,
+        "total_bytes": 994662584320
+      },
+      "machine": "arm64",
+      "macos_version": "26.5.2",
+      "physical_memory_bytes": 34359738368,
+      "system": "Darwin"
+    },
+    "privacy": {
+      "credential_files_inspected": false,
+      "credential_values_read": false,
+      "private_paths_emitted": false
+    },
+    "python": {
+      "implementation": "CPython",
+      "version": "3.11.13"
+    }
+  },
+  "provenance": {
+    "base_commit": "7aacf30d888f96a29a1cfc82d035fca489ed0c17",
+    "code_commit": null,
+    "code_revision_status": "uncommitted_worktree",
+    "environment_lock": "requirements-lock-macos-arm64-py311.txt",
+    "lock_format": "pip-freeze",
+    "lock_provenance": "observed",
+    "observation_scope": "macos-arm64-py311",
+    "stage": "stage1a",
+    "upstream_commit": "8f1e2438df612464e229e44c4a00ff637bf9379b"
+  },
+  "run_id": "stage1a-local-preflight",
+  "schema_version": 1,
+  "status": "observed",
+  "warnings": [
+    "full_model_execution_not_ready",
+    "model_snapshot_missing",
+    "mps_allocation_probe_failed",
+    "mps_built_but_unavailable",
+    "transcoder_snapshot_missing"
+  ]
+}

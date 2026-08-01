@@ -115,3 +115,73 @@ worked example, or execute E0 model reproductions during Stage 0. Each option
 would respectively change the fixed mathematics, hide an upstream-dependent
 boundary, leave the acceptance test without a source example, or violate the
 stage's offline safety boundary.
+
+## D-009 — 2026-08-01 — Pin direct Stage 1A assets and reject a transitively mutable alias target
+
+**Decision:** Select the exact model snapshot
+`google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the exact
+transcoder snapshot
+`mwhanna/gemma-scope-transcoders@bd5773156dea09893636c801df1237d0410307d2`.
+The model must be consumed from an exact-SHA local snapshot because the pinned
+upstream replacement-model constructor has no model-revision argument. Pass
+the transcoder as an explicit `repo@sha`; do not use the bare `gemma` shortcut.
+
+**Reason:** At the pinned `circuit-tracer` revision, the `gemma` loader alias
+maps to `mwhanna/gemma-scope-transcoders`, whose selected revision directly
+contains the 26 safetensors files. The upstream README instead names
+`mntss/gemma-scope-transcoders@9250a2d4860ce5ed5c96c14d5882b7d8162809a3`,
+but that repository's pinned configuration contains 26 unrevisioned
+`hf://google/gemma-scope-2b-pt-transcoders/.../params.npz` references. Pinning
+the outer `mntss` repository therefore does not transitively freeze the Google
+assets, even though the currently inspected Google source revision is
+`50eec2f25c60545a9a74c1c3a26a0afdd0b4b872`.
+
+**Alternatives considered:** Use the unrevisioned `gemma` shortcut; select the
+README's outer `mntss` pin without pinning all referenced Google assets; or use
+a floating model identifier. Each would leave at least one consumed artifact
+mutable or make the exact runtime unrecoverable.
+
+## D-010 — 2026-08-01 — Make device, dtype, and offload policy explicit by environment
+
+**Decision:** The intended local path uses the TransformerLens backend, probes
+MPS with a real allocation before loading assets, uses `bfloat16`, and uses CPU
+offload where the upstream API supports it. If the probe fails, do not silently
+run the full attribution or intervention workload on CPU; CPU is limited to
+metadata, tokenizer/configuration checks, unit tests, and small semantic
+checks. The prepared Colab fallback must probe CUDA explicitly, use `bfloat16`
+when supported, and use the upstream official `disk` attribution offload
+policy.
+
+**Reason:** The local PyTorch environment reports MPS as built but unavailable,
+and an actual MPS allocation raises an OS-version error; CUDA is also absent.
+A silent full CPU fallback would turn an explicit feasibility failure into an
+unbounded run. The official Colab path is the supported way to obtain CUDA and
+disk offload while keeping device behavior recorded and reviewable.
+
+**Alternatives considered:** Force MPS despite the failed allocation, silently
+fall back to CPU for the full workload, use `float32` everywhere, or use disk
+offload locally. These options respectively ignore a hard runtime failure,
+hide a material execution change, increase memory pressure unnecessarily, or
+depart from the prepared environment-specific policy.
+
+## D-011 — 2026-08-01 — Define the E0 completion boundary by executed runtime evidence
+
+**Decision:** E0 is complete only after the exact pinned assets are actually
+consumed and all of the following pass: the full official Dallas attribution
+produces a nonempty validated graph; the official Spanish intervention is
+validated at baseline, no-op, half, and full strengths; loaded-runtime
+preactivation, activation, raw-threshold, strict-gate, inactive-observability,
+and absolute-intervention-value mapping checks pass; validation summaries and
+checksums are recorded; and the Stage 0 plus new Stage 1A checks pass. Stage 1B
+must not begin before this boundary is met.
+
+**Reason:** Exact pins, access/download checks, environment preparation,
+configuration, and a Colab handoff establish reproducibility prerequisites but
+do not reproduce an attribution or intervention and do not verify semantics of
+the loaded runtime. The current Stage 1A verdict is therefore blocked, not
+complete.
+
+**Alternatives considered:** Mark E0 complete when metadata is pinned, when
+assets download, when a notebook is prepared, or after only one official run.
+None supplies the combined runtime and semantic evidence required before
+susceptibility work begins.

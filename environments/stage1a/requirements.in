@@ -1,0 +1,3 @@
+# Human-maintained direct dependency for the audited upstream reproduction.
+# Do not replace the immutable commit with a branch, tag, or PyPI release.
+circuit-tracer @ git+https://github.com/decoderesearch/circuit-tracer.git@8f1e2438df612464e229e44c4a00ff637bf9379b

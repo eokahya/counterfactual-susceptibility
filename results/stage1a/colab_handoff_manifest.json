@@ -1,0 +1,50 @@
+{
+  "artifact_type": "colab_handoff_manifest",
+  "deviations": [
+    "The planned Colab runtime uses CUDA with torch 2.6.0+cu124 instead of the observed macOS MPS environment.",
+    "The planned Colab attribution uses disk offload instead of the tracked macOS configuration's CPU offload."
+  ],
+  "payload": {
+    "assets": {
+      "model": {
+        "repository": "google/gemma-2-2b",
+        "revision": "c5ebcd40d208330abc697524c919956e692655cf"
+      },
+      "transcoder": {
+        "repository": "mwhanna/gemma-scope-transcoders",
+        "revision": "bd5773156dea09893636c801df1237d0410307d2"
+      }
+    },
+    "environment_plan": {
+      "cuda_backend": "cu124",
+      "platform": "linux-x86_64",
+      "python": "3.11",
+      "requirements": "environments/stage1a/requirements-colab-py311-cu124-planned.txt",
+      "torch": "2.6.0"
+    },
+    "execution": {
+      "base_config": "configs/stage1a_gemma2_2b_official_reproduction.yaml",
+      "entrypoint": "scripts/stage1a/run_stage1a.py",
+      "notebook": "notebooks/stage1a_official_reproduction_colab.ipynb",
+      "project_commit_input": "required_40_character_stage1a_branch_head",
+      "repository_ref": "stage-1a-reproduction",
+      "runtime_overrides": {
+        "attribution_offload": "disk",
+        "device": "cuda"
+      }
+    },
+    "handoff_state": "prepared_unverified"
+  },
+  "provenance": {
+    "project_repository": "https://github.com/eokahya/counterfactual-susceptibility.git",
+    "project_ref": "stage-1a-reproduction",
+    "upstream_repository": "https://github.com/decoderesearch/circuit-tracer.git",
+    "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b"
+  },
+  "run_id": "stage1a-colab-handoff-prepared-v1",
+  "schema_version": 1,
+  "status": "blocked",
+  "warnings": [
+    "Notebook preparation is not an empirical reproduction; completion requires validated artifacts from an actual compatible Colab GPU runtime."
+  ]
+}

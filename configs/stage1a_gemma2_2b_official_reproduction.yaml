@@ -1,0 +1,57 @@
+schema_version: 1
+experiment_name: stage1a_gemma2_2b_official_reproduction
+
+upstream:
+  repository: https://github.com/decoderesearch/circuit-tracer
+  revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+
+model:
+  identifier: google/gemma-2-2b
+  revision: c5ebcd40d208330abc697524c919956e692655cf
+  snapshot_path: results/generated/stage1a/assets/google-gemma-2-2b
+
+transcoder:
+  identifier: mwhanna/gemma-scope-transcoders
+  revision: bd5773156dea09893636c801df1237d0410307d2
+  snapshot_path: results/generated/stage1a/assets/mwhanna-gemma-scope-transcoders
+
+runtime:
+  backend: transformerlens
+  device: mps
+  dtype: bfloat16
+
+seeds:
+  python: 0
+  numpy: 0
+  torch: 0
+
+asset_policy:
+  allow_download: true
+  require_offline_execution: true
+
+attribution:
+  prompt: "The capital of state containing Dallas is"
+  max_n_logits: 10
+  desired_logit_probability: 0.95
+  max_feature_nodes: 8192
+  batch_size: 256
+  offload: cpu
+
+intervention:
+  prompt: "Hecho: Michael Jordan juega al"
+  feature:
+    layer: 20
+    position: -1
+    feature_id: 341
+  alphas: [0.0, 0.5, 1.0]
+  freeze_attention: true
+  constrained_layers: null
+
+artifacts:
+  raw_graph: results/generated/stage1a/official_attribution_graph.pt
+  environment_manifest: results/stage1a/environment_manifest.json
+  asset_manifest: results/stage1a/asset_manifest.json
+  attribution_summary: results/stage1a/attribution_summary.json
+  intervention_summary: results/stage1a/intervention_summary.json
+  semantics_summary: results/stage1a/semantics_summary.json
+  checksums: results/stage1a/checksums.sha256

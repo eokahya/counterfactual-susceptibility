@@ -27,9 +27,12 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.pytest.ini_options]
-addopts = "-ra --strict-config --strict-markers"
+addopts = "-ra --strict-config --strict-markers -m 'not model'"
 pythonpath = ["src"]
 testpaths = ["tests"]
+markers = [
+  "model: requires explicit opt-in, immutable local model/transcoder snapshots, and the optional Stage 1A runtime",
+]
 
 [tool.ruff]
 target-version = "py311"
