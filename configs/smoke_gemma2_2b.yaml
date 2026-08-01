@@ -1,0 +1,46 @@
+experiment:
+  name: smoke_gemma2_2b
+  status: future_smoke_not_executed
+  seed: 0
+
+backend:
+  name: circuit_tracer
+  upstream_repository: https://github.com/decoderesearch/circuit-tracer
+  upstream_revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+
+model:
+  identifier: google/gemma-2-2b
+  revision: TO_BE_PINNED
+  dtype: bfloat16
+  device: auto
+  offload: cpu
+
+transcoder:
+  # Upstream v0.5.2 source and README disagree; see UPSTREAM_API_AUDIT.md.
+  identifier: TO_BE_RESOLVED_AFTER_UPSTREAM_IDENTIFIER_MISMATCH
+  revision: TO_BE_PINNED
+
+prompt:
+  text: "The capital of France is"
+
+target_metric:
+  type: logit_difference
+  positive_token: " Paris"
+  negative_token: " London"
+
+candidate_generation:
+  k_margin_per_layer_position: 128
+  max_active_sources: 32
+
+numerics:
+  susceptibility_epsilon: 1.0e-12
+  crossing_tolerance: 1.0e-9
+
+intervention:
+  convention: "source_activation -> (1 - alpha) * source_activation"
+  alpha_grid: [0.0, 0.25, 0.5, 0.75, 1.0]
+
+execution:
+  allow_model_download: false
+  save_large_activations: false
+  generated_results_directory: results/generated/smoke_gemma2_2b

@@ -1,0 +1,12 @@
+\section{Related Work}
+\label{sec:related}
+
+This project builds on sparse autoencoder and transcoder methods, cross-layer replacement models, attribution graphs, activation patching, causal tracing, and feature intervention. Anthropic's circuit-tracing work explicitly identifies inactive, suppressed features as a limitation of active-only attribution graphs and suggests searching for features that are one ablation away from activation \citep{ameisen2025circuit}.
+
+Counterfactual interventions can reveal causal dependencies but can also produce ambiguous effects or miss relevant causes when the intervention is poorly chosen \citep{mueller2024counterfactuals}. We therefore use continuous source-suppression sweeps, report minimum verified intervention strengths, and separate predictions in the local replacement model from observations in the underlying model.
+
+Self-repair and nonlinear interactions can cause both gradient and ablation methods to underestimate component importance \citep{edin2025gim}. These effects motivate explicit calibration of local susceptibility predictions against intervention ground truth rather than treating a first-order score as a conclusion.
+
+Benchmarks with known circuits provide a complementary way to test whether a discovery method retrieves true causal structure \citep{gupta2024interpbench}. Our planned initial synthetic tests will serve this role for threshold-crossing and inhibitory-edge recovery; the main empirical target remains sparse features in open language models.
+
+The final review will distinguish counterfactual inactive-feature discovery from active-node attribution, contrastive activation analysis, feature steering, sensitivity analysis, and global circuit localization.

@@ -1,0 +1,22 @@
+\section{Experimental Design}
+\label{sec:experiments}
+
+\subsection{Evaluation ladder}
+
+We proceed from synthetic verification to open-model experiments. First, a small thresholded feature network with known inhibitory edges tests the formulas and numerical edge cases. Second, an open language model with pretrained transcoders is used to measure the prevalence of intervention-induced gate crossings. Third, held-out prompts are used to compare susceptibility against preregistered baselines. Finally, high-ranked pairs are tested with behavioral and mediation interventions.
+
+\subsection{Ground-truth intervention sweeps}
+
+For each selected active source, we sweep $\alpha$ from zero to one, record target preactivations and activations, bracket any gate crossing, and estimate the observed critical $\alpha^\star$ by binary search. We record replacement-model and underlying-model consequences separately.
+
+\subsection{Baselines}
+
+The primary baselines are random inactive targets, margin alone, inhibitory response alone, downstream gradient alone, and an unthresholded product of response and gradient. On a smaller subset, exhaustive intervention provides an oracle discovery reference.
+
+\subsection{Metrics}
+
+Gate-crossing prediction is measured with AUPRC, precision at fixed candidate budgets, and candidate-generation recall. Critical-strength prediction is measured with rank correlation, absolute error, and calibration. Behavioral predictions are evaluated by sign accuracy and normalized error. Mediation experiments report signed mediated effects and matched random-target controls. Efficiency is reported in interventions, accelerator time, and peak memory.
+
+\subsection{Generalization and controls}
+
+Discovery and evaluation prompts will be disjoint. Any key results will be checked across random seeds, dictionary sizes, and, if feasible, a second model family. Planned controls include matched random subspaces or features, non-inhibitory source--target pairs, and intervention strengths below the predicted threshold.

@@ -1,0 +1,98 @@
+\section{Counterfactual Susceptibility}
+\label{sec:method}
+
+\subsection{Single-source suppression}
+
+Fix a prompt and an inactive target feature $i$ with positive margin
+\begin{equation}
+    m_i=\tau_i-z_i>0.
+\end{equation}
+Let $j$ be an active upstream feature with activation $a_j$. We consider suppressing its activation by a fraction $\alpha\in[0,1]$.
+Our intervention convention is
+\begin{equation}
+    a_j \mapsto (1-\alpha)a_j,
+\end{equation}
+so $\alpha=0$ leaves the source unchanged and $\alpha=1$ fully suppresses it.
+
+Let
+\begin{equation}
+    J_{ij}=\frac{\partial z_i}{\partial a_j}
+\end{equation}
+be the prompt-local response of the target preactivation to the source activation under a declared linearization convention. The first-order counterfactual target preactivation is
+\begin{equation}
+    \widehat z_i(\alpha)=z_i-\alpha a_jJ_{ij}.
+\end{equation}
+
+Define the movement toward the target threshold under full source suppression as
+\begin{equation}
+    q_{j\rightarrow i}=-a_jJ_{ij}.
+\end{equation}
+For an active source with positive activation, an inhibitory local relation has
+$J_{ij}<0$, hence $q_{j\rightarrow i}>0$: suppressing the source raises the
+predicted target preactivation. Conversely, $q_{j\rightarrow i}\leq 0$ does not
+move the target toward its gate under this intervention. These statements are
+prompt-local, first-order predictions; finite interventions may change active
+sets and other nonlinear model states, so crossings must be verified by an
+intervention sweep.
+For $q_{j\rightarrow i}>0$, the predicted critical intervention is
+\begin{equation}
+    \widehat\alpha^\star_{j\rightarrow i}
+    =\frac{m_i}{q_{j\rightarrow i}}.
+\end{equation}
+A full suppression reaches or exceeds the threshold in the local-linear
+preactivation when $\widehat\alpha^\star_{j\rightarrow i}\leq 1$. At equality,
+the prediction lands exactly at $z_i=\tau_i$; whether this activates the feature
+depends on whether the loaded nonlinearity uses a strict or non-strict threshold
+comparison. We therefore treat equality, and values within numerical tolerance
+of it, as boundary cases rather than definite crossings.
+
+\subsection{Dimensionless susceptibility}
+
+We define pairwise counterfactual susceptibility as
+\begin{equation}
+    S_{j\rightarrow i}
+    =\frac{q_{j\rightarrow i}}{m_i+\varepsilon}.
+    \label{eq:susceptibility}
+\end{equation}
+For the unregularized score ($\varepsilon=0$), and away from numerical tolerance
+boundaries, $S_{j\rightarrow i}>1$ is equivalent to
+$\widehat\alpha^\star_{j\rightarrow i}<1$. With $\varepsilon>0$, however,
+$S_{j\rightarrow i}>1$ requires $q_{j\rightarrow i}>m_i+\varepsilon$ and is
+therefore a conservative sufficient condition for a strict full-suppression
+crossing, not an exact equivalence.
+
+The predicted target activation at intervention strength $\alpha$ is
+\begin{equation}
+    \widehat a_i(\alpha)
+    =\phi_i\!\left(z_i-\alpha a_jJ_{ij}\right).
+\end{equation}
+
+\subsection{Behavior-weighted salience}
+
+Let $T$ be a scalar target metric and
+\begin{equation}
+    g_i=\frac{\partial T}{\partial a_i}.
+\end{equation}
+We define a first-order behavior-weighted score
+\begin{equation}
+    B_{j\rightarrow i}(\alpha)
+    =|g_i|\,|\widehat a_i(\alpha)-a_i|.
+\end{equation}
+We evaluate $S$ and $B$ separately: activation ease is not behavioral importance.
+
+\subsection{Causal mediation}
+
+For a verified source--target pair, let $\Delta T_j$ denote the behavior change under source suppression and let $\Delta T_{j,i0}$ denote the change when the source is suppressed while the target is clamped inactive. The signed mediated effect is
+\begin{equation}
+    \Delta T^{\mathrm{med}}_{j\rightarrow i}
+    =\Delta T_j-\Delta T_{j,i0}.
+\end{equation}
+When numerically stable, we also report the mediated fraction
+\begin{equation}
+    \mathrm{MF}_{j\rightarrow i}
+    =\frac{\Delta T^{\mathrm{med}}_{j\rightarrow i}}{\Delta T_j}.
+\end{equation}
+
+\subsection{Candidate generation}
+
+A full dictionary search is computationally prohibitive. We therefore use a staged search: retain near-threshold inactive features, filter for positive predicted movement under selected source suppressions, and optionally prioritize features with large downstream behavioral response. Candidate recall is audited against a smaller brute-force intervention subset.

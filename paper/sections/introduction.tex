@@ -1,0 +1,21 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Mechanistic interpretability aims to identify internal variables and causal pathways that explain model behavior. Sparse feature dictionaries and attribution graphs make this problem more tractable by replacing dense neural activations with a smaller set of active, potentially interpretable features \citep{ameisen2025circuit,lindsey2025biology}. Their sparsity is also a structural limitation: the graph for a prompt is normally built from features active on that prompt.
+
+An inactive feature need not be causally irrelevant. It may lie just below its activation threshold because one or more active upstream features inhibit it. Suppressing an upstream feature can move the inactive feature across its gate, recruit a previously invisible pathway, and change the model's output. An active-only graph cannot display this pathway before the intervention.
+
+We study the following prediction problem: given a baseline prompt, an active source feature, an inactive target feature, and a declared intervention family, can we predict (i) whether the target will activate, (ii) the intervention strength at which it activates, and (iii) whether the new activation mediates a behavior change?
+
+Our proposed framework separates three claims that are often conflated. \emph{Activation susceptibility} measures how close a feature is to being recruited by a particular intervention. \emph{Behavioral salience} estimates the consequence of that recruitment for a target metric. \emph{Causal mediation} tests whether the recruited feature explains part of the source intervention's behavioral effect.
+
+The intended contributions are:
+\begin{enumerate}
+    \item a dimensionless, prompt-local susceptibility score derived from activation margins and source-to-target responses;
+    \item a candidate-generation procedure for searching large inactive dictionaries without exhaustive intervention;
+    \item a benchmark based on continuous intervention sweeps, measured critical intervention strengths, and held-out prompts;
+    \item mediation experiments that distinguish behaviorally meaningful counterfactual circuits from incidental gate crossings;
+    \item an augmentation of active-only attribution graphs with empirically verified inactive nodes and inhibitory edges.
+\end{enumerate}
+
+This version defines the hypotheses and experimental protocol. Results will be added only after the full pipeline is reproduced and audited.

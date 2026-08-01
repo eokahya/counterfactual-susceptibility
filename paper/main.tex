@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+\usepackage[numbers,sort&compress]{natbib}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ind}{\mathbb{I}}
+\newcommand{\CS}{\mathrm{CS}}
+
+\title{Counterfactual Susceptibility:\\Discovering Inactive and Inhibitory Circuits in Language Models}
+\author{Anonymous Authors}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Sparse attribution graphs typically describe features that are active on a baseline prompt. This leaves out counterfactual mechanisms in which an inactive feature is held below threshold by an active inhibitory pathway but becomes causally important after a small intervention. We introduce \emph{counterfactual susceptibility}, a prompt-local score that combines a target feature's activation margin with the response of its preactivation to a specified upstream intervention. We distinguish ease of activation from predicted behavioral salience and propose intervention sweeps and mediation tests as ground truth. This manuscript is a research scaffold: no empirical claims are made until the method is validated in both replacement and underlying models.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/background}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/limitations}
+\input{sections/related_work}
+\input{sections/conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\appendix
+\section{Reproducibility Checklist}
+The final version will report code revisions, model and dictionary revisions, configurations, random seeds, hardware, prompt-generation procedures, and complete metric tables.
+
+\end{document}

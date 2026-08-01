@@ -1,0 +1,18 @@
+\section{Background}
+\label{sec:background}
+
+\subsection{Sparse replacement models and attribution graphs}
+
+Cross-layer transcoders replace dense MLP computations with sparse feature activations whose decoder outputs can write to later layers. A local replacement model can then be used to construct prompt-specific feature interaction graphs \citep{ameisen2025circuit}. These graphs are useful hypothesis generators, but their relation to the underlying model must be checked by interventions.
+
+\subsection{Thresholded features}
+
+Let feature $i$ have preactivation $z_i$ and threshold $\tau_i$, with activation
+\begin{equation}
+    a_i=\phi_i(z_i),
+\end{equation}
+where $\phi_i$ is the exact nonlinearity used by the loaded dictionary. We deliberately leave the implementation-specific JumpReLU convention abstract here; the empirical code must read thresholds, biases, and activation semantics from the pinned model implementation.
+
+\subsection{The active-only blind spot}
+
+If $a_i=0$, feature $i$ is normally absent from the baseline attribution graph. Yet a perturbation can alter $z_i$, change the active set, and recruit feature $i$ into the downstream computation. This is especially important for inhibitory mechanisms and for evaluating local linear approximations under interventions.
