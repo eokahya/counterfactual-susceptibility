@@ -678,6 +678,8 @@ def test_t4_loader_uses_the_low_cpu_memory_model_path() -> None:
     assert "T4_TRANSFORMERLENS_CONTEXT_LENGTH = 512" in source
     assert "with torch.device(device):" in source
     assert '"direct_cuda_destination"' in source
+    assert '"device_map": {"": device}' in source
+    assert "after releasing the HF source model" in source
 
 
 def test_t4_transformerlens_destination_is_constructed_in_device_context(
@@ -686,7 +688,6 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
     events: list[object] = []
     fake_config = SimpleNamespace()
     fake_state_dict = {"weight": object()}
-    fake_transcoders = object()
 
     class FakeLoading:
         @staticmethod
@@ -710,9 +711,6 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
 
         def move_model_modules_to_device(self) -> None:
             events.append("move")
-
-        def _configure_replacement_model(self, transcoders: object) -> None:
-            events.append(("configure", transcoders))
 
     class FakeDeviceContext:
         def __enter__(self) -> None:
@@ -740,7 +738,6 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         torch=fake_torch,
         hf_model=fake_hf_model,
         tokenizer="tokenizer",
-        transcoders=fake_transcoders,
         device="cuda",
         dtype="float16",
     )
@@ -759,7 +756,7 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         )
         < events.index("device_exit")
     )
-    assert ("configure", fake_transcoders) in events
+    assert "move" in events
 
 
 @pytest.mark.parametrize(

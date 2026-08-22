@@ -135,7 +135,6 @@ def _load_transformerlens_replacement_model_t4(
     torch: Any,
     hf_model: Any,
     tokenizer: Any,
-    transcoders: Any,
     device: Any,
     dtype: Any,
 ) -> Any:
@@ -195,7 +194,6 @@ def _load_transformerlens_replacement_model_t4(
         center_unembed=False,
     )
     model.move_model_modules_to_device()
-    model._configure_replacement_model(transcoders)
     return model
 
 
@@ -756,6 +754,7 @@ def load_runtime(
         inventory=inventories["selected_transcoder"],
         role="transcoder",
     )
+    print("Verifying exact pinned snapshot contents", flush=True)
     model_verified_files = _verify_snapshot_files(
         snapshot=model_path,
         inventory=inventories["model"],
@@ -768,6 +767,7 @@ def load_runtime(
         required_files=TRANSCODER_REQUIRED_FILES,
         role="transcoder",
     )
+    print("Exact pinned snapshot contents verified", flush=True)
     # Network access, if explicitly granted, ends at immutable snapshot resolution.
     # Scientific execution below is always local-only.
     os.environ["HF_HUB_OFFLINE"] = "1"
@@ -785,18 +785,20 @@ def load_runtime(
         raise Stage1ABlocked("official reproduction requires per-layer transcoders")
 
     layer_files = _numeric_layer_files(transcoder_path)
-    transcoders = load_transcoder_set(
-        layer_files,
-        scan_name=f"{TRANSCODER_ID}@{TRANSCODER_REVISION}",
-        feature_input_hook=transcoder_config["feature_input_hook"],
-        feature_output_hook=transcoder_config["feature_output_hook"],
-        activation=transcoder_config.get("activation"),
-        k=transcoder_config.get("k"),
-        device=device,
-        dtype=dtype,
-        lazy_encoder=False,
-        lazy_decoder=bool(transcoder_section.get("lazy_decoder", True)),
-    )
+    transcoders = None
+    if dtype_name != "float16":
+        transcoders = load_transcoder_set(
+            layer_files,
+            scan_name=f"{TRANSCODER_ID}@{TRANSCODER_REVISION}",
+            feature_input_hook=transcoder_config["feature_input_hook"],
+            feature_output_hook=transcoder_config["feature_output_hook"],
+            activation=transcoder_config.get("activation"),
+            k=transcoder_config.get("k"),
+            device=device,
+            dtype=dtype,
+            lazy_encoder=False,
+            lazy_decoder=bool(transcoder_section.get("lazy_decoder", True)),
+        )
 
     try:
         tokenizer = AutoTokenizer.from_pretrained(
@@ -831,7 +833,16 @@ def load_runtime(
             torch_dtype=dtype,
             attn_implementation="eager",
             low_cpu_mem_usage=True,
+            **({"device_map": {"": device}} if dtype_name == "float16" else {}),
         )
+        if dtype_name == "float16" and any(
+            parameter.device.type != device.type for parameter in hf_model.parameters()
+        ):
+            raise Stage1ABlocked(
+                "the T4 Hugging Face source model was not fully streamed to CUDA"
+            )
+        if dtype_name == "float16":
+            print("Pinned Hugging Face source model is resident on CUDA", flush=True)
         if dtype_name == "float16":
             print(
                 "Converting the pinned model into TransformerLens with the T4 "
@@ -842,7 +853,6 @@ def load_runtime(
                 torch=torch,
                 hf_model=hf_model,
                 tokenizer=tokenizer,
-                transcoders=transcoders,
                 device=device,
                 dtype=dtype,
             )
@@ -863,6 +873,24 @@ def load_runtime(
         gc.collect()
         if device.type == "cuda":
             torch.cuda.empty_cache()
+        if dtype_name == "float16":
+            print(
+                "Loading the pinned transcoders after releasing the HF source model",
+                flush=True,
+            )
+            transcoders = load_transcoder_set(
+                layer_files,
+                scan_name=f"{TRANSCODER_ID}@{TRANSCODER_REVISION}",
+                feature_input_hook=transcoder_config["feature_input_hook"],
+                feature_output_hook=transcoder_config["feature_output_hook"],
+                activation=transcoder_config.get("activation"),
+                k=transcoder_config.get("k"),
+                device=device,
+                dtype=dtype,
+                lazy_encoder=False,
+                lazy_decoder=bool(transcoder_section.get("lazy_decoder", True)),
+            )
+            model._configure_replacement_model(transcoders)
         print("Pinned model and transcoder runtime loaded", flush=True)
     except Exception as exc:
         raise Stage1ABlocked(

@@ -103,12 +103,14 @@ def main(argv: list[str] | None = None) -> int:
         if (args.model_snapshot is None) != (args.transcoder_snapshot is None):
             raise ValueError("snapshot overrides must be supplied together")
         stage = "runtime_loading"
+        print("Worker entering immutable runtime loading", flush=True)
         bundle = load_runtime(
             config,
             allow_download=False,
             model_snapshot=args.model_snapshot,
             transcoder_snapshot=args.transcoder_snapshot,
         )
+        print("Worker completed immutable runtime loading", flush=True)
         artifacts = _mapping(config.get("artifacts"), "artifacts")
         stage = "environment_observation"
         write_json_atomic(

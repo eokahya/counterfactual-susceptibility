@@ -391,12 +391,14 @@ def main(argv: list[str] | None = None) -> int:
     result_directory.mkdir(parents=True, exist_ok=True)
     generated_directory.mkdir(parents=True, exist_ok=True)
     try:
+        print("Resolving and verifying the pinned Stage 1A assets", flush=True)
         _write_metadata_artifacts(
             config,
             allow_download=args.allow_download,
             model_snapshot=args.model_snapshot,
             transcoder_snapshot=args.transcoder_snapshot,
         )
+        print("Pinned Stage 1A assets are ready", flush=True)
     except Exception as error:
         terminal_status = classify_t4_failure(error)
         manifest = _write_manifest(
@@ -431,6 +433,7 @@ def main(argv: list[str] | None = None) -> int:
     child_environment.pop("HUGGING_FACE_HUB_TOKEN", None)
 
     for batch_size in validated.oom_retry.batch_sizes:
+        print(f"Starting isolated T4 worker at batch {batch_size}", flush=True)
         report_path = generated_directory / f"attempt-{batch_size}.json"
         report_path.unlink(missing_ok=True)
         command = [
