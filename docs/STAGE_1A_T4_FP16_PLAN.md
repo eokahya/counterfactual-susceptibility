@@ -48,18 +48,20 @@ The pinned Hugging Face model is loaded with `low_cpu_mem_usage=True` before
 TransformerLens conversion. On the T4 path, the Hugging Face source is streamed
 directly to CUDA, TransformerLens' destination parameters are allocated directly
 on the zero-storage `meta` device, and the converted CUDA tensors are assigned
-into those placeholders without copies. The source wrapper is then released
-before the pinned transcoders are loaded. This avoids holding either a second
-full model on the 12.7-GiB Colab host, two full model copies in T4 VRAM, or the
-source model and transcoders simultaneously. The T4 path caps TransformerLens'
-constant attention buffers at 512 tokens. Every preregistered prompt is shorter
-than this cap, and 512 is below Gemma 2's 4096-token local-attention window, so
-the cap does not change attention semantics for the executed inputs. These are
-host/GPU-memory loading adaptations only: model weights, dtype, attention
-implementation, and scientific settings are unchanged. The consumed context
-length and loader name are recorded in runtime provenance. The Colab runner also
-uses unbuffered child output and explicit parent/worker stage breadcrumbs so a
-backend failure leaves an observable stage boundary.
+into those placeholders without copies. The few Gemma normalization tensors
+emitted in FP32 are normalized to FP16 before assignment; tensors already in
+FP16 retain their existing storage. The source wrapper is then released before
+the pinned transcoders are loaded. This avoids holding either a second full
+model on the 12.7-GiB Colab host, two full model copies in T4 VRAM, or the source
+model and transcoders simultaneously. The T4 path caps TransformerLens' constant
+attention buffers at 512 tokens. Every preregistered prompt is shorter than this
+cap, and 512 is below Gemma 2's 4096-token local-attention window, so the cap does
+not change attention semantics for the executed inputs. These are host/GPU-memory
+loading adaptations only: model weights, dtype, attention implementation, and
+scientific settings are unchanged. The consumed context length and loader name
+are recorded in runtime provenance. The Colab runner also uses unbuffered child
+output and explicit parent/worker stage breadcrumbs so a backend failure leaves
+an observable stage boundary.
 
 ## Pinned upstream source audit
 

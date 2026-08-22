@@ -695,7 +695,19 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         rotary_dim=256,
         dtype="float16",
     )
-    fake_state_dict = {"weight": object()}
+
+    class FakeStateTensor:
+        dtype = "float32"
+
+        @staticmethod
+        def is_floating_point() -> bool:
+            return True
+
+        def to(self, *, device: object, dtype: object) -> object:
+            events.append(("cast", device, dtype))
+            return object()
+
+    fake_state_dict = {"weight": FakeStateTensor()}
 
     class FakeLoading:
         @staticmethod
@@ -741,7 +753,12 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
             return FakeIncompatible()
 
         def parameters(self) -> list[object]:
-            return [SimpleNamespace(device=SimpleNamespace(type="cuda"))]
+            return [
+                SimpleNamespace(
+                    device=SimpleNamespace(type="cuda"),
+                    dtype="float16",
+                )
+            ]
 
         def buffers(self) -> list[object]:
             return [SimpleNamespace(device=SimpleNamespace(type="cuda"))]
@@ -805,6 +822,10 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         event for event in events if isinstance(event, tuple) and event[0] == "load"
     )
     assert load_event[2] == {"assign": True, "strict": False}
+    cast_event = next(
+        event for event in events if isinstance(event, tuple) and event[0] == "cast"
+    )
+    assert cast_event[1:] == (fake_cuda_device, "float16")
 
 
 @pytest.mark.parametrize(

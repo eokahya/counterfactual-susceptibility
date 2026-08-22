@@ -177,6 +177,18 @@ def _load_transformerlens_replacement_model_t4(
         revision=MODEL_REVISION,
         local_files_only=True,
     )
+    converted_dtypes = 0
+    for name, tensor in state_dict.items():
+        if tensor.is_floating_point():
+            if tensor.dtype != dtype:
+                converted_dtypes += 1
+            state_dict[name] = tensor.to(device=device, dtype=dtype)
+        else:
+            state_dict[name] = tensor.to(device=device)
+    print(
+        f"Normalized {converted_dtypes} converted TransformerLens tensors to {dtype}",
+        flush=True,
+    )
     print("Constructing the TransformerLens destination on meta", flush=True)
     with torch.device("meta"):
         model = replacement_class(
@@ -235,6 +247,10 @@ def _load_transformerlens_replacement_model_t4(
     if any(parameter.device.type != device.type for parameter in model.parameters()):
         raise Stage1ABlocked(
             "the copy-free TransformerLens parameter load did not remain on CUDA"
+        )
+    if any(parameter.dtype != dtype for parameter in model.parameters()):
+        raise Stage1ABlocked(
+            "the copy-free TransformerLens parameter load retained a mixed dtype"
         )
     if any(buffer.device.type != device.type for buffer in model.buffers()):
         raise Stage1ABlocked(
