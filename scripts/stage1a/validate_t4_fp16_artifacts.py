@@ -28,15 +28,17 @@ from cfsus.reproduction.artifacts import (  # noqa: E402
     verify_checksum_manifest,
     write_checksum_manifest_atomic,
 )
-from cfsus.reproduction.t4_fp16 import (  # noqa: E402
-    EXECUTION_DTYPE,
-    MAX_BUNDLE_MEMBER_BYTES,
-    MAX_BUNDLE_TOTAL_BYTES,
+from cfsus.reproduction.config import (  # noqa: E402
     OFFICIAL_MODEL_ID,
     OFFICIAL_MODEL_REVISION,
     OFFICIAL_TRANSCODER_ID,
     OFFICIAL_TRANSCODER_REVISION,
     OFFICIAL_UPSTREAM_REVISION,
+)
+from cfsus.reproduction.t4_fp16 import (  # noqa: E402
+    EXECUTION_DTYPE,
+    MAX_BUNDLE_MEMBER_BYTES,
+    MAX_BUNDLE_TOTAL_BYTES,
     REFERENCE_DTYPE,
     REPRODUCTION_CLASS,
     T4_RESULT_DIRECTORY,

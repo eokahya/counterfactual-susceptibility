@@ -82,7 +82,7 @@ def _runtime_record(provenance: dict[str, Any]) -> dict[str, Any]:
     gpu = provenance.get("gpu")
     if not isinstance(gpu, dict):
         try:
-            import torch
+            import torch  # type: ignore[import-not-found]
 
             if not torch.cuda.is_available():
                 raise RuntimeError("CUDA is unavailable")
@@ -267,13 +267,15 @@ def _write_manifest(
     success: bool,
 ) -> dict[str, Any]:
     from cfsus.reproduction.artifacts import write_json_atomic
-    from cfsus.reproduction.t4_fp16 import (
+    from cfsus.reproduction.config import (
         OFFICIAL_MODEL_ID,
         OFFICIAL_MODEL_REVISION,
         OFFICIAL_TRANSCODER_ID,
         OFFICIAL_TRANSCODER_REVISION,
         OFFICIAL_UPSTREAM_REPOSITORY,
         OFFICIAL_UPSTREAM_REVISION,
+    )
+    from cfsus.reproduction.t4_fp16 import (
         PROJECT_BASE_COMMIT,
         REPRODUCTION_CLASS,
         T4_CLAIM_BOUNDARY,

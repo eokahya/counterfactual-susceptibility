@@ -45,10 +45,16 @@ value is not treated as proof for or against a native-BF16 reference
 reproduction, which remains pending in either case.
 
 The pinned Hugging Face model is loaded with `low_cpu_mem_usage=True` before
-TransformerLens conversion. This is a host-RAM loading adaptation only: model
-weights, dtype, attention implementation, and scientific settings are
-unchanged. The Colab runner also uses unbuffered child output so a backend
-failure leaves an observable stage boundary.
+TransformerLens conversion. TransformerLens' destination parameters are then
+allocated directly on CUDA instead of first allocating a second full model on
+the 12.7-GiB Colab host. The T4 path caps TransformerLens' constant attention
+buffers at 512 tokens. Every preregistered prompt is shorter than this cap, and
+512 is below Gemma 2's 4096-token local-attention window, so the cap does not
+change attention semantics for the executed inputs. These are host/GPU-memory
+loading adaptations only: model weights, dtype, attention implementation, and
+scientific settings are unchanged. The consumed context length and loader name
+are recorded in runtime provenance. The Colab runner also uses unbuffered child
+output so a backend failure leaves an observable stage boundary.
 
 ## Pinned upstream source audit
 

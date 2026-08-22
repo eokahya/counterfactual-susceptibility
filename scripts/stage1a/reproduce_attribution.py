@@ -10,6 +10,7 @@ Stage 0 environment.
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import importlib
 import importlib.metadata
@@ -42,6 +43,7 @@ OFFICIAL_ARGUMENTS = {
     "max_feature_nodes": 8192,
     "batch_size": 256,
 }
+T4_TRANSFORMERLENS_CONTEXT_LENGTH = 512
 
 MODEL_REQUIRED_FILES = (
     "config.json",
@@ -126,6 +128,75 @@ def _value(mapping: dict[str, Any], *names: str, default: Any = None) -> Any:
         if name in mapping:
             return mapping[name]
     return default
+
+
+def _load_transformerlens_replacement_model_t4(
+    *,
+    torch: Any,
+    hf_model: Any,
+    tokenizer: Any,
+    transcoders: Any,
+    device: Any,
+    dtype: Any,
+) -> Any:
+    """Convert the pinned HF model without a second host-RAM model allocation.
+
+    TransformerLens normally constructs its destination module on CPU and then
+    copies it to CUDA. A Colab T4 has enough VRAM for the FP16 destination but
+    the 12.7-GiB host cannot hold the HF source, converted state dict, and a
+    second full CPU module at once. Build only the destination tensors under a
+    CUDA default-device context, then use TransformerLens' ordinary per-key
+    state-dict copy and pinned replacement-model configuration.
+
+    The 512-token context cap is above every preregistered Stage 1A prompt and
+    below Gemma 2's 4096-token local-attention window, so it changes only the
+    size of constant attention buffers for this hardware-adapted path.
+    """
+
+    tl_loading: Any = importlib.import_module(
+        "transformer_lens.loading_from_pretrained"
+    )
+    replacement_module: Any = importlib.import_module(
+        "circuit_tracer.replacement_model.replacement_model_transformerlens"
+    )
+    replacement_class = replacement_module.TransformerLensReplacementModel
+    config = tl_loading.get_pretrained_model_config(
+        MODEL_ID,
+        hf_cfg=hf_model.config.to_dict(),
+        fold_ln=False,
+        device=device,
+        dtype=dtype,
+        n_ctx=T4_TRANSFORMERLENS_CONTEXT_LENGTH,
+        revision=MODEL_REVISION,
+        local_files_only=True,
+    )
+    state_dict = tl_loading.get_pretrained_state_dict(
+        MODEL_ID,
+        config,
+        hf_model,
+        dtype=dtype,
+        revision=MODEL_REVISION,
+        local_files_only=True,
+    )
+    print(
+        "Allocating the TransformerLens destination directly on CUDA",
+        flush=True,
+    )
+    with torch.device(device):
+        model = replacement_class(
+            config,
+            tokenizer=tokenizer,
+            move_to_device=False,
+        )
+    model.load_and_process_state_dict(
+        state_dict,
+        fold_ln=False,
+        center_writing_weights=False,
+        center_unembed=False,
+    )
+    model.move_model_modules_to_device()
+    model._configure_replacement_model(transcoders)
+    return model
 
 
 def _require_sha(name: str, value: object, expected: str) -> str:
@@ -731,6 +802,25 @@ def load_runtime(
         tokenizer = AutoTokenizer.from_pretrained(
             str(model_path), local_files_only=True
         )
+        prompt_token_lengths = {
+            "attribution": len(
+                tokenizer.encode(
+                    str(_mapping(config["attribution"], "attribution")["prompt"])
+                )
+            ),
+            "intervention": len(
+                tokenizer.encode(
+                    str(_mapping(config["intervention"], "intervention")["prompt"])
+                )
+            ),
+        }
+        if dtype_name == "float16" and any(
+            length > T4_TRANSFORMERLENS_CONTEXT_LENGTH
+            for length in prompt_token_lengths.values()
+        ):
+            raise Stage1ABlocked(
+                "a preregistered prompt exceeds the T4 TransformerLens context cap"
+            )
         print(
             "Loading pinned Hugging Face model with the low-CPU-memory path",
             flush=True,
@@ -742,18 +832,37 @@ def load_runtime(
             attn_implementation="eager",
             low_cpu_mem_usage=True,
         )
-        print("Converting the pinned model into TransformerLens", flush=True)
-        model = ReplacementModel.from_pretrained_and_transcoders(
-            model_name=MODEL_ID,
-            transcoders=transcoders,
-            backend="transformerlens",
-            device=device,
-            dtype=dtype,
-            hf_model=hf_model,
-            tokenizer=tokenizer,
-            revision=MODEL_REVISION,
-            local_files_only=True,
-        )
+        if dtype_name == "float16":
+            print(
+                "Converting the pinned model into TransformerLens with the T4 "
+                "low-host-RAM path",
+                flush=True,
+            )
+            model = _load_transformerlens_replacement_model_t4(
+                torch=torch,
+                hf_model=hf_model,
+                tokenizer=tokenizer,
+                transcoders=transcoders,
+                device=device,
+                dtype=dtype,
+            )
+        else:
+            print("Converting the pinned model into TransformerLens", flush=True)
+            model = ReplacementModel.from_pretrained_and_transcoders(
+                model_name=MODEL_ID,
+                transcoders=transcoders,
+                backend="transformerlens",
+                device=device,
+                dtype=dtype,
+                hf_model=hf_model,
+                tokenizer=tokenizer,
+                revision=MODEL_REVISION,
+                local_files_only=True,
+            )
+        del hf_model
+        gc.collect()
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
         print("Pinned model and transcoder runtime loaded", flush=True)
     except Exception as exc:
         raise Stage1ABlocked(
@@ -834,6 +943,13 @@ def load_runtime(
         "backend": "transformerlens",
         "device": str(device),
         "dtype": dtype_name,
+        "transformerlens_context_length": int(model.cfg.n_ctx),
+        "transformerlens_loader": (
+            "direct_cuda_destination"
+            if dtype_name == "float16"
+            else "upstream_from_pretrained"
+        ),
+        "prompt_token_lengths": prompt_token_lengths,
         "project_commit": project_commit,
         "project_dirty": project_dirty,
         "asset_integrity": {

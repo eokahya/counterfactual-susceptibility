@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import importlib
 import json
 import math
 import subprocess
 import sys
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -15,6 +17,7 @@ STAGE1A_SCRIPTS = REPOSITORY_ROOT / "scripts/stage1a"
 if str(STAGE1A_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(STAGE1A_SCRIPTS))
 
+import reproduce_attribution as runtime  # noqa: E402
 from run_stage1a_t4_fp16 import _write_manifest  # noqa: E402
 from validate_t4_fp16_artifacts import (  # noqa: E402
     BUNDLE_PREFIX,
@@ -672,6 +675,91 @@ def test_t4_loader_uses_the_low_cpu_memory_model_path() -> None:
     )
 
     assert "low_cpu_mem_usage=True" in source
+    assert "T4_TRANSFORMERLENS_CONTEXT_LENGTH = 512" in source
+    assert "with torch.device(device):" in source
+    assert '"direct_cuda_destination"' in source
+
+
+def test_t4_transformerlens_destination_is_constructed_in_device_context(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    events: list[object] = []
+    fake_config = SimpleNamespace()
+    fake_state_dict = {"weight": object()}
+    fake_transcoders = object()
+
+    class FakeLoading:
+        @staticmethod
+        def get_pretrained_model_config(*args: object, **kwargs: object) -> object:
+            events.append(("config", args, kwargs))
+            return fake_config
+
+        @staticmethod
+        def get_pretrained_state_dict(*args: object, **kwargs: object) -> object:
+            events.append(("state_dict", args, kwargs))
+            return fake_state_dict
+
+    class FakeModel:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            events.append(("construct", args, kwargs))
+
+        def load_and_process_state_dict(
+            self, state_dict: object, **kwargs: object
+        ) -> None:
+            events.append(("load", state_dict, kwargs))
+
+        def move_model_modules_to_device(self) -> None:
+            events.append("move")
+
+        def _configure_replacement_model(self, transcoders: object) -> None:
+            events.append(("configure", transcoders))
+
+    class FakeDeviceContext:
+        def __enter__(self) -> None:
+            events.append("device_enter")
+
+        def __exit__(self, *args: object) -> None:
+            events.append("device_exit")
+
+    def fake_device(device: object) -> FakeDeviceContext:
+        events.append(("device", device))
+        return FakeDeviceContext()
+
+    fake_torch = SimpleNamespace(device=fake_device)
+    fake_hf_model = SimpleNamespace(config=SimpleNamespace(to_dict=lambda: {}))
+
+    def fake_import(name: str) -> object:
+        if name == "transformer_lens.loading_from_pretrained":
+            return FakeLoading
+        if name.endswith("replacement_model_transformerlens"):
+            return SimpleNamespace(TransformerLensReplacementModel=FakeModel)
+        raise AssertionError(f"unexpected import: {name}")
+
+    monkeypatch.setattr(importlib, "import_module", fake_import)
+    result = runtime._load_transformerlens_replacement_model_t4(
+        torch=fake_torch,
+        hf_model=fake_hf_model,
+        tokenizer="tokenizer",
+        transcoders=fake_transcoders,
+        device="cuda",
+        dtype="float16",
+    )
+
+    assert isinstance(result, FakeModel)
+    config_event = events[0]
+    assert isinstance(config_event, tuple)
+    assert config_event[2]["n_ctx"] == 512
+    assert config_event[2]["local_files_only"] is True
+    assert (
+        events.index("device_enter")
+        < next(
+            index
+            for index, event in enumerate(events)
+            if isinstance(event, tuple) and event[0] == "construct"
+        )
+        < events.index("device_exit")
+    )
+    assert ("configure", fake_transcoders) in events
 
 
 @pytest.mark.parametrize(
