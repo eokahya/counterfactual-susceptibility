@@ -32,6 +32,9 @@ does not support final Counterfactual Susceptibility claims.
 - The T4 gate is the device identity plus compute capability `[7, 5]`;
   `torch.cuda.is_bf16_supported()` is retained as observed metadata and is not
   interpreted as a native-BF16 reproduction result.
+- The pinned Hugging Face model uses its low-CPU-memory loading path to avoid a
+  duplicate host-RAM copy during TransformerLens conversion; this does not
+  alter weights, dtype, or scientific parameters.
 
 ## Empirical fields pending execution
 

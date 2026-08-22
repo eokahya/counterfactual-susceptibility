@@ -44,6 +44,12 @@ The T4 gate uses the observed device name and compute capability `[7, 5]`.
 value is not treated as proof for or against a native-BF16 reference
 reproduction, which remains pending in either case.
 
+The pinned Hugging Face model is loaded with `low_cpu_mem_usage=True` before
+TransformerLens conversion. This is a host-RAM loading adaptation only: model
+weights, dtype, attention implementation, and scientific settings are
+unchanged. The Colab runner also uses unbuffered child output so a backend
+failure leaves an observable stage boundary.
+
 ## Pinned upstream source audit
 
 The audit was performed against the immutable upstream commit, not a mutable

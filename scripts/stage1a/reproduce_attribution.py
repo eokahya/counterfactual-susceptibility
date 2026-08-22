@@ -731,12 +731,18 @@ def load_runtime(
         tokenizer = AutoTokenizer.from_pretrained(
             str(model_path), local_files_only=True
         )
+        print(
+            "Loading pinned Hugging Face model with the low-CPU-memory path",
+            flush=True,
+        )
         hf_model = AutoModelForCausalLM.from_pretrained(
             str(model_path),
             local_files_only=True,
             torch_dtype=dtype,
             attn_implementation="eager",
+            low_cpu_mem_usage=True,
         )
+        print("Converting the pinned model into TransformerLens", flush=True)
         model = ReplacementModel.from_pretrained_and_transcoders(
             model_name=MODEL_ID,
             transcoders=transcoders,
@@ -748,6 +754,7 @@ def load_runtime(
             revision=MODEL_REVISION,
             local_files_only=True,
         )
+        print("Pinned model and transcoder runtime loaded", flush=True)
     except Exception as exc:
         raise Stage1ABlocked(
             f"immutable runtime load failed: {type(exc).__name__}"
