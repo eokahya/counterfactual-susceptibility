@@ -29,6 +29,9 @@ does not support final Counterfactual Susceptibility claims.
 - The notebook requires Colab runtime `2025.07` and installs/verifies exact
   `python3.11-venv`, `python3-pip-whl`, and `python3-setuptools-whl` package
   versions before creating its isolated environment.
+- The T4 gate is the device identity plus compute capability `[7, 5]`;
+  `torch.cuda.is_bf16_supported()` is retained as observed metadata and is not
+  interpreted as a native-BF16 reproduction result.
 
 ## Empirical fields pending execution
 

@@ -777,7 +777,7 @@ def validate_t4_run_manifest(value: object) -> None:
         raise ArtifactValidationError("runtime compute capability is invalid")
     if capability != [7, 5]:
         raise ArtifactValidationError("T4 compute capability must equal [7, 5]")
-    _manifest_bool(runtime["bf16_supported"], "runtime.bf16_supported", expected=False)
+    _manifest_bool(runtime["bf16_supported"], "runtime.bf16_supported")
 
     attribution = _manifest_mapping(record["attribution"], "attribution")
     attempted = attribution.get("attempted_batch_sizes")

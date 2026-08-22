@@ -812,11 +812,9 @@ def load_runtime(
         if dtype_name == "float16" and (
             "T4" not in gpu_provenance["name"]
             or gpu_provenance["compute_capability"] != [7, 5]
-            or gpu_provenance["bf16_supported"] is not False
         ):
             raise Stage1ABlocked(
-                "the T4/FP16 path requires a T4 (compute capability 7.5) with "
-                "native BF16 support reported false"
+                "the T4/FP16 path requires a T4 with compute capability 7.5"
             )
 
     provenance = {

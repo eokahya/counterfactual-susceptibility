@@ -39,6 +39,11 @@ image-compatible Ubuntu packages shown above, verifies their consumed versions
 with `dpkg-query`, and only then creates the isolated virtual environment. No
 mutable OS-package fallback is permitted.
 
+The T4 gate uses the observed device name and compute capability `[7, 5]`.
+`torch.cuda.is_bf16_supported()` is recorded as an API observation only: its
+value is not treated as proof for or against a native-BF16 reference
+reproduction, which remains pending in either case.
+
 ## Pinned upstream source audit
 
 The audit was performed against the immutable upstream commit, not a mutable

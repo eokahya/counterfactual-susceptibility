@@ -115,7 +115,7 @@ def _runtime_provenance(record: dict[str, Any], label: str) -> None:
         not isinstance(gpu, dict)
         or "T4" not in str(gpu.get("name"))
         or gpu.get("compute_capability") != [7, 5]
-        or gpu.get("bf16_supported") is not False
+        or not isinstance(gpu.get("bf16_supported"), bool)
     ):
         raise ArtifactValidationError(f"{label} T4 GPU provenance is invalid")
     asset_integrity = provenance.get("asset_integrity")

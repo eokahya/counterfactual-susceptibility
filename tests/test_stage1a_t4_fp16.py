@@ -188,7 +188,7 @@ def _valid_manifest() -> dict[str, Any]:
             "torch_cuda_version": "12.4",
             "reference_dtype": "bfloat16",
             "execution_dtype": "float16",
-            "bf16_supported": False,
+            "bf16_supported": True,
         },
         "attribution": {
             "attempted_batch_sizes": [256],
@@ -384,6 +384,11 @@ def test_manifest_rejects_overclaim_nonfinite_and_false_readiness() -> None:
     with pytest.raises(ArtifactValidationError, match="finite"):
         validate_t4_run_manifest(nan_timing)
 
+    invalid_bf16_probe = _valid_manifest()
+    invalid_bf16_probe["runtime"]["bf16_supported"] = "unknown"
+    with pytest.raises(ArtifactValidationError, match="must be a boolean"):
+        validate_t4_run_manifest(invalid_bf16_probe)
+
 
 def test_manifest_requires_cuda_oom_attribution_stage_for_retry() -> None:
     manifest = _valid_manifest()
@@ -534,7 +539,7 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
         "gpu": {
             "name": "Tesla T4",
             "compute_capability": [7, 5],
-            "bf16_supported": False,
+            "bf16_supported": True,
             "torch_version": "2.6.0+cu124",
             "torch_cuda_version": "12.4",
         },
@@ -649,6 +654,7 @@ def test_t4_notebook_is_output_free_compiles_and_invokes_tracked_runner() -> Non
     assert "validate_t4_fp16_artifacts.py" in source
     assert "torch.float16" in source
     assert "torch.cuda.is_bf16_supported()" in source
+    assert 'if record["bf16_supported"]' not in source
     assert "/content/stage1a-t4-fp16-small-artifacts.zip" in source
     assert "Colab `2025.07` Python 3.11 GPU runtime" in source
     assert 'run(["apt-get", "update"])' in source
