@@ -26,6 +26,9 @@ does not support final Counterfactual Susceptibility claims.
   closed.
 - The tracked notebook has no execution outputs and reads `HF_TOKEN` only from
   Colab secrets into a child-process environment.
+- The notebook requires Colab runtime `2025.07` and installs/verifies exact
+  `python3.11-venv`, `python3-pip-whl`, and `python3-setuptools-whl` package
+  versions before creating its isolated environment.
 
 ## Empirical fields pending execution
 

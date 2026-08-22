@@ -650,6 +650,11 @@ def test_t4_notebook_is_output_free_compiles_and_invokes_tracked_runner() -> Non
     assert "torch.float16" in source
     assert "torch.cuda.is_bf16_supported()" in source
     assert "/content/stage1a-t4-fp16-small-artifacts.zip" in source
+    assert "Colab `2025.07` Python 3.11 GPU runtime" in source
+    assert '"python3.11-venv": "3.11.13-1+jammy1"' in source
+    assert '"python3-pip-whl": "22.0.2+dfsg-1ubuntu0.6"' in source
+    assert '"python3-setuptools-whl": "68.1.2-2~jammy3"' in source
+    assert 'capture(["dpkg-query", "-W", "-f=${Version}", package])' in source
     assert "torch.bfloat16" not in source
 
 
