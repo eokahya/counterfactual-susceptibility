@@ -24,7 +24,7 @@ permitted only as the declared CUDA-OOM engineering deviation below.
 | Transcoder | `mwhanna/gemma-scope-transcoders@bd5773156dea09893636c801df1237d0410307d2` |
 | Python | `3.11` |
 | Colab runtime | `2025.07` |
-| Venv bootstrap | `python3.11-venv=3.11.13-1+jammy1`; `python3-pip-whl=22.0.2+dfsg-1ubuntu0.6`; `python3-setuptools-whl=68.1.2-2~jammy3` |
+| Venv bootstrap | `apt-get update`; `python3.11-venv=3.11.15-1+jammy1`; `python3-pip-whl=22.0.2+dfsg-1ubuntu0.7`; `python3-setuptools-whl=68.1.2-2~jammy3` |
 | PyTorch wheel | `2.6.0`, CUDA 12.4 (`cu124`) |
 | Backend | `transformerlens` |
 | Reference / execution dtype | `bfloat16` / `float16` |
@@ -34,9 +34,10 @@ feature `(20, -1, 341)`, alpha values, and intervention regime remain identical
 to the BF16 plan. The T4 path uses disk attribution offload.
 
 The pinned Colab image omits `ensurepip` from its base Python installation. The
-notebook therefore installs the exact image-compatible Ubuntu packages shown
-above, verifies their consumed versions with `dpkg-query`, and only then creates
-the isolated virtual environment. No mutable OS-package fallback is permitted.
+notebook therefore refreshes the image package indexes, installs the exact
+image-compatible Ubuntu packages shown above, verifies their consumed versions
+with `dpkg-query`, and only then creates the isolated virtual environment. No
+mutable OS-package fallback is permitted.
 
 ## Pinned upstream source audit
 
