@@ -20,6 +20,8 @@ from reproduce_attribution import load_yaml, repository_root  # noqa: E402
 from run_stage1a import _write_metadata_artifacts  # noqa: E402
 from validate_t4_fp16_artifacts import (  # noqa: E402
     RUN_MANIFEST_NAME,
+    T4_DTYPE_DEVIATION,
+    T4_ENVIRONMENT_RUN_ID,
     validate_t4_artifact_directory,
     write_t4_checksums,
 )
@@ -76,6 +78,138 @@ def _load_json(path: Path) -> dict[str, Any]:
     validate_json_value(value)
     assert_publication_safe(value)
     return value
+
+
+def _finalize_t4_environment_manifest(
+    path: Path, runtime_provenance: dict[str, Any]
+) -> dict[str, Any]:
+    """Replace generic preflight policy fields with observed T4/FP16 facts."""
+
+    from cfsus.reproduction.artifacts import (
+        assert_publication_safe,
+        validate_artifact_envelope,
+        write_json_atomic,
+    )
+    from cfsus.reproduction.t4_fp16 import (
+        EXECUTION_DTYPE,
+        PROJECT_BASE_COMMIT,
+        REFERENCE_DTYPE,
+        REPRODUCTION_CLASS,
+    )
+
+    record = _load_json(path)
+    validate_artifact_envelope(record, expected_type="environment_manifest")
+    gpu = runtime_provenance.get("gpu")
+    dtype_probe = runtime_provenance.get("dtype_probe")
+    project_commit = runtime_provenance.get("project_commit")
+    if (
+        runtime_provenance.get("device") != "cuda"
+        or runtime_provenance.get("dtype") != EXECUTION_DTYPE
+        or runtime_provenance.get("reproduction_class") != REPRODUCTION_CLASS
+        or runtime_provenance.get("reference_dtype") != REFERENCE_DTYPE
+        or runtime_provenance.get("reference_status") != "pending"
+        or runtime_provenance.get("project_dirty") is not False
+        or not isinstance(project_commit, str)
+        or len(project_commit) != 40
+        or any(character not in "0123456789abcdef" for character in project_commit)
+        or not isinstance(gpu, dict)
+        or "T4" not in str(gpu.get("name"))
+        or gpu.get("compute_capability") != [7, 5]
+        or not isinstance(gpu.get("torch_version"), str)
+        or not isinstance(gpu.get("torch_cuda_version"), str)
+        or not isinstance(gpu.get("total_memory_bytes"), int)
+        or gpu["total_memory_bytes"] <= 0
+        or not isinstance(dtype_probe, dict)
+        or dtype_probe.get("device_type") != "cuda"
+        or dtype_probe.get("dtype") != EXECUTION_DTYPE
+        or dtype_probe.get("passed") is not True
+    ):
+        raise RuntimeError("observed T4/FP16 provenance is incomplete or invalid")
+
+    payload = record.get("payload")
+    if not isinstance(payload, dict):
+        raise RuntimeError("environment manifest payload is not an object")
+    accelerators = payload.get("accelerators")
+    if not isinstance(accelerators, dict):
+        raise RuntimeError("environment manifest accelerator facts are missing")
+    cuda = accelerators.get("cuda")
+    dtype_support = accelerators.get("dtype_support")
+    if not isinstance(cuda, dict) or not isinstance(dtype_support, dict):
+        raise RuntimeError("environment manifest CUDA observations are missing")
+    cuda.update(
+        {
+            "available": True,
+            "compiled_version": gpu.get("torch_cuda_version"),
+            "observed_device": {
+                "name": gpu.get("name"),
+                "compute_capability": gpu.get("compute_capability"),
+                "total_memory_bytes": gpu.get("total_memory_bytes"),
+            },
+        }
+    )
+    dtype_support["cuda_float16"] = {
+        "attempted": True,
+        "error": None,
+        "error_type": None,
+        "success": True,
+    }
+    packages = payload.get("packages")
+    versions = packages.get("versions") if isinstance(packages, dict) else None
+    if not isinstance(versions, dict):
+        raise RuntimeError("environment manifest package versions are missing")
+    versions["torch"] = gpu["torch_version"]
+
+    execution_policy = payload.get("execution_policy")
+    if not isinstance(execution_policy, dict):
+        raise RuntimeError("environment manifest execution policy is missing")
+    execution_policy["current_runtime"] = {
+        "execution_scope": "full_t4_fp16_reproduction",
+        "fallback_enabled": False,
+        "fallback_used": False,
+        "full_model_execution_allowed": True,
+        "offload": "disk",
+        "requested_dtype": EXECUTION_DTYPE,
+        "selected_device": "cuda",
+    }
+    execution_policy["planned_colab"] = {
+        "device": "cuda",
+        "dtype": EXECUTION_DTYPE,
+        "observed": True,
+        "offload": "disk",
+    }
+    execution_policy["native_reference"] = {
+        "device": "cuda",
+        "dtype": REFERENCE_DTYPE,
+        "status": "pending",
+    }
+
+    provenance = record.get("provenance")
+    if not isinstance(provenance, dict):
+        raise RuntimeError("environment manifest provenance is not an object")
+    provenance.update(
+        {
+            "base_commit": PROJECT_BASE_COMMIT,
+            "code_commit": project_commit,
+            "code_revision_status": "clean_commit",
+            "device": "cuda",
+            "execution_dtype": EXECUTION_DTYPE,
+            "observation_scope": "colab-t4-linux-x86_64-py311",
+            "reference_dtype": REFERENCE_DTYPE,
+            "reference_status": "pending",
+            "reproduction_class": REPRODUCTION_CLASS,
+        }
+    )
+    record["run_id"] = T4_ENVIRONMENT_RUN_ID
+    record["warnings"] = sorted(
+        warning
+        for warning in record.get("warnings", [])
+        if warning != "unexpected_torch_version"
+    )
+    record["deviations"] = [T4_DTYPE_DEVIATION]
+    validate_artifact_envelope(record, expected_type="environment_manifest")
+    assert_publication_safe(record)
+    write_json_atomic(path, record)
+    return record
 
 
 def _runtime_record(provenance: dict[str, Any]) -> dict[str, Any]:
@@ -511,6 +645,9 @@ def main(argv: list[str] | None = None) -> int:
         present = {path.name for path in result_directory.iterdir() if path.is_file()}
         if not required_before_manifest.issubset(present):
             raise RuntimeError("successful worker omitted required summaries")
+        _finalize_t4_environment_manifest(
+            result_directory / "environment_manifest.json", runtime_provenance
+        )
         write_t4_checksums(result_directory)
         validate_t4_artifact_directory(
             result_directory,

@@ -18,9 +18,13 @@ if str(STAGE1A_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(STAGE1A_SCRIPTS))
 
 import reproduce_attribution as runtime  # noqa: E402
-from run_stage1a_t4_fp16 import _write_manifest  # noqa: E402
+from run_stage1a_t4_fp16 import (  # noqa: E402
+    _finalize_t4_environment_manifest,
+    _write_manifest,
+)
 from validate_t4_fp16_artifacts import (  # noqa: E402
     BUNDLE_PREFIX,
+    T4_DTYPE_DEVIATION,
     validate_t4_artifact_directory,
     validate_t4_small_bundle,
     write_t4_checksums,
@@ -231,6 +235,61 @@ def _valid_manifest() -> dict[str, Any]:
             "statement": "Native-BF16 reference reproduction remains pending.",
         },
     }
+
+
+def _generic_environment_manifest() -> dict[str, Any]:
+    return make_artifact_envelope(
+        artifact_type="environment_manifest",
+        run_id="stage1a-local-preflight",
+        status="observed",
+        provenance={
+            "base_commit": "1" * 40,
+            "code_commit": None,
+            "code_revision_status": "uncommitted_worktree",
+            "environment_lock": "requirements-colab-py311-cu124-planned.txt",
+            "lock_format": "direct-pins-planned",
+            "lock_provenance": "planned-input-with-observed-runtime-inventory",
+            "observation_scope": "linux-x86_64-py311",
+            "stage": "stage1a",
+            "upstream_commit": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+        },
+        payload={
+            "accelerators": {
+                "cuda": {
+                    "available": True,
+                    "compiled_version": "12.4",
+                    "device_count": 1,
+                },
+                "dtype_support": {},
+            },
+            "execution_policy": {
+                "current_runtime": {
+                    "cpu_scope": "metadata_tests_and_small_semantics_only",
+                    "fallback_enabled": False,
+                    "fallback_used": False,
+                    "full_model_execution_allowed": True,
+                    "offload": "cpu",
+                    "requested_dtype": "bfloat16",
+                    "selected_device": "cuda",
+                },
+                "planned_colab": {
+                    "device": "cuda",
+                    "dtype": "bfloat16",
+                    "observed": True,
+                    "offload": "disk",
+                },
+            },
+            "offline_only": True,
+            "packages": {"versions": {"torch": "2.6.0+cu124"}},
+            "platform": {"machine": "x86_64", "system": "Linux"},
+            "python": {"version": "3.11.15"},
+        },
+        warnings=[
+            "colab_input_is_planned_not_an_observed_transitive_lock",
+            "unexpected_torch_version",
+        ],
+        deviations=["CUDA/Colab was planned but not observed in this environment."],
+    )
 
 
 def test_t4_config_is_separate_strict_and_pinned() -> None:
@@ -516,6 +575,72 @@ def test_t4_artifact_validator_rejects_nonfinite_summary(tmp_path: Path) -> None
         )
 
 
+def test_t4_environment_finalizer_records_observed_fp16_profile(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "environment_manifest.json"
+    write_json_atomic(path, _generic_environment_manifest())
+    runtime_provenance = {
+        "device": "cuda",
+        "dtype": "float16",
+        "reproduction_class": "hardware_adapted_fp16",
+        "reference_dtype": "bfloat16",
+        "reference_status": "pending",
+        "project_commit": "1" * 40,
+        "project_dirty": False,
+        "dtype_probe": {
+            "device_type": "cuda",
+            "dtype": "float16",
+            "passed": True,
+        },
+        "gpu": {
+            "name": "Tesla T4",
+            "compute_capability": [7, 5],
+            "torch_version": "2.6.0+cu124",
+            "torch_cuda_version": "12.4",
+            "total_memory_bytes": 15_637_086_208,
+        },
+    }
+
+    record = _finalize_t4_environment_manifest(path, runtime_provenance)
+
+    assert record["run_id"] == "stage1a-t4-fp16-environment"
+    assert record["deviations"] == [T4_DTYPE_DEVIATION]
+    assert record["warnings"] == [
+        "colab_input_is_planned_not_an_observed_transitive_lock"
+    ]
+    assert record["provenance"]["code_commit"] == "1" * 40
+    policy = record["payload"]["execution_policy"]
+    assert policy["current_runtime"]["requested_dtype"] == "float16"
+    assert policy["current_runtime"]["offload"] == "disk"
+    assert policy["native_reference"] == {
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "status": "pending",
+    }
+    assert (
+        record["payload"]["accelerators"]["dtype_support"]["cuda_float16"]["success"]
+        is True
+    )
+
+
+def test_t4_artifact_validator_rejects_generic_preflight_environment(
+    tmp_path: Path,
+) -> None:
+    directory = tmp_path / "results/stage1a_t4_fp16"
+    directory.mkdir(parents=True)
+    write_json_atomic(
+        directory / "environment_manifest.json", _generic_environment_manifest()
+    )
+
+    with pytest.raises(ArtifactValidationError, match="environment identity"):
+        validate_t4_artifact_directory(
+            directory,
+            require_run_manifest=False,
+            require_complete=False,
+        )
+
+
 def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
     directory = tmp_path / "results/stage1a_t4_fp16"
     directory.mkdir(parents=True)
@@ -534,6 +659,11 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
         "reference_status": "pending",
         "project_commit": "1" * 40,
         "project_dirty": False,
+        "dtype_probe": {
+            "device_type": "cuda",
+            "dtype": "float16",
+            "passed": True,
+        },
         "asset_integrity": {
             "verification": "exact_file_content_hashes_matched",
         },
@@ -545,17 +675,12 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
             "bf16_supported": True,
             "torch_version": "2.6.0+cu124",
             "torch_cuda_version": "12.4",
+            "total_memory_bytes": 15_637_086_208,
         },
     }
     common_boundary = T4_CLAIM_BOUNDARY
     artifacts = {
-        "environment_manifest.json": make_artifact_envelope(
-            artifact_type="environment_manifest",
-            run_id="t4-environment",
-            status="observed",
-            provenance={},
-            payload={},
-        ),
+        "environment_manifest.json": _generic_environment_manifest(),
         "asset_manifest.json": make_artifact_envelope(
             artifact_type="asset_manifest",
             run_id="t4-assets",
@@ -613,6 +738,9 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
     }
     for name, artifact in artifacts.items():
         write_json_atomic(directory / name, artifact)
+    _finalize_t4_environment_manifest(
+        directory / "environment_manifest.json", provenance
+    )
     write_t4_checksums(directory)
     _write_manifest(
         directory=directory,

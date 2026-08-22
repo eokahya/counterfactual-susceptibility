@@ -39,6 +39,7 @@ from cfsus.reproduction.t4_fp16 import (  # noqa: E402
     EXECUTION_DTYPE,
     MAX_BUNDLE_MEMBER_BYTES,
     MAX_BUNDLE_TOTAL_BYTES,
+    PROJECT_BASE_COMMIT,
     REFERENCE_DTYPE,
     REPRODUCTION_CLASS,
     T4_RESULT_DIRECTORY,
@@ -56,6 +57,10 @@ SCIENCE_TYPES = {
     "intervention_summary.json": "intervention_summary",
     "semantics_summary.json": "semantics_summary",
 }
+T4_ENVIRONMENT_RUN_ID = "stage1a-t4-fp16-environment"
+T4_DTYPE_DEVIATION = (
+    "Native-BF16 reference dtype was adapted to float16 for T4 execution."
+)
 
 
 def _unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
@@ -138,6 +143,124 @@ def _runtime_provenance(record: dict[str, Any], label: str) -> None:
         or threshold_check.get("passed") is not True
     ):
         raise ArtifactValidationError(f"{label} threshold finiteness did not pass")
+
+
+def _validate_t4_environment(path: Path) -> dict[str, Any]:
+    record = _load_json(path)
+    validate_artifact_envelope(record, expected_type="environment_manifest")
+    if (
+        record.get("run_id") != T4_ENVIRONMENT_RUN_ID
+        or record.get("status") != "observed"
+        or record.get("deviations") != [T4_DTYPE_DEVIATION]
+        or record.get("warnings")
+        != ["colab_input_is_planned_not_an_observed_transitive_lock"]
+    ):
+        raise ArtifactValidationError("T4 environment identity is invalid")
+
+    provenance = record.get("provenance")
+    expected_provenance = {
+        "device": "cuda",
+        "base_commit": PROJECT_BASE_COMMIT,
+        "environment_lock": "requirements-colab-py311-cu124-planned.txt",
+        "execution_dtype": EXECUTION_DTYPE,
+        "reference_dtype": REFERENCE_DTYPE,
+        "reference_status": "pending",
+        "reproduction_class": REPRODUCTION_CLASS,
+        "upstream_commit": OFFICIAL_UPSTREAM_REVISION,
+        "code_revision_status": "clean_commit",
+    }
+    if not isinstance(provenance, dict) or any(
+        provenance.get(key) != value for key, value in expected_provenance.items()
+    ):
+        raise ArtifactValidationError("T4 environment provenance is invalid")
+    code_commit = provenance.get("code_commit")
+    if (
+        not isinstance(code_commit, str)
+        or len(code_commit) != 40
+        or any(character not in "0123456789abcdef" for character in code_commit)
+    ):
+        raise ArtifactValidationError("T4 environment code commit is invalid")
+
+    payload = record.get("payload")
+    if not isinstance(payload, dict):
+        raise ArtifactValidationError("T4 environment payload is invalid")
+    execution_policy = payload.get("execution_policy")
+    accelerators = payload.get("accelerators")
+    if not isinstance(execution_policy, dict) or not isinstance(accelerators, dict):
+        raise ArtifactValidationError("T4 environment observations are missing")
+    platform = payload.get("platform")
+    python = payload.get("python")
+    packages = payload.get("packages")
+    versions = packages.get("versions") if isinstance(packages, dict) else None
+    if (
+        payload.get("offline_only") is not True
+        or not isinstance(platform, dict)
+        or platform.get("system") != "Linux"
+        or platform.get("machine") != "x86_64"
+        or not isinstance(python, dict)
+        or not str(python.get("version", "")).startswith("3.11.")
+        or not isinstance(versions, dict)
+        or versions.get("torch") != "2.6.0+cu124"
+    ):
+        raise ArtifactValidationError("T4 environment platform profile is invalid")
+    current = execution_policy.get("current_runtime")
+    planned = execution_policy.get("planned_colab")
+    reference = execution_policy.get("native_reference")
+    expected_current = {
+        "execution_scope": "full_t4_fp16_reproduction",
+        "fallback_enabled": False,
+        "fallback_used": False,
+        "full_model_execution_allowed": True,
+        "offload": "disk",
+        "requested_dtype": EXECUTION_DTYPE,
+        "selected_device": "cuda",
+    }
+    expected_planned = {
+        "device": "cuda",
+        "dtype": EXECUTION_DTYPE,
+        "observed": True,
+        "offload": "disk",
+    }
+    expected_reference = {
+        "device": "cuda",
+        "dtype": REFERENCE_DTYPE,
+        "status": "pending",
+    }
+    if (
+        current != expected_current
+        or planned != expected_planned
+        or reference != expected_reference
+    ):
+        raise ArtifactValidationError("T4 environment execution policy is invalid")
+
+    cuda = accelerators.get("cuda")
+    dtype_support = accelerators.get("dtype_support")
+    observed_device = cuda.get("observed_device") if isinstance(cuda, dict) else None
+    float16_probe = (
+        dtype_support.get("cuda_float16") if isinstance(dtype_support, dict) else None
+    )
+    if (
+        not isinstance(cuda, dict)
+        or cuda.get("available") is not True
+        or cuda.get("compiled_version") != "12.4"
+        or not isinstance(cuda.get("device_count"), int)
+        or cuda["device_count"] < 1
+        or not isinstance(observed_device, dict)
+        or "T4" not in str(observed_device.get("name"))
+        or observed_device.get("compute_capability") != [7, 5]
+        or not isinstance(observed_device.get("total_memory_bytes"), int)
+        or observed_device["total_memory_bytes"] <= 0
+        or not isinstance(float16_probe, dict)
+        or float16_probe
+        != {
+            "attempted": True,
+            "error": None,
+            "error_type": None,
+            "success": True,
+        }
+    ):
+        raise ArtifactValidationError("T4 environment CUDA/FP16 probe is invalid")
+    return record
 
 
 def _validate_science_summary(path: Path, expected_type: str) -> dict[str, Any]:
@@ -244,9 +367,11 @@ def validate_t4_artifact_directory(
             "T4 completed artifact set is not exactly seven files"
         )
 
+    environment_record: dict[str, Any] | None = None
     if "environment_manifest.json" in names:
-        environment = _load_json(directory / "environment_manifest.json")
-        validate_artifact_envelope(environment, expected_type="environment_manifest")
+        environment_record = _validate_t4_environment(
+            directory / "environment_manifest.json"
+        )
     if "asset_manifest.json" in names:
         asset = _load_json(directory / "asset_manifest.json")
         validate_artifact_envelope(asset, expected_type="asset_manifest")
@@ -288,6 +413,14 @@ def validate_t4_artifact_directory(
         attribution = manifest.get("attribution")
         if not isinstance(project, dict) or not isinstance(attribution, dict):
             raise ArtifactValidationError("run manifest cross-file metadata is invalid")
+        if environment_record is not None:
+            environment_provenance = environment_record.get("provenance")
+            if not isinstance(
+                environment_provenance, dict
+            ) or environment_provenance.get("code_commit") != project.get(
+                "execution_commit"
+            ):
+                raise ArtifactValidationError("environment project commit mismatch")
         for record in science_records.values():
             provenance = record.get("provenance")
             if not isinstance(provenance, dict) or provenance.get(
