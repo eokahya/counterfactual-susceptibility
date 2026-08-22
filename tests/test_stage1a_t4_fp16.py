@@ -774,11 +774,12 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         events.append(("device", device))
         return FakeDeviceContext()
 
+    fake_mask = SimpleNamespace(clone=lambda: SimpleNamespace())
     fake_torch = SimpleNamespace(
         bool="bool",
         inf=float("inf"),
         device=fake_device,
-        ones=lambda *args, **kwargs: SimpleNamespace(),
+        ones=lambda *args, **kwargs: fake_mask,
         tril=lambda value: value,
         triu=lambda value, diagonal: value,
         tensor=lambda *args, **kwargs: SimpleNamespace(
@@ -826,6 +827,54 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         event for event in events if isinstance(event, tuple) and event[0] == "cast"
     )
     assert cast_event[1:] == (fake_cuda_device, "float16")
+
+
+def test_t4_parameter_views_are_materialized_individually() -> None:
+    events: list[str] = []
+
+    class FakeTensor:
+        def __init__(self, *, contiguous: bool) -> None:
+            self._contiguous = contiguous
+
+        def contiguous(self) -> FakeTensor:
+            events.append("contiguous")
+            return FakeTensor(contiguous=True)
+
+    class FakeParameter:
+        def __init__(self, *, contiguous: bool) -> None:
+            self.data = FakeTensor(contiguous=contiguous)
+
+        def detach(self) -> FakeTensor:
+            return self.data
+
+        def is_contiguous(self) -> bool:
+            return self.data._contiguous
+
+    class FakeNoGrad:
+        def __enter__(self) -> None:
+            events.append("no_grad_enter")
+
+        def __exit__(self, *args: object) -> None:
+            events.append("no_grad_exit")
+
+    copied = FakeParameter(contiguous=False)
+    unchanged = FakeParameter(contiguous=True)
+    parameters = [copied, unchanged]
+    model = SimpleNamespace(
+        named_parameters=lambda: [("copied", copied), ("unchanged", unchanged)],
+        parameters=lambda: parameters,
+    )
+    fake_torch = SimpleNamespace(no_grad=lambda: FakeNoGrad())
+
+    count = runtime._materialize_contiguous_parameters_t4(
+        torch=fake_torch,
+        model=model,
+    )
+
+    assert count == 1
+    assert copied.is_contiguous()
+    assert unchanged.is_contiguous()
+    assert events == ["no_grad_enter", "contiguous", "no_grad_exit"]
 
 
 @pytest.mark.parametrize(

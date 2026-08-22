@@ -224,10 +224,9 @@ def _load_transformerlens_replacement_model_t4(
             "global": causal_mask,
             "local": torch.triu(causal_mask, 1 - int(config.window_size)),
         }
-        rotary_by_base: dict[float, tuple[Any, Any]] = {}
         for block in model.blocks:
             attention = block.attn
-            attention.mask = masks[attention.attn_type]
+            attention.mask = masks[attention.attn_type].clone()
             attention.IGNORE = torch.tensor(-torch.inf, device=device)
             rope_base = (
                 config.rotary_base_local
@@ -235,14 +234,14 @@ def _load_transformerlens_replacement_model_t4(
                 and attention.attn_type == "local"
                 else config.rotary_base
             )
-            if rope_base not in rotary_by_base:
-                rotary_by_base[rope_base] = attention.calculate_sin_cos_rotary(
+            attention.rotary_sin, attention.rotary_cos = (
+                attention.calculate_sin_cos_rotary(
                     config.rotary_dim,
                     config.n_ctx,
                     base=rope_base,
                     dtype=config.dtype,
                 )
-            attention.rotary_sin, attention.rotary_cos = rotary_by_base[rope_base]
+            )
 
     if any(parameter.device.type != device.type for parameter in model.parameters()):
         raise Stage1ABlocked(
@@ -260,6 +259,35 @@ def _load_transformerlens_replacement_model_t4(
         "TransformerLens adopted the converted CUDA tensors without copies", flush=True
     )
     return model
+
+
+def _materialize_contiguous_parameters_t4(*, torch: Any, model: Any) -> int:
+    """Give assigned parameter views independent contiguous storage.
+
+    This runs only after the Hugging Face source wrapper has been released.
+    Each view is copied and replaced individually, so its old source storage can
+    be reclaimed before the next parameter is materialized.
+    """
+
+    noncontiguous = [
+        (name, parameter)
+        for name, parameter in model.named_parameters()
+        if not parameter.is_contiguous()
+    ]
+    print(
+        f"Materializing {len(noncontiguous)} non-contiguous parameter views",
+        flush=True,
+    )
+    materialized_count = len(noncontiguous)
+    with torch.no_grad():
+        for _name, parameter in noncontiguous:
+            parameter.data = parameter.detach().contiguous()
+    noncontiguous.clear()
+    if any(not parameter.is_contiguous() for parameter in model.parameters()):
+        raise Stage1ABlocked(
+            "the copy-free TransformerLens load retained a non-contiguous parameter"
+        )
+    return materialized_count
 
 
 def _require_sha(name: str, value: object, expected: str) -> str:
@@ -851,6 +879,7 @@ def load_runtime(
 
     layer_files = _numeric_layer_files(transcoder_path)
     transcoders = None
+    contiguous_parameter_copies = 0
     if dtype_name != "float16":
         transcoders = load_transcoder_set(
             layer_files,
@@ -939,6 +968,12 @@ def load_runtime(
         if device.type == "cuda":
             torch.cuda.empty_cache()
         if dtype_name == "float16":
+            contiguous_parameter_copies = _materialize_contiguous_parameters_t4(
+                torch=torch,
+                model=model,
+            )
+            gc.collect()
+            torch.cuda.empty_cache()
             print(
                 "Loading the pinned transcoders after releasing the HF source model",
                 flush=True,
@@ -1071,6 +1106,9 @@ def load_runtime(
                 "reference_dtype": "bfloat16",
                 "execution_dtype": "float16",
                 "reference_status": "pending",
+                "transformerlens_contiguous_parameter_copies": (
+                    contiguous_parameter_copies
+                ),
             }
         )
     return RuntimeBundle(
