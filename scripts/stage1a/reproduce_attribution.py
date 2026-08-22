@@ -138,14 +138,14 @@ def _load_transformerlens_replacement_model_t4(
     device: Any,
     dtype: Any,
 ) -> Any:
-    """Convert the pinned HF model without a second host-RAM model allocation.
+    """Convert the pinned HF model without a second full model allocation.
 
-    TransformerLens normally constructs its destination module on CPU and then
-    copies it to CUDA. A Colab T4 has enough VRAM for the FP16 destination but
-    the 12.7-GiB host cannot hold the HF source, converted state dict, and a
-    second full CPU module at once. Build only the destination tensors under a
-    CUDA default-device context, then use TransformerLens' ordinary per-key
-    state-dict copy and pinned replacement-model configuration.
+    TransformerLens normally constructs destination parameters and copies the
+    converted Hugging Face tensors into them. A T4 cannot hold both complete
+    FP16 models at that peak. Construct parameter placeholders on ``meta`` and
+    use PyTorch's assignment load to transfer ownership of the already converted
+    CUDA tensors without copying them. Only the small constant attention buffers
+    are materialized afterward.
 
     The 512-token context cap is above every preregistered Stage 1A prompt and
     below Gemma 2's 4096-token local-attention window, so it changes only the
@@ -177,23 +177,72 @@ def _load_transformerlens_replacement_model_t4(
         revision=MODEL_REVISION,
         local_files_only=True,
     )
-    print(
-        "Allocating the TransformerLens destination directly on CUDA",
-        flush=True,
-    )
-    with torch.device(device):
+    print("Constructing the TransformerLens destination on meta", flush=True)
+    with torch.device("meta"):
         model = replacement_class(
             config,
             tokenizer=tokenizer,
             move_to_device=False,
         )
-    model.load_and_process_state_dict(
+    expected_missing = {name for name, _buffer in model.named_buffers()}
+    incompatible = model.load_state_dict(
         state_dict,
-        fold_ln=False,
-        center_writing_weights=False,
-        center_unembed=False,
+        assign=True,
+        strict=False,
     )
-    model.move_model_modules_to_device()
+    if set(incompatible.missing_keys) != expected_missing:
+        raise Stage1ABlocked(
+            "the copy-free TransformerLens load omitted a non-buffer tensor"
+        )
+    if incompatible.unexpected_keys:
+        raise Stage1ABlocked(
+            "the copy-free TransformerLens load returned unexpected tensors"
+        )
+    del state_dict
+
+    with torch.device(device):
+        causal_mask = torch.tril(
+            torch.ones(
+                (config.n_ctx, config.n_ctx),
+                dtype=torch.bool,
+                device=device,
+            )
+        )
+        masks = {
+            "global": causal_mask,
+            "local": torch.triu(causal_mask, 1 - int(config.window_size)),
+        }
+        rotary_by_base: dict[float, tuple[Any, Any]] = {}
+        for block in model.blocks:
+            attention = block.attn
+            attention.mask = masks[attention.attn_type]
+            attention.IGNORE = torch.tensor(-torch.inf, device=device)
+            rope_base = (
+                config.rotary_base_local
+                if config.rotary_base_local is not None
+                and attention.attn_type == "local"
+                else config.rotary_base
+            )
+            if rope_base not in rotary_by_base:
+                rotary_by_base[rope_base] = attention.calculate_sin_cos_rotary(
+                    config.rotary_dim,
+                    config.n_ctx,
+                    base=rope_base,
+                    dtype=config.dtype,
+                )
+            attention.rotary_sin, attention.rotary_cos = rotary_by_base[rope_base]
+
+    if any(parameter.device.type != device.type for parameter in model.parameters()):
+        raise Stage1ABlocked(
+            "the copy-free TransformerLens parameter load did not remain on CUDA"
+        )
+    if any(buffer.device.type != device.type for buffer in model.buffers()):
+        raise Stage1ABlocked(
+            "the copy-free TransformerLens buffer load did not materialize on CUDA"
+        )
+    print(
+        "TransformerLens adopted the converted CUDA tensors without copies", flush=True
+    )
     return model
 
 
@@ -973,7 +1022,7 @@ def load_runtime(
         "dtype": dtype_name,
         "transformerlens_context_length": int(model.cfg.n_ctx),
         "transformerlens_loader": (
-            "direct_cuda_destination"
+            "meta_assign_cuda_destination"
             if dtype_name == "float16"
             else "upstream_from_pretrained"
         ),

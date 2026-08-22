@@ -676,8 +676,9 @@ def test_t4_loader_uses_the_low_cpu_memory_model_path() -> None:
 
     assert "low_cpu_mem_usage=True" in source
     assert "T4_TRANSFORMERLENS_CONTEXT_LENGTH = 512" in source
-    assert "with torch.device(device):" in source
-    assert '"direct_cuda_destination"' in source
+    assert 'with torch.device("meta"):' in source
+    assert '"meta_assign_cuda_destination"' in source
+    assert "assign=True" in source
     assert '"device_map": {"": device}' in source
     assert "after releasing the HF source model" in source
 
@@ -686,7 +687,14 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     events: list[object] = []
-    fake_config = SimpleNamespace()
+    fake_config = SimpleNamespace(
+        n_ctx=512,
+        window_size=4096,
+        rotary_base_local=None,
+        rotary_base=10000.0,
+        rotary_dim=256,
+        dtype="float16",
+    )
     fake_state_dict = {"weight": object()}
 
     class FakeLoading:
@@ -700,17 +708,43 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
             events.append(("state_dict", args, kwargs))
             return fake_state_dict
 
+    class FakeIncompatible:
+        def __init__(self) -> None:
+            self.missing_keys = ["buffer"]
+            self.unexpected_keys: list[str] = []
+
+    class FakeAttention:
+        attn_type = "global"
+        mask = SimpleNamespace(device=SimpleNamespace(type="cuda"))
+        IGNORE = SimpleNamespace(device=SimpleNamespace(type="cuda"))
+        rotary_sin = SimpleNamespace(device=SimpleNamespace(type="cuda"))
+        rotary_cos = SimpleNamespace(device=SimpleNamespace(type="cuda"))
+
+        @staticmethod
+        def calculate_sin_cos_rotary(
+            *args: object, **kwargs: object
+        ) -> tuple[object, object]:
+            events.append(("rotary", args, kwargs))
+            tensor = SimpleNamespace(device=SimpleNamespace(type="cuda"))
+            return tensor, tensor
+
     class FakeModel:
         def __init__(self, *args: object, **kwargs: object) -> None:
             events.append(("construct", args, kwargs))
+            self.blocks = [SimpleNamespace(attn=FakeAttention())]
 
-        def load_and_process_state_dict(
-            self, state_dict: object, **kwargs: object
-        ) -> None:
+        def named_buffers(self) -> list[tuple[str, object]]:
+            return [("buffer", object())]
+
+        def load_state_dict(self, state_dict: object, **kwargs: object) -> object:
             events.append(("load", state_dict, kwargs))
+            return FakeIncompatible()
 
-        def move_model_modules_to_device(self) -> None:
-            events.append("move")
+        def parameters(self) -> list[object]:
+            return [SimpleNamespace(device=SimpleNamespace(type="cuda"))]
+
+        def buffers(self) -> list[object]:
+            return [SimpleNamespace(device=SimpleNamespace(type="cuda"))]
 
     class FakeDeviceContext:
         def __enter__(self) -> None:
@@ -723,8 +757,19 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         events.append(("device", device))
         return FakeDeviceContext()
 
-    fake_torch = SimpleNamespace(device=fake_device)
+    fake_torch = SimpleNamespace(
+        bool="bool",
+        inf=float("inf"),
+        device=fake_device,
+        ones=lambda *args, **kwargs: SimpleNamespace(),
+        tril=lambda value: value,
+        triu=lambda value, diagonal: value,
+        tensor=lambda *args, **kwargs: SimpleNamespace(
+            device=SimpleNamespace(type="cuda")
+        ),
+    )
     fake_hf_model = SimpleNamespace(config=SimpleNamespace(to_dict=lambda: {}))
+    fake_cuda_device = SimpleNamespace(type="cuda")
 
     def fake_import(name: str) -> object:
         if name == "transformer_lens.loading_from_pretrained":
@@ -738,7 +783,7 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         torch=fake_torch,
         hf_model=fake_hf_model,
         tokenizer="tokenizer",
-        device="cuda",
+        device=fake_cuda_device,
         dtype="float16",
     )
 
@@ -756,7 +801,10 @@ def test_t4_transformerlens_destination_is_constructed_in_device_context(
         )
         < events.index("device_exit")
     )
-    assert "move" in events
+    load_event = next(
+        event for event in events if isinstance(event, tuple) and event[0] == "load"
+    )
+    assert load_event[2] == {"assign": True, "strict": False}
 
 
 @pytest.mark.parametrize(
