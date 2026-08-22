@@ -16,7 +16,9 @@ import importlib.metadata
 import json
 import os
 import random
+import re
 import resource
+import subprocess
 import sys
 import time
 from dataclasses import dataclass
@@ -98,9 +100,16 @@ def load_yaml(path: Path) -> dict[str, Any]:
     if not isinstance(loaded, dict):
         raise Stage1ABlocked("resolved configuration must be a YAML mapping")
     from cfsus.reproduction.config import Stage1AConfig, Stage1AConfigError
+    from cfsus.reproduction.t4_fp16 import (
+        is_t4_fp16_mapping,
+        validate_t4_fp16_mapping,
+    )
 
     try:
-        Stage1AConfig.from_mapping(loaded)
+        if is_t4_fp16_mapping(loaded):
+            validate_t4_fp16_mapping(loaded)
+        else:
+            Stage1AConfig.from_mapping(loaded)
     except Stage1AConfigError as exc:
         raise Stage1ABlocked(f"resolved configuration is invalid: {exc}") from exc
     return loaded
@@ -189,6 +198,20 @@ def validate_official_config(config: dict[str, Any]) -> dict[str, Any]:
     if asset_policy.get("require_offline_execution") is not True:
         raise Stage1ABlocked("resolved execution must require offline model execution")
     return attribution
+
+
+def validate_supported_config(config: dict[str, Any]) -> dict[str, Any]:
+    """Validate either the untouched official path or the separate T4 path."""
+
+    from cfsus.reproduction.t4_fp16 import (
+        is_t4_fp16_mapping,
+        validate_t4_fp16_mapping,
+    )
+
+    if not is_t4_fp16_mapping(config):
+        return validate_official_config(config)
+    validate_t4_fp16_mapping(config)
+    return _mapping(config.get("attribution"), "attribution")
 
 
 def _installed_upstream_revision() -> str:
@@ -493,6 +516,98 @@ def _probe_bfloat16(torch: Any, device: Any) -> None:
         ) from exc
 
 
+def _probe_float16(torch: Any, device: Any) -> None:
+    """Fail before model loading unless CUDA executes a finite FP16 matmul."""
+
+    if device.type != "cuda":
+        raise Stage1ABlocked("the T4/FP16 adaptation requires a CUDA device")
+    try:
+        operand = torch.ones((2, 2), device=device, dtype=torch.float16)
+        result = operand @ operand
+        if not bool(torch.isfinite(result).all().item()):
+            raise RuntimeError("float16 probe returned non-finite values")
+        torch.cuda.synchronize(device)
+    except Exception as exc:
+        raise Stage1ABlocked(
+            f"CUDA float16 execution probe failed: {type(exc).__name__}"
+        ) from exc
+
+
+def _sample_model_parameters(
+    model: Any, torch: Any, *, samples_per_tensor: int
+) -> dict[str, int | bool]:
+    """Check deterministic scalar samples without materializing full-size masks."""
+
+    parameter_tensors = 0
+    sampled_values = 0
+    try:
+        named_parameters = model.named_parameters()
+    except AttributeError as exc:
+        raise Stage1ABlocked("loaded model exposes no named parameters") from exc
+    for _name, parameter in named_parameters:
+        flat = parameter.detach().reshape(-1)
+        count = int(flat.numel())
+        if count == 0:
+            continue
+        parameter_tensors += 1
+        sample_count = min(samples_per_tensor, count)
+        indices = sorted(
+            {
+                int(index * (count - 1) / max(sample_count - 1, 1))
+                for index in range(sample_count)
+            }
+        )
+        sample = flat[indices]
+        if not bool(torch.isfinite(sample).all().item()):
+            raise Stage1ABlocked("sampled model parameter contains non-finite values")
+        sampled_values += len(indices)
+    if parameter_tensors == 0 or sampled_values == 0:
+        raise Stage1ABlocked("loaded model parameter sampling was empty")
+    return {
+        "passed": True,
+        "parameter_tensor_count": parameter_tensors,
+        "sampled_value_count": sampled_values,
+        "samples_per_tensor_limit": samples_per_tensor,
+    }
+
+
+def _project_commit() -> tuple[str, bool]:
+    """Capture public Git identity without serializing a local path."""
+
+    declared_commit = os.environ.get("CFSUS_PROJECT_COMMIT")
+    declared_dirty = os.environ.get("CFSUS_PROJECT_DIRTY_BEFORE_RUN")
+    if declared_commit is not None or declared_dirty is not None:
+        if (
+            declared_commit is None
+            or re.fullmatch(r"[0-9a-f]{40}", declared_commit) is None
+            or declared_dirty not in {"0", "1"}
+        ):
+            raise Stage1ABlocked("declared project Git provenance is malformed")
+        return declared_commit, declared_dirty == "1"
+    try:
+        commit = subprocess.run(
+            ("git", "rev-parse", "HEAD"),
+            cwd=repository_root(),
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        dirty = bool(
+            subprocess.run(
+                ("git", "status", "--porcelain"),
+                cwd=repository_root(),
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise Stage1ABlocked("project Git provenance could not be resolved") from exc
+    if re.fullmatch(r"[0-9a-f]{40}", commit) is None:
+        raise Stage1ABlocked("project Git commit is not an immutable SHA")
+    return commit, dirty
+
+
 def load_runtime(
     config: dict[str, Any],
     *,
@@ -502,7 +617,7 @@ def load_runtime(
 ) -> RuntimeBundle:
     """Load only exact immutable model/transcoder snapshots."""
 
-    validate_official_config(config)
+    validate_supported_config(config)
     installed_revision = _installed_upstream_revision()
 
     try:
@@ -527,8 +642,15 @@ def load_runtime(
     runtime = _mapping(config.get("runtime"), "runtime")
     configured_device = str(runtime.get("device"))
     device = _torch_device(torch, configured_device)
-    dtype = torch.bfloat16
-    _probe_bfloat16(torch, device)
+    dtype_name = str(runtime.get("dtype"))
+    if dtype_name == "bfloat16":
+        dtype = torch.bfloat16
+        _probe_bfloat16(torch, device)
+    elif dtype_name == "float16":
+        dtype = torch.float16
+        _probe_float16(torch, device)
+    else:
+        raise Stage1ABlocked(f"unsupported runtime dtype {dtype_name!r}")
 
     configured_model_path = repository_root() / str(model_section["snapshot_path"])
     configured_transcoder_path = repository_root() / str(
@@ -641,6 +763,7 @@ def load_runtime(
         "b_dec": (2304,),
         "threshold": (16384,),
     }
+    threshold_values_checked = 0
     for layer_index in range(26):
         transcoder = model.transcoders[layer_index]
         tensors = {
@@ -658,6 +781,43 @@ def load_runtime(
                 raise Stage1ABlocked(
                     f"layer {layer_index} {tensor_name} schema is incompatible"
                 )
+            if tensor_name == "threshold":
+                if not bool(torch.isfinite(tensor).all().item()):
+                    raise Stage1ABlocked(
+                        f"layer {layer_index} threshold contains non-finite values"
+                    )
+                threshold_values_checked += int(tensor.numel())
+        optional_skip = getattr(transcoder, "W_skip", None)
+        if optional_skip is not None and optional_skip.dtype != dtype:
+            raise Stage1ABlocked(f"layer {layer_index} W_skip dtype is incompatible")
+
+    numerics = _mapping(config.get("numerics", {}), "numerics")
+    parameter_finiteness = _sample_model_parameters(
+        model,
+        torch,
+        samples_per_tensor=int(numerics.get("model_parameter_samples_per_tensor", 16)),
+    )
+    project_commit, project_dirty = _project_commit()
+    gpu_provenance: dict[str, Any] | None = None
+    if device.type == "cuda":
+        properties = torch.cuda.get_device_properties(device)
+        gpu_provenance = {
+            "name": str(properties.name),
+            "compute_capability": [int(properties.major), int(properties.minor)],
+            "total_memory_bytes": int(properties.total_memory),
+            "bf16_supported": bool(torch.cuda.is_bf16_supported()),
+            "torch_version": str(torch.__version__),
+            "torch_cuda_version": str(torch.version.cuda),
+        }
+        if dtype_name == "float16" and (
+            "T4" not in gpu_provenance["name"]
+            or gpu_provenance["compute_capability"] != [7, 5]
+            or gpu_provenance["bf16_supported"] is not False
+        ):
+            raise Stage1ABlocked(
+                "the T4/FP16 path requires a T4 (compute capability 7.5) with "
+                "native BF16 support reported false"
+            )
 
     provenance = {
         "upstream_repository": "https://github.com/decoderesearch/circuit-tracer",
@@ -668,7 +828,9 @@ def load_runtime(
         "transcoder_revision": TRANSCODER_REVISION,
         "backend": "transformerlens",
         "device": str(device),
-        "dtype": "bfloat16",
+        "dtype": dtype_name,
+        "project_commit": project_commit,
+        "project_dirty": project_dirty,
         "asset_integrity": {
             "verification": "exact_file_content_hashes_matched",
             "model_verified_files": model_verified_files,
@@ -676,34 +838,56 @@ def load_runtime(
         },
         "dtype_probe": {
             "device_type": device.type,
-            "dtype": "bfloat16",
+            "dtype": dtype_name,
             "operation": "2x2_matmul",
             "passed": True,
         },
+        "parameter_finiteness_sample": parameter_finiteness,
+        "threshold_finiteness": {
+            "passed": True,
+            "values_checked": threshold_values_checked,
+        },
     }
+    if gpu_provenance is not None:
+        provenance["gpu"] = gpu_provenance
+    if dtype_name == "float16":
+        provenance.update(
+            {
+                "reproduction_class": "hardware_adapted_fp16",
+                "reference_dtype": "bfloat16",
+                "execution_dtype": "float16",
+                "reference_status": "pending",
+            }
+        )
     return RuntimeBundle(
         model=model,
         torch=torch,
         config=config,
         provenance=provenance,
         device=str(device),
-        dtype="bfloat16",
+        dtype=dtype_name,
     )
 
 
 def _safe_output(path: str, *, generated: bool) -> Path:
     root = repository_root()
     candidate = (root / path).resolve()
-    allowed = (
-        root / ("results/generated" if generated else "results/stage1a")
-    ).resolve()
-    try:
-        candidate.relative_to(allowed)
-    except ValueError as exc:
+    allowed_roots = (
+        ((root / "results/generated").resolve(),)
+        if generated
+        else (
+            (root / "results/stage1a").resolve(),
+            (root / "results/stage1a_t4_fp16").resolve(),
+        )
+    )
+    if not any(
+        candidate == allowed or candidate.is_relative_to(allowed)
+        for allowed in allowed_roots
+    ):
         kind = "raw" if generated else "summary"
         raise Stage1ABlocked(
-            f"{kind} output must stay under {allowed.relative_to(root)}"
-        ) from exc
+            f"{kind} output must stay under an approved Stage 1A result directory"
+        )
     candidate.parent.mkdir(parents=True, exist_ok=True)
     return candidate
 
@@ -790,6 +974,7 @@ def _graph_summary_signature(graph: Any, torch: Any, tokenizer: Any) -> dict[str
 def reproduce_attribution(
     bundle: RuntimeBundle,
     *,
+    batch_size: int | None = None,
     raw_output: str | None = None,
     summary_output: str | None = None,
 ) -> dict[str, Any]:
@@ -803,7 +988,17 @@ def reproduce_attribution(
     Graph = importlib.import_module("circuit_tracer.graph").Graph
 
     config = bundle.config
-    attribution_config = validate_official_config(config)
+    attribution_config = validate_supported_config(config)
+    is_t4 = config.get("reproduction_class") == "hardware_adapted_fp16"
+    configured_batch_size = int(attribution_config.get("batch_size", 256))
+    selected_batch_size = configured_batch_size if batch_size is None else batch_size
+    if is_t4:
+        if selected_batch_size not in {256, 128, 64}:
+            raise Stage1ABlocked(
+                "T4 attribution batch must be one of the preregistered values"
+            )
+    elif selected_batch_size != OFFICIAL_ARGUMENTS["batch_size"]:
+        raise Stage1ABlocked("official BF16 attribution batch must remain 256")
     artifacts = _mapping(config.get("artifacts"), "artifacts")
     raw_name = raw_output or str(artifacts["raw_graph"])
     summary_name = summary_output or str(artifacts["attribution_summary"])
@@ -826,7 +1021,7 @@ def reproduce_attribution(
             max_n_logits=OFFICIAL_ARGUMENTS["max_n_logits"],
             desired_logit_prob=OFFICIAL_ARGUMENTS["desired_logit_prob"],
             max_feature_nodes=OFFICIAL_ARGUMENTS["max_feature_nodes"],
-            batch_size=OFFICIAL_ARGUMENTS["batch_size"],
+            batch_size=selected_batch_size,
             offload=offload_value,
             verbose=bool(attribution_config.get("verbose", True)),
         )
@@ -870,7 +1065,11 @@ def reproduce_attribution(
         "prompt": OFFICIAL_PROMPT,
         "token_ids": in_memory_summary["token_ids"],
         "tokens": in_memory_summary["tokens"],
-        "parameters": {**OFFICIAL_ARGUMENTS, "offload": offload_value},
+        "parameters": {
+            **OFFICIAL_ARGUMENTS,
+            "batch_size": selected_batch_size,
+            "offload": offload_value,
+        },
         "graph": in_memory_summary["graph"],
         "raw_validation": {
             "passed": True,
@@ -895,13 +1094,19 @@ def reproduce_attribution(
             ),
         },
         "seed": seed,
-        "classification": "exact",
+        "classification": ("hardware_adapted_fp16" if is_t4 else "exact"),
+        "nonfinite_count": 0,
         "claim_boundary": (
-            "Upstream E0 reproduction only; this does not test Counterfactual "
-            "Susceptibility or predict gate crossings."
+            "T4/FP16 hardware-adapted runtime/API reproduction using the pinned "
+            "assets; native-BF16 reference reproduction remains pending."
+            if is_t4
+            else (
+                "Upstream E0 reproduction only; this does not test Counterfactual "
+                "Susceptibility or predict gate crossings."
+            )
         ),
     }
-    run_id = "stage1a-official-attribution"
+    run_id = "stage1a-t4-fp16-attribution" if is_t4 else "stage1a-official-attribution"
     from cfsus.reproduction.artifacts import make_artifact_envelope
 
     envelope: dict[str, Any] = make_artifact_envelope(
@@ -910,6 +1115,15 @@ def reproduce_attribution(
         status="completed",
         provenance=bundle.provenance,
         payload=payload,
+        deviations=(
+            [
+                f"Attribution batch_size was reduced from 256 to "
+                f"{selected_batch_size} after CUDA OOM; no bitwise-equivalence "
+                "claim is made."
+            ]
+            if is_t4 and selected_batch_size != 256
+            else []
+        ),
     )
     _write_summary(summary_path, envelope)
     return envelope

@@ -127,6 +127,7 @@ def reproduce_intervention(
     )
 
     config = bundle.config
+    is_t4 = config.get("reproduction_class") == "hardware_adapted_fp16"
     section = _intervention_config(config)
     torch = bundle.torch
     model = bundle.model
@@ -161,8 +162,14 @@ def reproduce_intervention(
         alpha: desired_activation(baseline_activation, alpha)
         for alpha in OFFICIAL_ALPHAS
     }
+    for alpha, desired in desired_values.items():
+        if desired != (1.0 - alpha) * baseline_activation:
+            raise Stage1ABlocked("intervention desired-value mapping is inconsistent")
     with torch.inference_mode():
         baseline_raw, _ = model.feature_intervention(
+            OFFICIAL_PROMPT, [], return_activations=False
+        )
+        baseline_repeat_raw, _ = model.feature_intervention(
             OFFICIAL_PROMPT, [], return_activations=False
         )
         condition_raw = {
@@ -193,18 +200,27 @@ def reproduce_intervention(
         )
 
     baseline = _next_token_vector(baseline_raw)
+    baseline_repeat = _next_token_vector(baseline_repeat_raw)
     conditions = {
         alpha: _next_token_vector(value) for alpha, value in condition_raw.items()
     }
     noop_repeat = _next_token_vector(noop_repeat_raw)
     ablation_repeat = _next_token_vector(ablation_repeat_raw)
-    all_vectors = [baseline, *conditions.values(), noop_repeat, ablation_repeat]
+    all_vectors = [
+        baseline,
+        baseline_repeat,
+        *conditions.values(),
+        noop_repeat,
+        ablation_repeat,
+    ]
     if not all(bool(torch.isfinite(vector).all().item()) for vector in all_vectors):
         raise Stage1ABlocked("intervention produced non-finite next-token logits")
 
     numerics = _mapping(config.get("numerics", {}), "numerics")
     atol = float(numerics.get("noop_absolute_tolerance", 2.0e-2))
     rtol = float(numerics.get("noop_relative_tolerance", 2.0e-3))
+    determinism_atol = float(numerics.get("determinism_absolute_tolerance", atol))
+    determinism_rtol = float(numerics.get("determinism_relative_tolerance", rtol))
     noop_max_error = float(torch.max(torch.abs(conditions[0.0] - baseline)).item())
     if not bool(torch.allclose(conditions[0.0], baseline, atol=atol, rtol=rtol)):
         raise Stage1ABlocked(
@@ -217,12 +233,24 @@ def reproduce_intervention(
     repeat_ablation_error = float(
         torch.max(torch.abs(ablation_repeat - conditions[1.0])).item()
     )
+    baseline_repeat_error = float(
+        torch.max(torch.abs(baseline_repeat - baseline)).item()
+    )
     if not bool(torch.allclose(noop_repeat, conditions[0.0], atol=atol, rtol=rtol)):
         raise Stage1ABlocked(
             "no-op intervention was not deterministic within tolerance"
         )
     if not bool(torch.allclose(ablation_repeat, conditions[1.0], atol=atol, rtol=rtol)):
         raise Stage1ABlocked("zero ablation was not deterministic within tolerance")
+    if not bool(
+        torch.allclose(
+            baseline_repeat,
+            baseline,
+            atol=determinism_atol,
+            rtol=determinism_rtol,
+        )
+    ):
+        raise Stage1ABlocked("baseline forward was not deterministic within tolerance")
 
     top_k = int(section.get("top_k", 10))
     if top_k <= 0 or top_k > int(baseline.shape[0]):
@@ -235,6 +263,11 @@ def reproduce_intervention(
     condition_probabilities = {
         alpha: torch.softmax(vector, dim=-1) for alpha, vector in conditions.items()
     }
+    if not bool(torch.isfinite(baseline_probabilities).all().item()) or not all(
+        bool(torch.isfinite(probabilities).all().item())
+        for probabilities in condition_probabilities.values()
+    ):
+        raise Stage1ABlocked("intervention produced non-finite probabilities")
     condition_payload = {
         "baseline": _condition_rows(
             token_ids=fixed_token_ids,
@@ -291,8 +324,11 @@ def reproduce_intervention(
             "within_tolerance": True,
         },
         "determinism": {
+            "baseline_repeat_maximum_absolute_logit_error": baseline_repeat_error,
             "noop_repeat_maximum_absolute_logit_error": repeat_noop_error,
             "ablation_repeat_maximum_absolute_logit_error": repeat_ablation_error,
+            "absolute_tolerance": determinism_atol,
+            "relative_tolerance": determinism_rtol,
             "within_tolerance": True,
         },
         "regime": {
@@ -314,12 +350,21 @@ def reproduce_intervention(
             ),
         },
         "seed": seed,
+        "nonfinite_count": 0,
         "claim_boundary": (
-            "API and intervention-value reproduction only; behavioral changes do not "
-            "establish semantic interpretation or Counterfactual Susceptibility."
+            "T4/FP16 hardware-adapted runtime/API reproduction using the pinned "
+            "assets; native-BF16 reference reproduction remains pending."
+            if is_t4
+            else (
+                "API and intervention-value reproduction only; behavioral changes "
+                "do not establish semantic interpretation or Counterfactual "
+                "Susceptibility."
+            )
         ),
     }
-    run_id = "stage1a-official-intervention"
+    run_id = (
+        "stage1a-t4-fp16-intervention" if is_t4 else "stage1a-official-intervention"
+    )
     from cfsus.reproduction.artifacts import (
         make_artifact_envelope,
         write_json_atomic,

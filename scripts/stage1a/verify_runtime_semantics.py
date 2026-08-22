@@ -102,6 +102,7 @@ def verify_runtime_semantics(
     )
 
     config = bundle.config
+    is_t4 = config.get("reproduction_class") == "hardware_adapted_fp16"
     _intervention_config(config)
     artifacts = _mapping(config.get("artifacts"), "artifacts")
     output = _safe_output(
@@ -180,9 +181,12 @@ def verify_runtime_semantics(
                 raise Stage1ABlocked(
                     f"layer {layer_index} {tensor_name} has an incompatible shape"
                 )
-            if tensor.dtype != torch.bfloat16:
+            expected_dtype = (
+                torch.float16 if bundle.dtype == "float16" else torch.bfloat16
+            )
+            if tensor.dtype != expected_dtype:
                 raise Stage1ABlocked(
-                    f"layer {layer_index} {tensor_name} is not bfloat16"
+                    f"layer {layer_index} {tensor_name} does not match runtime dtype"
                 )
 
     expected = torch.where(
@@ -257,9 +261,20 @@ def verify_runtime_semantics(
             "official intervention source is inactive under pinned assets"
         )
 
-    desired_noop = desired_activation(baseline_activation, 0.0)
+    desired_values = {
+        alpha: desired_activation(baseline_activation, alpha)
+        for alpha in (0.0, 0.5, 1.0)
+    }
+    for alpha, desired in desired_values.items():
+        expected_desired = (1.0 - alpha) * baseline_activation
+        if desired != expected_desired:
+            raise Stage1ABlocked("intervention desired-value mapping is inconsistent")
+    desired_noop = desired_values[0.0]
     with torch.inference_mode():
         baseline_raw, _ = model.feature_intervention(
+            OFFICIAL_PROMPT, [], return_activations=False
+        )
+        baseline_repeat_raw, _ = model.feature_intervention(
             OFFICIAL_PROMPT, [], return_activations=False
         )
         noop_raw, _ = model.feature_intervention(
@@ -279,11 +294,17 @@ def verify_runtime_semantics(
             return_activations=False,
         )
     baseline_logits = _next_token_vector(baseline_raw)
+    baseline_repeat_logits = _next_token_vector(baseline_repeat_raw)
     noop_logits = _next_token_vector(noop_raw)
     noop_repeat_logits = _next_token_vector(noop_repeat_raw)
     if not all(
         bool(torch.isfinite(values).all().item())
-        for values in (baseline_logits, noop_logits, noop_repeat_logits)
+        for values in (
+            baseline_logits,
+            baseline_repeat_logits,
+            noop_logits,
+            noop_repeat_logits,
+        )
     ):
         raise Stage1ABlocked("no-op semantic check produced non-finite logits")
     logit_atol = float(numerics.get("noop_absolute_tolerance", 2.0e-2))
@@ -292,6 +313,11 @@ def verify_runtime_semantics(
         torch.max(torch.abs(noop_logits - baseline_logits)).item()
     )
     repeat_error = float(torch.max(torch.abs(noop_repeat_logits - noop_logits)).item())
+    baseline_repeat_error = float(
+        torch.max(torch.abs(baseline_repeat_logits - baseline_logits)).item()
+    )
+    determinism_atol = float(numerics.get("determinism_absolute_tolerance", logit_atol))
+    determinism_rtol = float(numerics.get("determinism_relative_tolerance", logit_rtol))
     if not bool(
         torch.allclose(noop_logits, baseline_logits, atol=logit_atol, rtol=logit_rtol)
     ):
@@ -302,6 +328,15 @@ def verify_runtime_semantics(
         )
     ):
         raise Stage1ABlocked("absolute-value no-op was not deterministic")
+    if not bool(
+        torch.allclose(
+            baseline_repeat_logits,
+            baseline_logits,
+            atol=determinism_atol,
+            rtol=determinism_rtol,
+        )
+    ):
+        raise Stage1ABlocked("baseline forward was not deterministic")
 
     token_ids = [
         int(value)
@@ -356,12 +391,23 @@ def verify_runtime_semantics(
             "official_feature_baseline_activation": baseline_activation,
             "alpha": 0.0,
             "desired_noop_activation": desired_noop,
+            "desired_values": [
+                {
+                    "alpha": alpha,
+                    "desired_post_gate_activation": desired_values[alpha],
+                    "formula_verified": True,
+                }
+                for alpha in (0.0, 0.5, 1.0)
+            ],
             "apply_activation_function_for_returned_cache": False,
             "delta_logic_still_uses_post_gate_activation": True,
             "baseline_noop_maximum_absolute_logit_error": baseline_noop_error,
             "noop_repeat_maximum_absolute_logit_error": repeat_error,
+            "baseline_repeat_maximum_absolute_logit_error": baseline_repeat_error,
             "absolute_tolerance": logit_atol,
             "relative_tolerance": logit_rtol,
+            "determinism_absolute_tolerance": determinism_atol,
+            "determinism_relative_tolerance": determinism_rtol,
         },
         "timing": {
             "wall_seconds": time.perf_counter() - started,
@@ -373,12 +419,18 @@ def verify_runtime_semantics(
             ),
         },
         "seed": seed,
+        "nonfinite_count": 0,
         "claim_boundary": (
-            "Observability and API-semantics checks only; the inactive reference "
-            "is not a susceptibility candidate or ranked scan result."
+            "T4/FP16 hardware-adapted runtime/API reproduction using the pinned "
+            "assets; native-BF16 reference reproduction remains pending."
+            if is_t4
+            else (
+                "Observability and API-semantics checks only; the inactive reference "
+                "is not a susceptibility candidate or ranked scan result."
+            )
         ),
     }
-    run_id = "stage1a-runtime-semantics"
+    run_id = "stage1a-t4-fp16-semantics" if is_t4 else "stage1a-runtime-semantics"
     envelope = make_artifact_envelope(
         artifact_type="semantics_summary",
         run_id=run_id,
