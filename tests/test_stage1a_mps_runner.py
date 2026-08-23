@@ -51,29 +51,110 @@ def test_protected_git_state_requires_branch_refs_and_base_ancestry(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     values: dict[tuple[str, ...], str] = {
-        ("branch", "--show-current"): runner.EXPECTED_BRANCH,
+        ("symbolic-ref", "--quiet", "HEAD"): (f"refs/heads/{runner.EXPECTED_BRANCH}"),
         ("merge-base", runner.PROJECT_BASE_COMMIT, "HEAD"): runner.PROJECT_BASE_COMMIT,
-        ("ls-files", "--", "results/stage1a_t4_fp16"): "",
+        ("ls-files", "--", runner.PRESERVED_T4_INDEX_PATHSPEC): "",
+        ("ls-files", "-v", "-z"): "H README.md\0",
+        ("ls-files", "-f", "-z"): "H README.md\0",
+        ("ls-files", "-z"): "README.md\0",
+        ("for-each-ref", "--format=%(refname)", "refs/replace"): "",
+        (
+            "rev-parse",
+            "--path-format=absolute",
+            "--git-path",
+            "info/grafts",
+        ): str((ROOT / ".git/info/grafts").resolve()),
     }
     values.update(
         {
-            ("rev-parse", reference): expected
+            ("show-ref", "--verify", "--hash", reference): expected
             for reference, expected in runner.PROTECTED_REFS.items()
         }
     )
     monkeypatch.setattr(runner, "_git_output", lambda *args: values[args])
     runner._validate_protected_git_state()
 
-    values[("rev-parse", "main")] = "0" * 40
+    main_reference = "refs/heads/main"
+    values[("show-ref", "--verify", "--hash", main_reference)] = "0" * 40
     with pytest.raises(mps.MPSRuntimeError, match="protected Git ref changed"):
         runner._validate_protected_git_state()
 
-    values[("rev-parse", "main")] = runner.PROTECTED_REFS["main"]
-    values[("ls-files", "--", "results/stage1a_t4_fp16")] = (
-        "results/stage1a_t4_fp16/run_manifest.json"
+    values[("show-ref", "--verify", "--hash", main_reference)] = runner.PROTECTED_REFS[
+        main_reference
+    ]
+    values[("ls-files", "--", runner.PRESERVED_T4_INDEX_PATHSPEC)] = (
+        "Results/Stage1A_T4_FP16/run_manifest.json"
     )
     with pytest.raises(mps.MPSRuntimeError, match="unexpectedly tracked"):
         runner._validate_protected_git_state()
+
+    values[("ls-files", "--", runner.PRESERVED_T4_INDEX_PATHSPEC)] = ""
+    values[("ls-files", "-v", "-z")] = "h scripts/stage1a/runner.py\0"
+    with pytest.raises(mps.MPSRuntimeError, match="assume-unchanged"):
+        runner._validate_protected_git_state()
+
+    values[("ls-files", "-v", "-z")] = "S scripts/stage1a/runner.py\0"
+    with pytest.raises(mps.MPSRuntimeError, match="assume-unchanged"):
+        runner._validate_protected_git_state()
+
+    values[("ls-files", "-v", "-z")] = "H README.md\0"
+    values[("for-each-ref", "--format=%(refname)", "refs/replace")] = (
+        "refs/replace/1111111111111111111111111111111111111111"
+    )
+    with pytest.raises(mps.MPSRuntimeError, match="replacement refs"):
+        runner._validate_protected_git_state()
+
+
+def test_git_proof_uses_unambiguous_refs_and_case_insensitive_t4_pathspec() -> None:
+    assert all(reference.startswith("refs/") for reference in runner.PROTECTED_REFS)
+    assert runner.PRESERVED_T4_INDEX_PATHSPEC == (
+        ":(top,icase,literal)results/stage1a_t4_fp16"
+    )
+
+
+def test_git_graft_proof_rejects_nonempty_or_unsafe_grafts(tmp_path: Path) -> None:
+    grafts = tmp_path / "linked-git-dir/info/grafts"
+    grafts.parent.mkdir(parents=True)
+    runner._validate_no_legacy_grafts(grafts)
+    grafts.write_text("legacy graft\n", encoding="utf-8")
+    with pytest.raises(mps.MPSRuntimeError, match="grafts"):
+        runner._validate_no_legacy_grafts(grafts)
+
+
+def test_t4_index_proof_rejects_physical_unicode_aliases(tmp_path: Path) -> None:
+    repository = tmp_path / "repository"
+    preserved = repository / "results/stage1a_t4_fp16"
+    preserved.mkdir(parents=True)
+    original = preserved / "artifact.json"
+    original.write_text("preserved\n", encoding="utf-8")
+    alias = repository / "re\u017fults/\u017ftage1a_t4_fp16/artifact.json"
+    alias.parent.mkdir(parents=True, exist_ok=True)
+    if not alias.exists():
+        alias.hardlink_to(original)
+    with pytest.raises(mps.MPSRuntimeError, match="unexpectedly tracked"):
+        runner._validate_preserved_t4_index_aliases(
+            f"{alias.relative_to(repository).as_posix()}\0",
+            repository_root=repository,
+            directory=preserved,
+        )
+    unicode_directory_alias = alias.parent
+    if not unicode_directory_alias.samefile(preserved):
+        unicode_directory_alias = repository / "tracked-gitlink"
+        unicode_directory_alias.symlink_to(preserved, target_is_directory=True)
+    with pytest.raises(mps.MPSRuntimeError, match="unexpectedly tracked"):
+        runner._validate_preserved_t4_index_aliases(
+            f"{unicode_directory_alias.relative_to(repository).as_posix()}\0",
+            repository_root=repository,
+            directory=preserved,
+        )
+
+
+def test_external_xet_cache_rejects_a_symlink_into_the_project(tmp_path: Path) -> None:
+    cache = tmp_path / "external-cache"
+    cache.mkdir()
+    (cache / "xet").symlink_to(ROOT, target_is_directory=True)
+    with pytest.raises(mps.MPSRuntimeError, match="cache subdirectory is unsafe"):
+        runner._validate_external_cache_subdirectory(cache, "xet")
 
 
 def test_publication_state_rejects_a_mid_run_head_change(
@@ -657,6 +738,9 @@ def test_fake_producer_promotes_only_a_strictly_validated_bundle(
         "PREFLIGHT_OUTPUT",
         result_directory / "preflight/preflight_summary.json",
     )
+    authentication_home = tmp_path / "authentication-home"
+    monkeypatch.setenv("HF_HOME", str(authentication_home))
+    monkeypatch.setenv("HF_XET_CACHE", str(ROOT / "unsafe-inherited-xet-cache"))
     source_validation_calls = 0
 
     def fake_validate_source_checkout() -> tuple[str, bool]:
@@ -706,6 +790,13 @@ def test_fake_producer_promotes_only_a_strictly_validated_bundle(
         _args: Any, batch_size: int, _environment: dict[str, str]
     ) -> tuple[dict[str, Any], Path]:
         assert batch_size == 256
+        assert _environment["HF_HOME"] == str(authentication_home)
+        assert _environment["HF_HUB_CACHE"] == str(
+            (tmp_path / "external-cache" / "hub").resolve()
+        )
+        assert _environment["HF_XET_CACHE"] == str(
+            (tmp_path / "external-cache" / "xet").resolve()
+        )
         directory = generated_directory / "attempt-256-fake"
         return _raw_attempt(directory), directory
 

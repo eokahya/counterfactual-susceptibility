@@ -211,3 +211,27 @@ equivalent adapter, and the fourth risks weakening historical CUDA checks.
 **Revisit when:** The selected PyTorch/runtime implements and passes the exact
 sparse COO path on MPS, or numerical validation shows that the explicit adapter
 does not preserve the pinned computation.
+
+## D-013 — 2026-08-23 — Separate Hugging Face payload placement from authentication and harden Git provenance
+
+**Decision:** Set `HF_HUB_CACHE` and `HF_XET_CACHE` beneath the checked
+project-external cache when directing the two authorized pinned repositories;
+preserve the caller's `HF_HOME` so the existing secure Hugging Face login
+remains discoverable. Before execution,
+before candidate construction, and immediately around publication, require
+fully qualified protected refs, an exact symbolic branch, no replacement refs
+or legacy grafts, default index flags, a case-insensitive literal T4 index
+query, a clean source checkout, unchanged T4 hashes, and the same execution
+commit.
+
+**Reason:** Overriding `HF_HOME` moved the credential lookup location and caused
+an authenticated gated-model request to fail before any scientific execution.
+Separately, ambiguous refs, case-variant indexed paths, and Git index flags can
+make shorthand or porcelain-only checks report a false clean provenance state
+on macOS. Payload placement and authentication are independent concerns, and a
+completed bundle must not overstate either asset access or source identity.
+
+**Alternatives considered:** Copy or serialize the access token into the new
+cache; accept shorthand refs; trust case-sensitive `ls-files`; or rely only on
+`git status --porcelain`. These alternatives respectively duplicate sensitive
+material or leave reproduced provenance bypasses open.

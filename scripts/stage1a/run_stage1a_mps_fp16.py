@@ -12,7 +12,7 @@ import sys
 import tempfile
 import time
 from collections.abc import Mapping, Sequence
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from types import SimpleNamespace
 from typing import Any
 
@@ -59,12 +59,13 @@ CHECKSUM_NAME = "checksums.sha256"
 PROJECT_BASE_COMMIT = "d965e43c34a2ba408b8ae35b13b5651bf269beed"
 EXPECTED_BRANCH = "stage-1a-mps-fp16"
 PROTECTED_REFS = {
-    "main": "7aacf30d888f96a29a1cfc82d035fca489ed0c17",
-    "origin/main": "7aacf30d888f96a29a1cfc82d035fca489ed0c17",
-    "stage-1a-t4-fp16": PROJECT_BASE_COMMIT,
-    "origin/stage-1a-t4-fp16": PROJECT_BASE_COMMIT,
+    "refs/heads/main": "7aacf30d888f96a29a1cfc82d035fca489ed0c17",
+    "refs/remotes/origin/main": "7aacf30d888f96a29a1cfc82d035fca489ed0c17",
+    "refs/heads/stage-1a-t4-fp16": PROJECT_BASE_COMMIT,
+    "refs/remotes/origin/stage-1a-t4-fp16": PROJECT_BASE_COMMIT,
 }
 PRESERVED_T4_DIRECTORY = REPOSITORY_ROOT / "results/stage1a_t4_fp16"
+PRESERVED_T4_INDEX_PATHSPEC = ":(top,icase,literal)results/stage1a_t4_fp16"
 PRESERVED_T4_SHA256 = {
     "asset_manifest.json": (
         "173ddb97159ae1e0f4308334fc0fa1244f6ac6417b4bf7203b1c30bb7f1ca5c5"
@@ -112,13 +113,20 @@ CANONICAL_JSON_NAMES = (
 
 
 def _git_output(*arguments: str) -> str:
+    git_environment = {
+        key: value for key, value in os.environ.items() if not key.startswith("GIT_")
+    }
+    git_environment["GIT_NO_REPLACE_OBJECTS"] = "1"
     result = subprocess.run(
         ("git", *arguments),
         cwd=REPOSITORY_ROOT,
         check=True,
         capture_output=True,
         text=True,
+        env=git_environment,
     )
+    if result.stderr.strip():
+        raise MPSRuntimeError("Git command produced unexpected diagnostics")
     return result.stdout.strip()
 
 
@@ -147,20 +155,131 @@ def _validate_preserved_t4(
             raise MPSRuntimeError("preserved T4 artifact content changed")
 
 
+def _validate_default_index_flags(encoded_entries: str, *, source: str) -> None:
+    for entry in encoded_entries.split("\0"):
+        if entry and not entry.startswith("H "):
+            raise MPSRuntimeError(f"Git index contains non-default {source} flags")
+
+
+def _validate_no_legacy_grafts(grafts: Path) -> None:
+    if not grafts.is_absolute():
+        raise MPSRuntimeError("legacy Git graft path is not absolute")
+    if not grafts.exists():
+        return
+    if grafts.is_symlink() or not grafts.is_file() or grafts.stat().st_size > 0:
+        raise MPSRuntimeError("legacy Git grafts are not allowed")
+
+
+def _validate_preserved_t4_index_aliases(
+    encoded_paths: str,
+    *,
+    repository_root: Path = REPOSITORY_ROOT,
+    directory: Path = PRESERVED_T4_DIRECTORY,
+) -> None:
+    """Reject any tracked path that physically aliases preserved T4 evidence."""
+
+    try:
+        resolved_root = repository_root.resolve(strict=True)
+        resolved_directory = directory.resolve(strict=True)
+    except (OSError, RuntimeError) as error:
+        raise MPSRuntimeError("T4 index alias proof could not resolve paths") from error
+    if not resolved_directory.is_relative_to(resolved_root):
+        raise MPSRuntimeError("preserved T4 directory escapes the repository")
+    preserved_files = tuple(entry for entry in directory.iterdir() if entry.is_file())
+    for encoded_path in encoded_paths.split("\0"):
+        if not encoded_path:
+            continue
+        relative = PurePosixPath(encoded_path)
+        if relative.is_absolute() or ".." in relative.parts or not relative.parts:
+            raise MPSRuntimeError("Git index contains an unsafe path")
+        candidate = repository_root.joinpath(*relative.parts)
+        if not candidate.exists() and not candidate.is_symlink():
+            continue
+        try:
+            resolved_candidate = candidate.resolve(strict=True)
+            current = candidate
+            physically_within_preserved_directory = False
+            while True:
+                if current.exists() and os.path.samefile(current, directory):
+                    physically_within_preserved_directory = True
+                    break
+                if current == repository_root:
+                    break
+                current = current.parent
+            physically_preserved = any(
+                candidate.is_file() and os.path.samefile(candidate, preserved)
+                for preserved in preserved_files
+            )
+        except (OSError, RuntimeError) as error:
+            raise MPSRuntimeError(
+                "T4 index alias proof could not inspect a path"
+            ) from error
+        if (
+            resolved_candidate == resolved_directory
+            or resolved_candidate.is_relative_to(resolved_directory)
+            or physically_within_preserved_directory
+            or physically_preserved
+        ):
+            raise MPSRuntimeError("preserved T4 artifacts are unexpectedly tracked")
+
+
+def _validate_external_cache_subdirectory(cache: Path, name: str) -> Path:
+    candidate = cache / name
+    if candidate.is_symlink() or (candidate.exists() and not candidate.is_dir()):
+        raise MPSRuntimeError("Hugging Face cache subdirectory is unsafe")
+    try:
+        resolved_cache = cache.resolve(strict=False)
+        resolved_candidate = candidate.resolve(strict=False)
+    except (OSError, RuntimeError) as error:
+        raise MPSRuntimeError(
+            "Hugging Face cache path could not be resolved"
+        ) from error
+    if (
+        not resolved_candidate.is_relative_to(resolved_cache)
+        or resolved_candidate == REPOSITORY_ROOT
+        or resolved_candidate.is_relative_to(REPOSITORY_ROOT)
+    ):
+        raise MPSRuntimeError(
+            "Hugging Face cache subdirectory must be project-external"
+        )
+    return resolved_candidate
+
+
 def _validate_protected_git_state() -> None:
     try:
-        if _git_output("branch", "--show-current") != EXPECTED_BRANCH:
+        if (
+            _git_output("symbolic-ref", "--quiet", "HEAD")
+            != f"refs/heads/{EXPECTED_BRANCH}"
+        ):
             raise MPSRuntimeError("MPS execution branch identity changed")
         for reference, expected in PROTECTED_REFS.items():
-            if _git_output("rev-parse", reference) != expected:
+            if _git_output("show-ref", "--verify", "--hash", reference) != expected:
                 raise MPSRuntimeError(f"protected Git ref changed: {reference}")
+        if _git_output("for-each-ref", "--format=%(refname)", "refs/replace"):
+            raise MPSRuntimeError("Git replacement refs are not allowed")
+        graft_path = Path(
+            _git_output(
+                "rev-parse",
+                "--path-format=absolute",
+                "--git-path",
+                "info/grafts",
+            )
+        )
+        _validate_no_legacy_grafts(graft_path)
+        _validate_default_index_flags(
+            _git_output("ls-files", "-v", "-z"), source="assume-unchanged"
+        )
+        _validate_default_index_flags(
+            _git_output("ls-files", "-f", "-z"), source="fsmonitor"
+        )
         if (
             _git_output("merge-base", PROJECT_BASE_COMMIT, "HEAD")
             != PROJECT_BASE_COMMIT
         ):
             raise MPSRuntimeError("MPS branch is not descended from the exact base")
-        if _git_output("ls-files", "--", "results/stage1a_t4_fp16"):
+        if _git_output("ls-files", "--", PRESERVED_T4_INDEX_PATHSPEC):
             raise MPSRuntimeError("preserved T4 artifacts are unexpectedly tracked")
+        _validate_preserved_t4_index_aliases(_git_output("ls-files", "-z"))
     except subprocess.CalledProcessError as error:
         raise MPSRuntimeError("protected Git state could not be verified") from error
 
@@ -868,11 +987,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     if cache.is_relative_to(REPOSITORY_ROOT):
         raise MPSRuntimeError("Hugging Face cache must be project-external")
+    hub_cache = _validate_external_cache_subdirectory(cache, "hub")
+    xet_cache = _validate_external_cache_subdirectory(cache, "xet")
     child_environment = os.environ.copy()
     child_environment.pop("PYTORCH_ENABLE_MPS_FALLBACK", None)
     child_environment.pop("PYTORCH_MPS_HIGH_WATERMARK_RATIO", None)
-    child_environment["HF_HOME"] = str(cache)
-    child_environment["HF_HUB_CACHE"] = str(cache / "hub")
+    child_environment["HF_HUB_CACHE"] = str(hub_cache)
+    child_environment["HF_XET_CACHE"] = str(xet_cache)
     if args.allow_download:
         child_environment.pop("HF_HUB_OFFLINE", None)
         child_environment.pop("TRANSFORMERS_OFFLINE", None)
