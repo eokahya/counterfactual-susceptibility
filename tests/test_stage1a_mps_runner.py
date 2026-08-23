@@ -147,6 +147,17 @@ def test_t4_index_proof_rejects_physical_unicode_aliases(tmp_path: Path) -> None
             repository_root=repository,
             directory=preserved,
         )
+    unicode_ancestor_alias = repository / "re\u017fults"
+    canonical_ancestor = repository / "results"
+    if not unicode_ancestor_alias.samefile(canonical_ancestor):
+        unicode_ancestor_alias = repository / "tracked-parent-gitlink"
+        unicode_ancestor_alias.symlink_to(canonical_ancestor, target_is_directory=True)
+    with pytest.raises(mps.MPSRuntimeError, match="unexpectedly tracked"):
+        runner._validate_preserved_t4_index_aliases(
+            f"{unicode_ancestor_alias.relative_to(repository).as_posix()}\0",
+            repository_root=repository,
+            directory=preserved,
+        )
 
 
 def test_external_xet_cache_rejects_a_symlink_into_the_project(tmp_path: Path) -> None:

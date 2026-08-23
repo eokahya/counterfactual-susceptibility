@@ -206,6 +206,14 @@ def _validate_preserved_t4_index_aliases(
                 if current == repository_root:
                     break
                 current = current.parent
+            physically_contains_preserved_directory = False
+            if candidate.is_dir():
+                current = directory
+                while current != repository_root:
+                    if os.path.samefile(candidate, current):
+                        physically_contains_preserved_directory = True
+                        break
+                    current = current.parent
             physically_preserved = any(
                 candidate.is_file() and os.path.samefile(candidate, preserved)
                 for preserved in preserved_files
@@ -218,6 +226,7 @@ def _validate_preserved_t4_index_aliases(
             resolved_candidate == resolved_directory
             or resolved_candidate.is_relative_to(resolved_directory)
             or physically_within_preserved_directory
+            or physically_contains_preserved_directory
             or physically_preserved
         ):
             raise MPSRuntimeError("preserved T4 artifacts are unexpectedly tracked")
