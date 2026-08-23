@@ -18,6 +18,7 @@ if str(STAGE1A_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(STAGE1A_SCRIPTS))
 
 import reproduce_attribution as runtime  # noqa: E402
+import run_stage1a_t4_fp16_worker as t4_worker  # noqa: E402
 from run_stage1a_t4_fp16 import (  # noqa: E402
     _finalize_t4_environment_manifest,
     _write_manifest,
@@ -624,6 +625,21 @@ def test_t4_environment_finalizer_records_observed_fp16_profile(
     )
 
 
+def test_t4_worker_tracks_the_maximum_across_reset_stage_peaks(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observed = iter([7, 11, 5])
+    monkeypatch.setattr(t4_worker, "_peak_cuda_bytes", lambda _torch: next(observed))
+    samples: list[int] = []
+
+    for _ in range(3):
+        t4_worker._record_peak_cuda_bytes(samples, object())
+
+    assert samples == [7, 11, 5]
+    assert t4_worker._maximum_peak_cuda_bytes(samples) == 11
+    assert t4_worker._maximum_peak_cuda_bytes([]) is None
+
+
 def test_t4_artifact_validator_rejects_generic_preflight_environment(
     tmp_path: Path,
 ) -> None:
@@ -699,6 +715,11 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
                 "parameters": {"batch_size": 256},
                 "graph": {"finite": True, "selected_feature_count": 1},
                 "raw_validation": {"passed": True},
+                "timing": {
+                    "cuda_peak_allocated_bytes": 1,
+                    "process_peak_rss_bytes": 1,
+                    "wall_seconds": 1.0,
+                },
             },
         ),
         "intervention_summary.json": make_artifact_envelope(
@@ -716,6 +737,11 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
                     {"alpha": 0.5},
                     {"alpha": 1.0},
                 ],
+                "timing": {
+                    "cuda_peak_allocated_bytes": 2,
+                    "process_peak_rss_bytes": 1,
+                    "wall_seconds": 1.0,
+                },
             },
         ),
         "semantics_summary.json": make_artifact_envelope(
@@ -732,6 +758,11 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
                 },
                 "intervention_value_check": {
                     "desired_values": [{}, {}, {}],
+                },
+                "timing": {
+                    "cuda_peak_allocated_bytes": 3,
+                    "process_peak_rss_bytes": 1,
+                    "wall_seconds": 1.0,
                 },
             },
         ),
@@ -756,7 +787,7 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
                 "exception_type": None,
                 "message": "completed",
                 "failure_stage": None,
-                "peak_memory_bytes": 1,
+                "peak_memory_bytes": 3,
                 "wall_seconds": 1.0,
                 "cleanup_succeeded": True,
             }
@@ -766,6 +797,14 @@ def test_completed_t4_artifact_set_validates_end_to_end(tmp_path: Path) -> None:
     )
 
     assert set(validate_t4_artifact_directory(directory)) == T4_SMALL_FILES
+
+    manifest_path = directory / "stage1a_t4_fp16_run_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["retry_history"][0]["peak_memory_bytes"] = 2
+    manifest["timings"]["attempt_peak_memory_bytes"] = [2]
+    write_json_atomic(manifest_path, manifest)
+    with pytest.raises(ArtifactValidationError, match="attempt peak memory"):
+        validate_t4_artifact_directory(directory)
 
 
 def test_t4_notebook_is_output_free_compiles_and_invokes_tracked_runner() -> None:

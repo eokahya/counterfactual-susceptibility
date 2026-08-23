@@ -272,6 +272,24 @@ def _validate_science_summary(path: Path, expected_type: str) -> dict[str, Any]:
     payload = record.get("payload")
     if not isinstance(payload, dict) or payload.get("nonfinite_count") != 0:
         raise ArtifactValidationError(f"{path.name} has a nonzero nonfinite count")
+    timing = payload.get("timing")
+    if not isinstance(timing, dict) or set(timing) != {
+        "cuda_peak_allocated_bytes",
+        "process_peak_rss_bytes",
+        "wall_seconds",
+    }:
+        raise ArtifactValidationError(f"{path.name} timing metadata is invalid")
+    for key in ("cuda_peak_allocated_bytes", "process_peak_rss_bytes"):
+        value = timing.get(key)
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ArtifactValidationError(f"{path.name} {key} is invalid")
+    wall_seconds = timing.get("wall_seconds")
+    if (
+        isinstance(wall_seconds, bool)
+        or not isinstance(wall_seconds, (int, float))
+        or wall_seconds < 0
+    ):
+        raise ArtifactValidationError(f"{path.name} wall time is invalid")
     boundary = payload.get("claim_boundary")
     if not isinstance(boundary, str) or "native-BF16 reference" not in boundary:
         raise ArtifactValidationError(f"{path.name} omits the BF16 claim boundary")
@@ -421,12 +439,47 @@ def validate_t4_artifact_directory(
                 "execution_commit"
             ):
                 raise ArtifactValidationError("environment project commit mismatch")
+        timings = manifest.get("timings")
+        if not isinstance(timings, dict):
+            raise ArtifactValidationError("run manifest timings are invalid")
         for record in science_records.values():
             provenance = record.get("provenance")
             if not isinstance(provenance, dict) or provenance.get(
                 "project_commit"
             ) != project.get("execution_commit"):
                 raise ArtifactValidationError("summary project commit mismatch")
+        timing_keys = {
+            "attribution_summary.json": "attribution",
+            "intervention_summary.json": "intervention",
+            "semantics_summary.json": "semantics",
+        }
+        stage_peaks: list[int] = []
+        for filename, timing_key in timing_keys.items():
+            summary_record = science_records.get(filename)
+            payload = (
+                summary_record.get("payload")
+                if isinstance(summary_record, dict)
+                else None
+            )
+            timing = payload.get("timing") if isinstance(payload, dict) else None
+            if not isinstance(timing, dict) or timings.get(timing_key) != timing:
+                raise ArtifactValidationError("summary timing metadata mismatch")
+            stage_peak = timing.get("cuda_peak_allocated_bytes")
+            if isinstance(stage_peak, int) and not isinstance(stage_peak, bool):
+                stage_peaks.append(stage_peak)
+        history = manifest.get("retry_history")
+        final_attempt = history[-1] if isinstance(history, list) and history else None
+        attempt_peak = (
+            final_attempt.get("peak_memory_bytes")
+            if isinstance(final_attempt, dict)
+            else None
+        )
+        if stage_peaks and (
+            not isinstance(attempt_peak, int)
+            or isinstance(attempt_peak, bool)
+            or attempt_peak < max(stage_peaks)
+        ):
+            raise ArtifactValidationError("attempt peak memory is below a stage peak")
         attribution_record = science_records.get("attribution_summary.json")
         if attribution_record is not None:
             payload = attribution_record.get("payload")

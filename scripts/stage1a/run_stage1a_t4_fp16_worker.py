@@ -48,6 +48,16 @@ def _peak_cuda_bytes(torch: Any | None) -> int | None:
     return None
 
 
+def _record_peak_cuda_bytes(observations: list[int], torch: Any | None) -> None:
+    peak = _peak_cuda_bytes(torch)
+    if peak is not None:
+        observations.append(peak)
+
+
+def _maximum_peak_cuda_bytes(observations: list[int]) -> int | None:
+    return max(observations) if observations else None
+
+
 def _release(bundle: RuntimeBundle | None) -> bool:
     succeeded = True
     torch = bundle.torch if bundle is not None else sys.modules.get("torch")
@@ -96,6 +106,7 @@ def main(argv: list[str] | None = None) -> int:
     error: BaseException | None = None
     stage = "configuration_validation"
     started = time.perf_counter()
+    peak_memory_observations: list[int] = []
     report: dict[str, Any]
     try:
         config = load_yaml(args.config.resolve())
@@ -110,6 +121,7 @@ def main(argv: list[str] | None = None) -> int:
             model_snapshot=args.model_snapshot,
             transcoder_snapshot=args.transcoder_snapshot,
         )
+        _record_peak_cuda_bytes(peak_memory_observations, bundle.torch)
         print("Worker completed immutable runtime loading", flush=True)
         artifacts = _mapping(config.get("artifacts"), "artifacts")
         stage = "environment_observation"
@@ -122,18 +134,23 @@ def main(argv: list[str] | None = None) -> int:
         )
         stage = "runtime_semantics"
         verify_runtime_semantics(bundle)
+        _record_peak_cuda_bytes(peak_memory_observations, bundle.torch)
         stage = "intervention"
         reproduce_intervention(bundle)
+        _record_peak_cuda_bytes(peak_memory_observations, bundle.torch)
         stage = "attribution"
         reproduce_attribution(bundle, batch_size=args.batch_size)
+        _record_peak_cuda_bytes(peak_memory_observations, bundle.torch)
     except BaseException as exc:
         if isinstance(exc, (KeyboardInterrupt, SystemExit)):
             raise
         error = exc
     finally:
-        peak_memory = _peak_cuda_bytes(
-            bundle.torch if bundle is not None else sys.modules.get("torch")
+        _record_peak_cuda_bytes(
+            peak_memory_observations,
+            bundle.torch if bundle is not None else sys.modules.get("torch"),
         )
+        peak_memory = _maximum_peak_cuda_bytes(peak_memory_observations)
         cleanup_succeeded = _release(bundle)
         os.environ.pop("HF_TOKEN", None)
         os.environ.pop("HUGGING_FACE_HUB_TOKEN", None)
