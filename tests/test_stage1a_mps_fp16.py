@@ -32,6 +32,7 @@ from cfsus.reproduction.mps_fp16 import (
     _download_snapshot_phase,
     _mps_sparse_attribution_adapter,
     _summarize_graph,
+    _validate_live_sparse_metadata_boundary,
     _validate_required_snapshot,
     aggregate_mps_telemetry,
     aggregate_stage_attempt_telemetry,
@@ -311,8 +312,19 @@ def test_dense_sparse_boundary_is_numerically_equivalent_when_torch_exists() -> 
     assert metadata.device.type == "cpu"
     assert indices.device.type == device
     reconstructed = torch.zeros_like(source)
-    reconstructed.index_put_((indices[0], indices[1]), values, accumulate=True)
+    reconstructed.index_put_((indices[0], indices[1]), values, accumulate=False)
     assert torch.equal(reconstructed, source)
+
+
+def test_live_sparse_boundary_avoids_unsupported_mps_fp16_accumulation() -> None:
+    torch = pytest.importorskip("torch")
+    if not bool(torch.backends.mps.is_available()):
+        pytest.skip("requires a live MPS device")
+
+    result = _validate_live_sparse_metadata_boundary(torch)
+
+    assert result["passed"] is True
+    assert result["maximum_absolute_error"] == 0.0
 
 
 def test_exact_asset_allowlists_cover_only_consumed_files() -> None:

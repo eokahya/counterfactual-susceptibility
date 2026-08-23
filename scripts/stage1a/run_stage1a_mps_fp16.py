@@ -92,6 +92,19 @@ PRESERVED_T4_SHA256 = {
 }
 MODEL_METADATA_BYTES = 10_479_239_529
 TRANSCODER_METADATA_BYTES = 7_855_395_802
+LOADING_PLAN_ID = (
+    "hf-model-mps+fp16-transcoder-encoders-mps+transformerlens-conversion-v1"
+)
+OBSERVED_RUNTIME_LOADING_STOP = {
+    "loading_plan_id": LOADING_PLAN_ID,
+    "execution_commit": "9de01b5446775f01b211acbc461f8385f9f3732a",
+    "attempt_report_sha256": (
+        "bae2ee7e0061de08db8f71a6c9c0734212b4666c49d27a65bb7131cbaedfc49e"
+    ),
+    "mps_current_allocated_peak_bytes": 35_977_178_880,
+    "mps_driver_allocated_peak_bytes": 40_032_174_080,
+    "swap_used_peak_bytes": 34_567_031_357,
+}
 RAW_PAYLOAD_NAMES = (
     "model_smoke.json",
     "environment.json",
@@ -514,6 +527,7 @@ def _memory_gate(torch_module: Any | None = None) -> dict[str, Any]:
         physical_memory_bytes=physical,
         pressure=telemetry.get("system_memory_pressure"),
         swap_used_bytes=telemetry.get("swap_used_bytes"),
+        observed_loading=OBSERVED_RUNTIME_LOADING_STOP,
     )
 
 
@@ -1083,6 +1097,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     preflight = _preflight(preflight_directory / "preflight_summary.json")
     feasibility = _memory_gate()
+    write_json_atomic(
+        preflight_directory / "feasibility_report.json",
+        feasibility,
+    )
     if preflight.get("status") != "passed":
         return 2
     if feasibility.get("status") != "feasible_with_explicit_execution_deviation":

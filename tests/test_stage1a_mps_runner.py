@@ -226,6 +226,87 @@ def test_mps_oom_classifier_is_narrow() -> None:
     assert not mps.is_mps_out_of_memory(MemoryError("CPU allocation failed"))
 
 
+def test_sanitized_mps_error_preserves_safe_diagnostics() -> None:
+    diagnostic = "Expected scalar_type Float for MPS index_put"
+
+    assert mps.sanitize_error(RuntimeError(diagnostic)) == diagnostic
+
+
+def test_sanitized_mps_error_redacts_tokens_and_private_paths() -> None:
+    token = "hf_" + "z" * 24
+    private_path = "/" + "Users/alice/cache"
+    error = RuntimeError(f"MPS failure {token} {private_path}")
+
+    message = mps.sanitize_error(error)
+
+    assert message == "[REDACTED]"
+    assert token not in message
+    assert "alice" not in message
+
+
+def test_worker_failure_report_keeps_the_sanitized_leaf_diagnostic(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    generated = tmp_path / "generated"
+    attempt = generated / "attempt-256-test"
+    report_path = attempt / "attempt_report.json"
+    diagnostic = "Expected scalar_type Float for MPS index_put"
+    leaf = RuntimeError(diagnostic)
+    wrapper = ValueError("runtime wrapper")
+    wrapper.__cause__ = leaf
+
+    monkeypatch.setattr(worker, "_generated_root", lambda: generated.resolve())
+    monkeypatch.setattr(worker, "_load_config", lambda _path: {})
+    monkeypatch.setattr(worker, "fallback_enabled", lambda: False)
+    monkeypatch.setattr(
+        "run_stage1a_mps_fp16_worker.importlib.import_module",
+        lambda _name: SimpleNamespace(mps=None),
+    )
+
+    def fail_loading(_config: dict[str, Any], _args: Any) -> Any:
+        raise wrapper
+
+    def run_stage(
+        name: str,
+        *,
+        torch_getter: Any,
+        function: Any,
+        stage_records: dict[str, dict[str, Any]],
+    ) -> Any:
+        del torch_getter
+        stage_records[name] = {
+            "sample_count": 2,
+            "peak_mps_current_allocated_bytes": 0,
+            "peak_mps_driver_allocated_bytes": 1,
+            "peak_mps_recommended_max_bytes": 2,
+            "peak_process_rss_bytes": 3,
+            "peak_swap_used_bytes": 0,
+        }
+        return function()
+
+    monkeypatch.setattr(worker, "_load_bundle", fail_loading)
+    monkeypatch.setattr(worker, "_run_stage", run_stage)
+
+    code = worker.main(
+        [
+            "--config",
+            str(tmp_path / "config.yaml"),
+            "--batch-size",
+            "256",
+            "--attempt-directory",
+            str(attempt),
+            "--attempt-report",
+            str(report_path),
+        ]
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    assert code == 1
+    assert report["exception_type"] == "RuntimeError"
+    assert report["message"] == diagnostic
+    assert report["diagnostic_redacted"] is True
+
+
 def test_only_attribution_mps_oom_retries_in_declared_sequence() -> None:
     assert mps.should_retry_mps_attempt(
         batch_size=256,
@@ -317,6 +398,43 @@ def test_memory_gate_records_required_sparse_metadata_deviation() -> None:
     )
     assert unknown["status"] == "blocked"
     assert unknown["downloads_authorized"] is False
+
+
+def test_observed_identical_loading_plan_fails_closed() -> None:
+    candidate = mps.evaluate_memory_feasibility(
+        {
+            "model_bytes": runner.MODEL_METADATA_BYTES,
+            "transcoder_bytes": runner.TRANSCODER_METADATA_BYTES,
+        },
+        physical_memory_bytes=32 * 1024**3,
+        pressure="normal",
+        swap_used_bytes=512 * 1024**2,
+        observed_loading=runner.OBSERVED_RUNTIME_LOADING_STOP,
+    )
+
+    assert candidate["status"] == "blocked"
+    assert candidate["downloads_authorized"] is False
+    assert candidate["reason"] == (
+        "observed identical runtime-loading plan exceeds the conservative budget"
+    )
+    assert candidate["effective_peak_bytes"] == 40_032_174_080
+    assert candidate["empirical_loading_observation"] == (
+        runner.OBSERVED_RUNTIME_LOADING_STOP
+    )
+
+
+def test_malformed_empirical_loading_observation_fails_closed() -> None:
+    candidate = mps.evaluate_memory_feasibility(
+        {"model_bytes": 1, "transcoder_bytes": 1},
+        physical_memory_bytes=32 * 1024**3,
+        pressure="normal",
+        swap_used_bytes=0,
+        observed_loading={"loading_plan_id": "incomplete"},
+    )
+
+    assert candidate["status"] == "blocked"
+    assert candidate["downloads_authorized"] is False
+    assert candidate["empirical_loading_observation"] is None
 
 
 def test_memory_pressure_classifies_observed_free_percentage() -> None:

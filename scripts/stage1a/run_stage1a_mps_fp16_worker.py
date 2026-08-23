@@ -47,6 +47,7 @@ from mps_runtime import (  # noqa: E402
     fallback_enabled,
     is_mps_out_of_memory,
     sample_mps_memory,
+    sanitize_error,
     summarize_mps_samples,
 )
 
@@ -856,7 +857,7 @@ def main(argv: list[str] | None = None) -> int:
             "outcome": "failed",
             "category": category,
             "exception_type": type(leaf).__name__,
-            "message": f"MPS attempt failed in {failure_stage}: {category}.",
+            "message": sanitize_error(leaf),
             "failure_stage": failure_stage,
             "wall_seconds": time.perf_counter() - started,
             "cleanup_succeeded": cleanup_succeeded,

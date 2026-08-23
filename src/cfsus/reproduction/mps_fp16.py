@@ -1699,10 +1699,12 @@ def _dense_to_cpu_sparse_metadata(dense: Any, torch: Any) -> tuple[Any, Any, Any
     ).coalesce()
     reconstructed = torch.zeros_like(dense)
     if device_values.numel():
+        # ``torch.nonzero`` produces unique coordinates, so replacement is
+        # exactly equivalent here and avoids unsupported MPS FP16 accumulation.
         reconstructed.index_put_(
             tuple(device_indices[axis] for axis in range(dense.ndim)),
             device_values,
-            accumulate=True,
+            accumulate=False,
         )
     if not bool(torch.allclose(reconstructed, dense, atol=5e-3, rtol=2e-3)):
         raise ArtifactValidationError(
@@ -1723,7 +1725,8 @@ def _validate_live_sparse_metadata_boundary(torch: Any) -> dict[str, Any]:
             "sparse metadata boundary used an unexpected device"
         )
     dense = torch.zeros_like(source)
-    dense.index_put_((indices[0], indices[1]), values, accumulate=True)
+    # The extracted COO coordinates are unique; no reduction is required.
+    dense.index_put_((indices[0], indices[1]), values, accumulate=False)
     maximum_error = float(torch.max(torch.abs(dense - source)).item())
     if maximum_error > 5e-3:
         raise ArtifactValidationError(

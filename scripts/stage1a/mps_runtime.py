@@ -19,6 +19,8 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
+from cfsus.reproduction.artifacts import REDACTED, redact_sensitive
+
 MPS_BATCH_SEQUENCE = (256, 128, 64)
 MPS_EXECUTION_DTYPE = "float16"
 MPS_REPRODUCTION_CLASS = "hardware_adapted_mps_fp16"
@@ -153,6 +155,7 @@ def evaluate_memory_feasibility(
     pressure: str | None = None,
     swap_used_bytes: int | None = None,
     safety_fraction: float = 0.70,
+    observed_loading: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Conservatively gate downloads and execution before loading weights."""
 
@@ -185,6 +188,51 @@ def evaluate_memory_feasibility(
     budget = (
         int(physical_bytes * safety_fraction) if physical_bytes is not None else None
     )
+    empirical_loading: dict[str, Any] | None = None
+    empirical_error: str | None = None
+    if observed_loading is not None:
+        required_observation_keys = {
+            "loading_plan_id",
+            "execution_commit",
+            "attempt_report_sha256",
+            "mps_current_allocated_peak_bytes",
+            "mps_driver_allocated_peak_bytes",
+            "swap_used_peak_bytes",
+        }
+        if set(observed_loading) != required_observation_keys:
+            empirical_error = "empirical runtime-loading observation has invalid keys"
+        else:
+            plan_id = observed_loading.get("loading_plan_id")
+            execution_commit = observed_loading.get("execution_commit")
+            report_sha256 = observed_loading.get("attempt_report_sha256")
+            current_peak = observed_loading.get("mps_current_allocated_peak_bytes")
+            driver_peak = observed_loading.get("mps_driver_allocated_peak_bytes")
+            observed_swap_peak = observed_loading.get("swap_used_peak_bytes")
+            if (
+                not isinstance(plan_id, str)
+                or not plan_id
+                or not isinstance(execution_commit, str)
+                or re.fullmatch(r"[0-9a-f]{40}", execution_commit) is None
+                or not isinstance(report_sha256, str)
+                or _SHA256.fullmatch(report_sha256) is None
+                or isinstance(current_peak, bool)
+                or not isinstance(current_peak, int)
+                or current_peak < 0
+                or isinstance(driver_peak, bool)
+                or not isinstance(driver_peak, int)
+                or driver_peak < 0
+                or isinstance(observed_swap_peak, bool)
+                or not isinstance(observed_swap_peak, int)
+                or observed_swap_peak < 0
+                or current_peak > driver_peak
+            ):
+                empirical_error = "empirical runtime-loading observation is malformed"
+            else:
+                empirical_loading = dict(observed_loading)
+    effective_peak = estimate
+    if empirical_loading is not None:
+        observed_driver_peak = int(empirical_loading["mps_driver_allocated_peak_bytes"])
+        effective_peak = max(estimate or 0, observed_driver_peak)
     blocked_reason: str | None = None
     if not known:
         blocked_reason = "immutable snapshot sizes are unavailable"
@@ -196,6 +244,23 @@ def evaluate_memory_feasibility(
         blocked_reason = "swap usage telemetry is unavailable"
     elif swap_used_bytes > 4 * 1024**3:
         blocked_reason = "swap usage exceeds the preflight safety threshold"
+    elif empirical_error is not None:
+        blocked_reason = empirical_error
+    elif (
+        empirical_loading is not None
+        and effective_peak is not None
+        and effective_peak > budget
+    ):
+        blocked_reason = (
+            "observed identical runtime-loading plan exceeds the conservative budget"
+        )
+    elif (
+        empirical_loading is not None
+        and int(empirical_loading["swap_used_peak_bytes"]) > 4 * 1024**3
+    ):
+        blocked_reason = (
+            "observed identical runtime-loading plan exceeded the swap safety threshold"
+        )
     elif estimate is not None and estimate > budget:
         blocked_reason = (
             "conservative model/transcoder duplication estimate exceeds budget"
@@ -214,6 +279,8 @@ def evaluate_memory_feasibility(
         "snapshot_sizes": {"model_bytes": model, "transcoder_bytes": transcoder},
         "estimate_components": estimate_components,
         "estimated_peak_bytes": estimate,
+        "effective_peak_bytes": effective_peak,
+        "empirical_loading_observation": empirical_loading,
         "pressure": pressure,
         "swap_used_bytes": swap_used_bytes,
         "downloads_authorized": blocked_reason is None,
@@ -295,13 +362,9 @@ def classify_failure(error: BaseException) -> str:
 def sanitize_error(error: BaseException, *, limit: int = 240) -> str:
     """Make diagnostics one-line and credential/path-safe."""
 
-    text = " ".join(str(error).split())
-    text = re.sub(
-        r"(?i)(token|authorization|password)\s*[:=]\s*\S+", r"\1=<REDACTED>", text
-    )
-    text = re.sub(r"(?i)bearer\s+\S+", "Bearer <REDACTED>", text)
-    text = text.replace(str(Path.home()), "<HOME>")
-    return (text or type(error).__name__)[:limit]
+    text = " ".join(str(error).split()) or type(error).__name__
+    redacted = redact_sensitive({"message": text})["message"]
+    return redacted[:limit] if isinstance(redacted, str) else REDACTED
 
 
 def should_retry_mps_attempt(
