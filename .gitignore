@@ -23,6 +23,7 @@ htmlcov/
 # Virtual environments and local environment managers
 .venv/
 .venv-stage1a/
+.venv-stage1a-mps-py311/
 venv*/
 venv/
 env/

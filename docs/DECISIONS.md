@@ -185,3 +185,29 @@ complete.
 assets download, when a notebook is prepared, or after only one official run.
 None supplies the combined runtime and semantic evidence required before
 susceptibility work begins.
+
+## D-012 — 2026-08-23 — Isolate the MPS/FP16 runtime and make sparse CPU metadata explicit
+
+**Decision:** Implement Apple M2 Max/MPS/FP16 as a separate hardware-adapted
+runtime and artifact class. Keep dense model, transcoder, intervention, and
+autograd tensors on MPS. Because PyTorch 2.6.0 does not implement the pinned
+upstream sparse-COO conversion on MPS, permit only a project-local, numerically
+validated CPU boundary for sparse COO coordinates/values and the already
+CPU-resident graph storage. Keep `PYTORCH_ENABLE_MPS_FALLBACK` disabled and do
+not weaken the BF16 or T4 paths.
+
+**Reason:** Silent unsupported-operator fallback would conceal device changes,
+while treating MPS as a conditional branch of the CUDA path would blur runtime
+identity, telemetry semantics, and scientific claims. The explicit adapter
+preserves the same strict JumpReLU activations and reconstruction while making
+the unavoidable metadata placement observable and testable.
+
+**Alternatives considered:** Enable automatic MPS-to-CPU fallback; require
+native MPS sparse tensors; silently use dense CPU activations; or generalize the
+existing T4 validator. The first and third hide a material execution boundary,
+the second makes the exact PyTorch 2.6 path infeasible despite a bounded
+equivalent adapter, and the fourth risks weakening historical CUDA checks.
+
+**Revisit when:** The selected PyTorch/runtime implements and passes the exact
+sparse COO path on MPS, or numerical validation shows that the explicit adapter
+does not preserve the pinned computation.

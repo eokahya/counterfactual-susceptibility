@@ -1,0 +1,106 @@
+schema_version: 1
+experiment_name: stage1a_gemma2_2b_mps_fp16_hardware_adaptation
+reproduction_class: hardware_adapted_mps_fp16
+project_base_commit: d965e43c34a2ba408b8ae35b13b5651bf269beed
+reference_dtype: bfloat16
+execution_dtype: float16
+reference_status: pending
+claim_boundary: "Apple M2 Max/MPS FP16 hardware-adapted runtime using the pinned assets; the official native-BF16 reproduction and CUDA/T4 numerical equivalence remain pending."
+
+environment:
+  python: "3.11.13"
+  pytorch: "2.6.0"
+  platform: macos-arm64
+  hardware_family: "Apple M2 Max"
+  physical_memory_gib: 32
+
+upstream:
+  repository: https://github.com/decoderesearch/circuit-tracer
+  revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+  version: "0.5.2"
+
+model:
+  identifier: google/gemma-2-2b
+  revision: c5ebcd40d208330abc697524c919956e692655cf
+  snapshot_path: results/generated/stage1a_mps_fp16/assets/google-gemma-2-2b
+
+transcoder:
+  identifier: mwhanna/gemma-scope-transcoders
+  revision: bd5773156dea09893636c801df1237d0410307d2
+  snapshot_path: results/generated/stage1a_mps_fp16/assets/mwhanna-gemma-scope-transcoders
+
+runtime:
+  backend: transformerlens
+  device: mps
+  dtype: float16
+  execution_class: completed_hardware_adapted_mps_fp16
+  hardware_family: "Apple M2 Max"
+  official_bf16_reproduction: false
+  t4_fp16_reproduction: false
+  fallback_enabled: false
+  offload: disk
+
+seeds:
+  python: 0
+  numpy: 0
+  torch: 0
+
+asset_policy:
+  allow_download: true
+  require_offline_execution: true
+  cache_location: project_external_huggingface_cache
+  immutable_revisions_only: true
+
+attribution:
+  prompt: "The capital of state containing Dallas is"
+  max_n_logits: 10
+  desired_logit_probability: 0.95
+  max_feature_nodes: 8192
+  batch_size: 256
+  offload: disk
+
+intervention:
+  prompt: "Hecho: Michael Jordan juega al"
+  feature:
+    layer: 20
+    position: -1
+    feature_id: 341
+  alphas: [0.0, 0.5, 1.0]
+  freeze_attention: true
+  constrained_layers: null
+
+numerics:
+  gate_absolute_tolerance: 0.005
+  projection_absolute_tolerance: 0.005
+  noop_absolute_tolerance: 0.02
+  noop_relative_tolerance: 0.002
+  determinism_absolute_tolerance: 0.02
+  determinism_relative_tolerance: 0.002
+  model_parameter_samples_per_tensor: 16
+  preflight_absolute_tolerance: 0.005
+  preflight_relative_tolerance: 0.002
+
+oom_retry:
+  batch_sizes: [256, 128, 64]
+  trigger: mps_out_of_memory_only
+  fresh_process: true
+  clear_mps_cache_between_attempts: true
+  retry_on_unknown_failure: false
+
+memory_budget:
+  physical_memory_gib: 32
+  safety_reserve_gib: 6
+  telemetry: sampled_mps_and_process_rss
+  do_not_disable_guardrails: true
+  high_watermark_ratio_override: null
+
+artifacts:
+  preflight_summary: results/stage1a_mps_fp16/preflight/preflight_summary.json
+  environment_manifest: results/stage1a_mps_fp16/environment_manifest.json
+  asset_manifest: results/stage1a_mps_fp16/asset_manifest.json
+  attribution_summary: results/stage1a_mps_fp16/attribution_summary.json
+  intervention_summary: results/stage1a_mps_fp16/intervention_summary.json
+  semantics_summary: results/stage1a_mps_fp16/semantics_summary.json
+  memory_summary: results/stage1a_mps_fp16/memory_summary.json
+  checksums: results/stage1a_mps_fp16/checksums.sha256
+  run_manifest: results/stage1a_mps_fp16/stage1a_mps_run_manifest.json

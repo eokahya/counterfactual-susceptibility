@@ -65,6 +65,7 @@ FORBIDDEN_PATH_PREFIXES = (
     (".ssh",),
     (".venv",),
     (".venv-stage1a",),
+    (".venv-stage1a-mps-py311",),
     ("checkpoints",),
     ("data", "raw"),
     ("datasets",),
