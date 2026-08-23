@@ -41,6 +41,13 @@ TRANSCODER_REVISION = "bd5773156dea09893636c801df1237d0410307d2"
 MODEL_ID = "google/gemma-2-2b"
 TRANSCODER_ID = "mwhanna/gemma-scope-transcoders"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_CREDENTIAL_ASSIGNMENT = re.compile(
+    r"(?i)\b(?:token|access[_-]?token|api[_-]?key|auth[_-]?token|authorization|"
+    r"bearer[_-]?token|cookie|credentials|github[_-]?token|hf[_-]?token|"
+    r"id[_-]?token|password|passwd|private[_-]?token|refresh[_-]?token|"
+    r"secret)\s*[:=]"
+)
+_BEARER_CREDENTIAL = re.compile(r"(?i)\bbearer\s+\S+")
 
 
 class MPSRuntimeError(RuntimeError):
@@ -363,6 +370,8 @@ def sanitize_error(error: BaseException, *, limit: int = 240) -> str:
     """Make diagnostics one-line and credential/path-safe."""
 
     text = " ".join(str(error).split()) or type(error).__name__
+    if _CREDENTIAL_ASSIGNMENT.search(text) or _BEARER_CREDENTIAL.search(text):
+        return REDACTED
     redacted = redact_sensitive({"message": text})["message"]
     return redacted[:limit] if isinstance(redacted, str) else REDACTED
 

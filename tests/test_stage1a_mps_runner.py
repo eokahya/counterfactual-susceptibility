@@ -232,6 +232,23 @@ def test_sanitized_mps_error_preserves_safe_diagnostics() -> None:
     assert mps.sanitize_error(RuntimeError(diagnostic)) == diagnostic
 
 
+@pytest.mark.parametrize(
+    "credential",
+    (
+        "password=hunter2",
+        "token=opaque123",
+        "authorization: Basic opaque123",
+        "api_key=short-secret",
+        "Bearer tiny-secret",
+    ),
+)
+def test_sanitized_mps_error_redacts_generic_credentials(credential: str) -> None:
+    message = mps.sanitize_error(RuntimeError(f"MPS failure {credential}"))
+
+    assert message == "[REDACTED]"
+    assert credential not in message
+
+
 def test_sanitized_mps_error_redacts_tokens_and_private_paths() -> None:
     token = "hf_" + "z" * 24
     private_path = "/" + "Users/alice/cache"
@@ -435,6 +452,44 @@ def test_malformed_empirical_loading_observation_fails_closed() -> None:
     assert candidate["status"] == "blocked"
     assert candidate["downloads_authorized"] is False
     assert candidate["empirical_loading_observation"] is None
+
+
+def test_main_stops_before_cache_or_worker_for_observed_loading_plan(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    generated = tmp_path / "generated"
+    monkeypatch.setattr(runner, "GENERATED_DIRECTORY", generated)
+    monkeypatch.setattr(runner, "_load_config", lambda _path: {})
+    monkeypatch.setattr(runner, "_validate_source_checkout", lambda: (COMMIT, False))
+    monkeypatch.setattr(runner, "_preflight", lambda _path: {"status": "passed"})
+    monkeypatch.setattr(
+        runner,
+        "_memory_gate",
+        lambda: {
+            "status": "blocked",
+            "downloads_authorized": False,
+            "reason": (
+                "observed identical runtime-loading plan exceeds the conservative "
+                "budget"
+            ),
+        },
+    )
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> Any:
+        raise AssertionError("blocked main reached cache or worker handling")
+
+    monkeypatch.setattr(runner, "_validate_external_cache_subdirectory", forbidden)
+    monkeypatch.setattr(runner, "_validate_external_cache_tree", forbidden)
+    monkeypatch.setattr(runner, "_run_attempt", forbidden)
+
+    code = runner.main(["--config", str(tmp_path / "config.yaml")])
+
+    assert code == 2
+    reports = list(generated.glob("preflight-*/feasibility_report.json"))
+    assert len(reports) == 1
+    payload = json.loads(reports[0].read_text(encoding="utf-8"))
+    assert payload["status"] == "blocked"
+    assert payload["downloads_authorized"] is False
 
 
 def test_memory_pressure_classifies_observed_free_percentage() -> None:
