@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import stat
 import subprocess
 import sys
 import tempfile
@@ -251,7 +252,105 @@ def _validate_external_cache_subdirectory(cache: Path, name: str) -> Path:
         raise MPSRuntimeError(
             "Hugging Face cache subdirectory must be project-external"
         )
+    _validate_physical_project_separation(resolved_candidate)
     return resolved_candidate
+
+
+def _validate_physical_project_separation(path: Path) -> None:
+    try:
+        resolved_project = REPOSITORY_ROOT.resolve(strict=True)
+        current = path
+        while True:
+            if current.exists() and os.path.samefile(current, resolved_project):
+                raise MPSRuntimeError(
+                    "Hugging Face cache physically overlaps the project"
+                )
+            parent = current.parent
+            if parent == current:
+                break
+            current = parent
+        if path.exists():
+            current = resolved_project
+            while True:
+                if os.path.samefile(path, current):
+                    raise MPSRuntimeError(
+                        "Hugging Face cache physically overlaps the project"
+                    )
+                parent = current.parent
+                if parent == current:
+                    break
+                current = parent
+    except MPSRuntimeError:
+        raise
+    except (OSError, RuntimeError) as error:
+        raise MPSRuntimeError(
+            "Hugging Face cache physical boundary could not be verified"
+        ) from error
+
+
+def _validate_external_cache_tree(cache: Path) -> None:
+    if cache.is_symlink() or (cache.exists() and not cache.is_dir()):
+        raise MPSRuntimeError("Hugging Face cache root is unsafe")
+    if not cache.exists():
+        return
+    try:
+        resolved_cache = cache.resolve(strict=True)
+        cache_device = resolved_cache.stat().st_dev
+    except (OSError, RuntimeError) as error:
+        raise MPSRuntimeError(
+            "Hugging Face cache tree could not be resolved"
+        ) from error
+    if resolved_cache == REPOSITORY_ROOT or resolved_cache.is_relative_to(
+        REPOSITORY_ROOT
+    ):
+        raise MPSRuntimeError("Hugging Face cache tree must be project-external")
+    _validate_physical_project_separation(resolved_cache)
+
+    def fail_on_walk_error(error: OSError) -> None:
+        raise MPSRuntimeError(
+            "Hugging Face cache tree could not be traversed"
+        ) from error
+
+    for current_root, directory_names, filenames in os.walk(
+        resolved_cache,
+        followlinks=False,
+        onerror=fail_on_walk_error,
+    ):
+        current = Path(current_root)
+        for name in (*directory_names, *filenames):
+            entry = current / name
+            try:
+                metadata = entry.lstat()
+                if stat.S_ISLNK(metadata.st_mode):
+                    target = entry.resolve(strict=True)
+                    if (
+                        not target.is_relative_to(resolved_cache)
+                        or not target.is_file()
+                        or target.stat().st_dev != cache_device
+                    ):
+                        raise MPSRuntimeError(
+                            "Hugging Face cache symlink escapes the external cache"
+                        )
+                elif stat.S_ISDIR(metadata.st_mode):
+                    if metadata.st_dev != cache_device:
+                        raise MPSRuntimeError(
+                            "Hugging Face cache contains a mounted directory"
+                        )
+                elif stat.S_ISREG(metadata.st_mode):
+                    if metadata.st_dev != cache_device or metadata.st_nlink != 1:
+                        raise MPSRuntimeError(
+                            "Hugging Face cache contains a linked external file"
+                        )
+                else:
+                    raise MPSRuntimeError(
+                        "Hugging Face cache contains a special filesystem entry"
+                    )
+            except MPSRuntimeError:
+                raise
+            except (OSError, RuntimeError) as error:
+                raise MPSRuntimeError(
+                    "Hugging Face cache tree could not be inspected"
+                ) from error
 
 
 def _validate_protected_git_state() -> None:
@@ -998,9 +1097,13 @@ def main(argv: list[str] | None = None) -> int:
         raise MPSRuntimeError("Hugging Face cache must be project-external")
     hub_cache = _validate_external_cache_subdirectory(cache, "hub")
     xet_cache = _validate_external_cache_subdirectory(cache, "xet")
+    _validate_external_cache_tree(cache)
     child_environment = os.environ.copy()
     child_environment.pop("PYTORCH_ENABLE_MPS_FALLBACK", None)
     child_environment.pop("PYTORCH_MPS_HIGH_WATERMARK_RATIO", None)
+    for name in tuple(child_environment):
+        if name.startswith("HF_XET_"):
+            child_environment.pop(name)
     child_environment["HF_HUB_CACHE"] = str(hub_cache)
     child_environment["HF_XET_CACHE"] = str(xet_cache)
     if args.allow_download:
@@ -1014,6 +1117,7 @@ def main(argv: list[str] | None = None) -> int:
     accepted_directory: Path | None = None
     selected_batch: int | None = None
     for batch_size in MPS_BATCH_SEQUENCE:
+        _validate_external_cache_tree(cache)
         report, attempt_directory = _run_attempt(args, batch_size, child_environment)
         history.append(report)
         if report.get("outcome") == "completed":
@@ -1036,6 +1140,7 @@ def main(argv: list[str] | None = None) -> int:
     if selected_batch is None or accepted_directory is None:
         return 2
 
+    _validate_external_cache_tree(cache)
     _revalidate_publication_state(project_commit)
     staging_directory = Path(
         tempfile.mkdtemp(prefix="candidate-bundle-", dir=str(GENERATED_DIRECTORY))

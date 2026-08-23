@@ -217,7 +217,9 @@ does not preserve the pinned computation.
 **Decision:** Set `HF_HUB_CACHE` and `HF_XET_CACHE` beneath the checked
 project-external cache when directing the two authorized pinned repositories;
 preserve the caller's `HF_HOME` so the existing secure Hugging Face login
-remains discoverable. Before execution,
+remains discoverable. Remove inherited Xet redirect variables, reject unsafe
+entries throughout the existing cache tree, and recheck that tree between
+attempts and before publication. Before execution,
 before candidate construction, and immediately around publication, require
 fully qualified protected refs, an exact symbolic branch, no replacement refs
 or legacy grafts, default index flags, a case-insensitive literal T4 index

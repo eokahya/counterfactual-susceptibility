@@ -168,6 +168,45 @@ def test_external_xet_cache_rejects_a_symlink_into_the_project(tmp_path: Path) -
         runner._validate_external_cache_subdirectory(cache, "xet")
 
 
+def test_external_cache_tree_rejects_nested_redirects(tmp_path: Path) -> None:
+    cache = tmp_path / "external-cache"
+    blob = cache / "hub/blobs/blob"
+    blob.parent.mkdir(parents=True)
+    blob.write_bytes(b"verified blob")
+    snapshot = cache / "hub/snapshots/revision"
+    snapshot.mkdir(parents=True)
+    (snapshot / "config.json").symlink_to(blob)
+    (cache / "xet").mkdir()
+    runner._validate_external_cache_tree(cache)
+
+    (cache / "hub/.locks").symlink_to(ROOT, target_is_directory=True)
+    with pytest.raises(mps.MPSRuntimeError, match="cache symlink"):
+        runner._validate_external_cache_tree(cache)
+
+
+def test_external_cache_tree_fails_closed_on_unreadable_directories(
+    tmp_path: Path,
+) -> None:
+    cache = tmp_path / "external-cache"
+    unreadable = cache / "xet/hidden"
+    unreadable.mkdir(parents=True)
+    unreadable.chmod(0o333)
+    try:
+        with pytest.raises(mps.MPSRuntimeError, match="could not be traversed"):
+            runner._validate_external_cache_tree(cache)
+    finally:
+        unreadable.chmod(0o700)
+
+
+def test_external_cache_rejects_an_apfs_unicode_alias_into_the_project() -> None:
+    canonical = ROOT / "results/generated"
+    alias = Path(str(canonical).replace("/Users/", "/U\u017fers/", 1))
+    if not alias.exists() or not alias.samefile(canonical):
+        alias = canonical
+    with pytest.raises(mps.MPSRuntimeError, match="physically overlaps"):
+        runner._validate_physical_project_separation(alias)
+
+
 def test_publication_state_rejects_a_mid_run_head_change(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -752,6 +791,8 @@ def test_fake_producer_promotes_only_a_strictly_validated_bundle(
     authentication_home = tmp_path / "authentication-home"
     monkeypatch.setenv("HF_HOME", str(authentication_home))
     monkeypatch.setenv("HF_XET_CACHE", str(ROOT / "unsafe-inherited-xet-cache"))
+    monkeypatch.setenv("HF_XET_LOG_DEST", str(ROOT / "results/generated/xet.log"))
+    monkeypatch.setenv("HF_XET_DATA_STAGING_SUBDIR", "unsafe-inherited-staging")
     source_validation_calls = 0
 
     def fake_validate_source_checkout() -> tuple[str, bool]:
@@ -808,6 +849,8 @@ def test_fake_producer_promotes_only_a_strictly_validated_bundle(
         assert _environment["HF_XET_CACHE"] == str(
             (tmp_path / "external-cache" / "xet").resolve()
         )
+        assert "HF_XET_LOG_DEST" not in _environment
+        assert "HF_XET_DATA_STAGING_SUBDIR" not in _environment
         directory = generated_directory / "attempt-256-fake"
         return _raw_attempt(directory), directory
 
