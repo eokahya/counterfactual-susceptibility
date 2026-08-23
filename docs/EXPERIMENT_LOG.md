@@ -1,6 +1,7 @@
 # Experiment Log
 
-**Status:** No scientific experiments have been completed.
+**Status:** No scientific experiment has completed successfully. One failed
+real-runtime attempt is recorded below; it produced no scientific result.
 
 Unit tests, environment inspection, and deterministic formula verification are
 Stage 0 engineering checks. They are recorded in `docs/STAGE_0_REPORT.md`, not as
@@ -47,3 +48,84 @@ one.
 ---
 
 Never record a planned, configured, or partially scaffolded run as completed.
+
+---
+
+## EXP-20260823-001 — Stage 1A MPS/FP16 progressive runtime-load attempt
+
+- **Status:** failed
+- **Date (UTC):** 2026-08-23T11:38:05Z to 2026-08-23T12:46:43Z
+- **Authors/operators:** Codex App on the local Apple M2 Max host
+- **Scientific question or hypothesis:** Can the exact pinned Stage 1A Gemma
+  model and transcoder be loaded progressively into the separate MPS/FP16
+  runtime, pass loaded semantics, and proceed to the fixed attribution and
+  intervention without weakening the experiment?
+- **Prerequisite experiment IDs:** none
+- **Planned versus exploratory:** planned hardware-adaptation reproduction;
+  bounded postmortem operator diagnosis was exploratory engineering work
+- **Code commit:** `9de01b5446775f01b211acbc461f8385f9f3732a`
+- **Dirty-tree status:** tracked tree clean at launch; only the preserved
+  `results/stage1a_t4_fp16/` directory was untracked
+- **Configuration:**
+  `configs/stage1a_gemma2_2b_mps_fp16_reproduction.yaml`, SHA-256
+  `b17d96a66bb307670911c5ac76b247ba5233935a3ce84887bd9cd886d98af8bc`
+- **Random seeds:** Python 0, NumPy 0, Torch 0
+- **Upstream package:** `https://github.com/decoderesearch/circuit-tracer`,
+  commit `8f1e2438df612464e229e44c4a00ff637bf9379b`, version 0.5.2
+- **Model:**
+  `google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf`
+- **Transcoder/CLT:**
+  `mwhanna/gemma-scope-transcoders@bd5773156dea09893636c801df1237d0410307d2`
+- **Prompt inputs:** attribution `The capital of state containing Dallas is`;
+  intervention `Hecho: Michael Jordan juega al`
+- **Behavior metric:** configured official Dallas target with
+  `max_n_logits=10`, desired logit probability `0.95`, and a maximum of 8192
+  feature nodes; not evaluated
+- **Hardware:** Apple M2 Max, MPS, 32 GiB unified memory, 12-core CPU
+- **Software:** macOS 26.6.2 arm64; Python 3.11.13; PyTorch 2.6.0;
+  TransformerLens 3.2.1; Transformers 4.57.3; nnsight 0.6.1;
+  huggingface-hub 0.36.2; fallback disabled
+- **Intervention:** configured feature `(20, -1, 341)`, alphas `0.0`, `0.5`,
+  and `1.0`, frozen attention, unconstrained layers; not run
+- **Primary metrics and results:** the model-only MPS/FP16 forward passed with
+  token shape `[1, 8]`, finite logit shape `[1, 8, 256000]`, before transcoder
+  loading. The worker then failed in `runtime_loading`; loaded semantics,
+  attribution, and intervention were not reached.
+- **Replacement-model result:** not run; construction did not return a bundle
+- **Underlying-model result:** model-only progressive gate passed; no behavior
+  metric was computed
+- **Failures, warnings, and anomalies:** attempt category `failed_runtime`,
+  `RuntimeError`, `oom_confirmed=false`, `retry_eligible=false`, and no retry.
+  The original worker over-redacted the leaf diagnostic. A bounded real-MPS
+  postmortem reproduced a compatible deterministic failure from unsupported
+  FP16 `index_put_` accumulation at the next known sparse-boundary check;
+  because the original leaf text was not retained, exact identity is
+  unconfirmed. Unique-coordinate replacement passed with zero error and was
+  fixed in `86ec118`. TransformerLens also emitted its unsuppressed MPS
+  correctness warning. The real loading telemetry falsified the static memory
+  plan, so the large runtime was not rerun after the operator fix.
+- **Peak memory and wall-clock time:** `4,117.836113` seconds; 3,858 samples;
+  MPS current `35,977,178,880` bytes; MPS driver `40,032,174,080` bytes;
+  process RSS `5,948,440,576` bytes; system swap `34,567,031,357` bytes.
+  These overlapping unified-memory counters are not summed. The failed report
+  did not retain sampled pressure states, so intervening critical pressure
+  cannot be excluded.
+- **Artifacts:** ignored preflight
+  `results/generated/stage1a_mps_fp16/preflight-mndxhfn0/preflight_summary.json`
+  (SHA-256
+  `098d1cd0892cc3ef802375284aa51ab82b08079cc6cda3ebafbb19c683b5bb1c`)
+  and ignored attempt
+  `results/generated/stage1a_mps_fp16/attempt-256-yhp6ax3r/attempt_report.json`
+  (SHA-256
+  `bae2ee7e0061de08db8f71a6c9c0734212b4666c49d27a65bb7131cbaedfc49e`).
+  No canonical science bundle was published.
+- **Deviation from plan:** only the preregistered explicit CPU sparse-metadata
+  boundary; no scientific parameter changed. The later operator replacement
+  is equivalent for unique coordinates and was not used to claim a completed
+  run.
+- **Decision:** stop. Preserve the attempt as failed and classify the overall
+  Stage 1A MPS effort as blocked at the re-evaluated conservative memory gate.
+- **Follow-up:** do not launch the identical loading plan on this 32 GiB host.
+  Any future attempt requires a new audited loading-plan identity, a
+  conservative budget informed by the measured driver/swap peaks, renewed MPS
+  numerical validation, and no silent change to scientific parameters.

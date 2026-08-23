@@ -237,3 +237,44 @@ completed bundle must not overstate either asset access or source identity.
 cache; accept shorthand refs; trust case-sensitive `ls-files`; or rely only on
 `git status --porcelain`. These alternatives respectively duplicate sensitive
 material or leave reproduced provenance bypasses open.
+
+## D-014 — 2026-08-23 — Stop the MPS reproduction after runtime-load and memory gates fail
+
+**Decision:** Preserve the real batch-labelled-256 worker as
+`failed_runtime` at `runtime_loading`; do not relabel it as MPS OOM and do not
+start the 128 or 64 workers. A bounded postmortem reproduced a compatible
+deterministic RuntimeError at the next known sparse-metadata check: FP16 MPS
+does not support the requested `index_put_` accumulation. The original leaf
+diagnostic was not retained, so exact identity is unconfirmed. Because the
+coordinates originate from `nonzero` and are unique, use replacement rather
+than accumulation and retain a live MPS zero-error regression. This
+compatibility fix does not authorize a large rerun. Treat the exact current
+loading plan as resource-blocked on the 32 GiB host because its observed
+`40,032,174,080`-byte MPS-driver peak and `34,567,031,357`-byte host-wide
+sampled swap peak falsify the 24,051,816,857-byte conservative budget. Persist
+the observed plan fingerprint in the pre-run memory gate and fail closed before
+another identical load.
+
+**Reason:** Batch size is not consumed until attribution, so 128 or 64 cannot
+reduce model/transcoder/TransformerLens construction memory. The task permits
+retry only for confirmed MPS OOM; this attempt was a generic runtime error,
+OOM was unconfirmed, and attribution never started. Although the operator
+failure has an equivalent local fix, MPS current and driver allocations each
+exceeded physical/safety budgets and system swap rose far above the 4 GiB
+threshold. Current recovery to normal memory and thermal pressure does not
+erase the measured peak or make the original static estimate conservative.
+
+**Alternatives considered:** Reclassify the error as OOM and try 128/64;
+silently switch to CPU or CUDA; change dtype, model, revision, offload, prompt,
+or scientific parameters; suppress the TransformerLens warning; or publish
+empty semantics/attribution/intervention files as a completed artifact. These
+options respectively violate the narrow retry policy, conceal a runtime
+change, weaken the experiment, hide an unresolved correctness uncertainty, or
+fabricate evidence.
+
+**Revisit when:** A materially new loading plan has a distinct reviewed
+identity, a conservative static budget below the host reserve using this
+attempt as empirical evidence, bounded MPS correctness validation, and an
+isolated worker that cannot silently continue through unsafe memory. The new
+plan must preserve the exact scientific inputs and produce a fully validated
+real artifact before either Stage 1B readiness flag can become true.
