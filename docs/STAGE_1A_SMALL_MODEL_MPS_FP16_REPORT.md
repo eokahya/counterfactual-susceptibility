@@ -25,8 +25,9 @@ gate. Nothing downstream is reported as completed.
 - Pre-run execution commit: none; smoke never passed, so the accepted protocol
   was never frozen.
 - Accepted execution commit: none
-- Blocker report commit and push: recorded in the final task response after the
-  commit is created and the branch-only push is verified.
+- Blocker report commit:
+  `a99de406e200cf3731cc64ec92c5a6dec47ddf85`. The later provenance-only
+  finalization commit and branch-only push are recorded in the task response.
 
 ## 3. Protected history
 
@@ -166,8 +167,8 @@ Changes are isolated to Stage 1A-S config/manifest/environment docs, the new
 runtime/probe/download/worker code and tests, current status/decision/log docs,
 plus the README status link and one old-test fixture portability correction.
 Historical runtime modules, reports, notebook outputs, and `paper/` are
-unchanged. Relative to the exact base, the final candidate changes 18 files
-with 3469 insertions and 5 deletions.
+unchanged. Relative to the exact base, the blocker-report candidate changes 18
+files with 3470 insertions and 5 deletions.
 
 ## 16. Scientific boundary
 
