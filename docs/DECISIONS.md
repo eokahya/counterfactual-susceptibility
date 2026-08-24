@@ -613,3 +613,22 @@ claim.
 canonical results, reuse calibration pairs as canonical evidence, or persist
 the calibration graph. Each would introduce outcome leakage, circularity, or
 forbidden large evidence.
+
+## D-034 — 2026-08-24 — Accept only the frozen one-attempt canonical evidence
+
+**Decision:** Accept the canonical run from clean pre-run commit
+`de49bc0ee1d4ee1b2a0c15703b41e76781467ede`. It used exactly one fresh process,
+read no calibration artifact, made no scientific retry, passed every frozen
+scanner and targeted-response threshold, and produced only the allowlisted
+compact artifact bundle. The terminal class is exclusively
+`completed_stage1b_measurement_primitives`.
+
+**Reason:** The scanner matched the dense oracle exactly at all frozen chunk
+sizes, while the independent 64-pair targeted path passed prospective raw-edge
+validation without graph/edge input. Standalone and independent spot checks
+reproduced the evidence, so all binding phase gates are satisfied without
+post-outcome changes.
+
+**Alternatives considered:** Expand the claim to susceptibility, gate crossing,
+behavior, mediation, official BF16 reproduction, reference CLT reproduction,
+or paper readiness. None of those outcomes was measured in this Goal.

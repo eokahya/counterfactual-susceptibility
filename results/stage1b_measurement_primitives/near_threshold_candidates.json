@@ -1,0 +1,1799 @@
+{
+  "artifact_type": "stage1b_measurement_primitives_near_threshold_candidates",
+  "candidate_count": 128,
+  "candidates": [
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3765,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 0.0,
+      "preactivation": 47.0,
+      "threshold": 47.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 6397,
+        "layer": 11,
+        "position": 1
+      },
+      "margin": 0.0,
+      "preactivation": 83.5,
+      "threshold": 83.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 11855,
+        "layer": 12,
+        "position": 1
+      },
+      "margin": 0.0,
+      "preactivation": 109.0,
+      "threshold": 109.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 10189,
+        "layer": 15,
+        "position": 5
+      },
+      "margin": 0.0,
+      "preactivation": 157.0,
+      "threshold": 157.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 27,
+        "layer": 17,
+        "position": 2
+      },
+      "margin": 0.0,
+      "preactivation": 170.0,
+      "threshold": 170.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4617,
+        "layer": 1,
+        "position": 1
+      },
+      "margin": 0.03125,
+      "preactivation": 4.125,
+      "threshold": 4.15625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 542,
+        "layer": 2,
+        "position": 4
+      },
+      "margin": 0.078125,
+      "preactivation": 2.375,
+      "threshold": 2.453125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2522,
+        "layer": 0,
+        "position": 1
+      },
+      "margin": 0.125,
+      "preactivation": 1.5546875,
+      "threshold": 1.6796875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 15884,
+        "layer": 3,
+        "position": 3
+      },
+      "margin": 0.125,
+      "preactivation": 21.25,
+      "threshold": 21.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 178,
+        "layer": 3,
+        "position": 4
+      },
+      "margin": 0.125,
+      "preactivation": 16.625,
+      "threshold": 16.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 10215,
+        "layer": 8,
+        "position": 3
+      },
+      "margin": 0.125,
+      "preactivation": 21.5,
+      "threshold": 21.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2628,
+        "layer": 1,
+        "position": 3
+      },
+      "margin": 0.15625,
+      "preactivation": 4.21875,
+      "threshold": 4.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3293,
+        "layer": 2,
+        "position": 2
+      },
+      "margin": 0.15625,
+      "preactivation": 4.09375,
+      "threshold": 4.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 7489,
+        "layer": 1,
+        "position": 5
+      },
+      "margin": 0.1875,
+      "preactivation": 4.1875,
+      "threshold": 4.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1485,
+        "layer": 8,
+        "position": 3
+      },
+      "margin": 0.1875,
+      "preactivation": 15.25,
+      "threshold": 15.4375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2072,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 0.25,
+      "preactivation": 33.75,
+      "threshold": 34.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 5755,
+        "layer": 10,
+        "position": 3
+      },
+      "margin": 0.25,
+      "preactivation": 45.5,
+      "threshold": 45.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 7271,
+        "layer": 10,
+        "position": 5
+      },
+      "margin": 0.25,
+      "preactivation": 43.75,
+      "threshold": 44.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3923,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 0.2890625,
+      "preactivation": 1.4375,
+      "threshold": 1.7265625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 166,
+        "layer": 3,
+        "position": 5
+      },
+      "margin": 0.3125,
+      "preactivation": 15.5625,
+      "threshold": 15.875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 278,
+        "layer": 2,
+        "position": 5
+      },
+      "margin": 0.328125,
+      "preactivation": 2.328125,
+      "threshold": 2.65625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1482,
+        "layer": 3,
+        "position": 2
+      },
+      "margin": 0.375,
+      "preactivation": 18.875,
+      "threshold": 19.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2803,
+        "layer": 3,
+        "position": 2
+      },
+      "margin": 0.375,
+      "preactivation": 21.25,
+      "threshold": 21.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2797,
+        "layer": 8,
+        "position": 2
+      },
+      "margin": 0.375,
+      "preactivation": 19.25,
+      "threshold": 19.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 12257,
+        "layer": 9,
+        "position": 4
+      },
+      "margin": 0.375,
+      "preactivation": 27.875,
+      "threshold": 28.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3521,
+        "layer": 1,
+        "position": 1
+      },
+      "margin": 0.40625,
+      "preactivation": 3.8125,
+      "threshold": 4.21875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1064,
+        "layer": 7,
+        "position": 3
+      },
+      "margin": 0.4375,
+      "preactivation": 14.8125,
+      "threshold": 15.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1099,
+        "layer": 2,
+        "position": 4
+      },
+      "margin": 0.453125,
+      "preactivation": 3.578125,
+      "threshold": 4.03125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 203,
+        "layer": 3,
+        "position": 2
+      },
+      "margin": 0.5,
+      "preactivation": 16.375,
+      "threshold": 16.875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 38,
+        "layer": 3,
+        "position": 4
+      },
+      "margin": 0.5,
+      "preactivation": 16.25,
+      "threshold": 16.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1925,
+        "layer": 7,
+        "position": 3
+      },
+      "margin": 0.5,
+      "preactivation": 17.125,
+      "threshold": 17.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 717,
+        "layer": 8,
+        "position": 1
+      },
+      "margin": 0.5,
+      "preactivation": 15.875,
+      "threshold": 16.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1464,
+        "layer": 8,
+        "position": 4
+      },
+      "margin": 0.5,
+      "preactivation": 16.5,
+      "threshold": 17.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1008,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 0.5,
+      "preactivation": 37.25,
+      "threshold": 37.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2082,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 0.5,
+      "preactivation": 39.5,
+      "threshold": 40.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 771,
+        "layer": 15,
+        "position": 1
+      },
+      "margin": 0.5,
+      "preactivation": 108.5,
+      "threshold": 109.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3646,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 0.5078125,
+      "preactivation": 1.5234375,
+      "threshold": 2.03125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 947,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 0.55859375,
+      "preactivation": 0.89453125,
+      "threshold": 1.453125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1190,
+        "layer": 1,
+        "position": 4
+      },
+      "margin": 0.5625,
+      "preactivation": 4.75,
+      "threshold": 5.3125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 12099,
+        "layer": 2,
+        "position": 2
+      },
+      "margin": 0.5625,
+      "preactivation": 4.84375,
+      "threshold": 5.40625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4561,
+        "layer": 2,
+        "position": 5
+      },
+      "margin": 0.609375,
+      "preactivation": 3.765625,
+      "threshold": 4.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1426,
+        "layer": 7,
+        "position": 4
+      },
+      "margin": 0.625,
+      "preactivation": 19.125,
+      "threshold": 19.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 15854,
+        "layer": 9,
+        "position": 4
+      },
+      "margin": 0.625,
+      "preactivation": 27.125,
+      "threshold": 27.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 891,
+        "layer": 10,
+        "position": 2
+      },
+      "margin": 0.625,
+      "preactivation": 28.375,
+      "threshold": 29.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4476,
+        "layer": 0,
+        "position": 1
+      },
+      "margin": 0.6328125,
+      "preactivation": 1.2578125,
+      "threshold": 1.890625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3461,
+        "layer": 0,
+        "position": 1
+      },
+      "margin": 0.640625,
+      "preactivation": 1.3125,
+      "threshold": 1.953125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1998,
+        "layer": 2,
+        "position": 4
+      },
+      "margin": 0.65625,
+      "preactivation": 3.96875,
+      "threshold": 4.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 13966,
+        "layer": 4,
+        "position": 3
+      },
+      "margin": 0.6875,
+      "preactivation": 9.75,
+      "threshold": 10.4375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 451,
+        "layer": 6,
+        "position": 1
+      },
+      "margin": 0.6875,
+      "preactivation": 6.5625,
+      "threshold": 7.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1351,
+        "layer": 3,
+        "position": 2
+      },
+      "margin": 0.75,
+      "preactivation": 18.875,
+      "threshold": 19.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3745,
+        "layer": 5,
+        "position": 4
+      },
+      "margin": 0.75,
+      "preactivation": 12.8125,
+      "threshold": 13.5625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 240,
+        "layer": 6,
+        "position": 1
+      },
+      "margin": 0.75,
+      "preactivation": 6.5625,
+      "threshold": 7.3125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 153,
+        "layer": 9,
+        "position": 5
+      },
+      "margin": 0.75,
+      "preactivation": 17.0,
+      "threshold": 17.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4484,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 0.75,
+      "preactivation": 47.75,
+      "threshold": 48.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 7715,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 0.75,
+      "preactivation": 57.0,
+      "threshold": 57.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 185,
+        "layer": 0,
+        "position": 3
+      },
+      "margin": 0.755859375,
+      "preactivation": 0.259765625,
+      "threshold": 1.015625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 13246,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 0.7890625,
+      "preactivation": 1.5078125,
+      "threshold": 2.296875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 5470,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 0.8046875,
+      "preactivation": 1.0546875,
+      "threshold": 1.859375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 13025,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 0.8046875,
+      "preactivation": 1.7109375,
+      "threshold": 2.515625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1744,
+        "layer": 1,
+        "position": 5
+      },
+      "margin": 0.84375,
+      "preactivation": 3.3125,
+      "threshold": 4.15625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 8425,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 0.8515625,
+      "preactivation": 1.6640625,
+      "threshold": 2.515625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1643,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 0.875,
+      "preactivation": 1.484375,
+      "threshold": 2.359375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2522,
+        "layer": 0,
+        "position": 3
+      },
+      "margin": 0.91015625,
+      "preactivation": 0.76953125,
+      "threshold": 1.6796875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 56,
+        "layer": 2,
+        "position": 4
+      },
+      "margin": 0.9140625,
+      "preactivation": 1.3203125,
+      "threshold": 2.234375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 10387,
+        "layer": 2,
+        "position": 3
+      },
+      "margin": 0.9375,
+      "preactivation": 5.15625,
+      "threshold": 6.09375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 127,
+        "layer": 3,
+        "position": 2
+      },
+      "margin": 1.0,
+      "preactivation": 15.75,
+      "threshold": 16.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 15887,
+        "layer": 9,
+        "position": 4
+      },
+      "margin": 1.0,
+      "preactivation": 28.25,
+      "threshold": 29.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1649,
+        "layer": 11,
+        "position": 4
+      },
+      "margin": 1.0,
+      "preactivation": 79.5,
+      "threshold": 80.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 9817,
+        "layer": 11,
+        "position": 4
+      },
+      "margin": 1.0,
+      "preactivation": 87.5,
+      "threshold": 88.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 11208,
+        "layer": 12,
+        "position": 1
+      },
+      "margin": 1.0,
+      "preactivation": 131.0,
+      "threshold": 132.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 14586,
+        "layer": 13,
+        "position": 4
+      },
+      "margin": 1.0,
+      "preactivation": 115.0,
+      "threshold": 116.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4241,
+        "layer": 2,
+        "position": 2
+      },
+      "margin": 1.03125,
+      "preactivation": 3.09375,
+      "threshold": 4.125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 138,
+        "layer": 3,
+        "position": 2
+      },
+      "margin": 1.125,
+      "preactivation": 13.5,
+      "threshold": 14.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3017,
+        "layer": 9,
+        "position": 4
+      },
+      "margin": 1.125,
+      "preactivation": 25.0,
+      "threshold": 26.125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 197,
+        "layer": 2,
+        "position": 3
+      },
+      "margin": 1.15625,
+      "preactivation": 2.75,
+      "threshold": 3.90625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 665,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 1.171875,
+      "preactivation": 0.6171875,
+      "threshold": 1.7890625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 9443,
+        "layer": 1,
+        "position": 1
+      },
+      "margin": 1.234375,
+      "preactivation": 3.140625,
+      "threshold": 4.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4612,
+        "layer": 6,
+        "position": 1
+      },
+      "margin": 1.25,
+      "preactivation": 14.75,
+      "threshold": 16.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 30,
+        "layer": 8,
+        "position": 1
+      },
+      "margin": 1.25,
+      "preactivation": 10.375,
+      "threshold": 11.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2517,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 1.25,
+      "preactivation": 48.0,
+      "threshold": 49.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1645,
+        "layer": 10,
+        "position": 2
+      },
+      "margin": 1.25,
+      "preactivation": 41.25,
+      "threshold": 42.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 774,
+        "layer": 11,
+        "position": 1
+      },
+      "margin": 1.25,
+      "preactivation": 58.75,
+      "threshold": 60.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 813,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 1.25390625,
+      "preactivation": 0.60546875,
+      "threshold": 1.859375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 376,
+        "layer": 2,
+        "position": 2
+      },
+      "margin": 1.28125,
+      "preactivation": 1.0,
+      "threshold": 2.28125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 9780,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 1.3515625,
+      "preactivation": 1.0859375,
+      "threshold": 2.4375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 15116,
+        "layer": 0,
+        "position": 1
+      },
+      "margin": 1.37109375,
+      "preactivation": 0.91015625,
+      "threshold": 2.28125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 6464,
+        "layer": 0,
+        "position": 2
+      },
+      "margin": 1.375,
+      "preactivation": 1.390625,
+      "threshold": 2.765625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4509,
+        "layer": 5,
+        "position": 3
+      },
+      "margin": 1.375,
+      "preactivation": 16.25,
+      "threshold": 17.625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3126,
+        "layer": 6,
+        "position": 3
+      },
+      "margin": 1.375,
+      "preactivation": 14.1875,
+      "threshold": 15.5625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3591,
+        "layer": 6,
+        "position": 3
+      },
+      "margin": 1.375,
+      "preactivation": 9.9375,
+      "threshold": 11.3125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1867,
+        "layer": 7,
+        "position": 5
+      },
+      "margin": 1.375,
+      "preactivation": 16.875,
+      "threshold": 18.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1157,
+        "layer": 8,
+        "position": 1
+      },
+      "margin": 1.375,
+      "preactivation": 19.125,
+      "threshold": 20.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 161,
+        "layer": 9,
+        "position": 4
+      },
+      "margin": 1.375,
+      "preactivation": 14.3125,
+      "threshold": 15.6875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 8255,
+        "layer": 0,
+        "position": 3
+      },
+      "margin": 1.3828125,
+      "preactivation": 0.9921875,
+      "threshold": 2.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 12952,
+        "layer": 1,
+        "position": 2
+      },
+      "margin": 1.40625,
+      "preactivation": 2.6875,
+      "threshold": 4.09375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 5629,
+        "layer": 2,
+        "position": 3
+      },
+      "margin": 1.40625,
+      "preactivation": 5.59375,
+      "threshold": 7.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 16333,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 1.41015625,
+      "preactivation": 0.74609375,
+      "threshold": 2.15625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 8991,
+        "layer": 5,
+        "position": 2
+      },
+      "margin": 1.4375,
+      "preactivation": 13.6875,
+      "threshold": 15.125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1174,
+        "layer": 0,
+        "position": 2
+      },
+      "margin": 1.44140625,
+      "preactivation": 0.48046875,
+      "threshold": 1.921875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3064,
+        "layer": 2,
+        "position": 2
+      },
+      "margin": 1.453125,
+      "preactivation": 3.640625,
+      "threshold": 5.09375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 9058,
+        "layer": 0,
+        "position": 1
+      },
+      "margin": 1.474609375,
+      "preactivation": 0.494140625,
+      "threshold": 1.96875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4485,
+        "layer": 1,
+        "position": 4
+      },
+      "margin": 1.5,
+      "preactivation": 2.8125,
+      "threshold": 4.3125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 321,
+        "layer": 5,
+        "position": 4
+      },
+      "margin": 1.5,
+      "preactivation": 5.34375,
+      "threshold": 6.84375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2173,
+        "layer": 10,
+        "position": 1
+      },
+      "margin": 1.5,
+      "preactivation": 38.5,
+      "threshold": 40.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3765,
+        "layer": 10,
+        "position": 3
+      },
+      "margin": 1.5,
+      "preactivation": 45.5,
+      "threshold": 47.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1096,
+        "layer": 10,
+        "position": 4
+      },
+      "margin": 1.5,
+      "preactivation": 39.25,
+      "threshold": 40.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 30,
+        "layer": 15,
+        "position": 4
+      },
+      "margin": 1.5,
+      "preactivation": 117.5,
+      "threshold": 119.0
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 299,
+        "layer": 2,
+        "position": 3
+      },
+      "margin": 1.53125,
+      "preactivation": 2.84375,
+      "threshold": 4.375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 11662,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 1.552734375,
+      "preactivation": 0.392578125,
+      "threshold": 1.9453125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 458,
+        "layer": 6,
+        "position": 1
+      },
+      "margin": 1.59375,
+      "preactivation": 6.96875,
+      "threshold": 8.5625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 5163,
+        "layer": 2,
+        "position": 2
+      },
+      "margin": 1.609375,
+      "preactivation": 2.421875,
+      "threshold": 4.03125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 11829,
+        "layer": 8,
+        "position": 3
+      },
+      "margin": 1.625,
+      "preactivation": 19.625,
+      "threshold": 21.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 919,
+        "layer": 6,
+        "position": 4
+      },
+      "margin": 1.6875,
+      "preactivation": 9.0625,
+      "threshold": 10.75
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4579,
+        "layer": 0,
+        "position": 1
+      },
+      "margin": 1.70263671875,
+      "preactivation": 0.10986328125,
+      "threshold": 1.8125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 10458,
+        "layer": 0,
+        "position": 4
+      },
+      "margin": 1.75,
+      "preactivation": 0.515625,
+      "threshold": 2.265625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1475,
+        "layer": 3,
+        "position": 4
+      },
+      "margin": 1.75,
+      "preactivation": 17.5,
+      "threshold": 19.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 1186,
+        "layer": 4,
+        "position": 5
+      },
+      "margin": 1.75,
+      "preactivation": 5.40625,
+      "threshold": 7.15625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2540,
+        "layer": 8,
+        "position": 4
+      },
+      "margin": 1.75,
+      "preactivation": 19.125,
+      "threshold": 20.875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 2603,
+        "layer": 1,
+        "position": 2
+      },
+      "margin": 1.765625,
+      "preactivation": 2.390625,
+      "threshold": 4.15625
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 3569,
+        "layer": 2,
+        "position": 1
+      },
+      "margin": 1.84375,
+      "preactivation": 5.375,
+      "threshold": 7.21875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 4517,
+        "layer": 2,
+        "position": 5
+      },
+      "margin": 1.84375,
+      "preactivation": 2.9375,
+      "threshold": 4.78125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 5470,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 1.85406494140625,
+      "preactivation": 0.00531005859375,
+      "threshold": 1.859375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 7839,
+        "layer": 0,
+        "position": 5
+      },
+      "margin": 1.87255859375,
+      "preactivation": 0.09619140625,
+      "threshold": 1.96875
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 10229,
+        "layer": 1,
+        "position": 1
+      },
+      "margin": 1.875,
+      "preactivation": 3.90625,
+      "threshold": 5.78125
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 20,
+        "layer": 7,
+        "position": 1
+      },
+      "margin": 1.875,
+      "preactivation": 10.0625,
+      "threshold": 11.9375
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 14699,
+        "layer": 7,
+        "position": 1
+      },
+      "margin": 1.875,
+      "preactivation": 20.625,
+      "threshold": 22.5
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 852,
+        "layer": 9,
+        "position": 1
+      },
+      "margin": 1.875,
+      "preactivation": 17.375,
+      "threshold": 19.25
+    },
+    {
+      "activation": 0.0,
+      "activity": "inactive",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "feature": {
+        "feature_id": 717,
+        "layer": 1,
+        "position": 4
+      },
+      "margin": 1.8984375,
+      "preactivation": 1.3046875,
+      "threshold": 3.203125
+    }
+  ],
+  "schema_version": 1
+}

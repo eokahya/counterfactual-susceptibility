@@ -1,10 +1,12 @@
 # Counterfactual Susceptibility
 
-**Status:** No Counterfactual Susceptibility result exists and the reference
-Stage 1A reproduction remains pending. The separate Stage 1A-S-BF16 local
-small-model runtime pilot completed on MPS/BF16, giving engineering readiness
-only; empirical claim readiness and paper Results readiness remain false. The
-protected MPS/FP16 pilot remains `failed_runtime`. See
+**Status:** Stage 1B measurement primitives completed on the pinned local
+Gemma 3 270M + 18-PLT NNsight runtime on Apple MPS/BF16. The result validates
+an exact loaded-JumpReLU near-threshold scanner and a graph-independent
+targeted local derivative, but it is not a Counterfactual Susceptibility,
+gate-crossing, behavioral, mediation, Gemma 2, or reference-CLT result. The
+reference Stage 1A reproduction remains pending; empirical claim readiness
+and paper Results readiness remain false. See
 [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current experiment
 classes and readiness boundary.
 
@@ -41,6 +43,24 @@ gate crossing, mediation, behavioral importance, or paper result. See
 [`docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md`](docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md).
 
 The reference Stage 1A-R track remains pending.
+
+## Stage 1B status
+
+Stage 1B converted the accepted local Stage 1A-S-BF16 runtime into a reusable
+measurement backend and validated two bounded primitives. The inactive-feature
+scanner matched its ephemeral dense oracle exactly across chunk sizes 257,
+1024, and 4096. An independent targeted reverse-mode path computed
+`J_ij = partial z_i / partial a_j` without accepting graph or edge input; on
+the frozen 64-pair canonical set, `a_j * J_ij` matched raw attribution edges
+with Spearman 0.9999657, sign agreement 1.0, median symmetric normalized error
+0.001887, and p95 error 0.004512. The compact artifact bundle passed the
+standalone hostile-input validator. See
+[`docs/STAGE_1B_MEASUREMENT_PRIMITIVES_REPORT.md`](docs/STAGE_1B_MEASUREMENT_PRIMITIVES_REPORT.md).
+
+This establishes engineering readiness for a separately specified first
+prediction stage only. No inactive-target susceptibility score, source
+suppression, gate crossing, behavioral importance, mediation result, or paper
+result was produced.
 
 Stage 1A selected the immutable model snapshot
 `google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the direct

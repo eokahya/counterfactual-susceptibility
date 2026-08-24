@@ -1,0 +1,52 @@
+{
+  "artifact_type": "stage1b_measurement_primitives_scanner_oracle_summary",
+  "bounded_oracle_recall": 1.0,
+  "candidate_count": 128,
+  "canonical_chunk_size": 1024,
+  "chunk_sizes": [
+    257,
+    1024,
+    4096
+  ],
+  "dense_oracle_chunk_size": 16384,
+  "device": "mps:0",
+  "dtype": "torch.bfloat16",
+  "exact_candidate_identity_and_order": true,
+  "feature_width": 16384,
+  "global_top_k": 128,
+  "group_count": 90,
+  "loaded_gate": "a=z*1[z>tau]",
+  "maximum_retained_candidates": 4104,
+  "persisted_dense_arrays": false,
+  "schema_version": 1,
+  "selected_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "selected_positions": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "status": "passed",
+  "threshold_equality_activity": "inactive",
+  "top_k_per_group": 8
+}

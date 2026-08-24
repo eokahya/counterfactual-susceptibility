@@ -28,6 +28,15 @@ the paper Results section remains pending.
   and full ablation passed on Apple MPS/BF16. The 13-file small artifact bundle
   passed the independent validator. This is engineering runtime evidence only,
   not the reference reproduction or a Counterfactual Susceptibility result.
+- **Stage 1B — measurement primitives:**
+  `completed_stage1b_measurement_primitives`. On the frozen Stage 1A-S-BF16
+  runtime, the chunked exact loaded-JumpReLU inactive-feature scanner matched
+  its ephemeral dense oracle at all three frozen chunk sizes. The independent
+  targeted VJP path accepted no graph/edge input, and its reconstructed raw
+  edges passed the frozen 64-pair prospective validation. This is measurement-
+  tool engineering evidence only; it contains no inactive-target score,
+  suppression sweep, gate crossing, behavior, mediation, Gemma 2, or CLT
+  result.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -38,14 +47,18 @@ intervention, Counterfactual Susceptibility, or readiness result.
 Current readiness:
 
 ```text
-stage1b_engineering_readiness: true
+stage1b_measurement_primitives: completed
+stage1c_first_prediction_readiness: true
 stage1b_empirical_claim_readiness: false
+counterfactual_susceptibility_result: none
+gate_crossing_result: none
+behavioral_importance_result: none
+mediation_result: none
 official_bf16_reproduction: pending
 reference_clt_reproduction: pending
-counterfactual_susceptibility_result: none
 paper_results_readiness: false
 ```
 
-See `docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md` for the completed local
-runtime-validation evidence and its claim boundary. Historical reports remain
+See `docs/STAGE_1B_MEASUREMENT_PRIMITIVES_REPORT.md` for the completed Stage 1B
+engineering evidence and its claim boundary. Historical reports remain
 unchanged and retain their original scope.

@@ -246,3 +246,63 @@ Never record a planned, configured, or partially scaffolded run as completed.
   empirical readiness false and official/reference reproductions pending.
 - **Follow-up:** design Stage 1B engineering only under a separate Goal; do not
   begin Counterfactual Susceptibility or edit paper Results from this result.
+
+---
+
+## EXP-20260824-003 — Stage 1B measurement primitives canonical validation
+
+- **Status:** `completed_stage1b_measurement_primitives`
+- **Date (UTC):** 2026-08-24T19:00:22Z to 2026-08-24T19:02:22Z
+- **Authors/operators:** Codex App on the local Apple M2 Max host
+- **Scientific question:** Do an exact loaded-JumpReLU near-threshold scanner
+  and a graph-independent targeted `J_ij = partial z_i / partial a_j` path pass
+  their prospectively frozen numerical validation gates before the first
+  Counterfactual Susceptibility prediction?
+- **Base/branch:** `fb2fc158b45c842743804040e4e273776e666a48` /
+  `stage-1b-measurement-primitives`
+- **Clean pre-run execution commit:**
+  `de49bc0ee1d4ee1b2a0c15703b41e76781467ede`, pushed before the canonical run
+- **Configuration:**
+  `configs/stage1b_measurement_primitives_gemma3_270m_mps_bf16.yaml`, SHA-256
+  `c68d5f5974a2d08b40519ad89834a5bbc37715e434bd267c3ede15affcf19369`
+- **Artifact schema:** SHA-256
+  `8a88695c17a85f22e28a2c2023c98d0190a2093dbbc8b0129f79ea896a797d05`
+- **Runtime:** native arm64 CPython 3.11.13; PyTorch 2.6.0; NNsight 0.6.1;
+  circuit-tracer 0.5.2; Apple MPS/BF16; no autocast, CPU fallback, network,
+  authentication, or download
+- **Immutable assets:** `google/gemma-3-270m` at
+  `9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1`; 18-layer PLT subset
+  `transcoder_all/width_16k_l0_small` from
+  `mwhanna/gemma-scope-2-270m-pt` at
+  `fada11860ac1d337c1e41e9da308798405b94c8e`; circuit-tracer at
+  `8f1e2438df612464e229e44c4a00ff637bf9379b`
+- **Prompt:** `The capital of France is`; token IDs
+  `[2, 818, 5279, 529, 7001, 563]`
+- **Scanner:** all 90 layer/position groups and feature width 16,384; exact
+  candidate identity/order and recall 1.0 against the ephemeral dense oracle
+  at chunk sizes 257, 1024, and 4096; 128 global candidates; no dense array
+  persisted
+- **Targeted response:** graph-independent VJP on 64 frozen, calibration-
+  disjoint active pairs spanning 16 target layers, 5 target positions, and
+  both raw-edge signs. All 64 exceeded edge floor 0.015625. Spearman
+  0.9999656587509986; sign agreement 1.0; median symmetric normalized error
+  0.001886901581555902; nearest-rank p95 0.0045122760451227605.
+- **Attempt policy:** exactly one fresh canonical attempt; scientific retry
+  count 0; calibration artifact not read; no safety termination or timeout
+- **Safety:** MPS current peak 641,321,728 bytes; MPS driver peak
+  2,865,414,144 bytes; process RSS peak 1,290,059,776 bytes; minimum available
+  memory 12,009,701,376 bytes; swap growth 0; 0 telemetry failures; thermal
+  state nominal. Overlapping unified-memory counters are not summed.
+- **Artifacts:** `results/stage1b_measurement_primitives/`, 10 allowlisted
+  files, 120 KiB allocated size; checksum-manifest SHA-256
+  `641abac4d7e4efb75f82b8d359b56cff1e9a7e42ddb85495abeead59c61b08ee`
+- **Independent validation:** standalone validator passed; all nine payload
+  checksums passed; independent standard-library recomputation reproduced pair
+  order, endpoint digest, reconstructed edges, Spearman, sign, median/p95
+  errors, target coverage, both signs, and candidate order/gate invariants.
+- **Decision:** accept the two measurement primitives as local engineering
+  infrastructure. Do not infer susceptibility, a gate crossing, behavioral
+  importance, mediation, an official BF16 reproduction, reference CLT
+  reproduction, or a paper result.
+- **Follow-up:** a separately specified Stage 1C may make the first prediction;
+  the frozen Stage 1B canonical evidence and claim boundary must remain intact.

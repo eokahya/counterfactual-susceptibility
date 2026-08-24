@@ -1,0 +1,124 @@
+{
+  "artifact_type": "stage1b_measurement_primitives_memory_timing",
+  "safety_limits": {
+    "accepted_thermal_states": [
+      "nominal",
+      "fair"
+    ],
+    "calibration_timeout_seconds": 3600,
+    "canonical_timeout_seconds": 7200,
+    "kill_grace_seconds": 5.0,
+    "maximum_artifact_bundle_bytes": 5242880,
+    "maximum_graph_buffer_bytes": 6442450944,
+    "maximum_mps_driver_bytes": 25769803776,
+    "maximum_process_rss_bytes": 25769803776,
+    "maximum_swap_growth_bytes": 4294967296,
+    "minimum_available_memory_bytes": 4294967296,
+    "sample_interval_seconds": 1.0,
+    "telemetry_failure_limit": 3,
+    "terminate_grace_seconds": 15.0
+  },
+  "schema_version": 1,
+  "status": "passed",
+  "supervisor": {
+    "finished_at_unix": 1787598141.988207,
+    "minimum_available_memory_bytes": 12026331136,
+    "peak_process_group_rss_bytes": 1280933888,
+    "peak_swap_growth_bytes": 0,
+    "returncode": 0,
+    "safety_terminated": false,
+    "sample_count": 117,
+    "started_at_unix": 1787598022.042602,
+    "telemetry_failures": 0,
+    "termination_signal": null,
+    "thermal_states": [
+      "nominal"
+    ],
+    "timed_out": false
+  },
+  "worker": {
+    "attempt_peaks": {
+      "minimum_available_memory_bytes": 12009701376,
+      "mps_current_bytes": 641321728,
+      "mps_driver_bytes": 2865414144,
+      "process_rss_bytes": 1290059776,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 605489725
+    },
+    "finished_at_unix": 1787598141.319298,
+    "sample_count": 124,
+    "sampling_interval_seconds": 1.0,
+    "stage_peaks": {
+      "ephemeral_graph_reference": {
+        "minimum_available_memory_bytes": 12009701376,
+        "mps_current_bytes": 641321728,
+        "mps_driver_bytes": 2342453248,
+        "process_rss_bytes": 1280786432,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "replacement_runtime_loading": {
+        "minimum_available_memory_bytes": 12318277632,
+        "mps_current_bytes": 537530368,
+        "mps_driver_bytes": 2865397760,
+        "process_rss_bytes": 656883712,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "scanner_chunk_1024": {
+        "minimum_available_memory_bytes": 13772849152,
+        "mps_current_bytes": 579488768,
+        "mps_driver_bytes": 1152057344,
+        "process_rss_bytes": 748158976,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "scanner_chunk_257": {
+        "minimum_available_memory_bytes": 13762609152,
+        "mps_current_bytes": 579488768,
+        "mps_driver_bytes": 1152057344,
+        "process_rss_bytes": 740950016,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "scanner_chunk_4096": {
+        "minimum_available_memory_bytes": 13765181440,
+        "mps_current_bytes": 579485696,
+        "mps_driver_bytes": 1152057344,
+        "process_rss_bytes": 755859456,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "scanner_dense_oracle": {
+        "minimum_available_memory_bytes": 12226723840,
+        "mps_current_bytes": 558637056,
+        "mps_driver_bytes": 2865414144,
+        "process_rss_bytes": 727760896,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "targeted_vjp_canonical": {
+        "minimum_available_memory_bytes": 12055052288,
+        "mps_current_bytes": 638021120,
+        "mps_driver_bytes": 2319400960,
+        "process_rss_bytes": 1290059776,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      },
+      "worker_start": {
+        "minimum_available_memory_bytes": 15746760704,
+        "mps_current_bytes": 0,
+        "mps_driver_bytes": 393216,
+        "process_rss_bytes": 344883200,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 605489725
+      }
+    },
+    "started_at_unix": 1787598026.8172889,
+    "telemetry_failures": 0,
+    "thermal_states": [
+      "nominal"
+    ],
+    "violations": []
+  }
+}

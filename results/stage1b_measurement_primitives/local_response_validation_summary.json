@@ -1,0 +1,17 @@
+{
+  "above_edge_floor_count": 64,
+  "artifact_type": "stage1b_measurement_primitives_local_response_validation_summary",
+  "calibration_pair_ids_disjoint": true,
+  "convention": "attribution_matched_target_preactivation_pre_gate",
+  "edge_floor": 0.015625,
+  "graph_edge_orientation": "target_row_source_column",
+  "graph_edge_used_by_targeted_path": false,
+  "median_symmetric_normalized_error": 0.001886901581555902,
+  "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+  "p95_symmetric_normalized_error": 0.0045122760451227605,
+  "pair_count": 64,
+  "schema_version": 1,
+  "sign_agreement": 1.0,
+  "spearman": 0.9999656587509986,
+  "status": "passed"
+}

@@ -1,0 +1,1543 @@
+{
+  "artifact_type": "stage1b_measurement_primitives_local_response_validation_pairs",
+  "pair_count": 64,
+  "pairs": [
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "038b2c3b2eefe5a7a71f48769427330cc51184d000a4124206ff5c92cbdab4dd",
+      "raw_edge": 3.953125,
+      "reconstructed_edge": 3.95068359375,
+      "source": {
+        "feature_id": 724,
+        "layer": 0,
+        "position": 2
+      },
+      "source_activation": 11.625,
+      "symmetric_normalized_error": 0.000617779699759066,
+      "target": {
+        "feature_id": 10644,
+        "layer": 1,
+        "position": 2
+      },
+      "target_preactivation": 12.3125,
+      "targeted_response": 0.33984375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0437759607a2ff1daf49b9bcc629dcee6a2bb87210b8df4076548d6e2015661b",
+      "raw_edge": -8.25,
+      "reconstructed_edge": -8.267578125,
+      "source": {
+        "feature_id": 690,
+        "layer": 0,
+        "position": 4
+      },
+      "source_activation": 31.125,
+      "symmetric_normalized_error": 0.002128414331323164,
+      "target": {
+        "feature_id": 349,
+        "layer": 2,
+        "position": 4
+      },
+      "target_preactivation": 65.5,
+      "targeted_response": -0.265625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00b26ae25bf801af76345be3dfb42e1a97d45424424a23589cc4b0f2fc81c247",
+      "raw_edge": 34.0,
+      "reconstructed_edge": 33.92578125,
+      "source": {
+        "feature_id": 419,
+        "layer": 2,
+        "position": 3
+      },
+      "source_activation": 386.0,
+      "symmetric_normalized_error": 0.0021852895508654895,
+      "target": {
+        "feature_id": 9681,
+        "layer": 3,
+        "position": 3
+      },
+      "target_preactivation": 46.5,
+      "targeted_response": 0.087890625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00b56bd2c8d1476735fb82772274f35b77d6f7d424bbd2b873442cdd25d19265",
+      "raw_edge": -4.96875,
+      "reconstructed_edge": -4.972412109375,
+      "source": {
+        "feature_id": 4399,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 186.0,
+      "symmetric_normalized_error": 0.0007367567965814485,
+      "target": {
+        "feature_id": 1641,
+        "layer": 4,
+        "position": 5
+      },
+      "target_preactivation": 13.5,
+      "targeted_response": -0.0267333984375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00a1c28a237da26418ec94a61b78bb0cb136f769053efbb254c337e44201a15c",
+      "raw_edge": -13.4375,
+      "reconstructed_edge": -13.420166015625,
+      "source": {
+        "feature_id": 900,
+        "layer": 4,
+        "position": 3
+      },
+      "source_activation": 62.75,
+      "symmetric_normalized_error": 0.001290803479715296,
+      "target": {
+        "feature_id": 362,
+        "layer": 5,
+        "position": 3
+      },
+      "target_preactivation": 153.0,
+      "targeted_response": -0.2138671875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0073e8675a5c233adf8cca880a49f5345991bcbf32819089cb8a642adaf04754",
+      "raw_edge": -9.4375,
+      "reconstructed_edge": -9.4453125,
+      "source": {
+        "feature_id": 4399,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 186.0,
+      "symmetric_normalized_error": 0.0008274720728175424,
+      "target": {
+        "feature_id": 127,
+        "layer": 6,
+        "position": 4
+      },
+      "target_preactivation": 237.0,
+      "targeted_response": -0.05078125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00c9b84977e4005649116d50fc954b624a0c7bfadf2823d4ef8038bd24abe6b4",
+      "raw_edge": -15.4375,
+      "reconstructed_edge": -15.3828125,
+      "source": {
+        "feature_id": 1165,
+        "layer": 3,
+        "position": 1
+      },
+      "source_activation": 176.0,
+      "symmetric_normalized_error": 0.003548795944233207,
+      "target": {
+        "feature_id": 5844,
+        "layer": 8,
+        "position": 1
+      },
+      "target_preactivation": 66.0,
+      "targeted_response": -0.08740234375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "006f3e0ab06ba1d69d73cdc45ca2f9008bdd142e12f2cfa1111fe15d0a7dc574",
+      "raw_edge": -67.0,
+      "reconstructed_edge": -67.09375,
+      "source": {
+        "feature_id": 423,
+        "layer": 10,
+        "position": 2
+      },
+      "source_activation": 608.0,
+      "symmetric_normalized_error": 0.0013982754602656724,
+      "target": {
+        "feature_id": 4472,
+        "layer": 12,
+        "position": 2
+      },
+      "target_preactivation": 129.0,
+      "targeted_response": -0.1103515625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "007248e83b5f20d60d98c1f2114b0228863441a254f430c20fb5ebca29ca6387",
+      "raw_edge": 45.0,
+      "reconstructed_edge": 45.03125,
+      "source": {
+        "feature_id": 380,
+        "layer": 3,
+        "position": 3
+      },
+      "source_activation": 524.0,
+      "symmetric_normalized_error": 0.0006942034015966678,
+      "target": {
+        "feature_id": 8161,
+        "layer": 9,
+        "position": 3
+      },
+      "target_preactivation": 104.0,
+      "targeted_response": 0.0859375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0074bd10600f522558885ebda6d1f2d9335948c934e21a4f996c96e0e7dde348",
+      "raw_edge": -86.5,
+      "reconstructed_edge": -86.82421875,
+      "source": {
+        "feature_id": 4399,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 186.0,
+      "symmetric_normalized_error": 0.0037411823037569584,
+      "target": {
+        "feature_id": 5951,
+        "layer": 17,
+        "position": 4
+      },
+      "target_preactivation": 270.0,
+      "targeted_response": -0.466796875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0080010cf14dcf2c9522b53e912f53e980123316a7c64f1af704ae6b78a24e02",
+      "raw_edge": 35.75,
+      "reconstructed_edge": 35.7421875,
+      "source": {
+        "feature_id": 321,
+        "layer": 3,
+        "position": 2
+      },
+      "source_activation": 100.0,
+      "symmetric_normalized_error": 0.00021855534914217025,
+      "target": {
+        "feature_id": 260,
+        "layer": 6,
+        "position": 2
+      },
+      "target_preactivation": 43.25,
+      "targeted_response": 0.357421875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "007761731ed5bf599c06c132161b551a2352e85600310025bd28237d645055c6",
+      "raw_edge": -49.25,
+      "reconstructed_edge": -49.40625,
+      "source": {
+        "feature_id": 4399,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 186.0,
+      "symmetric_normalized_error": 0.0031675641431738993,
+      "target": {
+        "feature_id": 1156,
+        "layer": 12,
+        "position": 4
+      },
+      "target_preactivation": 236.0,
+      "targeted_response": -0.265625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "008295eb3076c6143ffbeac59e5537f668f7e6cb28cb0e486e7cf67694186a52",
+      "raw_edge": -19.0,
+      "reconstructed_edge": -18.90625,
+      "source": {
+        "feature_id": 537,
+        "layer": 3,
+        "position": 1
+      },
+      "source_activation": 440.0,
+      "symmetric_normalized_error": 0.00494641384995878,
+      "target": {
+        "feature_id": 331,
+        "layer": 6,
+        "position": 2
+      },
+      "target_preactivation": 98.0,
+      "targeted_response": -0.04296875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "009084996c8c10766137d3a850b52619c3521958d276190436f191646d585111",
+      "raw_edge": 29.625,
+      "reconstructed_edge": 29.744140625,
+      "source": {
+        "feature_id": 1177,
+        "layer": 5,
+        "position": 4
+      },
+      "source_activation": 157.0,
+      "symmetric_normalized_error": 0.004013553969141692,
+      "target": {
+        "feature_id": 2008,
+        "layer": 6,
+        "position": 4
+      },
+      "target_preactivation": 46.25,
+      "targeted_response": 0.189453125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "009313c02134b264cd93f43bfba3668f37dcc060d6bbff9a4962929446a31f06",
+      "raw_edge": 24.625,
+      "reconstructed_edge": 24.703125,
+      "source": {
+        "feature_id": 4399,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 186.0,
+      "symmetric_normalized_error": 0.0031675641431738993,
+      "target": {
+        "feature_id": 2994,
+        "layer": 6,
+        "position": 4
+      },
+      "target_preactivation": 20.5,
+      "targeted_response": 0.1328125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "009faa2f1604b4fd3744e1d4b77a805d995e55e352636e01dd15234d9152a3fb",
+      "raw_edge": 22.0,
+      "reconstructed_edge": 21.966796875,
+      "source": {
+        "feature_id": 840,
+        "layer": 7,
+        "position": 3
+      },
+      "source_activation": 163.0,
+      "symmetric_normalized_error": 0.0015103727066767359,
+      "target": {
+        "feature_id": 705,
+        "layer": 8,
+        "position": 3
+      },
+      "target_preactivation": 94.0,
+      "targeted_response": 0.134765625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00a7c50cf3675e40d46b5eb4250a01fc992bf7d7f3796f061119ddca49cf2457",
+      "raw_edge": -8.75,
+      "reconstructed_edge": -8.778076171875,
+      "source": {
+        "feature_id": 11278,
+        "layer": 3,
+        "position": 3
+      },
+      "source_activation": 63.75,
+      "symmetric_normalized_error": 0.0032035657079183787,
+      "target": {
+        "feature_id": 4225,
+        "layer": 6,
+        "position": 3
+      },
+      "target_preactivation": 54.5,
+      "targeted_response": -0.1376953125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00a7f2a91bc9ae8f1ba1b9e1942cd872862517cd6b938ebb3e9aaf8f2570a1a7",
+      "raw_edge": -18.625,
+      "reconstructed_edge": -18.4794921875,
+      "source": {
+        "feature_id": 507,
+        "layer": 5,
+        "position": 4
+      },
+      "source_activation": 1016.0,
+      "symmetric_normalized_error": 0.00784313725490196,
+      "target": {
+        "feature_id": 314,
+        "layer": 6,
+        "position": 5
+      },
+      "target_preactivation": 10.375,
+      "targeted_response": -0.0181884765625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00bd6e6ea7e4329e73904e90d5f42a04190b9b78243320e8cd52b1753a5cab22",
+      "raw_edge": -107.5,
+      "reconstructed_edge": -107.5,
+      "source": {
+        "feature_id": 781,
+        "layer": 10,
+        "position": 5
+      },
+      "source_activation": 512.0,
+      "symmetric_normalized_error": 0.0,
+      "target": {
+        "feature_id": 3515,
+        "layer": 11,
+        "position": 5
+      },
+      "target_preactivation": 366.0,
+      "targeted_response": -0.2099609375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00bf2a44353a365d54026590598e997ae39719aa5a906c562bfaa2b797ab875a",
+      "raw_edge": -14.4375,
+      "reconstructed_edge": -14.47265625,
+      "source": {
+        "feature_id": 532,
+        "layer": 10,
+        "position": 4
+      },
+      "source_activation": 312.0,
+      "symmetric_normalized_error": 0.0024321037697608433,
+      "target": {
+        "feature_id": 12835,
+        "layer": 14,
+        "position": 4
+      },
+      "target_preactivation": 294.0,
+      "targeted_response": -0.04638671875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00c545acdc0b151d03092cff609b82bed8534714d031d89206b978533edf496b",
+      "raw_edge": 73.5,
+      "reconstructed_edge": 73.6875,
+      "source": {
+        "feature_id": 380,
+        "layer": 3,
+        "position": 3
+      },
+      "source_activation": 524.0,
+      "symmetric_normalized_error": 0.0025477707006369425,
+      "target": {
+        "feature_id": 1727,
+        "layer": 13,
+        "position": 3
+      },
+      "target_preactivation": 103.5,
+      "targeted_response": 0.140625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00ccc1de9b6ae7fee9b1a15477f3229215698bb6ae7171930c4b375d3164c435",
+      "raw_edge": 17.25,
+      "reconstructed_edge": 17.3056640625,
+      "source": {
+        "feature_id": 1512,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 179.0,
+      "symmetric_normalized_error": 0.003221704111911827,
+      "target": {
+        "feature_id": 1069,
+        "layer": 6,
+        "position": 4
+      },
+      "target_preactivation": 15.9375,
+      "targeted_response": 0.0966796875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00d1ff22d0aab350229321984f4f49a0bf52291fae54e3b6572d039fdad42924",
+      "raw_edge": -33.5,
+      "reconstructed_edge": -33.591796875,
+      "source": {
+        "feature_id": 1011,
+        "layer": 9,
+        "position": 4
+      },
+      "source_activation": 234.0,
+      "symmetric_normalized_error": 0.002736455998369771,
+      "target": {
+        "feature_id": 400,
+        "layer": 14,
+        "position": 4
+      },
+      "target_preactivation": 264.0,
+      "targeted_response": -0.1435546875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00d5486fdf4e8c621ec5e4f52e5b03f63fd5cc118808c035a9490befeffdada0",
+      "raw_edge": -48.5,
+      "reconstructed_edge": -48.41015625,
+      "source": {
+        "feature_id": 472,
+        "layer": 14,
+        "position": 4
+      },
+      "source_activation": 816.0,
+      "symmetric_normalized_error": 0.001854165826917651,
+      "target": {
+        "feature_id": 619,
+        "layer": 15,
+        "position": 4
+      },
+      "target_preactivation": 123.5,
+      "targeted_response": -0.059326171875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00d61ee77adc85ea59654000c982269a3c59f6a8345ac25a5eb011ed4aa64b21",
+      "raw_edge": -57.25,
+      "reconstructed_edge": -57.578125,
+      "source": {
+        "feature_id": 537,
+        "layer": 3,
+        "position": 1
+      },
+      "source_activation": 440.0,
+      "symmetric_normalized_error": 0.005715063273914818,
+      "target": {
+        "feature_id": 773,
+        "layer": 4,
+        "position": 1
+      },
+      "target_preactivation": 41.75,
+      "targeted_response": -0.130859375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "00f1b510602203d20fd514a2e35c18e911a427c4848597080f68015f67da1f6a",
+      "raw_edge": -16.875,
+      "reconstructed_edge": -16.8662109375,
+      "source": {
+        "feature_id": 6365,
+        "layer": 3,
+        "position": 2
+      },
+      "source_activation": 101.0,
+      "symmetric_normalized_error": 0.0005209690023443605,
+      "target": {
+        "feature_id": 81,
+        "layer": 6,
+        "position": 2
+      },
+      "target_preactivation": 14.6875,
+      "targeted_response": -0.1669921875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0101ce36bc0bca3d08e253d4be7facb96020e34e6cbc7d550fbf957365bd6306",
+      "raw_edge": 72.0,
+      "reconstructed_edge": 72.05078125,
+      "source": {
+        "feature_id": 302,
+        "layer": 11,
+        "position": 2
+      },
+      "source_activation": 476.0,
+      "symmetric_normalized_error": 0.0007050465059522195,
+      "target": {
+        "feature_id": 112,
+        "layer": 13,
+        "position": 2
+      },
+      "target_preactivation": 276.0,
+      "targeted_response": 0.1513671875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01075a42c20d2effca60992ce8f02b3ca7dcb57ef437b0e9437c2d62c5e3d8c4",
+      "raw_edge": -8.6875,
+      "reconstructed_edge": -8.703369140625,
+      "source": {
+        "feature_id": 324,
+        "layer": 4,
+        "position": 3
+      },
+      "source_activation": 466.0,
+      "symmetric_normalized_error": 0.0018249968413516207,
+      "target": {
+        "feature_id": 846,
+        "layer": 7,
+        "position": 3
+      },
+      "target_preactivation": 57.0,
+      "targeted_response": -0.0186767578125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0107f0e371a9d3d1825bdf7b7b5d0de801b1a13327b41ba5d14d5bb692c953f8",
+      "raw_edge": -12.6875,
+      "reconstructed_edge": -12.689208984375,
+      "source": {
+        "feature_id": 990,
+        "layer": 2,
+        "position": 2
+      },
+      "source_activation": 112.5,
+      "symmetric_normalized_error": 0.00013468920466024647,
+      "target": {
+        "feature_id": 705,
+        "layer": 4,
+        "position": 2
+      },
+      "target_preactivation": 33.25,
+      "targeted_response": -0.11279296875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0112ec10b67776ae57addd90a9c6a85c611f6c87a92fee13b142020d305a687c",
+      "raw_edge": -9.625,
+      "reconstructed_edge": -9.64306640625,
+      "source": {
+        "feature_id": 603,
+        "layer": 8,
+        "position": 3
+      },
+      "source_activation": 174.0,
+      "symmetric_normalized_error": 0.0018752692531866907,
+      "target": {
+        "feature_id": 546,
+        "layer": 9,
+        "position": 3
+      },
+      "target_preactivation": 213.0,
+      "targeted_response": -0.055419921875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "011bd5a63dd01563ee9f670c6f68dbeaf6c322a15dbb8883b733e5c951831d4f",
+      "raw_edge": -22.0,
+      "reconstructed_edge": -21.916015625,
+      "source": {
+        "feature_id": 7085,
+        "layer": 6,
+        "position": 4
+      },
+      "source_activation": 57.25,
+      "symmetric_normalized_error": 0.003824772070269068,
+      "target": {
+        "feature_id": 1513,
+        "layer": 7,
+        "position": 4
+      },
+      "target_preactivation": 36.75,
+      "targeted_response": -0.3828125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0125dd374895620dc3273c4306f6417dc1ca50ef769872b43acff2a32594caf5",
+      "raw_edge": 23.125,
+      "reconstructed_edge": 23.07421875,
+      "source": {
+        "feature_id": 1512,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 179.0,
+      "symmetric_normalized_error": 0.0021983596854654604,
+      "target": {
+        "feature_id": 7994,
+        "layer": 7,
+        "position": 4
+      },
+      "target_preactivation": 59.0,
+      "targeted_response": 0.12890625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "012bbd9a5e093bcf68aeefd178adfda2bef5bdff0934c7c0012eefbf94ad8ea6",
+      "raw_edge": 167.0,
+      "reconstructed_edge": 167.25,
+      "source": {
+        "feature_id": 48,
+        "layer": 15,
+        "position": 3
+      },
+      "source_activation": 1536.0,
+      "symmetric_normalized_error": 0.0014958863126402393,
+      "target": {
+        "feature_id": 14390,
+        "layer": 17,
+        "position": 3
+      },
+      "target_preactivation": 362.0,
+      "targeted_response": 0.10888671875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "012cbcfa95ff63dc370ccc09f4cecd815fb3da020c3ceb52f913b30b075251ee",
+      "raw_edge": -16.875,
+      "reconstructed_edge": -16.84375,
+      "source": {
+        "feature_id": 3838,
+        "layer": 11,
+        "position": 4
+      },
+      "source_activation": 224.0,
+      "symmetric_normalized_error": 0.0018535681186283596,
+      "target": {
+        "feature_id": 1895,
+        "layer": 12,
+        "position": 4
+      },
+      "target_preactivation": 430.0,
+      "targeted_response": -0.0751953125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "013952e32dc2b25f4075dd8f3b07ed2b5cbd7af6a55876e197c05f963342658b",
+      "raw_edge": -8.6875,
+      "reconstructed_edge": -8.68359375,
+      "source": {
+        "feature_id": 359,
+        "layer": 0,
+        "position": 3
+      },
+      "source_activation": 72.0,
+      "symmetric_normalized_error": 0.00044974139869574995,
+      "target": {
+        "feature_id": 2994,
+        "layer": 6,
+        "position": 4
+      },
+      "target_preactivation": 20.5,
+      "targeted_response": -0.12060546875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0143be85f22276bde2fa1433153c1bc2ba717751dd04f2811b413060d5cb33a1",
+      "raw_edge": -43.75,
+      "reconstructed_edge": -43.59375,
+      "source": {
+        "feature_id": 3228,
+        "layer": 9,
+        "position": 3
+      },
+      "source_activation": 90.0,
+      "symmetric_normalized_error": 0.0035778175313059034,
+      "target": {
+        "feature_id": 5195,
+        "layer": 11,
+        "position": 3
+      },
+      "target_preactivation": 150.0,
+      "targeted_response": -0.484375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0147118db7274d5b94c9d509fe808e8784ddfc6eaf22d0c09851d06865e4c72e",
+      "raw_edge": 21.0,
+      "reconstructed_edge": 20.98046875,
+      "source": {
+        "feature_id": 380,
+        "layer": 3,
+        "position": 3
+      },
+      "source_activation": 524.0,
+      "symmetric_normalized_error": 0.0009304922303898762,
+      "target": {
+        "feature_id": 2130,
+        "layer": 9,
+        "position": 3
+      },
+      "target_preactivation": 31.625,
+      "targeted_response": 0.0400390625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0152dc07a8d3937ecde00fe1924154dab576659cb1a8618ed37ef50e3a689b83",
+      "raw_edge": 54.5,
+      "reconstructed_edge": 54.580078125,
+      "source": {
+        "feature_id": 507,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 270.0,
+      "symmetric_normalized_error": 0.0014682447313291195,
+      "target": {
+        "feature_id": 368,
+        "layer": 5,
+        "position": 4
+      },
+      "target_preactivation": 46.25,
+      "targeted_response": 0.2021484375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0164cbd6a115f5958d1c89086eefce8b7212e47737beaccf9bacf3763ec9950d",
+      "raw_edge": -35.25,
+      "reconstructed_edge": -35.1796875,
+      "source": {
+        "feature_id": 423,
+        "layer": 10,
+        "position": 2
+      },
+      "source_activation": 608.0,
+      "symmetric_normalized_error": 0.0019966722129783694,
+      "target": {
+        "feature_id": 2118,
+        "layer": 12,
+        "position": 2
+      },
+      "target_preactivation": 124.5,
+      "targeted_response": -0.057861328125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "016dd15174d3ae0ee626abbb212c011a1a7b97463783746edf9aff6a1779ffe5",
+      "raw_edge": -60.25,
+      "reconstructed_edge": -60.0234375,
+      "source": {
+        "feature_id": 469,
+        "layer": 14,
+        "position": 3
+      },
+      "source_activation": 1248.0,
+      "symmetric_normalized_error": 0.0037674569665475804,
+      "target": {
+        "feature_id": 303,
+        "layer": 17,
+        "position": 3
+      },
+      "target_preactivation": 274.0,
+      "targeted_response": -0.048095703125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "019b208ea3dfa805d77ac0b298d30ba5709616927da4393d6f9bd2279423acd3",
+      "raw_edge": 40.5,
+      "reconstructed_edge": 40.501953125,
+      "source": {
+        "feature_id": 8149,
+        "layer": 12,
+        "position": 2
+      },
+      "source_activation": 1424.0,
+      "symmetric_normalized_error": 4.822414582981699e-05,
+      "target": {
+        "feature_id": 658,
+        "layer": 17,
+        "position": 2
+      },
+      "target_preactivation": 294.0,
+      "targeted_response": 0.0284423828125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "019f88ce15a90cd5192711282d4270c770208c38b56b79526e29e25fe0bcc7b5",
+      "raw_edge": -55.0,
+      "reconstructed_edge": -55.1484375,
+      "source": {
+        "feature_id": 781,
+        "layer": 10,
+        "position": 3
+      },
+      "source_activation": 362.0,
+      "symmetric_normalized_error": 0.002695226611816441,
+      "target": {
+        "feature_id": 180,
+        "layer": 13,
+        "position": 3
+      },
+      "target_preactivation": 94.0,
+      "targeted_response": -0.15234375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "019fc86a2bad02378c9e6906bfc992cc372cc422430dddd296923694e52c75f8",
+      "raw_edge": -33.0,
+      "reconstructed_edge": -32.953125,
+      "source": {
+        "feature_id": 423,
+        "layer": 10,
+        "position": 2
+      },
+      "source_activation": 608.0,
+      "symmetric_normalized_error": 0.0014214641080312722,
+      "target": {
+        "feature_id": 3468,
+        "layer": 14,
+        "position": 2
+      },
+      "target_preactivation": 280.0,
+      "targeted_response": -0.05419921875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01a324a15f7b5055f8eb5024a4534854c47747f576855311ee4e91b09d66705f",
+      "raw_edge": 52.25,
+      "reconstructed_edge": 52.1484375,
+      "source": {
+        "feature_id": 396,
+        "layer": 14,
+        "position": 4
+      },
+      "source_activation": 712.0,
+      "symmetric_normalized_error": 0.0019456708822869115,
+      "target": {
+        "feature_id": 8682,
+        "layer": 15,
+        "position": 4
+      },
+      "target_preactivation": 161.0,
+      "targeted_response": 0.0732421875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01a335d6518a2d7da52b827882c5d4c3b37e1d0368115c8dc28774ec90cd6d8d",
+      "raw_edge": 78.5,
+      "reconstructed_edge": 78.78515625,
+      "source": {
+        "feature_id": 4857,
+        "layer": 13,
+        "position": 2
+      },
+      "source_activation": 1328.0,
+      "symmetric_normalized_error": 0.003625977896436111,
+      "target": {
+        "feature_id": 619,
+        "layer": 15,
+        "position": 2
+      },
+      "target_preactivation": 256.0,
+      "targeted_response": 0.059326171875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01a47e8156db6b055328931b6bdd35ce28dae33fa0c8dc67cb4c8256d7daaec9",
+      "raw_edge": 123.0,
+      "reconstructed_edge": 122.890625,
+      "source": {
+        "feature_id": 375,
+        "layer": 12,
+        "position": 5
+      },
+      "source_activation": 1760.0,
+      "symmetric_normalized_error": 0.0008896231810383173,
+      "target": {
+        "feature_id": 1320,
+        "layer": 14,
+        "position": 5
+      },
+      "target_preactivation": 338.0,
+      "targeted_response": 0.06982421875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01a6b2efa0ae24d3c5252690d9ec4c961b3d791d2016d19f7ec564dde121c1a8",
+      "raw_edge": -12.375,
+      "reconstructed_edge": -12.37548828125,
+      "source": {
+        "feature_id": 81,
+        "layer": 7,
+        "position": 3
+      },
+      "source_activation": 137.0,
+      "symmetric_normalized_error": 3.9456292292213304e-05,
+      "target": {
+        "feature_id": 511,
+        "layer": 8,
+        "position": 3
+      },
+      "target_preactivation": 144.0,
+      "targeted_response": -0.09033203125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01b3c5944d15c57b37db63ae5f181ca7ba1ab732f90c9ec97a1ff95113c2029c",
+      "raw_edge": -25.75,
+      "reconstructed_edge": -25.75,
+      "source": {
+        "feature_id": 423,
+        "layer": 10,
+        "position": 3
+      },
+      "source_activation": 412.0,
+      "symmetric_normalized_error": 0.0,
+      "target": {
+        "feature_id": 8423,
+        "layer": 15,
+        "position": 3
+      },
+      "target_preactivation": 233.0,
+      "targeted_response": -0.0625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01b5333d620558cee1e52dc809d20d666d156acc88a4219fc43df7c642fb57c0",
+      "raw_edge": -9.4375,
+      "reconstructed_edge": -9.467529296875,
+      "source": {
+        "feature_id": 471,
+        "layer": 7,
+        "position": 2
+      },
+      "source_activation": 157.0,
+      "symmetric_normalized_error": 0.003176858009943824,
+      "target": {
+        "feature_id": 306,
+        "layer": 9,
+        "position": 2
+      },
+      "target_preactivation": 29.75,
+      "targeted_response": -0.060302734375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01c3807f14252fa94dab43cddab64cb813f084956dece03a887e50ea2565e57c",
+      "raw_edge": 107.0,
+      "reconstructed_edge": 106.66015625,
+      "source": {
+        "feature_id": 507,
+        "layer": 5,
+        "position": 4
+      },
+      "source_activation": 1016.0,
+      "symmetric_normalized_error": 0.003181161672486608,
+      "target": {
+        "feature_id": 3323,
+        "layer": 11,
+        "position": 4
+      },
+      "target_preactivation": 108.0,
+      "targeted_response": 0.10498046875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01c4aa69a45316a9b37845acb31e41b79fcddccde7077d4f19fc475b63863e28",
+      "raw_edge": -9.5,
+      "reconstructed_edge": -9.47314453125,
+      "source": {
+        "feature_id": 603,
+        "layer": 8,
+        "position": 3
+      },
+      "source_activation": 174.0,
+      "symmetric_normalized_error": 0.0028308927606351493,
+      "target": {
+        "feature_id": 1022,
+        "layer": 10,
+        "position": 3
+      },
+      "target_preactivation": 56.5,
+      "targeted_response": -0.054443359375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01c5ceef3238da3e883d5a167cc68e10eddb556d398fa338eb19dbc905e91f76",
+      "raw_edge": 42.0,
+      "reconstructed_edge": 41.9609375,
+      "source": {
+        "feature_id": 380,
+        "layer": 3,
+        "position": 3
+      },
+      "source_activation": 524.0,
+      "symmetric_normalized_error": 0.0009304922303898762,
+      "target": {
+        "feature_id": 10340,
+        "layer": 9,
+        "position": 3
+      },
+      "target_preactivation": 43.5,
+      "targeted_response": 0.080078125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01c6940243440e5f508eecdef9f4e6af3dd5b02335d619b4062bc2918ce41f5d",
+      "raw_edge": 53.5,
+      "reconstructed_edge": 53.490234375,
+      "source": {
+        "feature_id": 1512,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 179.0,
+      "symmetric_normalized_error": 0.0001825517077712262,
+      "target": {
+        "feature_id": 471,
+        "layer": 14,
+        "position": 4
+      },
+      "target_preactivation": 92.0,
+      "targeted_response": 0.298828125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01c862a7b64d0f1e15d1665c4e3585cbc941aaabefd52e2dd408b0c5b51fc5f4",
+      "raw_edge": 113.5,
+      "reconstructed_edge": 113.3125,
+      "source": {
+        "feature_id": 469,
+        "layer": 10,
+        "position": 5
+      },
+      "source_activation": 784.0,
+      "symmetric_normalized_error": 0.0016533480297602646,
+      "target": {
+        "feature_id": 554,
+        "layer": 13,
+        "position": 5
+      },
+      "target_preactivation": 77.0,
+      "targeted_response": 0.14453125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "01cf3341e58247d7ae2c9b10726e8e8cea9943a791c47d4b46628c2557d7efc6",
+      "raw_edge": -27.375,
+      "reconstructed_edge": -27.37109375,
+      "source": {
+        "feature_id": 1590,
+        "layer": 10,
+        "position": 3
+      },
+      "source_activation": 77.0,
+      "symmetric_normalized_error": 0.00014270424545130217,
+      "target": {
+        "feature_id": 1256,
+        "layer": 12,
+        "position": 3
+      },
+      "target_preactivation": 278.0,
+      "targeted_response": -0.35546875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0207178990f3edc2311bea9af86211a3041097a0c78fcfebfa2d609ea18472fb",
+      "raw_edge": -68.5,
+      "reconstructed_edge": -68.232421875,
+      "source": {
+        "feature_id": 841,
+        "layer": 13,
+        "position": 1
+      },
+      "source_activation": 548.0,
+      "symmetric_normalized_error": 0.003913894324853229,
+      "target": {
+        "feature_id": 2203,
+        "layer": 15,
+        "position": 1
+      },
+      "target_preactivation": 458.0,
+      "targeted_response": -0.12451171875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "020e25434b5972ce915c21cc38b4f0c4dba9fe4af9c33338779706ba97c3c1cc",
+      "raw_edge": 44.25,
+      "reconstructed_edge": 44.05078125,
+      "source": {
+        "feature_id": 1512,
+        "layer": 3,
+        "position": 4
+      },
+      "source_activation": 179.0,
+      "symmetric_normalized_error": 0.0045122760451227605,
+      "target": {
+        "feature_id": 4055,
+        "layer": 4,
+        "position": 4
+      },
+      "target_preactivation": 41.75,
+      "targeted_response": 0.24609375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "020f7356752b7bbc05143314b503cd5267c598bae21c698ff58b53ea6cee9d65",
+      "raw_edge": 28.25,
+      "reconstructed_edge": 28.14453125,
+      "source": {
+        "feature_id": 380,
+        "layer": 3,
+        "position": 3
+      },
+      "source_activation": 524.0,
+      "symmetric_normalized_error": 0.003740389277550738,
+      "target": {
+        "feature_id": 13671,
+        "layer": 8,
+        "position": 3
+      },
+      "target_preactivation": 34.0,
+      "targeted_response": 0.0537109375
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "02289874303d5119c1a6ca81fede9d6c18bc710a75367c1376f6ecfeb46e59dc",
+      "raw_edge": -22.375,
+      "reconstructed_edge": -22.40234375,
+      "source": {
+        "feature_id": 859,
+        "layer": 9,
+        "position": 5
+      },
+      "source_activation": 148.0,
+      "symmetric_normalized_error": 0.0012213207711768298,
+      "target": {
+        "feature_id": 555,
+        "layer": 11,
+        "position": 5
+      },
+      "target_preactivation": 274.0,
+      "targeted_response": -0.1513671875
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "0232e253191293ea4c7198c1b37b9b7078bb590477544d17fc83c7aab8ba6b50",
+      "raw_edge": 148.0,
+      "reconstructed_edge": 148.28125,
+      "source": {
+        "feature_id": 3674,
+        "layer": 3,
+        "position": 2
+      },
+      "source_activation": 260.0,
+      "symmetric_normalized_error": 0.0018985339099251133,
+      "target": {
+        "feature_id": 15761,
+        "layer": 15,
+        "position": 2
+      },
+      "target_preactivation": 177.0,
+      "targeted_response": 0.5703125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "02339f4d935575224128d14fc8f1ef2b276a75ddd693fcf32e59e5eb5eee7430",
+      "raw_edge": -8.0,
+      "reconstructed_edge": -8.0244140625,
+      "source": {
+        "feature_id": 690,
+        "layer": 0,
+        "position": 4
+      },
+      "source_activation": 31.125,
+      "symmetric_normalized_error": 0.003047108294228777,
+      "target": {
+        "feature_id": 815,
+        "layer": 3,
+        "position": 4
+      },
+      "target_preactivation": 63.0,
+      "targeted_response": -0.2578125
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "02345487f7ca08f0b5639af10b005ad631c3c35f080223dd1d318b22fe07fc41",
+      "raw_edge": 280.0,
+      "reconstructed_edge": 279.984375,
+      "source": {
+        "feature_id": 227,
+        "layer": 10,
+        "position": 1
+      },
+      "source_activation": 792.0,
+      "symmetric_normalized_error": 5.580512849130835e-05,
+      "target": {
+        "feature_id": 299,
+        "layer": 11,
+        "position": 1
+      },
+      "target_preactivation": 992.0,
+      "targeted_response": 0.353515625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "02348b36a3bf06bb83f3a6fd7c5fd2f69fad678995b2b614ebf376ede3872035",
+      "raw_edge": 151.0,
+      "reconstructed_edge": 150.59765625,
+      "source": {
+        "feature_id": 157,
+        "layer": 11,
+        "position": 5
+      },
+      "source_activation": 1704.0,
+      "symmetric_normalized_error": 0.0026680827364685463,
+      "target": {
+        "feature_id": 153,
+        "layer": 14,
+        "position": 5
+      },
+      "target_preactivation": 420.0,
+      "targeted_response": 0.08837890625
+    },
+    {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "device": "mps:0",
+      "dtype": "torch.bfloat16",
+      "graph_edge_used": false,
+      "method": "target_encoder_reverse_vjp_source_decoder_contraction",
+      "pair_id": "023a4b24d243f9331549d6b7f03b16ad8501ac3fc4950aeb872eabd140bcd213",
+      "raw_edge": 25.125,
+      "reconstructed_edge": 25.09375,
+      "source": {
+        "feature_id": 77,
+        "layer": 0,
+        "position": 5
+      },
+      "source_activation": 88.0,
+      "symmetric_normalized_error": 0.0012445550715619166,
+      "target": {
+        "feature_id": 552,
+        "layer": 6,
+        "position": 5
+      },
+      "target_preactivation": 12.5625,
+      "targeted_response": 0.28515625
+    }
+  ],
+  "schema_version": 1
+}

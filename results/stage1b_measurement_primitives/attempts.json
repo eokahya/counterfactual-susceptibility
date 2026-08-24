@@ -1,0 +1,18 @@
+{
+  "artifact_type": "stage1b_measurement_primitives_attempts",
+  "attempts": [
+    {
+      "calibration_artifact_read": false,
+      "fresh_process": true,
+      "mode": "canonical",
+      "safety_terminated": false,
+      "supervisor_returncode": 0,
+      "telemetry_failures": 0,
+      "timed_out": false,
+      "worker_status": "passed"
+    }
+  ],
+  "schema_version": 1,
+  "scientific_retry_count": 0,
+  "status": "passed"
+}

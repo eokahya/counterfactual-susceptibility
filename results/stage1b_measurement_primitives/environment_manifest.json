@@ -1,0 +1,35 @@
+{
+  "accelerator": {
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "fallback_variable_present": false,
+    "graph_metadata_device": "cpu",
+    "mps_available": true,
+    "mps_bfloat16_probe": "passed",
+    "mps_built": true,
+    "outer_autocast_enabled": false,
+    "scientific_tensor_device": "mps"
+  },
+  "artifact_type": "stage1b_measurement_primitives_environment",
+  "execution_commit": "de49bc0ee1d4ee1b2a0c15703b41e76781467ede",
+  "packages": {
+    "circuit-tracer": "0.5.2",
+    "nnsight": "0.6.1",
+    "torch": "2.6.0",
+    "transformers": "4.57.3"
+  },
+  "platform": {
+    "host_class": "Apple M2 Max 32 GiB unified memory",
+    "machine": "arm64",
+    "python": "3.11.13",
+    "system": "Darwin"
+  },
+  "privacy": {
+    "credential_values_read": false,
+    "network_accessed": false,
+    "private_paths_recorded": false,
+    "secret_values_recorded": false
+  },
+  "schema_version": 1,
+  "status": "passed"
+}
