@@ -129,3 +129,48 @@ Never record a planned, configured, or partially scaffolded run as completed.
   Any future attempt requires a new audited loading-plan identity, a
   conservative budget informed by the measured driver/swap peaks, renewed MPS
   numerical validation, and no silent change to scientific parameters.
+
+---
+
+## EXP-20260824-001 — Stage 1A-S Gemma 3 270M MPS/FP16 model gate
+
+- **Status:** `failed_runtime`
+- **Date:** 2026-08-24 (Europe/Istanbul)
+- **Experiment class:** Stage 1A-S local small-model runtime validation
+- **Base/branch:** `4ef60d2b5f8120d5671afbf8400b61d66e291f4d` /
+  `stage-1a-small-model-mps-fp16`
+- **Upstream:** official `circuit-tracer` v0.5.2 at
+  `8f1e2438df612464e229e44c4a00ff637bf9379b`
+- **Model:**
+  `google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1`
+- **Transcoder:**
+  `mwhanna/gemma-scope-2-270m-pt@fada11860ac1d337c1e41e9da308798405b94c8e`,
+  `transcoder_all/width_16k_l0_small`; downloaded and verified but not loaded
+  because the preceding model gate failed
+- **Environment:** native arm64 CPython 3.11.13, PyTorch 2.6.0, MPS built and
+  available, NNsight 0.6.1, Transformers 4.57.3, fallback disabled; lock SHA-256
+  `2ddfaebbad636911f9033f7d46236ddf4b38513215011eb4fe1214fde7f583c4`
+- **Prompt:** `The capital of France is`; token IDs
+  `[2, 818, 5279, 529, 7001, 563]`
+- **Observed model result:** all parameters were MPS/FP16. Hidden states were
+  finite through index 7. The first non-finite value occurred after decoder
+  layer 7 at coordinate `[0, 0, 163]`, where finite operands `55520` and
+  `13408` sum to `68928`, above FP16 maximum `65504`. Hidden-state index 8
+  contained one positive infinity; later layers produced all-NaN logits
+  (`1,572,864` NaNs of `1,572,864` values; shape `[1, 6, 262144]`).
+- **Prompt-independence diagnosis:** BOS-only, `Hello`, and the planned prompt
+  all first became non-finite at hidden-state index 8.
+- **Telemetry:** 6 one-second samples; MPS current peak `551108608` bytes;
+  MPS driver peak `1126842368` bytes; process RSS peak `607125504` bytes;
+  minimum available memory `13509787648` bytes; swap growth `0`; thermal state
+  nominal; no memory or thermal limit violated.
+- **Retry:** none. The specification forbids retry for non-finite values and
+  permits retry only for verified attribution MPS OOM after runtime loading.
+- **Downstream stages:** one-layer semantics, full PLT, NNsight replacement,
+  attribution, intervention, accepted protocol, and canonical artifact bundle
+  were not run.
+- **Decision:** stop. Do not substitute BF16, FP32, CPU, CUDA, another model,
+  or a mixed-precision residual adapter under this experiment identity.
+- **Artifacts:** exact weights remain only in a project-external ignored cache;
+  diagnostic JSON remains under ignored `results/generated/`. No weights,
+  cache, raw graph, or canonical science artifact was published.

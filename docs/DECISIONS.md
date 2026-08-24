@@ -278,3 +278,113 @@ attempt as empirical evidence, bounded MPS correctness validation, and an
 isolated worker that cannot silently continue through unsafe memory. The new
 plan must preserve the exact scientific inputs and produce a fully validated
 real artifact before either Stage 1B readiness flag can become true.
+
+## D-015 — 2026-08-24 — Separate Stage 1A-S development runtime validation from Stage 1A-R
+
+**Decision:** Define Stage 1A-S as a separate local small-model runtime pilot.
+Gemma 3 270M with a GemmaScope-2 PLT is a development path; Gemma 2 2B with the
+reference CLT remains the pending Stage 1A-R validation path. PLT and CLT
+evidence are not interchangeable.
+
+**Reason:** The smaller model can reduce local engineering risk while testing
+loaded threshold semantics, attribution, and intervention capabilities, but it
+cannot answer whether the reference Gemma 2/CLT experiment reproduces.
+
+**Alternatives considered:** Relabel the small-model pilot as the reference
+reproduction or treat PLT and CLT as equivalent. Both would overstate the
+scientific evidence and erase a material representation change.
+
+## D-016 — 2026-08-24 — Give NNsight/MPS/FP16 its own fail-closed runtime identity
+
+**Decision:** Treat `backend=nnsight`, `device=mps`, and `dtype=float16` as an
+explicit Stage 1A-S runtime class. Disable automatic MPS fallback and reject
+unexpected CPU scientific tensors. Any permitted CPU metadata boundary must be
+enumerated and independently tested.
+
+**Reason:** NNsight and Apple MPS have distinct tracing, device-placement,
+operator, gradient, and memory behavior. Reusing TransformerLens/CUDA labels or
+allowing hidden fallback would make runtime evidence ambiguous.
+
+**Alternatives considered:** Reuse the previous Gemma 2 MPS validator, enable
+`PYTORCH_ENABLE_MPS_FALLBACK`, or silently switch to CPU/CUDA. Each would hide
+material backend or device differences.
+
+## D-017 — 2026-08-24 — Keep the small-model asset identity provisional until immutable metadata audit
+
+**Decision:** Provisionally evaluate `google/gemma-3-270m` pretrained/base and
+`mwhanna/gemma-scope-2-270m-pt` subfolder
+`transcoder_all/width_16k_l0_small`. Do not download payloads or accept the
+identity until official upstream source and Hugging Face metadata establish
+exact immutable upstream/model/transcoder revisions and an exact runtime-file
+allowlist. Do not substitute another model, width, PT/IT variant, backend,
+device, or dtype inside this goal.
+
+**Reason:** Mutable names, a guessed subfolder, or an alternative selected after
+a failure would make provenance and negative results irreproducible.
+
+**Alternatives considered:** Consume repository `main`, download the whole
+transcoder repository, or try a different small model after a blocker. These
+options respectively leave code/assets mutable, exceed the authorized payload,
+or turn a preregistered pilot into outcome-dependent model selection.
+
+## D-018 — 2026-08-24 — Freeze the accepted Stage 1A-S protocol before outputs
+
+**Decision:** Attribution/intervention smoke remains exploratory and ignored.
+After smoke passes, commit the complete accepted config, deterministic feature
+selection, runner/worker, validator, tests, schema, and dependency pins before
+executing the accepted pilot. No accepted-run scientific parameter may be
+changed after inspecting its outputs.
+
+**Reason:** A separate pre-run commit prevents hand-picked features, tolerances,
+or settings from converting engineering exploration into a biased accepted
+result.
+
+**Alternatives considered:** Select a semantically interesting feature by hand
+or tune accepted settings after viewing effects. Both would invalidate the
+pilot's deterministic and preregistered boundary.
+
+## D-019 — 2026-08-24 — Pin the official Gemma 3 development assets and narrow PLT subset
+
+**Decision:** Pin official `circuit-tracer` v0.5.2 at
+`8f1e2438df612464e229e44c4a00ff637bf9379b`,
+`google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1`, and
+`mwhanna/gemma-scope-2-270m-pt@fada11860ac1d337c1e41e9da308798405b94c8e`.
+For the transcoder, allow only
+`transcoder_all/width_16k_l0_small/config.yaml` and the 18 files
+`layer_0.safetensors` through `layer_17.safetensors`.
+
+**Reason:** The tagged release contains explicit Gemma 3 NNsight attribution
+support. Official Hugging Face metadata verifies the model architecture,
+18-layer count, 16K canonical PLT tensor layout, exact byte sizes, and immutable
+asset SHAs. The selected runtime subset is sufficient and totals less than the
+6 GiB transcoder cap.
+
+**Alternatives considered:** Mutable `main`, a native lower-case GemmaScope-2
+layout from a different repository, all widths, feature visualizations, or an
+alternate small model. Each changes provenance, loading semantics, authorized
+payload, or the preregistered identity.
+
+## D-020 — 2026-08-24 — Stop Stage 1A-S on reproducible Gemma 3 FP16 residual overflow
+
+**Decision:** Classify Stage 1A-S as `failed_runtime` at the model-only finite
+logit gate. Do not load the PLT, construct the replacement runtime, run
+attribution/intervention, freeze an accepted protocol, or retry. Do not change
+to BF16, FP32, mixed-precision residuals, CPU, CUDA, another model, or a new
+prompt under the same experiment identity.
+
+**Reason:** On exact MPS/FP16 execution, decoder layer 7 adds two finite values
+`55520` and `13408`; their sum `68928` exceeds FP16 maximum `65504` and becomes
+positive infinity. Later layers produce all-NaN logits. BOS-only, one-word,
+and the planned prompt first fail at the same hidden-state index, so the issue
+is not prompt-specific. Memory, swap, device, fallback, and thermal gates all
+passed. The specification explicitly prohibits retries for non-finite values.
+
+**Alternatives considered:** Treat the run as an OOM, lower attribution batch
+size, suppress finite checks, choose a prompt whose observed behavior looks
+better, or retain some residual operations in FP32. None addresses the observed
+failure without violating the retry rule or changing the experiment's declared
+dtype/scientific runtime identity.
+
+**Revisit when:** A separately specified and reviewed experiment explicitly
+permits a different numerical execution policy. It must not be presented as
+this all-FP16 pilot or as the pending official BF16 reproduction.

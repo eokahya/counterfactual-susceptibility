@@ -1,10 +1,10 @@
 # Counterfactual Susceptibility
 
-**Status:** Stage 1A / E0 is blocked, not complete. Exact asset pins,
-environment tooling, and a Colab handoff are prepared, but the pinned Gemma
-snapshot returned HTTP 403 for the configured credential and the local MPS
-runtime is unavailable. No real-model experiment has been run, and this
-repository contains no empirical result or claim of mechanistic faithfulness.
+**Status:** No Counterfactual Susceptibility result exists and the reference
+Stage 1A reproduction remains pending. The separate Stage 1A-S small-model
+MPS/FP16 pilot stopped as `failed_runtime` at its finite-logit model gate. See
+[`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current experiment
+classes and readiness boundary.
 
 This project studies a blind spot in sparse attribution graphs: a feature can be inactive on the baseline prompt yet become causally important after a small intervention removes an inhibitory influence. Active-only graphs cannot display such a feature before it crosses its activation threshold.
 
