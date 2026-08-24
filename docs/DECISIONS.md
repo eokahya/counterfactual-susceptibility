@@ -519,3 +519,97 @@ correction before a fresh accepted execution from a new pre-run commit.
 edit the accepted JSON by hand, accept normalized L2 as a substitute, or omit
 the first attempt. Each would weaken the frozen artifact contract or erase
 attempt provenance.
+
+## D-028 — 2026-08-24 — Separate Stage 1B measurement from prediction
+
+**Decision:** Stage 1B implements only an exact loaded-state near-threshold
+inactive scanner and an independent active-source/active-target local response
+measurement. It does not score inactive targets, search for gate crossings,
+run suppression sweeps, measure behavior or mediation, or change paper Results.
+
+**Reason:** These two primitives must be validated independently before the
+first prospective Counterfactual Susceptibility prediction can be trusted.
+
+**Alternatives considered:** Combine scanning, prediction, and intervention in
+one run, or treat Stage 1A attribution as sufficient. Both would make failures
+circular and overstate the evidence.
+
+## D-029 — 2026-08-24 — Preserve exact loaded JumpReLU state in the scanner
+
+**Decision:** Compute chunk projections on native MPS/BF16 from loaded encoder,
+bias, and threshold tensors; classify with the loaded strict gate
+`a=z*1[z>tau]`, with equality inactive. Require exact chunk/dense-oracle
+candidate identity and order at feature chunk sizes 257, 1024, and 4096.
+
+**Reason:** CPU/FP32 recomputation, approximate thresholds, or full retained
+dense caches can alter marginal BF16 feature ordering or violate memory and
+artifact boundaries.
+
+**Alternatives considered:** Use the public full dense activation cache,
+recompute in FP32 on CPU, or accept approximate recall. Each changes the
+measurement or weakens the exact-oracle claim.
+
+## D-030 — 2026-08-24 — Compute targeted J independently of graph edges
+
+**Decision:** Compute `J_ij=partial z_i/partial a_j` with a bounded reverse-mode
+VJP under the frozen NNsight attribution convention, using target encoder and
+unscaled source decoder directions. The targeted implementation accepts no
+graph or edge input. Only the validator later compares `a_j*J_ij` with the raw
+target-row/source-column adjacency edge.
+
+**Reason:** Dividing a graph edge by activation would make the validation
+circular. Target preactivation must exclude the target gate derivative.
+
+**Alternatives considered:** Divide `E` by `a_j`, use a UI-normalized edge, or
+differentiate an underlying-model intervention sweep. The first two are
+circular; the last uses a different nonlinear convention.
+
+## D-031 — 2026-08-24 — Freeze calibration and canonical evidence separately
+
+**Decision:** Calibration may debug the implementation and freeze the prompt,
+chunk sizes, top-K, hash seed, exact disjoint pair IDs, edge floor, tolerances,
+runner, worker, validator, and artifact schema. Canonical outputs are produced
+only from a subsequent clean pre-run commit and cannot change those choices.
+
+**Reason:** Outcome-dependent definitions would invalidate the prospective
+active-pair validation.
+
+**Alternatives considered:** Select pairs manually, tune tolerances after the
+canonical run, or reuse calibration rows as final evidence. Each leaks outcome
+information into acceptance.
+
+## D-032 — 2026-08-24 — Treat compact artifacts as hostile input
+
+**Decision:** The standalone validator rejects duplicate JSON keys, unknown or
+dense tensor-shaped fields, nonfinite values, calibration leakage, altered
+pair IDs/order, missing checksum coverage, local paths, secrets, forbidden
+extensions, links, raw graph/adjacency/gradient payloads, and any bundle at or
+above 5 MiB. It independently recomputes scanner and local-response metrics.
+
+**Reason:** Small JSON does not by itself guarantee scientific, provenance, or
+secret safety. Claimed safety booleans must be cross-checked structurally.
+
+**Alternatives considered:** Trust runner summaries or reuse only the Stage 1A
+marker scan. Neither covers Stage 1B pair leakage, dense arrays, or adversarial
+serialization.
+
+## D-033 — 2026-08-24 — Freeze the calibrated active-pair protocol before canonical execution
+
+**Decision:** Freeze the exact 16 calibration IDs, disjoint 64 canonical IDs,
+canonical endpoint-manifest digest, edge floor 0.015625, unchanged hard
+tolerances, prompt, scanner chunk sizes, top-K values, runner, worker,
+validator, and artifact schema in the pre-run commit. Canonical execution may
+read only this tracked frozen config and the immutable offline assets; it may
+not read the calibration artifact.
+
+**Reason:** The real MPS/BF16 calibration passed exact scanner/dense equality
+and active-pair validation with Spearman 1.0, sign agreement 1.0, median SNE
+0.0022785724126932663, and p95 SNE 0.004240743761213505. These results establish
+that the implementation is suitable to freeze; they do not justify changing
+the preregistered acceptance thresholds or making an empirical susceptibility
+claim.
+
+**Alternatives considered:** Tune the edge floor or tolerances after viewing
+canonical results, reuse calibration pairs as canonical evidence, or persist
+the calibration graph. Each would introduce outcome leakage, circularity, or
+forbidden large evidence.

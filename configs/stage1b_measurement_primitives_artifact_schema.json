@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "artifact_class": "stage1b_measurement_primitives_small_bundle",
+  "canonical_phase": "canonical_frozen",
+  "terminal_status": "completed_stage1b_measurement_primitives",
+  "maximum_total_bytes_exclusive": 5242880,
+  "maximum_json_file_bytes": 2097152,
+  "maximum_checksum_file_bytes": 65536,
+  "allowlist": [
+    "asset_manifest.json",
+    "attempts.json",
+    "checksums.sha256",
+    "environment_manifest.json",
+    "local_response_validation_pairs.json",
+    "local_response_validation_summary.json",
+    "memory_timing_summary.json",
+    "near_threshold_candidates.json",
+    "run_manifest.json",
+    "scanner_oracle_summary.json"
+  ],
+  "artifact_types": {
+    "asset_manifest.json": "stage1b_measurement_primitives_asset_manifest",
+    "attempts.json": "stage1b_measurement_primitives_attempts",
+    "environment_manifest.json": "stage1b_measurement_primitives_environment",
+    "local_response_validation_pairs.json": "stage1b_measurement_primitives_local_response_validation_pairs",
+    "local_response_validation_summary.json": "stage1b_measurement_primitives_local_response_validation_summary",
+    "memory_timing_summary.json": "stage1b_measurement_primitives_memory_timing",
+    "near_threshold_candidates.json": "stage1b_measurement_primitives_near_threshold_candidates",
+    "run_manifest.json": "stage1b_measurement_primitives_run_manifest",
+    "scanner_oracle_summary.json": "stage1b_measurement_primitives_scanner_oracle_summary"
+  },
+  "scanner_contract": {
+    "groups": 90,
+    "feature_width": 16384,
+    "chunk_sizes": [257, 1024, 4096],
+    "dense_oracle_chunk_size": 16384,
+    "top_k_per_group": 8,
+    "global_top_k": 128,
+    "gate": "a=z*1[z>tau]",
+    "threshold_equality_activity": "inactive",
+    "exact_identity_and_order_required": true
+  },
+  "response_contract": {
+    "pair_count": 64,
+    "edge_floor": 0.015625,
+    "minimum_target_layers": 6,
+    "minimum_target_positions": 3,
+    "both_edge_signs_required": true,
+    "graph_edge_orientation": "target_row_source_column",
+    "graph_edge_input_to_targeted_path": "forbidden",
+    "scientific_retry_count": 0
+  },
+  "forbidden_payload_classes": [
+    "model_or_transcoder_weight",
+    "cache",
+    "raw_graph",
+    "adjacency",
+    "complete_activation_tensor",
+    "full_dense_preactivation_array",
+    "gradient_tensor",
+    "secret",
+    "machine_local_path"
+  ]
+}

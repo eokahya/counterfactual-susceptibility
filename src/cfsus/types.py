@@ -97,6 +97,194 @@ class FeatureRef:
 
 
 @dataclass(frozen=True, slots=True)
+class RuntimeIdentity:
+    """Immutable identity attached to every Stage 1B measurement."""
+
+    backend: str
+    device: str
+    dtype: str
+    model_revision: str
+    transcoder_revision: str
+    upstream_revision: str
+    prompt_id: str
+
+    def __post_init__(self) -> None:
+        for name in (
+            "backend",
+            "device",
+            "dtype",
+            "model_revision",
+            "transcoder_revision",
+            "upstream_revision",
+            "prompt_id",
+        ):
+            value = getattr(self, name)
+            if not isinstance(value, str) or not value.strip():
+                raise ScientificInputError(f"{name} must be a non-empty string")
+
+
+@dataclass(frozen=True, slots=True)
+class MeasuredFeatureState:
+    """One exact loaded JumpReLU state measured by the runtime.
+
+    The record deliberately contains scalar values only. Tensor projections and
+    loaded gate evaluation stay inside the backend on its declared device and
+    dtype before crossing this boundary.
+    """
+
+    feature: FeatureRef
+    preactivation: float
+    activation: float
+    threshold: float
+    activity: FeatureActivity
+    device: str
+    dtype: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.feature, FeatureRef):
+            raise ScientificInputError("feature must be a FeatureRef")
+        for name in ("preactivation", "activation", "threshold"):
+            _require_finite(name, getattr(self, name))
+        if not isinstance(self.activity, FeatureActivity):
+            raise ScientificInputError("activity must be a FeatureActivity")
+        if not self.device.strip() or not self.dtype.strip():
+            raise ScientificInputError("device and dtype must be non-empty")
+        if self.activity is FeatureActivity.INACTIVE:
+            if self.activation != 0.0 or self.preactivation > self.threshold:
+                raise ScientificInputError(
+                    "inactive loaded state must have a=0 and z<=threshold"
+                )
+        elif (
+            self.preactivation <= self.threshold
+            or self.activation != self.preactivation
+        ):
+            raise ScientificInputError(
+                "active loaded state must have z>threshold and a=z"
+            )
+
+    @property
+    def inactive_margin(self) -> float:
+        """Return ``threshold-preactivation`` for an inactive state."""
+
+        if self.activity is not FeatureActivity.INACTIVE:
+            raise ScientificInputError("inactive margin is undefined for active state")
+        margin = self.threshold - self.preactivation
+        _require_finite("inactive_margin", margin)
+        if margin < 0.0:
+            raise ScientificInputError("inactive margin must be non-negative")
+        return margin
+
+
+@dataclass(frozen=True, slots=True)
+class NearThresholdCandidate:
+    """Compact inactive feature retained by the Stage 1B scanner."""
+
+    feature: FeatureRef
+    preactivation: float
+    activation: float
+    threshold: float
+    margin: float
+    device: str
+    dtype: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.feature, FeatureRef):
+            raise ScientificInputError("feature must be a FeatureRef")
+        for name in ("preactivation", "activation", "threshold", "margin"):
+            _require_finite(name, getattr(self, name))
+        if self.activation != 0.0:
+            raise ScientificInputError("near-threshold candidate must be inactive")
+        if self.preactivation > self.threshold:
+            raise ScientificInputError(
+                "near-threshold candidate must have z<=threshold"
+            )
+        if self.margin < 0.0 or self.margin != self.threshold - self.preactivation:
+            raise ScientificInputError("candidate margin must equal threshold-z")
+        if not self.device.strip() or not self.dtype.strip():
+            raise ScientificInputError("device and dtype must be non-empty")
+
+    @property
+    def sort_key(self) -> tuple[float, int, int, int]:
+        """Frozen deterministic scanner order."""
+
+        return (
+            self.margin,
+            self.feature.layer,
+            self.feature.position,
+            self.feature.feature_id,
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class LocalResponseEstimate:
+    """Independent scalar ``partial z_i / partial a_j`` measurement."""
+
+    source: FeatureRef
+    target: FeatureRef
+    source_activation: float
+    target_preactivation: float
+    response: float
+    device: str
+    dtype: str
+    method: str
+    convention: str
+    graph_edge_used: bool = False
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.source, FeatureRef) or not isinstance(
+            self.target, FeatureRef
+        ):
+            raise ScientificInputError("source and target must be FeatureRef values")
+        if self.source == self.target:
+            raise ScientificInputError("source and target must differ")
+        if self.source.layer >= self.target.layer:
+            raise ScientificInputError("source layer must be strictly upstream")
+        if self.source.position > self.target.position:
+            raise ScientificInputError("source token position must be causal upstream")
+        for name in ("source_activation", "target_preactivation", "response"):
+            _require_finite(name, getattr(self, name))
+        if self.source_activation <= 0.0:
+            raise ScientificInputError("source must be baseline-active and positive")
+        if not self.device.strip() or not self.dtype.strip():
+            raise ScientificInputError("device and dtype must be non-empty")
+        if not self.method.strip() or not self.convention.strip():
+            raise ScientificInputError("method and convention must be non-empty")
+        if self.graph_edge_used:
+            raise ScientificInputError("targeted response must not use a graph edge")
+
+
+@dataclass(frozen=True, slots=True)
+class ActivePairReference:
+    """Compact raw-graph reference admitted only by independent validation."""
+
+    pair_id: str
+    source: FeatureRef
+    target: FeatureRef
+    source_activation: float
+    raw_edge: float
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.pair_id, str) or len(self.pair_id) != 64:
+            raise ScientificInputError("pair_id must be a lowercase SHA-256 string")
+        if any(character not in "0123456789abcdef" for character in self.pair_id):
+            raise ScientificInputError("pair_id must be a lowercase SHA-256 string")
+        if not isinstance(self.source, FeatureRef) or not isinstance(
+            self.target, FeatureRef
+        ):
+            raise ScientificInputError("source and target must be FeatureRef values")
+        if self.source == self.target or self.source.layer >= self.target.layer:
+            raise ScientificInputError("reference pair must be strictly layer-upstream")
+        if self.source.position > self.target.position:
+            raise ScientificInputError("reference pair must be causal upstream")
+        _require_finite("source_activation", self.source_activation)
+        _require_finite("raw_edge", self.raw_edge)
+        if self.source_activation <= 0.0 or self.raw_edge == 0.0:
+            raise ScientificInputError(
+                "reference requires positive source and nonzero edge"
+            )
+
+
+@dataclass(frozen=True, slots=True)
 class BaselineFeatureState:
     """Baseline values under the backend's exact activation convention.
 

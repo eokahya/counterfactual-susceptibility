@@ -1,0 +1,218 @@
+schema_version: 1
+experiment_name: stage1b_measurement_primitives
+experiment_class: stage1b_measurement_primitives
+completed_status: completed_stage1b_measurement_primitives
+claim_class: local_measurement_primitive_validation
+branch: stage-1b-measurement-primitives
+base_commit: fb2fc158b45c842743804040e4e273776e666a48
+accepted_stage1a_execution_commit: 6a5c21027fbb6b83e34c39db75987b0ce5b72d17
+phase: canonical_frozen
+
+upstream:
+  repository: https://github.com/decoderesearch/circuit-tracer.git
+  version: 0.5.2
+  revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+
+model:
+  identifier: google/gemma-3-270m
+  revision: 9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1
+  architecture: Gemma3ForCausalLM
+  layer_count: 18
+  hidden_size: 640
+
+transcoder:
+  identifier: mwhanna/gemma-scope-2-270m-pt
+  revision: fada11860ac1d337c1e41e9da308798405b94c8e
+  subfolder: transcoder_all/width_16k_l0_small
+  feature_input_hook: mlp.hook_in
+  feature_output_hook: hook_mlp_out
+  layer_count: 18
+  feature_width: 16384
+  storage_dtype: float32
+  execution_dtype: bfloat16
+
+runtime:
+  backend: nnsight
+  device: mps
+  dtype: bfloat16
+  python: 3.11.13
+  torch: 2.6.0
+  nnsight: 0.6.1
+  transformers: 4.57.3
+  platform: macos-arm64
+  fallback_environment_variable: PYTORCH_ENABLE_MPS_FALLBACK
+  fallback_allowed: false
+  outer_autocast_allowed: false
+  scientific_tensor_device: mps
+  graph_metadata_device: cpu
+
+prompt:
+  id: pilot
+  text: The capital of France is
+  expected_token_ids: [2, 818, 5279, 529, 7001, 563]
+  zero_positions: [0]
+
+scanner:
+  selected_layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  selected_positions: [1, 2, 3, 4, 5]
+  feature_width: 16384
+  chunk_sizes: [257, 1024, 4096]
+  canonical_chunk_size: 1024
+  top_k_per_group: 8
+  global_top_k: 128
+  tie_break: [margin, layer, position, feature_id]
+  dense_oracle_lifecycle: one_group_ephemeral
+  exact_oracle_required: true
+
+responses:
+  method: target_encoder_reverse_vjp_source_decoder_contraction
+  convention: attribution_matched_target_preactivation_pre_gate
+  graph_edge_orientation: target_row_source_column
+  graph_edge_formula: raw_edge_equals_source_activation_times_targeted_response
+  graph_edge_input_to_targeted_path: forbidden
+  pair_seed: stage1b-measurement-primitives-v1
+  per_target_per_sign: 2
+  calibration_pair_count: 16
+  canonical_pair_count: 64
+  minimum_target_layers: 6
+  minimum_target_positions: 3
+  require_both_edge_signs: true
+  calibration_pair_ids:
+    - 000436addf21bf33049b15bfa0163c51c940f15abe5deac807c1a6b5cdc86569
+    - 00093971cbb8debaaa1d051d55facaa6c0a90d1b7ddd4070373bd4587967c49f
+    - 000c226f94121b4d5bdeea80c51e870c2cd82eb6810c989caa9730222d3c78df
+    - 00144b9375b2ea5defa205e0b95cd38c85c6f458bc9e425a992aee827adacf2e
+    - 0024d52b5eb15f76186817edb79e32d7f12bba122e63de88d6da072fede98b15
+    - 00251bb7870ec8315049c4eaacc2efad3185ba99e3c44088077bfc94df79d23d
+    - 0025dd2e735458a5a00e31b8cdfd98eba7bb2e17fecc7fcf81c674e27fe9f4c6
+    - 002bfe08392ecdc943a874b64e1f6b7544b2456bb56baad79c0ba0da59b8fca0
+    - 0033749738ac1064c786eaf45db8690f34dba65bc0842f5fd92bb785419a519b
+    - 005070c8c07a754636caabcbfbf2ee9b81a174fc4d341958f5b0bd05666217cf
+    - 005147ae61eacb5a4248b47dc09d752c1f7d8cfaf60a186810868f951b3e86d7
+    - 00519b97470bc215ed0824777d40d5d2b8f66fa4a792b9b9eaadeb8c20dd532f
+    - 005778c14fd830512395c4ae31405308b34ce72b253fcdcb65de070d0e485a8e
+    - 005bd5df7771dcbb252afa1b1838266b47f04ddaa16e39d3cfcd4a65ddfd2048
+    - 006726e67184142999f0a6212d55aaf82be864a2acb9fd4c549f30933be821cd
+    - 0069666f40a6cd624aa27ce758d28327b6d86321f80db6d87ad560f432be7f6c
+  canonical_pair_ids:
+    - 038b2c3b2eefe5a7a71f48769427330cc51184d000a4124206ff5c92cbdab4dd
+    - 0437759607a2ff1daf49b9bcc629dcee6a2bb87210b8df4076548d6e2015661b
+    - 00b26ae25bf801af76345be3dfb42e1a97d45424424a23589cc4b0f2fc81c247
+    - 00b56bd2c8d1476735fb82772274f35b77d6f7d424bbd2b873442cdd25d19265
+    - 00a1c28a237da26418ec94a61b78bb0cb136f769053efbb254c337e44201a15c
+    - 0073e8675a5c233adf8cca880a49f5345991bcbf32819089cb8a642adaf04754
+    - 00c9b84977e4005649116d50fc954b624a0c7bfadf2823d4ef8038bd24abe6b4
+    - 006f3e0ab06ba1d69d73cdc45ca2f9008bdd142e12f2cfa1111fe15d0a7dc574
+    - 007248e83b5f20d60d98c1f2114b0228863441a254f430c20fb5ebca29ca6387
+    - 0074bd10600f522558885ebda6d1f2d9335948c934e21a4f996c96e0e7dde348
+    - 0080010cf14dcf2c9522b53e912f53e980123316a7c64f1af704ae6b78a24e02
+    - 007761731ed5bf599c06c132161b551a2352e85600310025bd28237d645055c6
+    - 008295eb3076c6143ffbeac59e5537f668f7e6cb28cb0e486e7cf67694186a52
+    - 009084996c8c10766137d3a850b52619c3521958d276190436f191646d585111
+    - 009313c02134b264cd93f43bfba3668f37dcc060d6bbff9a4962929446a31f06
+    - 009faa2f1604b4fd3744e1d4b77a805d995e55e352636e01dd15234d9152a3fb
+    - 00a7c50cf3675e40d46b5eb4250a01fc992bf7d7f3796f061119ddca49cf2457
+    - 00a7f2a91bc9ae8f1ba1b9e1942cd872862517cd6b938ebb3e9aaf8f2570a1a7
+    - 00bd6e6ea7e4329e73904e90d5f42a04190b9b78243320e8cd52b1753a5cab22
+    - 00bf2a44353a365d54026590598e997ae39719aa5a906c562bfaa2b797ab875a
+    - 00c545acdc0b151d03092cff609b82bed8534714d031d89206b978533edf496b
+    - 00ccc1de9b6ae7fee9b1a15477f3229215698bb6ae7171930c4b375d3164c435
+    - 00d1ff22d0aab350229321984f4f49a0bf52291fae54e3b6572d039fdad42924
+    - 00d5486fdf4e8c621ec5e4f52e5b03f63fd5cc118808c035a9490befeffdada0
+    - 00d61ee77adc85ea59654000c982269a3c59f6a8345ac25a5eb011ed4aa64b21
+    - 00f1b510602203d20fd514a2e35c18e911a427c4848597080f68015f67da1f6a
+    - 0101ce36bc0bca3d08e253d4be7facb96020e34e6cbc7d550fbf957365bd6306
+    - 01075a42c20d2effca60992ce8f02b3ca7dcb57ef437b0e9437c2d62c5e3d8c4
+    - 0107f0e371a9d3d1825bdf7b7b5d0de801b1a13327b41ba5d14d5bb692c953f8
+    - 0112ec10b67776ae57addd90a9c6a85c611f6c87a92fee13b142020d305a687c
+    - 011bd5a63dd01563ee9f670c6f68dbeaf6c322a15dbb8883b733e5c951831d4f
+    - 0125dd374895620dc3273c4306f6417dc1ca50ef769872b43acff2a32594caf5
+    - 012bbd9a5e093bcf68aeefd178adfda2bef5bdff0934c7c0012eefbf94ad8ea6
+    - 012cbcfa95ff63dc370ccc09f4cecd815fb3da020c3ceb52f913b30b075251ee
+    - 013952e32dc2b25f4075dd8f3b07ed2b5cbd7af6a55876e197c05f963342658b
+    - 0143be85f22276bde2fa1433153c1bc2ba717751dd04f2811b413060d5cb33a1
+    - 0147118db7274d5b94c9d509fe808e8784ddfc6eaf22d0c09851d06865e4c72e
+    - 0152dc07a8d3937ecde00fe1924154dab576659cb1a8618ed37ef50e3a689b83
+    - 0164cbd6a115f5958d1c89086eefce8b7212e47737beaccf9bacf3763ec9950d
+    - 016dd15174d3ae0ee626abbb212c011a1a7b97463783746edf9aff6a1779ffe5
+    - 019b208ea3dfa805d77ac0b298d30ba5709616927da4393d6f9bd2279423acd3
+    - 019f88ce15a90cd5192711282d4270c770208c38b56b79526e29e25fe0bcc7b5
+    - 019fc86a2bad02378c9e6906bfc992cc372cc422430dddd296923694e52c75f8
+    - 01a324a15f7b5055f8eb5024a4534854c47747f576855311ee4e91b09d66705f
+    - 01a335d6518a2d7da52b827882c5d4c3b37e1d0368115c8dc28774ec90cd6d8d
+    - 01a47e8156db6b055328931b6bdd35ce28dae33fa0c8dc67cb4c8256d7daaec9
+    - 01a6b2efa0ae24d3c5252690d9ec4c961b3d791d2016d19f7ec564dde121c1a8
+    - 01b3c5944d15c57b37db63ae5f181ca7ba1ab732f90c9ec97a1ff95113c2029c
+    - 01b5333d620558cee1e52dc809d20d666d156acc88a4219fc43df7c642fb57c0
+    - 01c3807f14252fa94dab43cddab64cb813f084956dece03a887e50ea2565e57c
+    - 01c4aa69a45316a9b37845acb31e41b79fcddccde7077d4f19fc475b63863e28
+    - 01c5ceef3238da3e883d5a167cc68e10eddb556d398fa338eb19dbc905e91f76
+    - 01c6940243440e5f508eecdef9f4e6af3dd5b02335d619b4062bc2918ce41f5d
+    - 01c862a7b64d0f1e15d1665c4e3585cbc941aaabefd52e2dd408b0c5b51fc5f4
+    - 01cf3341e58247d7ae2c9b10726e8e8cea9943a791c47d4b46628c2557d7efc6
+    - 0207178990f3edc2311bea9af86211a3041097a0c78fcfebfa2d609ea18472fb
+    - 020e25434b5972ce915c21cc38b4f0c4dba9fe4af9c33338779706ba97c3c1cc
+    - 020f7356752b7bbc05143314b503cd5267c598bae21c698ff58b53ea6cee9d65
+    - 02289874303d5119c1a6ca81fede9d6c18bc710a75367c1376f6ecfeb46e59dc
+    - 0232e253191293ea4c7198c1b37b9b7078bb590477544d17fc83c7aab8ba6b50
+    - 02339f4d935575224128d14fc8f1ef2b276a75ddd693fcf32e59e5eb5eee7430
+    - 02345487f7ca08f0b5639af10b005ad631c3c35f080223dd1d318b22fe07fc41
+    - 02348b36a3bf06bb83f3a6fd7c5fd2f69fad678995b2b614ebf376ede3872035
+    - 023a4b24d243f9331549d6b7f03b16ad8501ac3fc4950aeb872eabd140bcd213
+  canonical_endpoint_manifest_sha256: 9879064f623be1cfdac4c8a1321f293e59e9e897ed7919608157a6e63e62082c
+  proposed_edge_floor: 0.015625
+  edge_floor: 0.015625
+  graph:
+    max_n_logits: 10
+    desired_logit_probability: 0.95
+    max_feature_nodes: 4096
+    attribution_batch_size: 64
+
+tolerances:
+  spearman_minimum: 0.98
+  sign_agreement_minimum: 0.95
+  median_symmetric_normalized_error_maximum: 0.05
+  p95_symmetric_normalized_error_maximum: 0.20
+
+safety_limits:
+  maximum_mps_driver_bytes: 25769803776
+  maximum_process_rss_bytes: 25769803776
+  maximum_swap_growth_bytes: 4294967296
+  minimum_available_memory_bytes: 4294967296
+  maximum_graph_buffer_bytes: 6442450944
+  maximum_artifact_bundle_bytes: 5242880
+  accepted_thermal_states: [nominal, fair]
+  sample_interval_seconds: 1.0
+  telemetry_failure_limit: 3
+  terminate_grace_seconds: 15.0
+  kill_grace_seconds: 5.0
+  calibration_timeout_seconds: 3600
+  canonical_timeout_seconds: 7200
+
+artifacts:
+  result_directory: results/stage1b_measurement_primitives
+  generated_directory: results/generated/stage1b_measurement_primitives
+  environment_lock: environments/stage1a_small_model_mps_bf16/requirements-lock.txt
+  required_files:
+    - run_manifest.json
+    - asset_manifest.json
+    - environment_manifest.json
+    - scanner_oracle_summary.json
+    - near_threshold_candidates.json
+    - local_response_validation_summary.json
+    - local_response_validation_pairs.json
+    - memory_timing_summary.json
+    - attempts.json
+    - checksums.sha256
+
+readiness_on_success:
+  stage1b_measurement_primitives: completed
+  stage1c_first_prediction_readiness: true
+  stage1b_empirical_claim_readiness: false
+  counterfactual_susceptibility_result: none
+  gate_crossing_result: none
+  behavioral_importance_result: none
+  mediation_result: none
+  official_bf16_reproduction: pending
+  reference_clt_reproduction: pending
+  paper_results_readiness: false
