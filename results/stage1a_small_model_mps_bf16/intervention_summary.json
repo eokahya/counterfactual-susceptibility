@@ -1,0 +1,492 @@
+{
+  "artifact_type": "stage1a_small_model_mps_bf16_intervention",
+  "intervention": {
+    "baseline": {
+      "diagnostics": {
+        "absolute_maximum": 22.25,
+        "device": "mps:0",
+        "dtype": "torch.bfloat16",
+        "element_count": 1572864,
+        "floating": true,
+        "maximum": 22.0,
+        "minimum": -22.25,
+        "nan_count": 0,
+        "negative_infinity_count": 0,
+        "nonfinite_count": 0,
+        "positive_infinity_count": 0,
+        "shape": [
+          1,
+          6,
+          262144
+        ]
+      },
+      "top_logits": [
+        20.125,
+        19.0,
+        18.125,
+        17.375,
+        17.375,
+        17.25,
+        16.625,
+        16.625,
+        16.5,
+        16.5
+      ],
+      "top_probabilities": [
+        0.42523208260536194,
+        0.13805262744426727,
+        0.057548895478248596,
+        0.027184177190065384,
+        0.027184177190065384,
+        0.023989949375391006,
+        0.012840894982218742,
+        0.012840894982218742,
+        0.01133204996585846,
+        0.01133204996585846
+      ],
+      "top_token_ids": [
+        9079,
+        506,
+        496,
+        886,
+        3224,
+        7001,
+        711,
+        992,
+        5628,
+        236743
+      ],
+      "top_tokens": [
+        " Paris",
+        " the",
+        " a",
+        " one",
+        " known",
+        " France",
+        " not",
+        " also",
+        " located",
+        " "
+      ]
+    },
+    "baseline_noop_maximum_absolute_logit_difference_tolerance": 0.0,
+    "baseline_noop_normalized_l2_tolerance": 0.01,
+    "baseline_repeat": {
+      "diagnostics": {
+        "absolute_maximum": 22.25,
+        "device": "mps:0",
+        "dtype": "torch.bfloat16",
+        "element_count": 1572864,
+        "floating": true,
+        "maximum": 22.0,
+        "minimum": -22.25,
+        "nan_count": 0,
+        "negative_infinity_count": 0,
+        "nonfinite_count": 0,
+        "positive_infinity_count": 0,
+        "shape": [
+          1,
+          6,
+          262144
+        ]
+      },
+      "top_logits": [
+        20.125,
+        19.0,
+        18.125,
+        17.375,
+        17.375,
+        17.25,
+        16.625,
+        16.625,
+        16.5,
+        16.5
+      ],
+      "top_probabilities": [
+        0.42523208260536194,
+        0.13805262744426727,
+        0.057548895478248596,
+        0.027184177190065384,
+        0.027184177190065384,
+        0.023989949375391006,
+        0.012840894982218742,
+        0.012840894982218742,
+        0.01133204996585846,
+        0.01133204996585846
+      ],
+      "top_token_ids": [
+        9079,
+        506,
+        496,
+        886,
+        3224,
+        7001,
+        711,
+        992,
+        5628,
+        236743
+      ],
+      "top_tokens": [
+        " Paris",
+        " the",
+        " a",
+        " one",
+        " known",
+        " France",
+        " not",
+        " also",
+        " located",
+        " "
+      ]
+    },
+    "baseline_repeat_maximum_absolute_logit_difference": 0.0,
+    "baseline_repeat_normalized_l2": 0.0,
+    "conditions": [
+      {
+        "alpha": 0.0,
+        "baseline_activation": 1960.0,
+        "desired_absolute_activation": 1960.0,
+        "logits": {
+          "diagnostics": {
+            "absolute_maximum": 22.25,
+            "device": "mps:0",
+            "dtype": "torch.bfloat16",
+            "element_count": 1572864,
+            "floating": true,
+            "maximum": 22.0,
+            "minimum": -22.25,
+            "nan_count": 0,
+            "negative_infinity_count": 0,
+            "nonfinite_count": 0,
+            "positive_infinity_count": 0,
+            "shape": [
+              1,
+              6,
+              262144
+            ]
+          },
+          "top_logits": [
+            20.125,
+            19.0,
+            18.125,
+            17.375,
+            17.375,
+            17.25,
+            16.625,
+            16.625,
+            16.5,
+            16.5
+          ],
+          "top_probabilities": [
+            0.42523208260536194,
+            0.13805262744426727,
+            0.057548895478248596,
+            0.027184177190065384,
+            0.027184177190065384,
+            0.023989949375391006,
+            0.012840894982218742,
+            0.012840894982218742,
+            0.01133204996585846,
+            0.01133204996585846
+          ],
+          "top_token_ids": [
+            9079,
+            506,
+            496,
+            886,
+            3224,
+            7001,
+            711,
+            992,
+            5628,
+            236743
+          ],
+          "top_tokens": [
+            " Paris",
+            " the",
+            " a",
+            " one",
+            " known",
+            " France",
+            " not",
+            " also",
+            " located",
+            " "
+          ]
+        },
+        "maximum_absolute_logit_difference_from_baseline": 0.0,
+        "normalized_l2_from_baseline": 0.0,
+        "observed_post_intervention_activation": null,
+        "observed_post_intervention_activation_accessible": false,
+        "sent_absolute_activation": 1960.0,
+        "sent_device": "mps:0",
+        "sent_dtype": "torch.bfloat16"
+      },
+      {
+        "alpha": 0.5,
+        "baseline_activation": 1960.0,
+        "desired_absolute_activation": 980.0,
+        "logits": {
+          "diagnostics": {
+            "absolute_maximum": 22.25,
+            "device": "mps:0",
+            "dtype": "torch.bfloat16",
+            "element_count": 1572864,
+            "floating": true,
+            "maximum": 22.0,
+            "minimum": -22.25,
+            "nan_count": 0,
+            "negative_infinity_count": 0,
+            "nonfinite_count": 0,
+            "positive_infinity_count": 0,
+            "shape": [
+              1,
+              6,
+              262144
+            ]
+          },
+          "top_logits": [
+            21.75,
+            19.5,
+            19.125,
+            18.625,
+            17.75,
+            17.625,
+            17.125,
+            17.125,
+            17.125,
+            16.875
+          ],
+          "top_probabilities": [
+            0.660267174243927,
+            0.06959164887666702,
+            0.04782959073781967,
+            0.029010111466050148,
+            0.012093213386833668,
+            0.010672223754227161,
+            0.006473031360656023,
+            0.006473031360656023,
+            0.006473031360656023,
+            0.00504120159894228
+          ],
+          "top_token_ids": [
+            9079,
+            506,
+            7001,
+            496,
+            886,
+            3224,
+            711,
+            992,
+            5628,
+            236743
+          ],
+          "top_tokens": [
+            " Paris",
+            " the",
+            " France",
+            " a",
+            " one",
+            " known",
+            " not",
+            " also",
+            " located",
+            " "
+          ]
+        },
+        "maximum_absolute_logit_difference_from_baseline": 2.03125,
+        "normalized_l2_from_baseline": 0.07579172470201417,
+        "observed_post_intervention_activation": null,
+        "observed_post_intervention_activation_accessible": false,
+        "sent_absolute_activation": 980.0,
+        "sent_device": "mps:0",
+        "sent_dtype": "torch.bfloat16"
+      },
+      {
+        "alpha": 1.0,
+        "baseline_activation": 1960.0,
+        "desired_absolute_activation": 0.0,
+        "logits": {
+          "diagnostics": {
+            "absolute_maximum": 23.25,
+            "device": "mps:0",
+            "dtype": "torch.bfloat16",
+            "element_count": 1572864,
+            "floating": true,
+            "maximum": 23.25,
+            "minimum": -22.25,
+            "nan_count": 0,
+            "negative_infinity_count": 0,
+            "nonfinite_count": 0,
+            "positive_infinity_count": 0,
+            "shape": [
+              1,
+              6,
+              262144
+            ]
+          },
+          "top_logits": [
+            23.25,
+            21.0,
+            20.0,
+            19.0,
+            18.25,
+            18.125,
+            18.0,
+            17.625,
+            17.625,
+            17.625
+          ],
+          "top_probabilities": [
+            0.7778844833374023,
+            0.08198841661214828,
+            0.03016185201704502,
+            0.011095925234258175,
+            0.005241344217211008,
+            0.004625469446182251,
+            0.004081962630152702,
+            0.0028054891154170036,
+            0.0028054891154170036,
+            0.0028054891154170036
+          ],
+          "top_token_ids": [
+            9079,
+            7001,
+            506,
+            496,
+            93075,
+            886,
+            3224,
+            992,
+            5628,
+            49533
+          ],
+          "top_tokens": [
+            " Paris",
+            " France",
+            " the",
+            " a",
+            " Toulouse",
+            " one",
+            " known",
+            " also",
+            " located",
+            " Lyon"
+          ]
+        },
+        "maximum_absolute_logit_difference_from_baseline": 4.03125,
+        "normalized_l2_from_baseline": 0.15886218899401644,
+        "observed_post_intervention_activation": null,
+        "observed_post_intervention_activation_accessible": false,
+        "sent_absolute_activation": 0.0,
+        "sent_device": "mps:0",
+        "sent_dtype": "torch.bfloat16"
+      }
+    ],
+    "freeze_attention": true,
+    "raw_baseline": {
+      "diagnostics": {
+        "absolute_maximum": 22.25,
+        "device": "mps:0",
+        "dtype": "torch.bfloat16",
+        "element_count": 1572864,
+        "floating": true,
+        "maximum": 22.0,
+        "minimum": -22.25,
+        "nan_count": 0,
+        "negative_infinity_count": 0,
+        "nonfinite_count": 0,
+        "positive_infinity_count": 0,
+        "shape": [
+          1,
+          6,
+          262144
+        ]
+      },
+      "top_logits": [
+        20.125,
+        19.0,
+        18.125,
+        17.375,
+        17.375,
+        17.25,
+        16.625,
+        16.625,
+        16.5,
+        16.5
+      ],
+      "top_probabilities": [
+        0.42523208260536194,
+        0.13805262744426727,
+        0.057548895478248596,
+        0.027184177190065384,
+        0.027184177190065384,
+        0.023989949375391006,
+        0.012840894982218742,
+        0.012840894982218742,
+        0.01133204996585846,
+        0.01133204996585846
+      ],
+      "top_token_ids": [
+        9079,
+        506,
+        496,
+        886,
+        3224,
+        7001,
+        711,
+        992,
+        5628,
+        236743
+      ],
+      "top_tokens": [
+        " Paris",
+        " the",
+        " a",
+        " one",
+        " known",
+        " France",
+        " not",
+        " also",
+        " located",
+        " "
+      ]
+    },
+    "raw_to_frozen_baseline_maximum_absolute_logit_difference": 0.0,
+    "raw_to_frozen_baseline_normalized_l2": 0.0,
+    "runtime_monkeypatches": 0,
+    "suppression_formula": "desired=(1-alpha)*baseline"
+  },
+  "loaded_semantics": {
+    "inactive_activation": 0.0,
+    "inactive_feature": 0,
+    "inactive_preactivation": -1224.0,
+    "inactive_threshold": 156.0,
+    "maximum_gate_discrepancy": 0.0,
+    "nonfinite_count": 0,
+    "selected_activation": 1960.0,
+    "selected_preactivation": 1960.0,
+    "selected_threshold": 146.0,
+    "threshold_equality_inactive": true
+  },
+  "profile": "accepted",
+  "prompt": "The capital of France is",
+  "schema_version": 1,
+  "selection": {
+    "baseline_activation": 1960.0,
+    "feature": 1191,
+    "layer": 17,
+    "position": 5,
+    "rule": "highest_absolute_direct_contribution_to_baseline_top_logit_at_final_token",
+    "score": 2.484375
+  },
+  "status": "passed",
+  "token_ids": [
+    2,
+    818,
+    5279,
+    529,
+    7001,
+    563
+  ]
+}

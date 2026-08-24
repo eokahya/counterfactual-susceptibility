@@ -1,8 +1,10 @@
 # Counterfactual Susceptibility
 
 **Status:** No Counterfactual Susceptibility result exists and the reference
-Stage 1A reproduction remains pending. The separate Stage 1A-S small-model
-MPS/FP16 pilot stopped as `failed_runtime` at its finite-logit model gate. See
+Stage 1A reproduction remains pending. The separate Stage 1A-S-BF16 local
+small-model runtime pilot completed on MPS/BF16, giving engineering readiness
+only; empirical claim readiness and paper Results readiness remain false. The
+protected MPS/FP16 pilot remains `failed_runtime`. See
 [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current experiment
 classes and readiness boundary.
 
@@ -28,6 +30,17 @@ changes under interventions, with replacement-model and underlying-model
 evidence reported separately.
 
 ## Stage 1A status
+
+Stage 1A-S-BF16 completed the narrowly scoped local Gemma 3 270M plus 18-PLT
+NNsight runtime validation on Apple MPS/BF16. Finite model execution, loaded
+threshold semantics, nonempty attribution, deterministic feature selection,
+no-op consistency, and absolute feature suppression passed the independent
+small-artifact validator. This does not establish a Gemma 2/reference-CLT
+reproduction, PLT/CLT or MPS/CUDA equivalence, a susceptibility prediction,
+gate crossing, mediation, behavioral importance, or paper result. See
+[`docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md`](docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md).
+
+The reference Stage 1A-R track remains pending.
 
 Stage 1A selected the immutable model snapshot
 `google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the direct

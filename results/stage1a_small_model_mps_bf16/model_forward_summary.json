@@ -1,0 +1,4982 @@
+{
+  "fp32_diagnostic_process_overlap": false,
+  "module_guard": {
+    "floating_parameter_dtype": "torch.bfloat16",
+    "parameter_count": 236,
+    "parameter_device": "mps",
+    "source_mandated_fp32_buffers": [
+      "model.rotary_emb.inv_freq",
+      "model.rotary_emb_local.inv_freq"
+    ]
+  },
+  "prompts": [
+    {
+      "decoded_tokens": [
+        "<bos>"
+      ],
+      "decoder_layers": [
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 10.125,
+            "summary": {
+              "absolute_maximum": 2864.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 2864.0,
+              "minimum": -118.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": -1.859375,
+            "summary": {
+              "absolute_maximum": 124.5,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 124.5,
+              "minimum": -25.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 0,
+          "output": {
+            "coordinate_0_0_163": 8.25,
+            "summary": {
+              "absolute_maximum": 2992.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 2992.0,
+              "minimum": -116.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 0.408203125,
+            "summary": {
+              "absolute_maximum": 1352.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 1352.0,
+              "minimum": -98.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 113.0,
+            "summary": {
+              "absolute_maximum": 3760.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 3760.0,
+              "minimum": -396.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 1,
+          "output": {
+            "coordinate_0_0_163": 113.5,
+            "summary": {
+              "absolute_maximum": 5120.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 5120.0,
+              "minimum": -396.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 40.25,
+            "summary": {
+              "absolute_maximum": 900.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 900.0,
+              "minimum": -28.75,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 51.5,
+            "summary": {
+              "absolute_maximum": 5376.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 5376.0,
+              "minimum": -404.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 2,
+          "output": {
+            "coordinate_0_0_163": 92.0,
+            "summary": {
+              "absolute_maximum": 6272.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 6272.0,
+              "minimum": -402.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 10496.0,
+            "summary": {
+              "absolute_maximum": 10496.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 10496.0,
+              "minimum": -135.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 81.5,
+            "summary": {
+              "absolute_maximum": 6784.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 6784.0,
+              "minimum": -412.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 3,
+          "output": {
+            "coordinate_0_0_163": 10560.0,
+            "summary": {
+              "absolute_maximum": 10560.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 10560.0,
+              "minimum": -414.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13760.0,
+            "summary": {
+              "absolute_maximum": 13760.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 13760.0,
+              "minimum": -41.25,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 11072.0,
+            "summary": {
+              "absolute_maximum": 11072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 11072.0,
+              "minimum": -410.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 4,
+          "output": {
+            "coordinate_0_0_163": 24832.0,
+            "summary": {
+              "absolute_maximum": 24832.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 24832.0,
+              "minimum": -410.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 14592.0,
+            "summary": {
+              "absolute_maximum": 14592.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 14592.0,
+              "minimum": -296.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 27520.0,
+            "summary": {
+              "absolute_maximum": 27520.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 27520.0,
+              "minimum": -216.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 5,
+          "output": {
+            "coordinate_0_0_163": 41984.0,
+            "summary": {
+              "absolute_maximum": 41984.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 41984.0,
+              "minimum": -212.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13184.0,
+            "summary": {
+              "absolute_maximum": 13184.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 13184.0,
+              "minimum": -596.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 41728.0,
+            "summary": {
+              "absolute_maximum": 41728.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 41728.0,
+              "minimum": -201.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 6,
+          "output": {
+            "coordinate_0_0_163": 54784.0,
+            "summary": {
+              "absolute_maximum": 54784.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 54784.0,
+              "minimum": -181.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13376.0,
+            "summary": {
+              "absolute_maximum": 13376.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 13376.0,
+              "minimum": -211.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 55040.0,
+            "summary": {
+              "absolute_maximum": 55040.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 55040.0,
+              "minimum": -171.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 7,
+          "output": {
+            "coordinate_0_0_163": 68608.0,
+            "summary": {
+              "absolute_maximum": 68608.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 68608.0,
+              "minimum": -149.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 14912.0,
+            "summary": {
+              "absolute_maximum": 14912.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 14912.0,
+              "minimum": -1280.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 68096.0,
+            "summary": {
+              "absolute_maximum": 68096.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 68096.0,
+              "minimum": -145.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 8,
+          "output": {
+            "coordinate_0_0_163": 82944.0,
+            "summary": {
+              "absolute_maximum": 82944.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 82944.0,
+              "minimum": -134.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 4896.0,
+            "summary": {
+              "absolute_maximum": 4896.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 4896.0,
+              "minimum": -498.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 83456.0,
+            "summary": {
+              "absolute_maximum": 83456.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 83456.0,
+              "minimum": -132.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 9,
+          "output": {
+            "coordinate_0_0_163": 88576.0,
+            "summary": {
+              "absolute_maximum": 88576.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 88576.0,
+              "minimum": -216.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 1408.0,
+            "summary": {
+              "absolute_maximum": 3040.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 1408.0,
+              "minimum": -3040.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 90112.0,
+            "summary": {
+              "absolute_maximum": 90112.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 90112.0,
+              "minimum": -218.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 10,
+          "output": {
+            "coordinate_0_0_163": 91648.0,
+            "summary": {
+              "absolute_maximum": 91648.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 91648.0,
+              "minimum": -3264.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 7072.0,
+            "summary": {
+              "absolute_maximum": 7072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 7072.0,
+              "minimum": -1112.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 92160.0,
+            "summary": {
+              "absolute_maximum": 92160.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 92160.0,
+              "minimum": -3104.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 11,
+          "output": {
+            "coordinate_0_0_163": 99328.0,
+            "summary": {
+              "absolute_maximum": 99328.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 99328.0,
+              "minimum": -2496.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -680.0,
+            "summary": {
+              "absolute_maximum": 1208.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 1208.0,
+              "minimum": -956.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 100864.0,
+            "summary": {
+              "absolute_maximum": 100864.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 100864.0,
+              "minimum": -2512.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 12,
+          "output": {
+            "coordinate_0_0_163": 100352.0,
+            "summary": {
+              "absolute_maximum": 100352.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 100352.0,
+              "minimum": -1304.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -536.0,
+            "summary": {
+              "absolute_maximum": 536.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 227.0,
+              "minimum": -536.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1296.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 13,
+          "output": {
+            "coordinate_0_0_163": 102912.0,
+            "summary": {
+              "absolute_maximum": 102912.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 102912.0,
+              "minimum": -1072.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -249.0,
+            "summary": {
+              "absolute_maximum": 249.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 98.5,
+              "minimum": -249.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 104960.0,
+            "summary": {
+              "absolute_maximum": 104960.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 104960.0,
+              "minimum": -1072.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 14,
+          "output": {
+            "coordinate_0_0_163": 104960.0,
+            "summary": {
+              "absolute_maximum": 104960.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 104960.0,
+              "minimum": -972.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -1680.0,
+            "summary": {
+              "absolute_maximum": 1680.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 66.5,
+              "minimum": -1680.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1012.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 15,
+          "output": {
+            "coordinate_0_0_163": 101888.0,
+            "summary": {
+              "absolute_maximum": 101888.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 101888.0,
+              "minimum": -1064.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -19584.0,
+            "summary": {
+              "absolute_maximum": 19584.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 1184.0,
+              "minimum": -19584.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1136.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 16,
+          "output": {
+            "coordinate_0_0_163": 83968.0,
+            "summary": {
+              "absolute_maximum": 83968.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 83968.0,
+              "minimum": -796.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -16896.0,
+            "summary": {
+              "absolute_maximum": 16896.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 5184.0,
+              "minimum": -16896.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 83968.0,
+            "summary": {
+              "absolute_maximum": 83968.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 83968.0,
+              "minimum": -744.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          },
+          "layer": 17,
+          "output": {
+            "coordinate_0_0_163": 67072.0,
+            "summary": {
+              "absolute_maximum": 67072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 640,
+              "floating": true,
+              "maximum": 67072.0,
+              "minimum": -4064.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                1,
+                640
+              ]
+            }
+          }
+        }
+      ],
+      "hidden_states": [
+        {
+          "absolute_maximum": 23.375,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 0,
+          "maximum": 23.375,
+          "minimum": -2.59375,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 2992.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 1,
+          "maximum": 2992.0,
+          "minimum": -116.5,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 5120.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 2,
+          "maximum": 5120.0,
+          "minimum": -396.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 6272.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 3,
+          "maximum": 6272.0,
+          "minimum": -402.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 10560.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 4,
+          "maximum": 10560.0,
+          "minimum": -414.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 24832.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 5,
+          "maximum": 24832.0,
+          "minimum": -410.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 41984.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 6,
+          "maximum": 41984.0,
+          "minimum": -212.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 54784.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 7,
+          "maximum": 54784.0,
+          "minimum": -181.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 68608.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 8,
+          "maximum": 68608.0,
+          "minimum": -149.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 82944.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 9,
+          "maximum": 82944.0,
+          "minimum": -134.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 88576.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 10,
+          "maximum": 88576.0,
+          "minimum": -216.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 91648.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 11,
+          "maximum": 91648.0,
+          "minimum": -3264.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 99328.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 12,
+          "maximum": 99328.0,
+          "minimum": -2496.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 100352.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 13,
+          "maximum": 100352.0,
+          "minimum": -1304.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 102912.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 14,
+          "maximum": 102912.0,
+          "minimum": -1072.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 104960.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 15,
+          "maximum": 104960.0,
+          "minimum": -972.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 101888.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 16,
+          "maximum": 101888.0,
+          "minimum": -1064.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 83968.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 17,
+          "maximum": 83968.0,
+          "minimum": -796.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 26.75,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 640,
+          "floating": true,
+          "index": 18,
+          "maximum": 10.25,
+          "minimum": -26.75,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            640
+          ]
+        }
+      ],
+      "input_device": "mps:0",
+      "kind": "bos_only",
+      "logits": {
+        "diagnostics": {
+          "absolute_maximum": 14.625,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 262144,
+          "floating": true,
+          "maximum": 14.5,
+          "minimum": -14.625,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            1,
+            262144
+          ]
+        },
+        "top_logits": [
+          14.5,
+          14.4375,
+          14.25,
+          14.125,
+          14.0625,
+          13.6875,
+          13.625,
+          13.625,
+          13.5625,
+          13.3125
+        ],
+        "top_probabilities": [
+          0.07909847050905228,
+          0.07430613040924072,
+          0.06160195171833038,
+          0.05436352640390396,
+          0.05106980726122856,
+          0.035099729895591736,
+          0.032973144203424454,
+          0.032973144203424454,
+          0.030975403264164925,
+          0.024123668670654297
+        ],
+        "top_token_ids": [
+          184,
+          198,
+          255999,
+          185,
+          818,
+          236820,
+          200,
+          3617,
+          1106,
+          236777
+        ],
+        "top_tokens": [
+          "<h1>",
+          "<strong>",
+          "<start_of_image>",
+          "<h2>",
+          "The",
+          "<",
+          "<b>",
+          "package",
+          "import",
+          "I"
+        ]
+      },
+      "prior_fp16_failure_coordinate": {
+        "coordinate": [
+          0,
+          0,
+          163
+        ],
+        "feedforward_operand": 13376.0,
+        "finite": true,
+        "fp32_scalar_sum_for_diagnostic": 68416.0,
+        "layer": 7,
+        "observed_bf16_layer_output": 68608.0,
+        "residual_operand": 55040.0
+      },
+      "prompt_id": "bos_only",
+      "text": null,
+      "token_ids": [
+        2
+      ]
+    },
+    {
+      "decoded_tokens": [
+        "<bos>",
+        "Hello"
+      ],
+      "decoder_layers": [
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 10.125,
+            "summary": {
+              "absolute_maximum": 2864.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 2864.0,
+              "minimum": -118.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": -1.859375,
+            "summary": {
+              "absolute_maximum": 135.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 135.0,
+              "minimum": -26.25,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 0,
+          "output": {
+            "coordinate_0_0_163": 8.25,
+            "summary": {
+              "absolute_maximum": 2992.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 2992.0,
+              "minimum": -116.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 0.408203125,
+            "summary": {
+              "absolute_maximum": 1352.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 1352.0,
+              "minimum": -167.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 113.0,
+            "summary": {
+              "absolute_maximum": 3760.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 3760.0,
+              "minimum": -396.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 1,
+          "output": {
+            "coordinate_0_0_163": 113.5,
+            "summary": {
+              "absolute_maximum": 5120.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 5120.0,
+              "minimum": -396.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 40.25,
+            "summary": {
+              "absolute_maximum": 900.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 900.0,
+              "minimum": -136.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 51.5,
+            "summary": {
+              "absolute_maximum": 5376.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 5376.0,
+              "minimum": -404.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 2,
+          "output": {
+            "coordinate_0_0_163": 92.0,
+            "summary": {
+              "absolute_maximum": 6272.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 6272.0,
+              "minimum": -402.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 10496.0,
+            "summary": {
+              "absolute_maximum": 10496.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 10496.0,
+              "minimum": -262.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 81.5,
+            "summary": {
+              "absolute_maximum": 6784.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 6784.0,
+              "minimum": -412.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 3,
+          "output": {
+            "coordinate_0_0_163": 10560.0,
+            "summary": {
+              "absolute_maximum": 10560.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 10560.0,
+              "minimum": -414.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13760.0,
+            "summary": {
+              "absolute_maximum": 13760.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 13760.0,
+              "minimum": -74.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 11072.0,
+            "summary": {
+              "absolute_maximum": 11072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 11072.0,
+              "minimum": -410.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 4,
+          "output": {
+            "coordinate_0_0_163": 24832.0,
+            "summary": {
+              "absolute_maximum": 24832.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 24832.0,
+              "minimum": -410.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 14592.0,
+            "summary": {
+              "absolute_maximum": 14592.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 14592.0,
+              "minimum": -668.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 27520.0,
+            "summary": {
+              "absolute_maximum": 27520.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 27520.0,
+              "minimum": -254.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 5,
+          "output": {
+            "coordinate_0_0_163": 41984.0,
+            "summary": {
+              "absolute_maximum": 41984.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 41984.0,
+              "minimum": -262.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13184.0,
+            "summary": {
+              "absolute_maximum": 13184.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 13184.0,
+              "minimum": -596.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 41728.0,
+            "summary": {
+              "absolute_maximum": 41728.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 41728.0,
+              "minimum": -258.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 6,
+          "output": {
+            "coordinate_0_0_163": 54784.0,
+            "summary": {
+              "absolute_maximum": 54784.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 54784.0,
+              "minimum": -252.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13376.0,
+            "summary": {
+              "absolute_maximum": 13376.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 13376.0,
+              "minimum": -684.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 55040.0,
+            "summary": {
+              "absolute_maximum": 55040.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 55040.0,
+              "minimum": -253.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 7,
+          "output": {
+            "coordinate_0_0_163": 68608.0,
+            "summary": {
+              "absolute_maximum": 68608.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 68608.0,
+              "minimum": -302.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 14912.0,
+            "summary": {
+              "absolute_maximum": 14912.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 14912.0,
+              "minimum": -1280.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 68096.0,
+            "summary": {
+              "absolute_maximum": 68096.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 68096.0,
+              "minimum": -306.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 8,
+          "output": {
+            "coordinate_0_0_163": 82944.0,
+            "summary": {
+              "absolute_maximum": 82944.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 82944.0,
+              "minimum": -316.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 4896.0,
+            "summary": {
+              "absolute_maximum": 4896.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 4896.0,
+              "minimum": -498.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 83456.0,
+            "summary": {
+              "absolute_maximum": 83456.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 83456.0,
+              "minimum": -316.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 9,
+          "output": {
+            "coordinate_0_0_163": 88576.0,
+            "summary": {
+              "absolute_maximum": 88576.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 88576.0,
+              "minimum": -326.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 1408.0,
+            "summary": {
+              "absolute_maximum": 3040.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 1728.0,
+              "minimum": -3040.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 90112.0,
+            "summary": {
+              "absolute_maximum": 90112.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 90112.0,
+              "minimum": -330.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 10,
+          "output": {
+            "coordinate_0_0_163": 91648.0,
+            "summary": {
+              "absolute_maximum": 91648.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 91648.0,
+              "minimum": -3264.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 7072.0,
+            "summary": {
+              "absolute_maximum": 7072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 7072.0,
+              "minimum": -1112.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 92160.0,
+            "summary": {
+              "absolute_maximum": 92160.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 92160.0,
+              "minimum": -3104.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 11,
+          "output": {
+            "coordinate_0_0_163": 99328.0,
+            "summary": {
+              "absolute_maximum": 99328.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 99328.0,
+              "minimum": -2496.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -680.0,
+            "summary": {
+              "absolute_maximum": 1208.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 1208.0,
+              "minimum": -956.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 100864.0,
+            "summary": {
+              "absolute_maximum": 100864.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 100864.0,
+              "minimum": -2512.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 12,
+          "output": {
+            "coordinate_0_0_163": 100352.0,
+            "summary": {
+              "absolute_maximum": 100352.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 100352.0,
+              "minimum": -1304.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -536.0,
+            "summary": {
+              "absolute_maximum": 2560.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 2560.0,
+              "minimum": -644.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1296.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 13,
+          "output": {
+            "coordinate_0_0_163": 102912.0,
+            "summary": {
+              "absolute_maximum": 102912.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 102912.0,
+              "minimum": -1136.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -249.0,
+            "summary": {
+              "absolute_maximum": 3360.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 640.0,
+              "minimum": -3360.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 104960.0,
+            "summary": {
+              "absolute_maximum": 104960.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 104960.0,
+              "minimum": -1072.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 14,
+          "output": {
+            "coordinate_0_0_163": 104960.0,
+            "summary": {
+              "absolute_maximum": 104960.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 104960.0,
+              "minimum": -1064.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -1680.0,
+            "summary": {
+              "absolute_maximum": 1680.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 828.0,
+              "minimum": -1680.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1056.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 15,
+          "output": {
+            "coordinate_0_0_163": 101888.0,
+            "summary": {
+              "absolute_maximum": 101888.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 101888.0,
+              "minimum": -1360.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -19584.0,
+            "summary": {
+              "absolute_maximum": 19584.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 5920.0,
+              "minimum": -19584.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1416.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 16,
+          "output": {
+            "coordinate_0_0_163": 83968.0,
+            "summary": {
+              "absolute_maximum": 83968.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 83968.0,
+              "minimum": -1520.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -16896.0,
+            "summary": {
+              "absolute_maximum": 16896.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 5184.0,
+              "minimum": -16896.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 83968.0,
+            "summary": {
+              "absolute_maximum": 83968.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 83968.0,
+              "minimum": -1656.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          },
+          "layer": 17,
+          "output": {
+            "coordinate_0_0_163": 67072.0,
+            "summary": {
+              "absolute_maximum": 67072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 1280,
+              "floating": true,
+              "maximum": 67072.0,
+              "minimum": -4064.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                2,
+                640
+              ]
+            }
+          }
+        }
+      ],
+      "hidden_states": [
+        {
+          "absolute_maximum": 23.375,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 0,
+          "maximum": 23.375,
+          "minimum": -4.125,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 2992.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 1,
+          "maximum": 2992.0,
+          "minimum": -116.5,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 5120.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 2,
+          "maximum": 5120.0,
+          "minimum": -396.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 6272.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 3,
+          "maximum": 6272.0,
+          "minimum": -402.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 10560.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 4,
+          "maximum": 10560.0,
+          "minimum": -414.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 24832.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 5,
+          "maximum": 24832.0,
+          "minimum": -410.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 41984.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 6,
+          "maximum": 41984.0,
+          "minimum": -262.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 54784.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 7,
+          "maximum": 54784.0,
+          "minimum": -252.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 68608.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 8,
+          "maximum": 68608.0,
+          "minimum": -302.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 82944.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 9,
+          "maximum": 82944.0,
+          "minimum": -316.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 88576.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 10,
+          "maximum": 88576.0,
+          "minimum": -326.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 91648.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 11,
+          "maximum": 91648.0,
+          "minimum": -3264.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 99328.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 12,
+          "maximum": 99328.0,
+          "minimum": -2496.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 100352.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 13,
+          "maximum": 100352.0,
+          "minimum": -1304.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 102912.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 14,
+          "maximum": 102912.0,
+          "minimum": -1136.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 104960.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 15,
+          "maximum": 104960.0,
+          "minimum": -1064.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 101888.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 16,
+          "maximum": 101888.0,
+          "minimum": -1360.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 83968.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 17,
+          "maximum": 83968.0,
+          "minimum": -1520.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 60.75,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1280,
+          "floating": true,
+          "index": 18,
+          "maximum": 42.75,
+          "minimum": -60.75,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            640
+          ]
+        }
+      ],
+      "input_device": "mps:0",
+      "kind": "text",
+      "logits": {
+        "diagnostics": {
+          "absolute_maximum": 26.75,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 524288,
+          "floating": true,
+          "maximum": 18.25,
+          "minimum": -26.75,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            2,
+            262144
+          ]
+        },
+        "top_logits": [
+          18.25,
+          17.25,
+          17.0,
+          16.125,
+          16.125,
+          16.0,
+          15.8125,
+          15.5,
+          15.375,
+          15.375
+        ],
+        "top_probabilities": [
+          0.3544226288795471,
+          0.13038478791713715,
+          0.10154377669095993,
+          0.04232974350452423,
+          0.04232974350452423,
+          0.03735587000846863,
+          0.030969100072979927,
+          0.022657480090856552,
+          0.019995152950286865,
+          0.019995152950286865
+        ],
+        "top_token_ids": [
+          236764,
+          4677,
+          236888,
+          532,
+          784,
+          236761,
+          993,
+          14160,
+          4690,
+          7612
+        ],
+        "top_tokens": [
+          ",",
+          " everyone",
+          "!",
+          " and",
+          " all",
+          ".",
+          " there",
+          " everybody",
+          " friends",
+          " guys"
+        ]
+      },
+      "prior_fp16_failure_coordinate": {
+        "coordinate": [
+          0,
+          0,
+          163
+        ],
+        "feedforward_operand": 13376.0,
+        "finite": true,
+        "fp32_scalar_sum_for_diagnostic": 68416.0,
+        "layer": 7,
+        "observed_bf16_layer_output": 68608.0,
+        "residual_operand": 55040.0
+      },
+      "prompt_id": "hello",
+      "text": "Hello",
+      "token_ids": [
+        2,
+        9259
+      ]
+    },
+    {
+      "decoded_tokens": [
+        "<bos>",
+        "The",
+        " capital",
+        " of",
+        " France",
+        " is"
+      ],
+      "decoder_layers": [
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 10.125,
+            "summary": {
+              "absolute_maximum": 2864.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 2864.0,
+              "minimum": -118.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": -1.859375,
+            "summary": {
+              "absolute_maximum": 140.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 140.0,
+              "minimum": -35.25,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 0,
+          "output": {
+            "coordinate_0_0_163": 8.25,
+            "summary": {
+              "absolute_maximum": 2992.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 2992.0,
+              "minimum": -116.5,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 0.408203125,
+            "summary": {
+              "absolute_maximum": 1352.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 1352.0,
+              "minimum": -236.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 113.0,
+            "summary": {
+              "absolute_maximum": 3760.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 3760.0,
+              "minimum": -398.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 1,
+          "output": {
+            "coordinate_0_0_163": 113.5,
+            "summary": {
+              "absolute_maximum": 5120.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 5120.0,
+              "minimum": -398.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 40.25,
+            "summary": {
+              "absolute_maximum": 900.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 900.0,
+              "minimum": -282.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 51.5,
+            "summary": {
+              "absolute_maximum": 5376.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 5376.0,
+              "minimum": -404.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 2,
+          "output": {
+            "coordinate_0_0_163": 92.0,
+            "summary": {
+              "absolute_maximum": 6272.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 6272.0,
+              "minimum": -406.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 10496.0,
+            "summary": {
+              "absolute_maximum": 10496.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 10496.0,
+              "minimum": -528.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 81.5,
+            "summary": {
+              "absolute_maximum": 6784.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 6784.0,
+              "minimum": -414.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 3,
+          "output": {
+            "coordinate_0_0_163": 10560.0,
+            "summary": {
+              "absolute_maximum": 10560.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 10560.0,
+              "minimum": -544.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13760.0,
+            "summary": {
+              "absolute_maximum": 13760.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 13760.0,
+              "minimum": -536.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 11072.0,
+            "summary": {
+              "absolute_maximum": 11072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 11072.0,
+              "minimum": -430.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 4,
+          "output": {
+            "coordinate_0_0_163": 24832.0,
+            "summary": {
+              "absolute_maximum": 24832.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 24832.0,
+              "minimum": -424.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 14592.0,
+            "summary": {
+              "absolute_maximum": 14592.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 14592.0,
+              "minimum": -1080.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 27520.0,
+            "summary": {
+              "absolute_maximum": 27520.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 27520.0,
+              "minimum": -476.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 5,
+          "output": {
+            "coordinate_0_0_163": 41984.0,
+            "summary": {
+              "absolute_maximum": 41984.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 41984.0,
+              "minimum": -520.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13184.0,
+            "summary": {
+              "absolute_maximum": 13184.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 13184.0,
+              "minimum": -764.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 41728.0,
+            "summary": {
+              "absolute_maximum": 41728.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 41728.0,
+              "minimum": -532.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 6,
+          "output": {
+            "coordinate_0_0_163": 54784.0,
+            "summary": {
+              "absolute_maximum": 54784.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 54784.0,
+              "minimum": -560.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 13376.0,
+            "summary": {
+              "absolute_maximum": 13376.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 13376.0,
+              "minimum": -1312.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 55040.0,
+            "summary": {
+              "absolute_maximum": 55040.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 55040.0,
+              "minimum": -552.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 7,
+          "output": {
+            "coordinate_0_0_163": 68608.0,
+            "summary": {
+              "absolute_maximum": 68608.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 68608.0,
+              "minimum": -572.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 14912.0,
+            "summary": {
+              "absolute_maximum": 14912.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 14912.0,
+              "minimum": -1280.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 68096.0,
+            "summary": {
+              "absolute_maximum": 68096.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 68096.0,
+              "minimum": -568.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 8,
+          "output": {
+            "coordinate_0_0_163": 82944.0,
+            "summary": {
+              "absolute_maximum": 82944.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 82944.0,
+              "minimum": -616.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 4896.0,
+            "summary": {
+              "absolute_maximum": 4896.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 4896.0,
+              "minimum": -498.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 83456.0,
+            "summary": {
+              "absolute_maximum": 83456.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 83456.0,
+              "minimum": -620.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 9,
+          "output": {
+            "coordinate_0_0_163": 88576.0,
+            "summary": {
+              "absolute_maximum": 88576.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 88576.0,
+              "minimum": -640.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 1408.0,
+            "summary": {
+              "absolute_maximum": 3040.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 2688.0,
+              "minimum": -3040.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 90112.0,
+            "summary": {
+              "absolute_maximum": 90112.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 90112.0,
+              "minimum": -644.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 10,
+          "output": {
+            "coordinate_0_0_163": 91648.0,
+            "summary": {
+              "absolute_maximum": 91648.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 91648.0,
+              "minimum": -3264.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": 7072.0,
+            "summary": {
+              "absolute_maximum": 7072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 7072.0,
+              "minimum": -2000.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 92160.0,
+            "summary": {
+              "absolute_maximum": 92160.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 92160.0,
+              "minimum": -3104.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 11,
+          "output": {
+            "coordinate_0_0_163": 99328.0,
+            "summary": {
+              "absolute_maximum": 99328.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 99328.0,
+              "minimum": -2496.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -680.0,
+            "summary": {
+              "absolute_maximum": 1288.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 1288.0,
+              "minimum": -956.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 100864.0,
+            "summary": {
+              "absolute_maximum": 100864.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 100864.0,
+              "minimum": -2512.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 12,
+          "output": {
+            "coordinate_0_0_163": 100352.0,
+            "summary": {
+              "absolute_maximum": 100352.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 100352.0,
+              "minimum": -1304.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -536.0,
+            "summary": {
+              "absolute_maximum": 2640.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 2640.0,
+              "minimum": -536.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -1296.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 13,
+          "output": {
+            "coordinate_0_0_163": 102912.0,
+            "summary": {
+              "absolute_maximum": 102912.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 102912.0,
+              "minimum": -1272.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -249.0,
+            "summary": {
+              "absolute_maximum": 3408.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 2464.0,
+              "minimum": -3408.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 104960.0,
+            "summary": {
+              "absolute_maximum": 104960.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 104960.0,
+              "minimum": -1272.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 14,
+          "output": {
+            "coordinate_0_0_163": 104960.0,
+            "summary": {
+              "absolute_maximum": 104960.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 104960.0,
+              "minimum": -1392.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -1680.0,
+            "summary": {
+              "absolute_maximum": 1680.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 1488.0,
+              "minimum": -1680.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -2000.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 15,
+          "output": {
+            "coordinate_0_0_163": 101888.0,
+            "summary": {
+              "absolute_maximum": 101888.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 101888.0,
+              "minimum": -2128.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -19584.0,
+            "summary": {
+              "absolute_maximum": 19584.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 5408.0,
+              "minimum": -19584.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 103424.0,
+            "summary": {
+              "absolute_maximum": 103424.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 103424.0,
+              "minimum": -2160.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 16,
+          "output": {
+            "coordinate_0_0_163": 83968.0,
+            "summary": {
+              "absolute_maximum": 83968.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 83968.0,
+              "minimum": -2144.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        },
+        {
+          "feedforward_post_norm": {
+            "coordinate_0_0_163": -16896.0,
+            "summary": {
+              "absolute_maximum": 16896.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 5184.0,
+              "minimum": -16896.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "feedforward_residual": {
+            "coordinate_0_0_163": 83968.0,
+            "summary": {
+              "absolute_maximum": 83968.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 83968.0,
+              "minimum": -2096.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          },
+          "layer": 17,
+          "output": {
+            "coordinate_0_0_163": 67072.0,
+            "summary": {
+              "absolute_maximum": 67072.0,
+              "device": "mps:0",
+              "dtype": "torch.bfloat16",
+              "element_count": 3840,
+              "floating": true,
+              "maximum": 67072.0,
+              "minimum": -4064.0,
+              "nan_count": 0,
+              "negative_infinity_count": 0,
+              "nonfinite_count": 0,
+              "positive_infinity_count": 0,
+              "shape": [
+                1,
+                6,
+                640
+              ]
+            }
+          }
+        }
+      ],
+      "hidden_states": [
+        {
+          "absolute_maximum": 23.375,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 0,
+          "maximum": 23.375,
+          "minimum": -12.75,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 2992.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 1,
+          "maximum": 2992.0,
+          "minimum": -116.5,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 5120.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 2,
+          "maximum": 5120.0,
+          "minimum": -398.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 6272.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 3,
+          "maximum": 6272.0,
+          "minimum": -406.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 10560.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 4,
+          "maximum": 10560.0,
+          "minimum": -544.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 24832.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 5,
+          "maximum": 24832.0,
+          "minimum": -424.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 41984.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 6,
+          "maximum": 41984.0,
+          "minimum": -520.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 54784.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 7,
+          "maximum": 54784.0,
+          "minimum": -560.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 68608.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 8,
+          "maximum": 68608.0,
+          "minimum": -572.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 82944.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 9,
+          "maximum": 82944.0,
+          "minimum": -616.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 88576.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 10,
+          "maximum": 88576.0,
+          "minimum": -640.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 91648.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 11,
+          "maximum": 91648.0,
+          "minimum": -3264.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 99328.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 12,
+          "maximum": 99328.0,
+          "minimum": -2496.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 100352.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 13,
+          "maximum": 100352.0,
+          "minimum": -1304.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 102912.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 14,
+          "maximum": 102912.0,
+          "minimum": -1272.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 104960.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 15,
+          "maximum": 104960.0,
+          "minimum": -1392.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 101888.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 16,
+          "maximum": 101888.0,
+          "minimum": -2128.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 83968.0,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 17,
+          "maximum": 83968.0,
+          "minimum": -2144.0,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        },
+        {
+          "absolute_maximum": 71.5,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 3840,
+          "floating": true,
+          "index": 18,
+          "maximum": 56.0,
+          "minimum": -71.5,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            640
+          ]
+        }
+      ],
+      "input_device": "mps:0",
+      "kind": "text",
+      "logits": {
+        "diagnostics": {
+          "absolute_maximum": 22.25,
+          "device": "mps:0",
+          "dtype": "torch.bfloat16",
+          "element_count": 1572864,
+          "floating": true,
+          "maximum": 22.0,
+          "minimum": -22.25,
+          "nan_count": 0,
+          "negative_infinity_count": 0,
+          "nonfinite_count": 0,
+          "positive_infinity_count": 0,
+          "shape": [
+            1,
+            6,
+            262144
+          ]
+        },
+        "top_logits": [
+          20.125,
+          19.0,
+          18.125,
+          17.375,
+          17.375,
+          17.25,
+          16.625,
+          16.625,
+          16.5,
+          16.5
+        ],
+        "top_probabilities": [
+          0.42523208260536194,
+          0.13805262744426727,
+          0.057548895478248596,
+          0.027184177190065384,
+          0.027184177190065384,
+          0.023989949375391006,
+          0.012840894982218742,
+          0.012840894982218742,
+          0.01133204996585846,
+          0.01133204996585846
+        ],
+        "top_token_ids": [
+          9079,
+          506,
+          496,
+          886,
+          3224,
+          7001,
+          711,
+          992,
+          5628,
+          236743
+        ],
+        "top_tokens": [
+          " Paris",
+          " the",
+          " a",
+          " one",
+          " known",
+          " France",
+          " not",
+          " also",
+          " located",
+          " "
+        ]
+      },
+      "prior_fp16_failure_coordinate": {
+        "coordinate": [
+          0,
+          0,
+          163
+        ],
+        "feedforward_operand": 13376.0,
+        "finite": true,
+        "fp32_scalar_sum_for_diagnostic": 68416.0,
+        "layer": 7,
+        "observed_bf16_layer_output": 68608.0,
+        "residual_operand": 55040.0
+      },
+      "prompt_id": "pilot",
+      "text": "The capital of France is",
+      "token_ids": [
+        2,
+        818,
+        5279,
+        529,
+        7001,
+        563
+      ]
+    }
+  ],
+  "runtime": {
+    "backend": "nnsight",
+    "device": "mps",
+    "dtype": "bfloat16",
+    "fallback_enabled": false,
+    "outer_autocast_enabled": false,
+    "source_mandated_internal_fp32": [
+      "gemma3_rmsnorm_accumulation_then_cast_back",
+      "gemma3_rotary_frequency_trigonometry_then_cast_back",
+      "gemma3_attention_softmax_then_cast_back"
+    ]
+  },
+  "status": "passed",
+  "temporary_comparison_vectors": {
+    "bytes": 1367500,
+    "location": "project_external_private_temp",
+    "persisted_in_repository": false
+  }
+}

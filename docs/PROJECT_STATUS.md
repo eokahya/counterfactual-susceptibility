@@ -21,6 +21,13 @@ the paper Results section remains pending.
   overflowed FP16 after decoder layer 7, producing non-finite logits. The
   no-retry policy stopped escalation before loaded PLT semantics, NNsight
   replacement, attribution, or intervention.
+- **Stage 1A-S-BF16 — local small-model MPS/BF16 recovery:**
+  `completed_small_model_mps_bf16_pilot`. The exact Gemma 3 270M model, all 18
+  selected PLTs, NNsight replacement runtime, finite attribution, deterministic
+  baseline-active feature selection, baseline repeat, no-op, half suppression,
+  and full ablation passed on Apple MPS/BF16. The 13-file small artifact bundle
+  passed the independent validator. This is engineering runtime evidence only,
+  not the reference reproduction or a Counterfactual Susceptibility result.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -31,7 +38,7 @@ intervention, Counterfactual Susceptibility, or readiness result.
 Current readiness:
 
 ```text
-stage1b_engineering_readiness: false
+stage1b_engineering_readiness: true
 stage1b_empirical_claim_readiness: false
 official_bf16_reproduction: pending
 reference_clt_reproduction: pending
@@ -39,5 +46,6 @@ counterfactual_susceptibility_result: none
 paper_results_readiness: false
 ```
 
-See `docs/STAGE_1A_SMALL_MODEL_MPS_FP16_PLAN.md` for the fail-closed execution
-gates. Historical reports remain unchanged and retain their original scope.
+See `docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md` for the completed local
+runtime-validation evidence and its claim boundary. Historical reports remain
+unchanged and retain their original scope.

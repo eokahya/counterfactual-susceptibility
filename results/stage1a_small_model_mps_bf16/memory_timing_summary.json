@@ -1,0 +1,1092 @@
+{
+  "accepted_attempt_peaks": {
+    "minimum_available_memory_bytes": 11848892416,
+    "mps_current_bytes": 689690112,
+    "mps_driver_bytes": 3009298432,
+    "process_rss_bytes": 1103904768,
+    "swap_growth_bytes": 0,
+    "swap_used_bytes": 613878333
+  },
+  "accepted_finished_at_unix": 1787590242.6436532,
+  "accepted_stage_peaks": {
+    "attribution": {
+      "minimum_available_memory_bytes": 11912298496,
+      "mps_current_bytes": 648288256,
+      "mps_driver_bytes": 3009298432,
+      "process_rss_bytes": 1048838144,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "attribution_precompute": {
+      "minimum_available_memory_bytes": 11854626816,
+      "mps_current_bytes": 614083584,
+      "mps_driver_bytes": 2966142976,
+      "process_rss_bytes": 885735424,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "full_plt_loading": {
+      "minimum_available_memory_bytes": 13823131648,
+      "mps_current_bytes": 1202688,
+      "mps_driver_bytes": 8798208,
+      "process_rss_bytes": 354992128,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "intervention_alpha_0.0": {
+      "minimum_available_memory_bytes": 12030033920,
+      "mps_current_bytes": 689690112,
+      "mps_driver_bytes": 2346729472,
+      "process_rss_bytes": 1084096512,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "intervention_alpha_0.5": {
+      "minimum_available_memory_bytes": 11973672960,
+      "mps_current_bytes": 673638656,
+      "mps_driver_bytes": 2332098560,
+      "process_rss_bytes": 1099448320,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "intervention_alpha_1.0": {
+      "minimum_available_memory_bytes": 11848892416,
+      "mps_current_bytes": 677332992,
+      "mps_driver_bytes": 2332098560,
+      "process_rss_bytes": 1103904768,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "intervention_baseline": {
+      "minimum_available_memory_bytes": 12104318976,
+      "mps_current_bytes": 646113280,
+      "mps_driver_bytes": 2346713088,
+      "process_rss_bytes": 1075789824,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "loaded_semantics": {
+      "minimum_available_memory_bytes": 12471762944,
+      "mps_current_bytes": 642967296,
+      "mps_driver_bytes": 2346713088,
+      "process_rss_bytes": 1071579136,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "replacement_runtime_construction": {
+      "minimum_available_memory_bytes": 11984830464,
+      "mps_current_bytes": 538840832,
+      "mps_driver_bytes": 2865397760,
+      "process_rss_bytes": 681181184,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    },
+    "worker_start": {
+      "minimum_available_memory_bytes": 13921533952,
+      "mps_current_bytes": 0,
+      "mps_driver_bytes": 393216,
+      "process_rss_bytes": 293027840,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 613878333
+    }
+  },
+  "accepted_started_at_unix": 1787590231.207835,
+  "artifact_type": "stage1a_small_model_mps_bf16_memory_timing",
+  "attempts": [
+    {
+      "attempt_index": 0,
+      "batch_size": null,
+      "source": "model_gate_verified_cache/model_gate_attempts.json",
+      "stage": "model_forward",
+      "supervisor_finished_at_unix": 1787574164.250896,
+      "supervisor_peak_process_group_rss_bytes": 824131584,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787574153.991804,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 13120765952,
+        "mps_current_bytes": 703969792,
+        "mps_driver_bytes": 2875015168,
+        "process_rss_bytes": 824098816,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787574163.681708,
+      "worker_stage_peaks": {
+        "model_forward_bos_only": {
+          "minimum_available_memory_bytes": 13136969728,
+          "mps_current_bytes": 538601728,
+          "mps_driver_bytes": 2873819136,
+          "process_rss_bytes": 663732224,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_forward_hello": {
+          "minimum_available_memory_bytes": 13120765952,
+          "mps_current_bytes": 539821568,
+          "mps_driver_bytes": 2875015168,
+          "process_rss_bytes": 740982784,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_forward_pilot": {
+          "minimum_available_memory_bytes": 13330153472,
+          "mps_current_bytes": 544073216,
+          "mps_driver_bytes": 2208268288,
+          "process_rss_bytes": 824098816,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_loading": {
+          "minimum_available_memory_bytes": 13213073408,
+          "mps_current_bytes": 703969792,
+          "mps_driver_bytes": 2865119232,
+          "process_rss_bytes": 599965696,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 16665083904,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 293273600,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787574154.598727,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 1,
+      "batch_size": null,
+      "source": "model_gate_verified_cache/model_gate_attempts.json",
+      "stage": "fp32_reference",
+      "supervisor_finished_at_unix": 1787574167.366196,
+      "supervisor_peak_process_group_rss_bytes": 1422540800,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787574164.263191,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 15438217216,
+        "mps_current_bytes": 0,
+        "mps_driver_bytes": 0,
+        "process_rss_bytes": 1464778752,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787574166.6417081,
+      "worker_stage_peaks": {
+        "fp32_forward_bos_only": {
+          "minimum_available_memory_bytes": 15530016768,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 0,
+          "process_rss_bytes": 1378566144,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "fp32_forward_hello": {
+          "minimum_available_memory_bytes": 15475916800,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 0,
+          "process_rss_bytes": 1431355392,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "fp32_forward_pilot": {
+          "minimum_available_memory_bytes": 15438217216,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 0,
+          "process_rss_bytes": 1464778752,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "fp32_model_loading": {
+          "minimum_available_memory_bytes": 15534243840,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 0,
+          "process_rss_bytes": 1372307456,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 16613949440,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 0,
+          "process_rss_bytes": 288653312,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787574164.907626,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": null,
+      "source": "loaded_semantics/loaded_semantics_attempts.json",
+      "stage": "loaded_semantics",
+      "supervisor_finished_at_unix": 1787575004.975639,
+      "supervisor_peak_process_group_rss_bytes": 696254464,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787574999.846999,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 12296257536,
+        "mps_current_bytes": 582153728,
+        "mps_driver_bytes": 2907324416,
+        "process_rss_bytes": 696860672,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787575003.715265,
+      "worker_stage_peaks": {
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 12296273920,
+          "mps_current_bytes": 582153728,
+          "mps_driver_bytes": 2907324416,
+          "process_rss_bytes": 696860672,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_forward": {
+          "minimum_available_memory_bytes": 12370329600,
+          "mps_current_bytes": 539519488,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 663797760,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_loading": {
+          "minimum_available_memory_bytes": 12477693952,
+          "mps_current_bytes": 536197632,
+          "mps_driver_bytes": 2865119232,
+          "process_rss_bytes": 619495424,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "one_layer_plt_loading": {
+          "minimum_available_memory_bytes": 12296257536,
+          "mps_current_bytes": 582153728,
+          "mps_driver_bytes": 2907324416,
+          "process_rss_bytes": 696532992,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 15912927232,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 295354368,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787575000.518238,
+      "worker_status": "failed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": null,
+      "source": "loaded_semantics_inference_fix/loaded_semantics_attempts.json",
+      "stage": "loaded_semantics",
+      "supervisor_finished_at_unix": 1787575070.2539048,
+      "supervisor_peak_process_group_rss_bytes": 718012416,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787575065.141842,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 13192478720,
+        "mps_current_bytes": 584180480,
+        "mps_driver_bytes": 2907406336,
+        "process_rss_bytes": 745930752,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787575069.754268,
+      "worker_stage_peaks": {
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 13192478720,
+          "mps_current_bytes": 584180480,
+          "mps_driver_bytes": 2907406336,
+          "process_rss_bytes": 745930752,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_forward": {
+          "minimum_available_memory_bytes": 13574438912,
+          "mps_current_bytes": 539519488,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 671514624,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "model_loading": {
+          "minimum_available_memory_bytes": 13686652928,
+          "mps_current_bytes": 536197632,
+          "mps_driver_bytes": 2865119232,
+          "process_rss_bytes": 620560384,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "one_layer_plt_loading": {
+          "minimum_available_memory_bytes": 13570260992,
+          "mps_current_bytes": 582153728,
+          "mps_driver_bytes": 2907340800,
+          "process_rss_bytes": 702627840,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 17117937664,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 297992192,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787575065.8067641,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": null,
+      "source": "full_plt/full_plt_attempts.json",
+      "stage": "full_plt",
+      "supervisor_finished_at_unix": 1787575095.1242838,
+      "supervisor_peak_process_group_rss_bytes": 347815936,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787575092.0541508,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 15703015424,
+        "mps_current_bytes": 22190592,
+        "mps_driver_bytes": 1101414400,
+        "process_rss_bytes": 379355136,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787575094.52448,
+      "worker_stage_peaks": {
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 15703015424,
+          "mps_current_bytes": 22190592,
+          "mps_driver_bytes": 1101414400,
+          "process_rss_bytes": 379355136,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 17207623680,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 191791104,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787575092.6868181,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": null,
+      "source": "replacement_runtime/replacement_runtime_attempts.json",
+      "stage": "replacement_runtime",
+      "supervisor_finished_at_unix": 1787575114.2745988,
+      "supervisor_peak_process_group_rss_bytes": 749486080,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787575108.125264,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 13268058112,
+        "mps_current_bytes": 564859648,
+        "mps_driver_bytes": 2882240512,
+        "process_rss_bytes": 749453312,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787575113.371136,
+      "worker_stage_peaks": {
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 17030971392,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 355500032,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "replacement_feature_access": {
+          "minimum_available_memory_bytes": 13268058112,
+          "mps_current_bytes": 564859648,
+          "mps_driver_bytes": 2882240512,
+          "process_rss_bytes": 749453312,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 13637681152,
+          "mps_current_bytes": 538841344,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 664010752,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 17133535232,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 294010880,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787575108.758739,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": 16,
+      "source": "smoke/smoke_attempts.json",
+      "stage": "smoke",
+      "supervisor_finished_at_unix": 1787575155.0243468,
+      "supervisor_peak_process_group_rss_bytes": 1006419968,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787575139.6488519,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 12976029696,
+        "mps_current_bytes": 624953344,
+        "mps_driver_bytes": 2958868480,
+        "process_rss_bytes": 1006403584,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787575153.8794081,
+      "worker_stage_peaks": {
+        "attribution": {
+          "minimum_available_memory_bytes": 12976029696,
+          "mps_current_bytes": 586372864,
+          "mps_driver_bytes": 2958868480,
+          "process_rss_bytes": 999096320,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "attribution_precompute": {
+          "minimum_available_memory_bytes": 13113802752,
+          "mps_current_bytes": 590468352,
+          "mps_driver_bytes": 2924216320,
+          "process_rss_bytes": 874659840,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 17010950144,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 355926016,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 13593018368,
+          "mps_current_bytes": 624953344,
+          "mps_driver_bytes": 2250145792,
+          "process_rss_bytes": 1006403584,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 13622706176,
+          "mps_current_bytes": 537530112,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 674594816,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 17099718656,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 293912576,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787575140.279298,
+      "worker_status": "failed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": 16,
+      "source": "smoke_layerwise_threshold_fix/smoke_attempts.json",
+      "stage": "smoke",
+      "supervisor_finished_at_unix": 1787575274.62637,
+      "supervisor_peak_process_group_rss_bytes": 1038385152,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787575260.3022232,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 12965937152,
+        "mps_current_bytes": 650982912,
+        "mps_driver_bytes": 2958983168,
+        "process_rss_bytes": 1038303232,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 622266941
+      },
+      "worker_finished_at_unix": 1787575273.395456,
+      "worker_stage_peaks": {
+        "attribution": {
+          "minimum_available_memory_bytes": 12965937152,
+          "mps_current_bytes": 586270976,
+          "mps_driver_bytes": 2958983168,
+          "process_rss_bytes": 992935936,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "attribution_precompute": {
+          "minimum_available_memory_bytes": 13122076672,
+          "mps_current_bytes": 554520576,
+          "mps_driver_bytes": 2924199936,
+          "process_rss_bytes": 867270656,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 16988061696,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 357023744,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "intervention_alpha_0.0": {
+          "minimum_available_memory_bytes": 13606092800,
+          "mps_current_bytes": 633086208,
+          "mps_driver_bytes": 2250211328,
+          "process_rss_bytes": 1018806272,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "intervention_alpha_0.5": {
+          "minimum_available_memory_bytes": 13559906304,
+          "mps_current_bytes": 637048064,
+          "mps_driver_bytes": 2281734144,
+          "process_rss_bytes": 1033895936,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "intervention_alpha_1.0": {
+          "minimum_available_memory_bytes": 13560676352,
+          "mps_current_bytes": 633086208,
+          "mps_driver_bytes": 2281734144,
+          "process_rss_bytes": 1038303232,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "intervention_baseline": {
+          "minimum_available_memory_bytes": 13543604224,
+          "mps_current_bytes": 650982912,
+          "mps_driver_bytes": 2292170752,
+          "process_rss_bytes": 1012285440,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 13628489728,
+          "mps_current_bytes": 626401024,
+          "mps_driver_bytes": 2250211328,
+          "process_rss_bytes": 1008156672,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 13607895040,
+          "mps_current_bytes": 537530112,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 670646272,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 17091887104,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 294993920,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 622266941
+        }
+      },
+      "worker_started_at_unix": 1787575260.9621172,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": 16,
+      "source": "smoke_selection_audit/smoke_attempts.json",
+      "stage": "smoke",
+      "supervisor_finished_at_unix": 1787589407.3332312,
+      "supervisor_peak_process_group_rss_bytes": 1044414464,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787589393.0024571,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 12552699904,
+        "mps_current_bytes": 639051008,
+        "mps_driver_bytes": 2966142976,
+        "process_rss_bytes": 1044414464,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 613878333
+      },
+      "worker_finished_at_unix": 1787589406.556542,
+      "worker_stage_peaks": {
+        "attribution": {
+          "minimum_available_memory_bytes": 12596707328,
+          "mps_current_bytes": 586273536,
+          "mps_driver_bytes": 2958966784,
+          "process_rss_bytes": 1000210432,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "attribution_precompute": {
+          "minimum_available_memory_bytes": 12552699904,
+          "mps_current_bytes": 614842112,
+          "mps_driver_bytes": 2966142976,
+          "process_rss_bytes": 858013696,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 14749892608,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 354385920,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.0": {
+          "minimum_available_memory_bytes": 13235208192,
+          "mps_current_bytes": 633086208,
+          "mps_driver_bytes": 2250194944,
+          "process_rss_bytes": 1024671744,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.5": {
+          "minimum_available_memory_bytes": 13188431872,
+          "mps_current_bytes": 633086208,
+          "mps_driver_bytes": 2281717760,
+          "process_rss_bytes": 1040007168,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_1.0": {
+          "minimum_available_memory_bytes": 13175488512,
+          "mps_current_bytes": 639051008,
+          "mps_driver_bytes": 2281734144,
+          "process_rss_bytes": 1044414464,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_baseline": {
+          "minimum_available_memory_bytes": 13290389504,
+          "mps_current_bytes": 629547008,
+          "mps_driver_bytes": 2254389248,
+          "process_rss_bytes": 1020149760,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 13291896832,
+          "mps_current_bytes": 626401024,
+          "mps_driver_bytes": 2287861760,
+          "process_rss_bytes": 1016020992,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 12639453184,
+          "mps_current_bytes": 537530112,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 653049856,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 14861844480,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 233160704,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        }
+      },
+      "worker_started_at_unix": 1787589393.6409512,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": 16,
+      "source": "smoke_max_abs_control/smoke_attempts.json",
+      "stage": "smoke",
+      "supervisor_finished_at_unix": 1787590124.743812,
+      "supervisor_peak_process_group_rss_bytes": 1006174208,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787590108.33828,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 12115378176,
+        "mps_current_bytes": 679768320,
+        "mps_driver_bytes": 2966142976,
+        "process_rss_bytes": 1006370816,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 613878333
+      },
+      "worker_finished_at_unix": 1787590123.83317,
+      "worker_stage_peaks": {
+        "attribution": {
+          "minimum_available_memory_bytes": 12288999424,
+          "mps_current_bytes": 586520832,
+          "mps_driver_bytes": 2958983168,
+          "process_rss_bytes": 988135424,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "attribution_precompute": {
+          "minimum_available_memory_bytes": 12288442368,
+          "mps_current_bytes": 612929280,
+          "mps_driver_bytes": 2966142976,
+          "process_rss_bytes": 862502912,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 14929412096,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 355991552,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.0": {
+          "minimum_available_memory_bytes": 12153077760,
+          "mps_current_bytes": 634593536,
+          "mps_driver_bytes": 2250227712,
+          "process_rss_bytes": 871628800,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.5": {
+          "minimum_available_memory_bytes": 12115378176,
+          "mps_current_bytes": 679768320,
+          "mps_driver_bytes": 2323709952,
+          "process_rss_bytes": 812007424,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_1.0": {
+          "minimum_available_memory_bytes": 12115378176,
+          "mps_current_bytes": 635642112,
+          "mps_driver_bytes": 2281750528,
+          "process_rss_bytes": 905953280,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_baseline": {
+          "minimum_available_memory_bytes": 12183420928,
+          "mps_current_bytes": 629547008,
+          "mps_driver_bytes": 2250227712,
+          "process_rss_bytes": 1006370816,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 12270256128,
+          "mps_current_bytes": 626401024,
+          "mps_driver_bytes": 2277425152,
+          "process_rss_bytes": 1002586112,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 12300517376,
+          "mps_current_bytes": 537530112,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 648347648,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 14929412096,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 343031808,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        }
+      },
+      "worker_started_at_unix": 1787590108.988789,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": 64,
+      "source": "accepted_missing_max_abs/accepted_attempts.json",
+      "stage": "accepted",
+      "supervisor_finished_at_unix": 1787589554.996962,
+      "supervisor_peak_process_group_rss_bytes": 1090568192,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787589540.646707,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 12264570880,
+        "mps_current_bytes": 684971264,
+        "mps_driver_bytes": 3009331200,
+        "process_rss_bytes": 1091551232,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 613878333
+      },
+      "worker_finished_at_unix": 1787589554.253495,
+      "worker_stage_peaks": {
+        "attribution": {
+          "minimum_available_memory_bytes": 12491800576,
+          "mps_current_bytes": 637959424,
+          "mps_driver_bytes": 3009331200,
+          "process_rss_bytes": 1043202048,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "attribution_precompute": {
+          "minimum_available_memory_bytes": 12319408128,
+          "mps_current_bytes": 572640768,
+          "mps_driver_bytes": 2924216320,
+          "process_rss_bytes": 862076928,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 15551791104,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 359333888,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.0": {
+          "minimum_available_memory_bytes": 13033586688,
+          "mps_current_bytes": 667085056,
+          "mps_driver_bytes": 2300608512,
+          "process_rss_bytes": 1071923200,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.5": {
+          "minimum_available_memory_bytes": 13052100608,
+          "mps_current_bytes": 671279360,
+          "mps_driver_bytes": 2332131328,
+          "process_rss_bytes": 1088290816,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_1.0": {
+          "minimum_available_memory_bytes": 13048086528,
+          "mps_current_bytes": 671279360,
+          "mps_driver_bytes": 2332131328,
+          "process_rss_bytes": 1091551232,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_baseline": {
+          "minimum_available_memory_bytes": 13072171008,
+          "mps_current_bytes": 684971264,
+          "mps_driver_bytes": 2342567936,
+          "process_rss_bytes": 1069563904,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 13161201664,
+          "mps_current_bytes": 642967296,
+          "mps_driver_bytes": 2300608512,
+          "process_rss_bytes": 1065123840,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 12264570880,
+          "mps_current_bytes": 537530624,
+          "mps_driver_bytes": 2865414144,
+          "process_rss_bytes": 670826496,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 15593275392,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 297304064,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        }
+      },
+      "worker_started_at_unix": 1787589541.340204,
+      "worker_status": "passed"
+    },
+    {
+      "attempt_index": 0,
+      "batch_size": 64,
+      "source": "accepted/accepted_attempts.json",
+      "stage": "accepted",
+      "supervisor_finished_at_unix": 1787590243.898159,
+      "supervisor_peak_process_group_rss_bytes": 1103986688,
+      "supervisor_peak_swap_growth_bytes": 0,
+      "supervisor_started_at_unix": 1787590230.532694,
+      "supervisor_thermal_states": [
+        "nominal"
+      ],
+      "worker_attempt_peaks": {
+        "minimum_available_memory_bytes": 11848892416,
+        "mps_current_bytes": 689690112,
+        "mps_driver_bytes": 3009298432,
+        "process_rss_bytes": 1103904768,
+        "swap_growth_bytes": 0,
+        "swap_used_bytes": 613878333
+      },
+      "worker_finished_at_unix": 1787590242.6436532,
+      "worker_stage_peaks": {
+        "attribution": {
+          "minimum_available_memory_bytes": 11912298496,
+          "mps_current_bytes": 648288256,
+          "mps_driver_bytes": 3009298432,
+          "process_rss_bytes": 1048838144,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "attribution_precompute": {
+          "minimum_available_memory_bytes": 11854626816,
+          "mps_current_bytes": 614083584,
+          "mps_driver_bytes": 2966142976,
+          "process_rss_bytes": 885735424,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "full_plt_loading": {
+          "minimum_available_memory_bytes": 13823131648,
+          "mps_current_bytes": 1202688,
+          "mps_driver_bytes": 8798208,
+          "process_rss_bytes": 354992128,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.0": {
+          "minimum_available_memory_bytes": 12030033920,
+          "mps_current_bytes": 689690112,
+          "mps_driver_bytes": 2346729472,
+          "process_rss_bytes": 1084096512,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_0.5": {
+          "minimum_available_memory_bytes": 11973672960,
+          "mps_current_bytes": 673638656,
+          "mps_driver_bytes": 2332098560,
+          "process_rss_bytes": 1099448320,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_alpha_1.0": {
+          "minimum_available_memory_bytes": 11848892416,
+          "mps_current_bytes": 677332992,
+          "mps_driver_bytes": 2332098560,
+          "process_rss_bytes": 1103904768,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "intervention_baseline": {
+          "minimum_available_memory_bytes": 12104318976,
+          "mps_current_bytes": 646113280,
+          "mps_driver_bytes": 2346713088,
+          "process_rss_bytes": 1075789824,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "loaded_semantics": {
+          "minimum_available_memory_bytes": 12471762944,
+          "mps_current_bytes": 642967296,
+          "mps_driver_bytes": 2346713088,
+          "process_rss_bytes": 1071579136,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "replacement_runtime_construction": {
+          "minimum_available_memory_bytes": 11984830464,
+          "mps_current_bytes": 538840832,
+          "mps_driver_bytes": 2865397760,
+          "process_rss_bytes": 681181184,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        },
+        "worker_start": {
+          "minimum_available_memory_bytes": 13921533952,
+          "mps_current_bytes": 0,
+          "mps_driver_bytes": 393216,
+          "process_rss_bytes": 293027840,
+          "swap_growth_bytes": 0,
+          "swap_used_bytes": 613878333
+        }
+      },
+      "worker_started_at_unix": 1787590231.207835,
+      "worker_status": "passed"
+    }
+  ],
+  "safety_limits": {
+    "accepted_thermal_states": [
+      "nominal",
+      "fair"
+    ],
+    "kill_grace_seconds": 5.0,
+    "maximum_graph_buffer_bytes": 6442450944,
+    "maximum_mps_driver_bytes": 25769803776,
+    "maximum_process_rss_bytes": 25769803776,
+    "maximum_swap_growth_bytes": 4294967296,
+    "maximum_transcoder_download_bytes": 6442450944,
+    "minimum_available_memory_bytes": 4294967296,
+    "sample_interval_seconds": 1.0,
+    "stage_timeout_seconds": {
+      "accepted": 7200,
+      "fp32_reference": 1200,
+      "full_plt": 900,
+      "loaded_semantics": 900,
+      "model_forward": 900,
+      "replacement_runtime": 1200,
+      "smoke": 3600
+    },
+    "telemetry_failure_limit": 3,
+    "terminate_grace_seconds": 15.0
+  },
+  "schema_version": 1,
+  "status": "passed"
+}

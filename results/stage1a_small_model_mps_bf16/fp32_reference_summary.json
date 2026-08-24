@@ -1,0 +1,81 @@
+{
+  "accepted_execution_fallback": false,
+  "execution_class": "separate_cpu_fp32_diagnostic_only",
+  "frozen_tolerances": {
+    "accumulated_value_bf16_ulps": 8,
+    "baseline_noop_normalized_l2_maximum": 0.01,
+    "fp32_reference_cosine_minimum": 0.995,
+    "fp32_reference_magnitude_ratio_maximum": 2.0,
+    "fp32_reference_magnitude_ratio_minimum": 0.5,
+    "fp32_reference_norm_ratio_maximum": 1.05,
+    "fp32_reference_norm_ratio_minimum": 0.95,
+    "fp32_reference_normalized_l2_maximum": 0.05,
+    "fp32_reference_top10_overlap_minimum": 8,
+    "fp32_reference_top1_agreement_required": true,
+    "gate_value_bf16_ulps": 2,
+    "intervention_value_bf16_exact_required": true,
+    "operator_reference_absolute": 0.25,
+    "operator_reference_normalized_l2": 0.05,
+    "overflow_absolute": 512.0,
+    "overflow_relative": 0.005
+  },
+  "prompts": [
+    {
+      "cpu_fp32_finite": true,
+      "final_hidden_absmax_ratio_mps_over_cpu": 0.9831082663029779,
+      "final_logit_cosine_similarity": 0.99999164773299,
+      "layer7_absmax_ratio_mps_over_cpu": 0.9955265025983739,
+      "logit_norm_ratio_mps_over_cpu": 0.984793266758081,
+      "mps_bf16_finite": true,
+      "normalized_l2_error": 0.01573833690151696,
+      "passed": true,
+      "prompt_id": "bos_only",
+      "token_ids": [
+        2
+      ],
+      "top10_overlap": 10,
+      "top1_agreement": true
+    },
+    {
+      "cpu_fp32_finite": true,
+      "final_hidden_absmax_ratio_mps_over_cpu": 1.0059679977663751,
+      "final_logit_cosine_similarity": 0.9999794549986762,
+      "layer7_absmax_ratio_mps_over_cpu": 1.0012783510377279,
+      "logit_norm_ratio_mps_over_cpu": 1.004386001451983,
+      "mps_bf16_finite": true,
+      "normalized_l2_error": 0.0077786394771240126,
+      "passed": true,
+      "prompt_id": "hello",
+      "token_ids": [
+        2,
+        9259
+      ],
+      "top10_overlap": 10,
+      "top1_agreement": true
+    },
+    {
+      "cpu_fp32_finite": true,
+      "final_hidden_absmax_ratio_mps_over_cpu": 1.0066737638432277,
+      "final_logit_cosine_similarity": 0.9999691273013742,
+      "layer7_absmax_ratio_mps_over_cpu": 0.9984046150213325,
+      "logit_norm_ratio_mps_over_cpu": 0.9979922772704195,
+      "mps_bf16_finite": true,
+      "normalized_l2_error": 0.008102615633501103,
+      "passed": true,
+      "prompt_id": "pilot",
+      "token_ids": [
+        2,
+        818,
+        5279,
+        529,
+        7001,
+        563
+      ],
+      "top10_overlap": 10,
+      "top1_agreement": true
+    }
+  ],
+  "ran_after_mps_process_exit": true,
+  "status": "passed",
+  "temporary_raw_vectors_deleted_after_validation": true
+}

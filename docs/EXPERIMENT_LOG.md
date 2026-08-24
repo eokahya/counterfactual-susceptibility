@@ -1,7 +1,8 @@
 # Experiment Log
 
-**Status:** No scientific experiment has completed successfully. One failed
-real-runtime attempt is recorded below; it produced no scientific result.
+**Status:** One local small-model runtime-validation pilot has completed. No
+Counterfactual Susceptibility experiment, reference reproduction, or paper
+Results experiment has completed.
 
 Unit tests, environment inspection, and deterministic formula verification are
 Stage 0 engineering checks. They are recorded in `docs/STAGE_0_REPORT.md`, not as
@@ -174,3 +175,74 @@ Never record a planned, configured, or partially scaffolded run as completed.
 - **Artifacts:** exact weights remain only in a project-external ignored cache;
   diagnostic JSON remains under ignored `results/generated/`. No weights,
   cache, raw graph, or canonical science artifact was published.
+
+---
+
+## EXP-20260824-002 — Stage 1A-S-BF16 local MPS/BF16 runtime validation
+
+- **Status:** `completed_small_model_mps_bf16_pilot`
+- **Date (UTC):** 2026-08-24T16:50:30Z to 2026-08-24T16:50:44Z
+- **Authors/operators:** Codex App on the local Apple M2 Max host
+- **Scientific question or hypothesis:** Can the exact BF16-trained Gemma 3
+  270M checkpoint, pinned 18-layer PLT subset, and NNsight replacement runtime
+  execute locally on native Apple MPS/BF16 with finite attribution and correct
+  absolute feature-intervention semantics?
+- **Prerequisite experiment IDs:** EXP-20260824-001 is protected negative FP16
+  runtime evidence, not an acceptance prerequisite
+- **Planned versus exploratory:** planned local runtime-validation recovery
+- **Code commit:** `6a5c21027fbb6b83e34c39db75987b0ce5b72d17`
+- **Dirty-tree status:** clean execution commit, already present on the isolated
+  origin branch before canonical accepted launch
+- **Configuration:** `configs/stage1a_gemma3_270m_mps_bf16_pilot.yaml`,
+  SHA-256 `429662d9598ba24d769aca9239271183c894eb98f85c76f95a38b5b78df65c6d`
+- **Random seeds:** no stochastic feature selection or sampling; deterministic
+  frozen candidate rule and stable numeric tie-break
+- **Upstream package:** `https://github.com/decoderesearch/circuit-tracer`,
+  commit `8f1e2438df612464e229e44c4a00ff637bf9379b`, version 0.5.2
+- **Model:**
+  `google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1`
+- **Transcoder/PLT:**
+  `mwhanna/gemma-scope-2-270m-pt@fada11860ac1d337c1e41e9da308798405b94c8e`,
+  `transcoder_all/width_16k_l0_small`
+- **Prompt inputs:** BOS-only, `Hello`, and accepted pilot
+  `The capital of France is`; accepted token IDs
+  `[2, 818, 5279, 529, 7001, 563]`
+- **Behavior metric:** none. This experiment validates runtime response and
+  control consistency, not behavior semantics or susceptibility.
+- **Hardware:** Apple M2 Max, MPS, 32 GiB unified memory, 12-core CPU
+- **Software:** native arm64 macOS; CPython 3.11.13; PyTorch 2.6.0;
+  NNsight 0.6.1; circuit-tracer 0.5.2; Transformers 4.57.3; fallback disabled
+- **Intervention:** frozen direct-contribution rule selected layer 17,
+  position 5, feature 1191, baseline activation 1960. Absolute desired values
+  were `(1-alpha)*baseline` for alpha 0, 0.5, and 1.0, with
+  `freeze_attention=true` in baseline and every condition.
+- **Primary metrics and results:** finite graph shape `[2276,2276]`, 2,152
+  active/selected features, 1,454,640 nonzero edges, zero non-finite values.
+  Candidate audit independently reproduced the selected feature. Raw/frozen,
+  repeat, and no-op normalized-L2 and maximum-absolute differences were zero.
+  Half/full response magnitudes were 0.075792/0.158862 normalized L2 and
+  2.03125/4.03125 maximum absolute logit difference; no semantic-direction
+  claim.
+- **Replacement-model result:** all 18 PLTs and NNsight replacement runtime
+  passed MPS/BF16 parameter, loaded JumpReLU, active/inactive, and finite gates.
+- **Underlying-model result:** all three prompt classes remained finite; the
+  separate post-MPS CPU/FP32 diagnostic passed every preregistered threshold.
+- **Failures, warnings, and anomalies:** canonical accepted attempt had none
+  and required no retry. Three pre-accepted engineering failures and one
+  batch-64 runtime pass invalidated for a missing mandatory compact evidence
+  field are retained with explicit dispositions in attempt provenance.
+- **Peak memory and wall-clock time:** supervisor about 13.37 seconds; MPS
+  current 689,690,112 bytes; MPS driver 3,009,298,432 bytes; process RSS
+  1,103,904,768 bytes; minimum available 11,848,892,416 bytes; swap growth 0;
+  thermal nominal. Overlapping unified-memory counters are not summed.
+- **Artifacts:** `results/stage1a_small_model_mps_bf16/`, 13 allowlisted files,
+  996 KiB total; checksum-manifest SHA-256
+  `ea7bd6db0ceca579f4b62aba530d419a3c0bc1e3ee98abff5ccf6938062d4b95`
+- **Deviation from plan:** one first runtime pass was correctly invalidated and
+  preserved because a required compact max-absolute control field was missing.
+  A new pre-run commit and fresh canonical run followed the binding correction
+  policy; canonical batch 64 passed.
+- **Decision:** local engineering runtime validation is complete. Keep Stage 1B
+  empirical readiness false and official/reference reproductions pending.
+- **Follow-up:** design Stage 1B engineering only under a separate Goal; do not
+  begin Counterfactual Susceptibility or edit paper Results from this result.

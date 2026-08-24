@@ -1,0 +1,24 @@
+{
+  "artifact_type": "stage1a_small_model_mps_bf16_preflight",
+  "asset_status": "verified",
+  "execution_commit": "6a5c21027fbb6b83e34c39db75987b0ce5b72d17",
+  "fallback_enabled": false,
+  "memory_projection": {
+    "activation_reserve_bytes": 1073741824,
+    "feasible": true,
+    "full_eager_plt_bytes": 756177408,
+    "graph_buffer_limit_bytes": 6442450944,
+    "maximum_process_rss_bytes": 25769803776,
+    "model_weight_bytes": 536223056,
+    "persistent_lazy_plt_bytes": 1202688,
+    "runtime_reserve_bytes": 4294967296,
+    "total_conservative_bytes": 12390528848,
+    "two_lazy_matrices_bytes": 41943040
+  },
+  "network_used_for_execution": false,
+  "operator_probe_status": "passed",
+  "paid_compute_used": false,
+  "projected_download_bytes": 2087816677,
+  "schema_version": 1,
+  "status": "passed"
+}

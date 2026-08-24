@@ -1,0 +1,2663 @@
+{
+  "artifact_type": "stage1a_small_model_mps_bf16_attribution",
+  "attribution": {
+    "active_feature_count": 2152,
+    "adapter_usage": {
+      "batch_calls": 35,
+      "component_calls": 1,
+      "partial_ranking_calls": 0,
+      "runtime_monkeypatches": 0
+    },
+    "adjacency_shape": [
+      2276,
+      2276
+    ],
+    "error_node_count": 108,
+    "graph_metadata_device": "cpu",
+    "input_node_count": 6,
+    "logit_node_count": 10,
+    "nonfinite_count": 0,
+    "nonzero_edge_count": 1454640,
+    "projected_graph_bytes": 40403552,
+    "raw_graph_persisted": false,
+    "scientific_tensor_device": "mps",
+    "scientific_tensor_dtype": "torch.bfloat16",
+    "selected_feature_count": 2152
+  },
+  "batch_size": 64,
+  "module_guard": {
+    "floating_parameter_dtype": "torch.bfloat16",
+    "parameter_count": 290,
+    "parameter_device": "mps",
+    "source_mandated_fp32_buffers": [
+      "model.rotary_emb.inv_freq",
+      "model.rotary_emb_local.inv_freq"
+    ]
+  },
+  "profile": "accepted",
+  "prompt": "The capital of France is",
+  "schema_version": 1,
+  "selection": {
+    "baseline_activation": 1960.0,
+    "feature": 1191,
+    "layer": 17,
+    "position": 5,
+    "rule": "highest_absolute_direct_contribution_to_baseline_top_logit_at_final_token",
+    "score": 2.484375
+  },
+  "selection_audit": {
+    "candidate_count": 370,
+    "candidates": [
+      {
+        "baseline_activation": 88.0,
+        "feature": 77,
+        "layer": 0,
+        "position": 5,
+        "score": 0.0028839111328125
+      },
+      {
+        "baseline_activation": 6.6875,
+        "feature": 2571,
+        "layer": 0,
+        "position": 5,
+        "score": 0.0034942626953125
+      },
+      {
+        "baseline_activation": 5.28125,
+        "feature": 8722,
+        "layer": 0,
+        "position": 5,
+        "score": 0.0003376007080078125
+      },
+      {
+        "baseline_activation": 204.0,
+        "feature": 453,
+        "layer": 1,
+        "position": 5,
+        "score": 0.026123046875
+      },
+      {
+        "baseline_activation": 9.875,
+        "feature": 845,
+        "layer": 1,
+        "position": 5,
+        "score": 0.0014190673828125
+      },
+      {
+        "baseline_activation": 12.0,
+        "feature": 6751,
+        "layer": 1,
+        "position": 5,
+        "score": 0.002044677734375
+      },
+      {
+        "baseline_activation": 3.125,
+        "feature": 284,
+        "layer": 2,
+        "position": 5,
+        "score": 0.0004062652587890625
+      },
+      {
+        "baseline_activation": 334.0,
+        "feature": 375,
+        "layer": 2,
+        "position": 5,
+        "score": 0.00469970703125
+      },
+      {
+        "baseline_activation": 19.875,
+        "feature": 820,
+        "layer": 2,
+        "position": 5,
+        "score": 0.0262451171875
+      },
+      {
+        "baseline_activation": 27.0,
+        "feature": 2714,
+        "layer": 2,
+        "position": 5,
+        "score": 0.0084228515625
+      },
+      {
+        "baseline_activation": 9.9375,
+        "feature": 2832,
+        "layer": 2,
+        "position": 5,
+        "score": 0.00372314453125
+      },
+      {
+        "baseline_activation": 10.9375,
+        "feature": 7706,
+        "layer": 2,
+        "position": 5,
+        "score": 0.001983642578125
+      },
+      {
+        "baseline_activation": 20.75,
+        "feature": 9224,
+        "layer": 2,
+        "position": 5,
+        "score": 0.007537841796875
+      },
+      {
+        "baseline_activation": 170.0,
+        "feature": 68,
+        "layer": 3,
+        "position": 5,
+        "score": 0.01361083984375
+      },
+      {
+        "baseline_activation": 350.0,
+        "feature": 523,
+        "layer": 3,
+        "position": 5,
+        "score": 0.146484375
+      },
+      {
+        "baseline_activation": 58.5,
+        "feature": 831,
+        "layer": 3,
+        "position": 5,
+        "score": 0.0040283203125
+      },
+      {
+        "baseline_activation": 33.75,
+        "feature": 2040,
+        "layer": 3,
+        "position": 5,
+        "score": 0.0033721923828125
+      },
+      {
+        "baseline_activation": 86.0,
+        "feature": 2610,
+        "layer": 3,
+        "position": 5,
+        "score": 0.0037078857421875
+      },
+      {
+        "baseline_activation": 31.25,
+        "feature": 4816,
+        "layer": 3,
+        "position": 5,
+        "score": 0.0184326171875
+      },
+      {
+        "baseline_activation": 43.75,
+        "feature": 45,
+        "layer": 4,
+        "position": 5,
+        "score": 0.005706787109375
+      },
+      {
+        "baseline_activation": 48.0,
+        "feature": 68,
+        "layer": 4,
+        "position": 5,
+        "score": 0.01171875
+      },
+      {
+        "baseline_activation": 47.25,
+        "feature": 304,
+        "layer": 4,
+        "position": 5,
+        "score": 0.00154876708984375
+      },
+      {
+        "baseline_activation": 544.0,
+        "feature": 375,
+        "layer": 4,
+        "position": 5,
+        "score": 0.130859375
+      },
+      {
+        "baseline_activation": 15.875,
+        "feature": 388,
+        "layer": 4,
+        "position": 5,
+        "score": 0.0026702880859375
+      },
+      {
+        "baseline_activation": 67.5,
+        "feature": 629,
+        "layer": 4,
+        "position": 5,
+        "score": 0.0029296875
+      },
+      {
+        "baseline_activation": 44.25,
+        "feature": 700,
+        "layer": 4,
+        "position": 5,
+        "score": 0.00762939453125
+      },
+      {
+        "baseline_activation": 73.0,
+        "feature": 705,
+        "layer": 4,
+        "position": 5,
+        "score": 0.041015625
+      },
+      {
+        "baseline_activation": 13.5,
+        "feature": 1641,
+        "layer": 4,
+        "position": 5,
+        "score": 0.00372314453125
+      },
+      {
+        "baseline_activation": 9.4375,
+        "feature": 1711,
+        "layer": 4,
+        "position": 5,
+        "score": 0.0023956298828125
+      },
+      {
+        "baseline_activation": 20.0,
+        "feature": 3620,
+        "layer": 4,
+        "position": 5,
+        "score": 0.00274658203125
+      },
+      {
+        "baseline_activation": 19.25,
+        "feature": 10951,
+        "layer": 4,
+        "position": 5,
+        "score": 0.000827789306640625
+      },
+      {
+        "baseline_activation": 20.875,
+        "feature": 13488,
+        "layer": 4,
+        "position": 5,
+        "score": 0.0003662109375
+      },
+      {
+        "baseline_activation": 27.875,
+        "feature": 14700,
+        "layer": 4,
+        "position": 5,
+        "score": 0.0017852783203125
+      },
+      {
+        "baseline_activation": 18.75,
+        "feature": 14946,
+        "layer": 4,
+        "position": 5,
+        "score": 0.00714111328125
+      },
+      {
+        "baseline_activation": 14.6875,
+        "feature": 15018,
+        "layer": 4,
+        "position": 5,
+        "score": 0.004302978515625
+      },
+      {
+        "baseline_activation": 28.75,
+        "feature": 211,
+        "layer": 5,
+        "position": 5,
+        "score": 0.01177978515625
+      },
+      {
+        "baseline_activation": 294.0,
+        "feature": 339,
+        "layer": 5,
+        "position": 5,
+        "score": 0.01043701171875
+      },
+      {
+        "baseline_activation": 171.0,
+        "feature": 489,
+        "layer": 5,
+        "position": 5,
+        "score": 0.0272216796875
+      },
+      {
+        "baseline_activation": 44.0,
+        "feature": 1034,
+        "layer": 5,
+        "position": 5,
+        "score": 0.00109100341796875
+      },
+      {
+        "baseline_activation": 39.5,
+        "feature": 1988,
+        "layer": 5,
+        "position": 5,
+        "score": 0.00732421875
+      },
+      {
+        "baseline_activation": 28.75,
+        "feature": 2975,
+        "layer": 5,
+        "position": 5,
+        "score": 0.01611328125
+      },
+      {
+        "baseline_activation": 36.0,
+        "feature": 3290,
+        "layer": 5,
+        "position": 5,
+        "score": 0.0010833740234375
+      },
+      {
+        "baseline_activation": 35.25,
+        "feature": 3713,
+        "layer": 5,
+        "position": 5,
+        "score": 0.0185546875
+      },
+      {
+        "baseline_activation": 32.25,
+        "feature": 4213,
+        "layer": 5,
+        "position": 5,
+        "score": 0.000156402587890625
+      },
+      {
+        "baseline_activation": 85.5,
+        "feature": 127,
+        "layer": 6,
+        "position": 5,
+        "score": 0.002166748046875
+      },
+      {
+        "baseline_activation": 33.5,
+        "feature": 139,
+        "layer": 6,
+        "position": 5,
+        "score": 0.00201416015625
+      },
+      {
+        "baseline_activation": 10.375,
+        "feature": 314,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0001049041748046875
+      },
+      {
+        "baseline_activation": 75.5,
+        "feature": 357,
+        "layer": 6,
+        "position": 5,
+        "score": 0.00982666015625
+      },
+      {
+        "baseline_activation": 680.0,
+        "feature": 375,
+        "layer": 6,
+        "position": 5,
+        "score": 0.049072265625
+      },
+      {
+        "baseline_activation": 241.0,
+        "feature": 510,
+        "layer": 6,
+        "position": 5,
+        "score": 0.01239013671875
+      },
+      {
+        "baseline_activation": 86.5,
+        "feature": 518,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0322265625
+      },
+      {
+        "baseline_activation": 12.5625,
+        "feature": 552,
+        "layer": 6,
+        "position": 5,
+        "score": 0.000423431396484375
+      },
+      {
+        "baseline_activation": 22.75,
+        "feature": 728,
+        "layer": 6,
+        "position": 5,
+        "score": 0.00262451171875
+      },
+      {
+        "baseline_activation": 108.0,
+        "feature": 751,
+        "layer": 6,
+        "position": 5,
+        "score": 0.039794921875
+      },
+      {
+        "baseline_activation": 17.0,
+        "feature": 766,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0032806396484375
+      },
+      {
+        "baseline_activation": 45.5,
+        "feature": 1119,
+        "layer": 6,
+        "position": 5,
+        "score": 0.006866455078125
+      },
+      {
+        "baseline_activation": 152.0,
+        "feature": 1629,
+        "layer": 6,
+        "position": 5,
+        "score": 0.016845703125
+      },
+      {
+        "baseline_activation": 50.0,
+        "feature": 2387,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0022125244140625
+      },
+      {
+        "baseline_activation": 32.0,
+        "feature": 2623,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0052490234375
+      },
+      {
+        "baseline_activation": 22.625,
+        "feature": 4225,
+        "layer": 6,
+        "position": 5,
+        "score": 0.007049560546875
+      },
+      {
+        "baseline_activation": 64.5,
+        "feature": 6013,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0140380859375
+      },
+      {
+        "baseline_activation": 50.75,
+        "feature": 6037,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0101318359375
+      },
+      {
+        "baseline_activation": 46.0,
+        "feature": 7119,
+        "layer": 6,
+        "position": 5,
+        "score": 0.00994873046875
+      },
+      {
+        "baseline_activation": 19.375,
+        "feature": 8287,
+        "layer": 6,
+        "position": 5,
+        "score": 0.01129150390625
+      },
+      {
+        "baseline_activation": 26.25,
+        "feature": 12006,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0029296875
+      },
+      {
+        "baseline_activation": 83.5,
+        "feature": 12772,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0191650390625
+      },
+      {
+        "baseline_activation": 43.25,
+        "feature": 12863,
+        "layer": 6,
+        "position": 5,
+        "score": 0.010009765625
+      },
+      {
+        "baseline_activation": 38.25,
+        "feature": 12926,
+        "layer": 6,
+        "position": 5,
+        "score": 0.022216796875
+      },
+      {
+        "baseline_activation": 48.0,
+        "feature": 13471,
+        "layer": 6,
+        "position": 5,
+        "score": 0.00958251953125
+      },
+      {
+        "baseline_activation": 26.375,
+        "feature": 14593,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0014495849609375
+      },
+      {
+        "baseline_activation": 44.25,
+        "feature": 15096,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0019683837890625
+      },
+      {
+        "baseline_activation": 50.25,
+        "feature": 15757,
+        "layer": 6,
+        "position": 5,
+        "score": 0.00469970703125
+      },
+      {
+        "baseline_activation": 22.625,
+        "feature": 16079,
+        "layer": 6,
+        "position": 5,
+        "score": 0.0023956298828125
+      },
+      {
+        "baseline_activation": 26.75,
+        "feature": 34,
+        "layer": 7,
+        "position": 5,
+        "score": 0.000682830810546875
+      },
+      {
+        "baseline_activation": 85.0,
+        "feature": 81,
+        "layer": 7,
+        "position": 5,
+        "score": 0.00860595703125
+      },
+      {
+        "baseline_activation": 66.5,
+        "feature": 257,
+        "layer": 7,
+        "position": 5,
+        "score": 0.010498046875
+      },
+      {
+        "baseline_activation": 77.5,
+        "feature": 357,
+        "layer": 7,
+        "position": 5,
+        "score": 0.00836181640625
+      },
+      {
+        "baseline_activation": 74.0,
+        "feature": 358,
+        "layer": 7,
+        "position": 5,
+        "score": 0.000339508056640625
+      },
+      {
+        "baseline_activation": 668.0,
+        "feature": 375,
+        "layer": 7,
+        "position": 5,
+        "score": 0.004852294921875
+      },
+      {
+        "baseline_activation": 61.75,
+        "feature": 403,
+        "layer": 7,
+        "position": 5,
+        "score": 0.01141357421875
+      },
+      {
+        "baseline_activation": 24.0,
+        "feature": 442,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0021209716796875
+      },
+      {
+        "baseline_activation": 229.0,
+        "feature": 533,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0054931640625
+      },
+      {
+        "baseline_activation": 95.5,
+        "feature": 620,
+        "layer": 7,
+        "position": 5,
+        "score": 0.01507568359375
+      },
+      {
+        "baseline_activation": 96.5,
+        "feature": 710,
+        "layer": 7,
+        "position": 5,
+        "score": 0.00897216796875
+      },
+      {
+        "baseline_activation": 42.0,
+        "feature": 1081,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0179443359375
+      },
+      {
+        "baseline_activation": 44.25,
+        "feature": 1703,
+        "layer": 7,
+        "position": 5,
+        "score": 0.004791259765625
+      },
+      {
+        "baseline_activation": 27.0,
+        "feature": 1834,
+        "layer": 7,
+        "position": 5,
+        "score": 0.002899169921875
+      },
+      {
+        "baseline_activation": 70.5,
+        "feature": 2764,
+        "layer": 7,
+        "position": 5,
+        "score": 0.017822265625
+      },
+      {
+        "baseline_activation": 64.5,
+        "feature": 2902,
+        "layer": 7,
+        "position": 5,
+        "score": 0.00994873046875
+      },
+      {
+        "baseline_activation": 22.5,
+        "feature": 4368,
+        "layer": 7,
+        "position": 5,
+        "score": 0.01416015625
+      },
+      {
+        "baseline_activation": 68.0,
+        "feature": 6515,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0029754638671875
+      },
+      {
+        "baseline_activation": 23.75,
+        "feature": 6583,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0014801025390625
+      },
+      {
+        "baseline_activation": 41.25,
+        "feature": 7537,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0272216796875
+      },
+      {
+        "baseline_activation": 31.125,
+        "feature": 8500,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0419921875
+      },
+      {
+        "baseline_activation": 68.0,
+        "feature": 11237,
+        "layer": 7,
+        "position": 5,
+        "score": 0.0107421875
+      },
+      {
+        "baseline_activation": 51.5,
+        "feature": 13994,
+        "layer": 7,
+        "position": 5,
+        "score": 0.00579833984375
+      },
+      {
+        "baseline_activation": 17.875,
+        "feature": 110,
+        "layer": 8,
+        "position": 5,
+        "score": 0.00180816650390625
+      },
+      {
+        "baseline_activation": 25.25,
+        "feature": 128,
+        "layer": 8,
+        "position": 5,
+        "score": 0.017822265625
+      },
+      {
+        "baseline_activation": 45.25,
+        "feature": 254,
+        "layer": 8,
+        "position": 5,
+        "score": 0.002899169921875
+      },
+      {
+        "baseline_activation": 229.0,
+        "feature": 267,
+        "layer": 8,
+        "position": 5,
+        "score": 0.045166015625
+      },
+      {
+        "baseline_activation": 123.0,
+        "feature": 541,
+        "layer": 8,
+        "position": 5,
+        "score": 0.052978515625
+      },
+      {
+        "baseline_activation": 31.75,
+        "feature": 559,
+        "layer": 8,
+        "position": 5,
+        "score": 0.0147705078125
+      },
+      {
+        "baseline_activation": 170.0,
+        "feature": 561,
+        "layer": 8,
+        "position": 5,
+        "score": 0.032958984375
+      },
+      {
+        "baseline_activation": 158.0,
+        "feature": 603,
+        "layer": 8,
+        "position": 5,
+        "score": 0.02978515625
+      },
+      {
+        "baseline_activation": 22.875,
+        "feature": 687,
+        "layer": 8,
+        "position": 5,
+        "score": 0.00109100341796875
+      },
+      {
+        "baseline_activation": 47.75,
+        "feature": 705,
+        "layer": 8,
+        "position": 5,
+        "score": 0.029052734375
+      },
+      {
+        "baseline_activation": 31.25,
+        "feature": 1735,
+        "layer": 8,
+        "position": 5,
+        "score": 0.006134033203125
+      },
+      {
+        "baseline_activation": 27.25,
+        "feature": 1786,
+        "layer": 8,
+        "position": 5,
+        "score": 0.001678466796875
+      },
+      {
+        "baseline_activation": 53.0,
+        "feature": 1914,
+        "layer": 8,
+        "position": 5,
+        "score": 0.0184326171875
+      },
+      {
+        "baseline_activation": 75.0,
+        "feature": 2448,
+        "layer": 8,
+        "position": 5,
+        "score": 0.0108642578125
+      },
+      {
+        "baseline_activation": 20.375,
+        "feature": 3026,
+        "layer": 8,
+        "position": 5,
+        "score": 0.00848388671875
+      },
+      {
+        "baseline_activation": 22.0,
+        "feature": 3091,
+        "layer": 8,
+        "position": 5,
+        "score": 0.002838134765625
+      },
+      {
+        "baseline_activation": 45.5,
+        "feature": 3748,
+        "layer": 8,
+        "position": 5,
+        "score": 0.0341796875
+      },
+      {
+        "baseline_activation": 29.5,
+        "feature": 5962,
+        "layer": 8,
+        "position": 5,
+        "score": 0.02294921875
+      },
+      {
+        "baseline_activation": 25.5,
+        "feature": 7156,
+        "layer": 8,
+        "position": 5,
+        "score": 0.0040283203125
+      },
+      {
+        "baseline_activation": 32.25,
+        "feature": 8072,
+        "layer": 8,
+        "position": 5,
+        "score": 0.01031494140625
+      },
+      {
+        "baseline_activation": 43.5,
+        "feature": 10040,
+        "layer": 8,
+        "position": 5,
+        "score": 0.03369140625
+      },
+      {
+        "baseline_activation": 22.375,
+        "feature": 10215,
+        "layer": 8,
+        "position": 5,
+        "score": 0.007598876953125
+      },
+      {
+        "baseline_activation": 34.75,
+        "feature": 10738,
+        "layer": 8,
+        "position": 5,
+        "score": 0.00946044921875
+      },
+      {
+        "baseline_activation": 33.0,
+        "feature": 12150,
+        "layer": 8,
+        "position": 5,
+        "score": 0.00135040283203125
+      },
+      {
+        "baseline_activation": 187.0,
+        "feature": 36,
+        "layer": 9,
+        "position": 5,
+        "score": 0.031982421875
+      },
+      {
+        "baseline_activation": 73.5,
+        "feature": 139,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0228271484375
+      },
+      {
+        "baseline_activation": 70.0,
+        "feature": 157,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0308837890625
+      },
+      {
+        "baseline_activation": 113.0,
+        "feature": 337,
+        "layer": 9,
+        "position": 5,
+        "score": 0.07177734375
+      },
+      {
+        "baseline_activation": 454.0,
+        "feature": 375,
+        "layer": 9,
+        "position": 5,
+        "score": 0.05810546875
+      },
+      {
+        "baseline_activation": 46.75,
+        "feature": 418,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0086669921875
+      },
+      {
+        "baseline_activation": 126.5,
+        "feature": 450,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0198974609375
+      },
+      {
+        "baseline_activation": 69.0,
+        "feature": 503,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0113525390625
+      },
+      {
+        "baseline_activation": 109.5,
+        "feature": 546,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0439453125
+      },
+      {
+        "baseline_activation": 64.0,
+        "feature": 761,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0047607421875
+      },
+      {
+        "baseline_activation": 46.0,
+        "feature": 837,
+        "layer": 9,
+        "position": 5,
+        "score": 0.00592041015625
+      },
+      {
+        "baseline_activation": 148.0,
+        "feature": 859,
+        "layer": 9,
+        "position": 5,
+        "score": 0.126953125
+      },
+      {
+        "baseline_activation": 83.0,
+        "feature": 1011,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0098876953125
+      },
+      {
+        "baseline_activation": 23.375,
+        "feature": 1253,
+        "layer": 9,
+        "position": 5,
+        "score": 0.005035400390625
+      },
+      {
+        "baseline_activation": 36.75,
+        "feature": 1320,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0087890625
+      },
+      {
+        "baseline_activation": 60.25,
+        "feature": 1367,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0107421875
+      },
+      {
+        "baseline_activation": 30.125,
+        "feature": 1636,
+        "layer": 9,
+        "position": 5,
+        "score": 0.01116943359375
+      },
+      {
+        "baseline_activation": 40.5,
+        "feature": 1807,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0233154296875
+      },
+      {
+        "baseline_activation": 108.5,
+        "feature": 2031,
+        "layer": 9,
+        "position": 5,
+        "score": 0.07958984375
+      },
+      {
+        "baseline_activation": 61.75,
+        "feature": 2293,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0189208984375
+      },
+      {
+        "baseline_activation": 47.5,
+        "feature": 3367,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0145263671875
+      },
+      {
+        "baseline_activation": 85.5,
+        "feature": 3464,
+        "layer": 9,
+        "position": 5,
+        "score": 0.07958984375
+      },
+      {
+        "baseline_activation": 29.125,
+        "feature": 4469,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0028228759765625
+      },
+      {
+        "baseline_activation": 56.5,
+        "feature": 5105,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0498046875
+      },
+      {
+        "baseline_activation": 43.75,
+        "feature": 9332,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0224609375
+      },
+      {
+        "baseline_activation": 99.5,
+        "feature": 9960,
+        "layer": 9,
+        "position": 5,
+        "score": 0.0595703125
+      },
+      {
+        "baseline_activation": 45.75,
+        "feature": 11124,
+        "layer": 9,
+        "position": 5,
+        "score": 0.01129150390625
+      },
+      {
+        "baseline_activation": 37.0,
+        "feature": 14346,
+        "layer": 9,
+        "position": 5,
+        "score": 0.00225830078125
+      },
+      {
+        "baseline_activation": 70.0,
+        "feature": 15,
+        "layer": 10,
+        "position": 5,
+        "score": 0.044921875
+      },
+      {
+        "baseline_activation": 67.5,
+        "feature": 122,
+        "layer": 10,
+        "position": 5,
+        "score": 0.021240234375
+      },
+      {
+        "baseline_activation": 157.0,
+        "feature": 147,
+        "layer": 10,
+        "position": 5,
+        "score": 0.010986328125
+      },
+      {
+        "baseline_activation": 68.0,
+        "feature": 274,
+        "layer": 10,
+        "position": 5,
+        "score": 0.01190185546875
+      },
+      {
+        "baseline_activation": 238.0,
+        "feature": 396,
+        "layer": 10,
+        "position": 5,
+        "score": 0.2138671875
+      },
+      {
+        "baseline_activation": 394.0,
+        "feature": 413,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0546875
+      },
+      {
+        "baseline_activation": 316.0,
+        "feature": 423,
+        "layer": 10,
+        "position": 5,
+        "score": 0.169921875
+      },
+      {
+        "baseline_activation": 40.75,
+        "feature": 425,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0169677734375
+      },
+      {
+        "baseline_activation": 784.0,
+        "feature": 469,
+        "layer": 10,
+        "position": 5,
+        "score": 0.1376953125
+      },
+      {
+        "baseline_activation": 182.0,
+        "feature": 486,
+        "layer": 10,
+        "position": 5,
+        "score": 0.021728515625
+      },
+      {
+        "baseline_activation": 180.0,
+        "feature": 505,
+        "layer": 10,
+        "position": 5,
+        "score": 0.00970458984375
+      },
+      {
+        "baseline_activation": 104.5,
+        "feature": 747,
+        "layer": 10,
+        "position": 5,
+        "score": 0.01434326171875
+      },
+      {
+        "baseline_activation": 512.0,
+        "feature": 781,
+        "layer": 10,
+        "position": 5,
+        "score": 0.32421875
+      },
+      {
+        "baseline_activation": 264.0,
+        "feature": 799,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0164794921875
+      },
+      {
+        "baseline_activation": 77.0,
+        "feature": 805,
+        "layer": 10,
+        "position": 5,
+        "score": 0.07763671875
+      },
+      {
+        "baseline_activation": 163.0,
+        "feature": 1060,
+        "layer": 10,
+        "position": 5,
+        "score": 0.042236328125
+      },
+      {
+        "baseline_activation": 50.5,
+        "feature": 1073,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0220947265625
+      },
+      {
+        "baseline_activation": 188.0,
+        "feature": 1182,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0125732421875
+      },
+      {
+        "baseline_activation": 133.0,
+        "feature": 1361,
+        "layer": 10,
+        "position": 5,
+        "score": 0.04443359375
+      },
+      {
+        "baseline_activation": 95.5,
+        "feature": 1407,
+        "layer": 10,
+        "position": 5,
+        "score": 0.052734375
+      },
+      {
+        "baseline_activation": 91.0,
+        "feature": 1807,
+        "layer": 10,
+        "position": 5,
+        "score": 0.02490234375
+      },
+      {
+        "baseline_activation": 50.0,
+        "feature": 2400,
+        "layer": 10,
+        "position": 5,
+        "score": 0.018310546875
+      },
+      {
+        "baseline_activation": 111.5,
+        "feature": 2527,
+        "layer": 10,
+        "position": 5,
+        "score": 0.07958984375
+      },
+      {
+        "baseline_activation": 84.0,
+        "feature": 2847,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0262451171875
+      },
+      {
+        "baseline_activation": 74.5,
+        "feature": 2916,
+        "layer": 10,
+        "position": 5,
+        "score": 0.11181640625
+      },
+      {
+        "baseline_activation": 42.25,
+        "feature": 3717,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0079345703125
+      },
+      {
+        "baseline_activation": 73.5,
+        "feature": 5722,
+        "layer": 10,
+        "position": 5,
+        "score": 0.04296875
+      },
+      {
+        "baseline_activation": 134.0,
+        "feature": 8203,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0244140625
+      },
+      {
+        "baseline_activation": 168.0,
+        "feature": 11014,
+        "layer": 10,
+        "position": 5,
+        "score": 0.1484375
+      },
+      {
+        "baseline_activation": 105.0,
+        "feature": 13381,
+        "layer": 10,
+        "position": 5,
+        "score": 0.04150390625
+      },
+      {
+        "baseline_activation": 52.25,
+        "feature": 13693,
+        "layer": 10,
+        "position": 5,
+        "score": 0.025146484375
+      },
+      {
+        "baseline_activation": 72.0,
+        "feature": 14052,
+        "layer": 10,
+        "position": 5,
+        "score": 0.0673828125
+      },
+      {
+        "baseline_activation": 69.0,
+        "feature": 142,
+        "layer": 11,
+        "position": 5,
+        "score": 0.047119140625
+      },
+      {
+        "baseline_activation": 1704.0,
+        "feature": 157,
+        "layer": 11,
+        "position": 5,
+        "score": 0.439453125
+      },
+      {
+        "baseline_activation": 237.0,
+        "feature": 159,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0791015625
+      },
+      {
+        "baseline_activation": 194.0,
+        "feature": 246,
+        "layer": 11,
+        "position": 5,
+        "score": 0.08544921875
+      },
+      {
+        "baseline_activation": 1128.0,
+        "feature": 297,
+        "layer": 11,
+        "position": 5,
+        "score": 1.8359375
+      },
+      {
+        "baseline_activation": 205.0,
+        "feature": 375,
+        "layer": 11,
+        "position": 5,
+        "score": 0.020263671875
+      },
+      {
+        "baseline_activation": 752.0,
+        "feature": 420,
+        "layer": 11,
+        "position": 5,
+        "score": 0.7421875
+      },
+      {
+        "baseline_activation": 222.0,
+        "feature": 467,
+        "layer": 11,
+        "position": 5,
+        "score": 0.01458740234375
+      },
+      {
+        "baseline_activation": 278.0,
+        "feature": 477,
+        "layer": 11,
+        "position": 5,
+        "score": 0.099609375
+      },
+      {
+        "baseline_activation": 274.0,
+        "feature": 555,
+        "layer": 11,
+        "position": 5,
+        "score": 0.00958251953125
+      },
+      {
+        "baseline_activation": 502.0,
+        "feature": 702,
+        "layer": 11,
+        "position": 5,
+        "score": 0.50390625
+      },
+      {
+        "baseline_activation": 194.0,
+        "feature": 714,
+        "layer": 11,
+        "position": 5,
+        "score": 0.1435546875
+      },
+      {
+        "baseline_activation": 382.0,
+        "feature": 774,
+        "layer": 11,
+        "position": 5,
+        "score": 0.16015625
+      },
+      {
+        "baseline_activation": 135.0,
+        "feature": 814,
+        "layer": 11,
+        "position": 5,
+        "score": 0.032958984375
+      },
+      {
+        "baseline_activation": 203.0,
+        "feature": 916,
+        "layer": 11,
+        "position": 5,
+        "score": 0.008544921875
+      },
+      {
+        "baseline_activation": 72.5,
+        "feature": 961,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0281982421875
+      },
+      {
+        "baseline_activation": 516.0,
+        "feature": 1094,
+        "layer": 11,
+        "position": 5,
+        "score": 0.44921875
+      },
+      {
+        "baseline_activation": 81.0,
+        "feature": 1352,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0166015625
+      },
+      {
+        "baseline_activation": 110.0,
+        "feature": 1454,
+        "layer": 11,
+        "position": 5,
+        "score": 0.009033203125
+      },
+      {
+        "baseline_activation": 344.0,
+        "feature": 2479,
+        "layer": 11,
+        "position": 5,
+        "score": 0.03125
+      },
+      {
+        "baseline_activation": 101.5,
+        "feature": 2716,
+        "layer": 11,
+        "position": 5,
+        "score": 0.052734375
+      },
+      {
+        "baseline_activation": 366.0,
+        "feature": 3515,
+        "layer": 11,
+        "position": 5,
+        "score": 0.072265625
+      },
+      {
+        "baseline_activation": 111.5,
+        "feature": 3794,
+        "layer": 11,
+        "position": 5,
+        "score": 0.036376953125
+      },
+      {
+        "baseline_activation": 107.0,
+        "feature": 5105,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0034942626953125
+      },
+      {
+        "baseline_activation": 100.5,
+        "feature": 5336,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0634765625
+      },
+      {
+        "baseline_activation": 234.0,
+        "feature": 6781,
+        "layer": 11,
+        "position": 5,
+        "score": 0.00775146484375
+      },
+      {
+        "baseline_activation": 173.0,
+        "feature": 6813,
+        "layer": 11,
+        "position": 5,
+        "score": 0.029296875
+      },
+      {
+        "baseline_activation": 159.0,
+        "feature": 7484,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0025634765625
+      },
+      {
+        "baseline_activation": 117.0,
+        "feature": 8082,
+        "layer": 11,
+        "position": 5,
+        "score": 0.059814453125
+      },
+      {
+        "baseline_activation": 133.0,
+        "feature": 10408,
+        "layer": 11,
+        "position": 5,
+        "score": 0.224609375
+      },
+      {
+        "baseline_activation": 282.0,
+        "feature": 10607,
+        "layer": 11,
+        "position": 5,
+        "score": 0.0184326171875
+      },
+      {
+        "baseline_activation": 117.5,
+        "feature": 11574,
+        "layer": 11,
+        "position": 5,
+        "score": 0.015625
+      },
+      {
+        "baseline_activation": 284.0,
+        "feature": 12523,
+        "layer": 11,
+        "position": 5,
+        "score": 0.40625
+      },
+      {
+        "baseline_activation": 102.5,
+        "feature": 13811,
+        "layer": 11,
+        "position": 5,
+        "score": 0.08349609375
+      },
+      {
+        "baseline_activation": 420.0,
+        "feature": 247,
+        "layer": 12,
+        "position": 5,
+        "score": 0.248046875
+      },
+      {
+        "baseline_activation": 108.0,
+        "feature": 326,
+        "layer": 12,
+        "position": 5,
+        "score": 0.08251953125
+      },
+      {
+        "baseline_activation": 1760.0,
+        "feature": 375,
+        "layer": 12,
+        "position": 5,
+        "score": 0.322265625
+      },
+      {
+        "baseline_activation": 316.0,
+        "feature": 403,
+        "layer": 12,
+        "position": 5,
+        "score": 0.177734375
+      },
+      {
+        "baseline_activation": 288.0,
+        "feature": 520,
+        "layer": 12,
+        "position": 5,
+        "score": 0.0537109375
+      },
+      {
+        "baseline_activation": 392.0,
+        "feature": 960,
+        "layer": 12,
+        "position": 5,
+        "score": 0.1640625
+      },
+      {
+        "baseline_activation": 480.0,
+        "feature": 962,
+        "layer": 12,
+        "position": 5,
+        "score": 0.35546875
+      },
+      {
+        "baseline_activation": 78.5,
+        "feature": 979,
+        "layer": 12,
+        "position": 5,
+        "score": 0.0123291015625
+      },
+      {
+        "baseline_activation": 151.0,
+        "feature": 1029,
+        "layer": 12,
+        "position": 5,
+        "score": 0.0654296875
+      },
+      {
+        "baseline_activation": 1184.0,
+        "feature": 1063,
+        "layer": 12,
+        "position": 5,
+        "score": 1.0703125
+      },
+      {
+        "baseline_activation": 221.0,
+        "feature": 1232,
+        "layer": 12,
+        "position": 5,
+        "score": 0.0181884765625
+      },
+      {
+        "baseline_activation": 368.0,
+        "feature": 1280,
+        "layer": 12,
+        "position": 5,
+        "score": 0.169921875
+      },
+      {
+        "baseline_activation": 172.0,
+        "feature": 1677,
+        "layer": 12,
+        "position": 5,
+        "score": 0.0771484375
+      },
+      {
+        "baseline_activation": 190.0,
+        "feature": 3232,
+        "layer": 12,
+        "position": 5,
+        "score": 0.052978515625
+      },
+      {
+        "baseline_activation": 108.0,
+        "feature": 4088,
+        "layer": 12,
+        "position": 5,
+        "score": 0.01171875
+      },
+      {
+        "baseline_activation": 270.0,
+        "feature": 4204,
+        "layer": 12,
+        "position": 5,
+        "score": 0.451171875
+      },
+      {
+        "baseline_activation": 338.0,
+        "feature": 5124,
+        "layer": 12,
+        "position": 5,
+        "score": 0.396484375
+      },
+      {
+        "baseline_activation": 272.0,
+        "feature": 6829,
+        "layer": 12,
+        "position": 5,
+        "score": 0.07568359375
+      },
+      {
+        "baseline_activation": 840.0,
+        "feature": 11911,
+        "layer": 12,
+        "position": 5,
+        "score": 0.453125
+      },
+      {
+        "baseline_activation": 146.0,
+        "feature": 15795,
+        "layer": 12,
+        "position": 5,
+        "score": 0.039306640625
+      },
+      {
+        "baseline_activation": 716.0,
+        "feature": 124,
+        "layer": 13,
+        "position": 5,
+        "score": 0.2314453125
+      },
+      {
+        "baseline_activation": 432.0,
+        "feature": 153,
+        "layer": 13,
+        "position": 5,
+        "score": 0.1328125
+      },
+      {
+        "baseline_activation": 168.0,
+        "feature": 159,
+        "layer": 13,
+        "position": 5,
+        "score": 0.01031494140625
+      },
+      {
+        "baseline_activation": 396.0,
+        "feature": 166,
+        "layer": 13,
+        "position": 5,
+        "score": 0.08740234375
+      },
+      {
+        "baseline_activation": 110.0,
+        "feature": 333,
+        "layer": 13,
+        "position": 5,
+        "score": 0.0014495849609375
+      },
+      {
+        "baseline_activation": 1192.0,
+        "feature": 469,
+        "layer": 13,
+        "position": 5,
+        "score": 1.8046875
+      },
+      {
+        "baseline_activation": 179.0,
+        "feature": 477,
+        "layer": 13,
+        "position": 5,
+        "score": 0.04443359375
+      },
+      {
+        "baseline_activation": 103.0,
+        "feature": 489,
+        "layer": 13,
+        "position": 5,
+        "score": 0.048828125
+      },
+      {
+        "baseline_activation": 296.0,
+        "feature": 545,
+        "layer": 13,
+        "position": 5,
+        "score": 0.00860595703125
+      },
+      {
+        "baseline_activation": 77.0,
+        "feature": 554,
+        "layer": 13,
+        "position": 5,
+        "score": 0.004974365234375
+      },
+      {
+        "baseline_activation": 177.0,
+        "feature": 615,
+        "layer": 13,
+        "position": 5,
+        "score": 0.003326416015625
+      },
+      {
+        "baseline_activation": 210.0,
+        "feature": 710,
+        "layer": 13,
+        "position": 5,
+        "score": 0.10107421875
+      },
+      {
+        "baseline_activation": 362.0,
+        "feature": 805,
+        "layer": 13,
+        "position": 5,
+        "score": 0.2060546875
+      },
+      {
+        "baseline_activation": 116.5,
+        "feature": 880,
+        "layer": 13,
+        "position": 5,
+        "score": 0.004180908203125
+      },
+      {
+        "baseline_activation": 348.0,
+        "feature": 1078,
+        "layer": 13,
+        "position": 5,
+        "score": 0.0634765625
+      },
+      {
+        "baseline_activation": 510.0,
+        "feature": 1855,
+        "layer": 13,
+        "position": 5,
+        "score": 0.75
+      },
+      {
+        "baseline_activation": 176.0,
+        "feature": 2115,
+        "layer": 13,
+        "position": 5,
+        "score": 0.2333984375
+      },
+      {
+        "baseline_activation": 196.0,
+        "feature": 2136,
+        "layer": 13,
+        "position": 5,
+        "score": 0.003936767578125
+      },
+      {
+        "baseline_activation": 105.0,
+        "feature": 2429,
+        "layer": 13,
+        "position": 5,
+        "score": 0.0198974609375
+      },
+      {
+        "baseline_activation": 330.0,
+        "feature": 2485,
+        "layer": 13,
+        "position": 5,
+        "score": 0.01324462890625
+      },
+      {
+        "baseline_activation": 200.0,
+        "feature": 3141,
+        "layer": 13,
+        "position": 5,
+        "score": 0.052734375
+      },
+      {
+        "baseline_activation": 113.0,
+        "feature": 4349,
+        "layer": 13,
+        "position": 5,
+        "score": 0.00872802734375
+      },
+      {
+        "baseline_activation": 171.0,
+        "feature": 5567,
+        "layer": 13,
+        "position": 5,
+        "score": 0.032958984375
+      },
+      {
+        "baseline_activation": 276.0,
+        "feature": 7775,
+        "layer": 13,
+        "position": 5,
+        "score": 0.10595703125
+      },
+      {
+        "baseline_activation": 115.5,
+        "feature": 7893,
+        "layer": 13,
+        "position": 5,
+        "score": 0.016357421875
+      },
+      {
+        "baseline_activation": 125.5,
+        "feature": 7907,
+        "layer": 13,
+        "position": 5,
+        "score": 0.04931640625
+      },
+      {
+        "baseline_activation": 133.0,
+        "feature": 8135,
+        "layer": 13,
+        "position": 5,
+        "score": 0.034423828125
+      },
+      {
+        "baseline_activation": 133.0,
+        "feature": 11033,
+        "layer": 13,
+        "position": 5,
+        "score": 0.00787353515625
+      },
+      {
+        "baseline_activation": 356.0,
+        "feature": 14586,
+        "layer": 13,
+        "position": 5,
+        "score": 0.00634765625
+      },
+      {
+        "baseline_activation": 420.0,
+        "feature": 153,
+        "layer": 14,
+        "position": 5,
+        "score": 0.09423828125
+      },
+      {
+        "baseline_activation": 560.0,
+        "feature": 184,
+        "layer": 14,
+        "position": 5,
+        "score": 0.2041015625
+      },
+      {
+        "baseline_activation": 338.0,
+        "feature": 222,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0262451171875
+      },
+      {
+        "baseline_activation": 97.5,
+        "feature": 267,
+        "layer": 14,
+        "position": 5,
+        "score": 0.018798828125
+      },
+      {
+        "baseline_activation": 816.0,
+        "feature": 347,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0888671875
+      },
+      {
+        "baseline_activation": 1016.0,
+        "feature": 403,
+        "layer": 14,
+        "position": 5,
+        "score": 0.03076171875
+      },
+      {
+        "baseline_activation": 129.0,
+        "feature": 463,
+        "layer": 14,
+        "position": 5,
+        "score": 0.044189453125
+      },
+      {
+        "baseline_activation": 1824.0,
+        "feature": 500,
+        "layer": 14,
+        "position": 5,
+        "score": 0.458984375
+      },
+      {
+        "baseline_activation": 752.0,
+        "feature": 700,
+        "layer": 14,
+        "position": 5,
+        "score": 0.2890625
+      },
+      {
+        "baseline_activation": 188.0,
+        "feature": 714,
+        "layer": 14,
+        "position": 5,
+        "score": 0.01190185546875
+      },
+      {
+        "baseline_activation": 274.0,
+        "feature": 1053,
+        "layer": 14,
+        "position": 5,
+        "score": 0.1376953125
+      },
+      {
+        "baseline_activation": 107.0,
+        "feature": 1214,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0103759765625
+      },
+      {
+        "baseline_activation": 193.0,
+        "feature": 1232,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0242919921875
+      },
+      {
+        "baseline_activation": 274.0,
+        "feature": 1304,
+        "layer": 14,
+        "position": 5,
+        "score": 0.044677734375
+      },
+      {
+        "baseline_activation": 338.0,
+        "feature": 1320,
+        "layer": 14,
+        "position": 5,
+        "score": 0.2412109375
+      },
+      {
+        "baseline_activation": 398.0,
+        "feature": 1588,
+        "layer": 14,
+        "position": 5,
+        "score": 0.08837890625
+      },
+      {
+        "baseline_activation": 272.0,
+        "feature": 1737,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0068359375
+      },
+      {
+        "baseline_activation": 456.0,
+        "feature": 2270,
+        "layer": 14,
+        "position": 5,
+        "score": 0.09912109375
+      },
+      {
+        "baseline_activation": 238.0,
+        "feature": 3468,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0111083984375
+      },
+      {
+        "baseline_activation": 636.0,
+        "feature": 5262,
+        "layer": 14,
+        "position": 5,
+        "score": 0.06298828125
+      },
+      {
+        "baseline_activation": 150.0,
+        "feature": 6083,
+        "layer": 14,
+        "position": 5,
+        "score": 0.002685546875
+      },
+      {
+        "baseline_activation": 126.5,
+        "feature": 7930,
+        "layer": 14,
+        "position": 5,
+        "score": 0.023681640625
+      },
+      {
+        "baseline_activation": 121.0,
+        "feature": 8175,
+        "layer": 14,
+        "position": 5,
+        "score": 0.005157470703125
+      },
+      {
+        "baseline_activation": 286.0,
+        "feature": 10163,
+        "layer": 14,
+        "position": 5,
+        "score": 0.07421875
+      },
+      {
+        "baseline_activation": 152.0,
+        "feature": 10773,
+        "layer": 14,
+        "position": 5,
+        "score": 0.0263671875
+      },
+      {
+        "baseline_activation": 336.0,
+        "feature": 10852,
+        "layer": 14,
+        "position": 5,
+        "score": 0.095703125
+      },
+      {
+        "baseline_activation": 232.0,
+        "feature": 10902,
+        "layer": 14,
+        "position": 5,
+        "score": 0.04833984375
+      },
+      {
+        "baseline_activation": 410.0,
+        "feature": 12723,
+        "layer": 14,
+        "position": 5,
+        "score": 0.006561279296875
+      },
+      {
+        "baseline_activation": 181.0,
+        "feature": 13066,
+        "layer": 14,
+        "position": 5,
+        "score": 0.04931640625
+      },
+      {
+        "baseline_activation": 125.5,
+        "feature": 15025,
+        "layer": 14,
+        "position": 5,
+        "score": 0.00933837890625
+      },
+      {
+        "baseline_activation": 118.5,
+        "feature": 48,
+        "layer": 15,
+        "position": 5,
+        "score": 0.00750732421875
+      },
+      {
+        "baseline_activation": 568.0,
+        "feature": 60,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0081787109375
+      },
+      {
+        "baseline_activation": 350.0,
+        "feature": 73,
+        "layer": 15,
+        "position": 5,
+        "score": 0.060791015625
+      },
+      {
+        "baseline_activation": 568.0,
+        "feature": 252,
+        "layer": 15,
+        "position": 5,
+        "score": 0.1494140625
+      },
+      {
+        "baseline_activation": 1512.0,
+        "feature": 268,
+        "layer": 15,
+        "position": 5,
+        "score": 0.06005859375
+      },
+      {
+        "baseline_activation": 138.0,
+        "feature": 321,
+        "layer": 15,
+        "position": 5,
+        "score": 0.03271484375
+      },
+      {
+        "baseline_activation": 91.5,
+        "feature": 332,
+        "layer": 15,
+        "position": 5,
+        "score": 0.00592041015625
+      },
+      {
+        "baseline_activation": 126.0,
+        "feature": 355,
+        "layer": 15,
+        "position": 5,
+        "score": 0.052490234375
+      },
+      {
+        "baseline_activation": 328.0,
+        "feature": 489,
+        "layer": 15,
+        "position": 5,
+        "score": 0.078125
+      },
+      {
+        "baseline_activation": 1560.0,
+        "feature": 546,
+        "layer": 15,
+        "position": 5,
+        "score": 1.65625
+      },
+      {
+        "baseline_activation": 378.0,
+        "feature": 619,
+        "layer": 15,
+        "position": 5,
+        "score": 0.09521484375
+      },
+      {
+        "baseline_activation": 180.0,
+        "feature": 633,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0712890625
+      },
+      {
+        "baseline_activation": 104.0,
+        "feature": 666,
+        "layer": 15,
+        "position": 5,
+        "score": 0.029052734375
+      },
+      {
+        "baseline_activation": 338.0,
+        "feature": 774,
+        "layer": 15,
+        "position": 5,
+        "score": 0.09521484375
+      },
+      {
+        "baseline_activation": 174.0,
+        "feature": 1219,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0164794921875
+      },
+      {
+        "baseline_activation": 229.0,
+        "feature": 1222,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0478515625
+      },
+      {
+        "baseline_activation": 358.0,
+        "feature": 1446,
+        "layer": 15,
+        "position": 5,
+        "score": 0.04443359375
+      },
+      {
+        "baseline_activation": 186.0,
+        "feature": 1998,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0301513671875
+      },
+      {
+        "baseline_activation": 136.0,
+        "feature": 2006,
+        "layer": 15,
+        "position": 5,
+        "score": 0.051513671875
+      },
+      {
+        "baseline_activation": 126.5,
+        "feature": 2131,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0189208984375
+      },
+      {
+        "baseline_activation": 241.0,
+        "feature": 2218,
+        "layer": 15,
+        "position": 5,
+        "score": 0.007781982421875
+      },
+      {
+        "baseline_activation": 154.0,
+        "feature": 2337,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0174560546875
+      },
+      {
+        "baseline_activation": 338.0,
+        "feature": 2840,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0654296875
+      },
+      {
+        "baseline_activation": 156.0,
+        "feature": 2916,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0235595703125
+      },
+      {
+        "baseline_activation": 138.0,
+        "feature": 3433,
+        "layer": 15,
+        "position": 5,
+        "score": 0.01904296875
+      },
+      {
+        "baseline_activation": 194.0,
+        "feature": 4135,
+        "layer": 15,
+        "position": 5,
+        "score": 0.039794921875
+      },
+      {
+        "baseline_activation": 152.0,
+        "feature": 4813,
+        "layer": 15,
+        "position": 5,
+        "score": 0.005462646484375
+      },
+      {
+        "baseline_activation": 208.0,
+        "feature": 6750,
+        "layer": 15,
+        "position": 5,
+        "score": 0.0181884765625
+      },
+      {
+        "baseline_activation": 213.0,
+        "feature": 7227,
+        "layer": 15,
+        "position": 5,
+        "score": 0.00732421875
+      },
+      {
+        "baseline_activation": 219.0,
+        "feature": 7798,
+        "layer": 15,
+        "position": 5,
+        "score": 0.04638671875
+      },
+      {
+        "baseline_activation": 172.0,
+        "feature": 11969,
+        "layer": 15,
+        "position": 5,
+        "score": 0.154296875
+      },
+      {
+        "baseline_activation": 908.0,
+        "feature": 15435,
+        "layer": 15,
+        "position": 5,
+        "score": 0.10595703125
+      },
+      {
+        "baseline_activation": 528.0,
+        "feature": 78,
+        "layer": 16,
+        "position": 5,
+        "score": 0.009521484375
+      },
+      {
+        "baseline_activation": 418.0,
+        "feature": 128,
+        "layer": 16,
+        "position": 5,
+        "score": 0.00897216796875
+      },
+      {
+        "baseline_activation": 132.0,
+        "feature": 155,
+        "layer": 16,
+        "position": 5,
+        "score": 0.047607421875
+      },
+      {
+        "baseline_activation": 191.0,
+        "feature": 163,
+        "layer": 16,
+        "position": 5,
+        "score": 0.040283203125
+      },
+      {
+        "baseline_activation": 1064.0,
+        "feature": 293,
+        "layer": 16,
+        "position": 5,
+        "score": 0.10888671875
+      },
+      {
+        "baseline_activation": 422.0,
+        "feature": 335,
+        "layer": 16,
+        "position": 5,
+        "score": 0.052001953125
+      },
+      {
+        "baseline_activation": 768.0,
+        "feature": 421,
+        "layer": 16,
+        "position": 5,
+        "score": 0.234375
+      },
+      {
+        "baseline_activation": 832.0,
+        "feature": 555,
+        "layer": 16,
+        "position": 5,
+        "score": 0.06298828125
+      },
+      {
+        "baseline_activation": 1784.0,
+        "feature": 769,
+        "layer": 16,
+        "position": 5,
+        "score": 0.6875
+      },
+      {
+        "baseline_activation": 318.0,
+        "feature": 1288,
+        "layer": 16,
+        "position": 5,
+        "score": 0.005035400390625
+      },
+      {
+        "baseline_activation": 272.0,
+        "feature": 1602,
+        "layer": 16,
+        "position": 5,
+        "score": 0.0986328125
+      },
+      {
+        "baseline_activation": 334.0,
+        "feature": 2371,
+        "layer": 16,
+        "position": 5,
+        "score": 0.06689453125
+      },
+      {
+        "baseline_activation": 336.0,
+        "feature": 2512,
+        "layer": 16,
+        "position": 5,
+        "score": 0.1455078125
+      },
+      {
+        "baseline_activation": 270.0,
+        "feature": 3662,
+        "layer": 16,
+        "position": 5,
+        "score": 0.0177001953125
+      },
+      {
+        "baseline_activation": 193.0,
+        "feature": 4258,
+        "layer": 16,
+        "position": 5,
+        "score": 0.0634765625
+      },
+      {
+        "baseline_activation": 548.0,
+        "feature": 6097,
+        "layer": 16,
+        "position": 5,
+        "score": 0.12890625
+      },
+      {
+        "baseline_activation": 404.0,
+        "feature": 6141,
+        "layer": 16,
+        "position": 5,
+        "score": 0.051513671875
+      },
+      {
+        "baseline_activation": 268.0,
+        "feature": 8198,
+        "layer": 16,
+        "position": 5,
+        "score": 0.01092529296875
+      },
+      {
+        "baseline_activation": 230.0,
+        "feature": 9308,
+        "layer": 16,
+        "position": 5,
+        "score": 0.01446533203125
+      },
+      {
+        "baseline_activation": 326.0,
+        "feature": 13515,
+        "layer": 16,
+        "position": 5,
+        "score": 0.053466796875
+      },
+      {
+        "baseline_activation": 442.0,
+        "feature": 14802,
+        "layer": 16,
+        "position": 5,
+        "score": 0.08837890625
+      },
+      {
+        "baseline_activation": 292.0,
+        "feature": 15315,
+        "layer": 16,
+        "position": 5,
+        "score": 0.03759765625
+      },
+      {
+        "baseline_activation": 346.0,
+        "feature": 128,
+        "layer": 17,
+        "position": 5,
+        "score": 0.06787109375
+      },
+      {
+        "baseline_activation": 360.0,
+        "feature": 170,
+        "layer": 17,
+        "position": 5,
+        "score": 0.014892578125
+      },
+      {
+        "baseline_activation": 840.0,
+        "feature": 193,
+        "layer": 17,
+        "position": 5,
+        "score": 0.080078125
+      },
+      {
+        "baseline_activation": 198.0,
+        "feature": 297,
+        "layer": 17,
+        "position": 5,
+        "score": 0.01507568359375
+      },
+      {
+        "baseline_activation": 1320.0,
+        "feature": 305,
+        "layer": 17,
+        "position": 5,
+        "score": 0.4375
+      },
+      {
+        "baseline_activation": 300.0,
+        "feature": 347,
+        "layer": 17,
+        "position": 5,
+        "score": 0.0576171875
+      },
+      {
+        "baseline_activation": 212.0,
+        "feature": 441,
+        "layer": 17,
+        "position": 5,
+        "score": 0.017578125
+      },
+      {
+        "baseline_activation": 1056.0,
+        "feature": 467,
+        "layer": 17,
+        "position": 5,
+        "score": 0.0279541015625
+      },
+      {
+        "baseline_activation": 672.0,
+        "feature": 468,
+        "layer": 17,
+        "position": 5,
+        "score": 0.2119140625
+      },
+      {
+        "baseline_activation": 173.0,
+        "feature": 618,
+        "layer": 17,
+        "position": 5,
+        "score": 0.0022430419921875
+      },
+      {
+        "baseline_activation": 456.0,
+        "feature": 865,
+        "layer": 17,
+        "position": 5,
+        "score": 0.419921875
+      },
+      {
+        "baseline_activation": 656.0,
+        "feature": 936,
+        "layer": 17,
+        "position": 5,
+        "score": 0.1943359375
+      },
+      {
+        "baseline_activation": 338.0,
+        "feature": 1052,
+        "layer": 17,
+        "position": 5,
+        "score": 0.003692626953125
+      },
+      {
+        "baseline_activation": 1960.0,
+        "feature": 1191,
+        "layer": 17,
+        "position": 5,
+        "score": 2.484375
+      },
+      {
+        "baseline_activation": 310.0,
+        "feature": 1359,
+        "layer": 17,
+        "position": 5,
+        "score": 0.01361083984375
+      },
+      {
+        "baseline_activation": 326.0,
+        "feature": 2200,
+        "layer": 17,
+        "position": 5,
+        "score": 0.19921875
+      },
+      {
+        "baseline_activation": 244.0,
+        "feature": 2410,
+        "layer": 17,
+        "position": 5,
+        "score": 0.0032958984375
+      },
+      {
+        "baseline_activation": 318.0,
+        "feature": 2497,
+        "layer": 17,
+        "position": 5,
+        "score": 0.002288818359375
+      },
+      {
+        "baseline_activation": 228.0,
+        "feature": 3514,
+        "layer": 17,
+        "position": 5,
+        "score": 0.1435546875
+      },
+      {
+        "baseline_activation": 294.0,
+        "feature": 5137,
+        "layer": 17,
+        "position": 5,
+        "score": 0.051513671875
+      },
+      {
+        "baseline_activation": 254.0,
+        "feature": 5729,
+        "layer": 17,
+        "position": 5,
+        "score": 0.0203857421875
+      },
+      {
+        "baseline_activation": 556.0,
+        "feature": 7416,
+        "layer": 17,
+        "position": 5,
+        "score": 0.255859375
+      },
+      {
+        "baseline_activation": 612.0,
+        "feature": 9865,
+        "layer": 17,
+        "position": 5,
+        "score": 0.44140625
+      }
+    ],
+    "excluded_counts": {
+      "non_final_position": 1782,
+      "nonfinite_baseline": 0,
+      "nonfinite_score": 0,
+      "nonpositive_baseline": 0
+    },
+    "raw_graph_persisted": false,
+    "rule": "highest_absolute_direct_contribution_to_baseline_top_logit_at_final_token",
+    "source_class": "selected_graph_features",
+    "source_count": 2152
+  },
+  "status": "passed",
+  "token_count": 6,
+  "token_ids": [
+    2,
+    818,
+    5279,
+    529,
+    7001,
+    563
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "artifact_type": "stage1a_small_model_mps_bf16_environment",
+  "branch": "stage-1a-small-model-mps-bf16",
+  "environment": {
+    "circuit_tracer": "0.5.2",
+    "fallback_variable_present": false,
+    "huggingface_hub": "0.36.2",
+    "lock_sha256": "84f502dccd0f1b3a686c6cf5266f3c6e1103f256a8206dd37c748413e7cffee0",
+    "machine": "arm64",
+    "macos": "26.6.2",
+    "mps_available": true,
+    "mps_built": true,
+    "nnsight": "0.6.1",
+    "outer_autocast_enabled": false,
+    "python": "3.11.13",
+    "safetensors": "0.8.0",
+    "source_mandated_internal_fp32": [
+      "gemma3_rmsnorm_accumulation_then_cast_back",
+      "gemma3_rotary_frequency_trigonometry_then_cast_back",
+      "gemma3_attention_softmax_then_cast_back"
+    ],
+    "torch": "2.6.0",
+    "transformers": "4.57.3",
+    "upstream_commit": "8f1e2438df612464e229e44c4a00ff637bf9379b"
+  },
+  "environment_path_class": ".venv-stage1a-small-model-mps-bf16/bin/python",
+  "execution_commit": "6a5c21027fbb6b83e34c39db75987b0ce5b72d17",
+  "fallback_enabled": false,
+  "schema_version": 1,
+  "secret_values_recorded": false,
+  "status": "passed"
+}

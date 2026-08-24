@@ -1,6 +1,6 @@
 # Stage 1A-S-BF16 local small-model MPS/BF16 recovery plan
 
-Status: `PRE_RUN_FREEZE_READY`
+Status: `COMPLETED_LOCAL_RUNTIME_VALIDATION`
 
 ## Purpose and experiment identity
 
@@ -230,3 +230,19 @@ These corrections do not change the prompt, model, PLT subset, backend,
 device, dtype, feature-selection rule, attribution settings, intervention
 mapping, or normalized-L2 tolerance. A new pre-run commit and push are required
 before the fresh accepted run.
+
+## Accepted gate record (2026-08-24)
+
+The corrected pre-run implementation was committed and pushed at
+`6a5c21027fbb6b83e34c39db75987b0ce5b72d17` before canonical accepted outputs
+were generated. The fresh clean worker passed at the first frozen batch size,
+64; no OOM retry or fallback occurred. The finite graph contained 2,152
+selected features and 1,454,640 nonzero edges. The independently auditable
+candidate table accounted for every selected feature and reproduced the frozen
+winner. Loaded semantics, normalized-L2 and maximum-absolute baseline/no-op
+controls, half suppression, full ablation, finite-value, provenance, checksum,
+memory, swap, thermal, secret-safety, and artifact-allowlist gates all passed.
+
+The only result class is `completed_small_model_mps_bf16_pilot`. Its evidence
+and claim boundary are recorded in
+`docs/STAGE_1A_SMALL_MODEL_MPS_BF16_REPORT.md`.
