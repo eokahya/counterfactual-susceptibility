@@ -522,6 +522,13 @@ def _validate_intervention(value: dict[str, Any]) -> None:
     tolerance = float(intervention.get("baseline_noop_normalized_l2_tolerance", -1))
     if tolerance != 0.01:
         _fail("no-op tolerance changed")
+    maximum_absolute_tolerance = float(
+        intervention.get(
+            "baseline_noop_maximum_absolute_logit_difference_tolerance", math.nan
+        )
+    )
+    if maximum_absolute_tolerance != 0.0:
+        _fail("no-op maximum-absolute tolerance changed")
     for baseline_name in ("raw_baseline", "baseline", "baseline_repeat"):
         baseline_record = _mapping(intervention.get(baseline_name), baseline_name)
         _finite_summary(baseline_record["diagnostics"], f"{baseline_name} logits")
@@ -531,6 +538,16 @@ def _validate_intervention(value: dict[str, Any]) -> None:
     ):
         if float(intervention.get(key, math.inf)) > tolerance:
             _fail(f"intervention control {key} failed")
+    for key in (
+        "raw_to_frozen_baseline_maximum_absolute_logit_difference",
+        "baseline_repeat_maximum_absolute_logit_difference",
+    ):
+        maximum_control = float(intervention.get(key, math.nan))
+        if (
+            not math.isfinite(maximum_control)
+            or maximum_control > maximum_absolute_tolerance
+        ):
+            _fail(f"intervention control {key} failed")
     conditions = intervention.get("conditions", [])
     _require([item.get("alpha") for item in conditions], [0.0, 0.5, 1.0], "alphas")
     for condition in conditions:
@@ -539,6 +556,11 @@ def _validate_intervention(value: dict[str, Any]) -> None:
         desired = float(condition.get("desired_absolute_activation", math.nan))
         sent = float(condition.get("sent_absolute_activation", math.nan))
         reference = (1.0 - alpha) * baseline
+        maximum_absolute = float(
+            condition.get("maximum_absolute_logit_difference_from_baseline", math.nan)
+        )
+        if not math.isfinite(maximum_absolute) or maximum_absolute < 0.0:
+            _fail("intervention maximum absolute difference is invalid")
         if not within_bf16_ulps(desired, reference, 1) or desired != sent:
             _fail("absolute BF16 intervention mapping is invalid")
         _require(condition.get("sent_device"), "mps:0", "intervention device")
@@ -547,6 +569,11 @@ def _validate_intervention(value: dict[str, Any]) -> None:
     noop = conditions[0]
     if float(noop.get("normalized_l2_from_baseline", math.inf)) > tolerance:
         _fail("no-op intervention differs from baseline")
+    if (
+        float(noop.get("maximum_absolute_logit_difference_from_baseline", math.inf))
+        > maximum_absolute_tolerance
+    ):
+        _fail("no-op maximum absolute difference differs from baseline")
 
 
 def _validate_attempts_and_memory(
@@ -556,17 +583,39 @@ def _validate_attempts_and_memory(
     if entries != memory.get("attempts"):
         _fail("memory/timing summary does not exactly match attempt provenance")
     successful_accepted: list[dict[str, Any]] = []
+    invalidated_accepted_count = 0
+    allowed_dispositions = {
+        "engineering_preflight",
+        "invalidated_missing_required_maximum_absolute_difference",
+        "canonical_accepted",
+    }
     for raw_set in attempts.get("attempt_sets", []):
         attempt_set = _mapping(raw_set, "attempt set")
+        source = attempt_set.get("source")
+        disposition = attempt_set.get("disposition")
+        if not isinstance(source, str) or disposition not in allowed_dispositions:
+            _fail("attempt-set source or disposition is invalid")
         record = _mapping(attempt_set.get("record"), "attempt record")
         for attempt in record.get("attempts", []):
             worker = _mapping(attempt.get("worker"), "worker")
             if worker.get("status") == "passed":
                 validate_peak_hierarchy(worker.get("telemetry"))
             if attempt.get("stage") == "accepted" and worker.get("status") == "passed":
-                successful_accepted.append(worker)
+                if (
+                    source == "accepted/accepted_attempts.json"
+                    and disposition == "canonical_accepted"
+                ):
+                    successful_accepted.append(worker)
+                elif disposition == (
+                    "invalidated_missing_required_maximum_absolute_difference"
+                ):
+                    invalidated_accepted_count += 1
+                else:
+                    _fail("accepted attempt disposition is invalid")
     if len(successful_accepted) != 1:
         _fail("exactly one accepted worker must pass")
+    if invalidated_accepted_count != 1:
+        _fail("the invalidated accepted attempt is not preserved exactly once")
     accepted = successful_accepted[0]
     git = _mapping(accepted.get("git"), "accepted Git identity")
     _require(git.get("execution_commit"), execution_commit, "accepted execution SHA")

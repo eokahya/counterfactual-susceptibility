@@ -309,6 +309,7 @@ def validate_bf16_config(value: Any) -> dict[str, Any]:
         ("fp32_reference_magnitude_ratio_minimum", 0.5),
         ("fp32_reference_magnitude_ratio_maximum", 2.0),
         ("baseline_noop_normalized_l2_maximum", 0.01),
+        ("baseline_noop_maximum_absolute_logit_difference", 0.0),
         ("intervention_value_bf16_exact_required", True),
     ):
         _require(tolerances, tolerance_key, tolerance_expected, "tolerances")

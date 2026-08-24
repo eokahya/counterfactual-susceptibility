@@ -499,3 +499,23 @@ before the execution commit and accepted pilot.
 **Alternatives considered:** Loosen the gate tolerance, validate only the
 selected scalar, or ignore discrepancies in other layers. Each would conceal
 incorrect loaded-semantics coverage.
+
+## D-027 — 2026-08-24 — Invalidate an accepted runtime pass missing one required compact control
+
+**Decision:** Preserve the first batch-64 accepted runtime pass under ignored
+generated provenance, but do not publish it as the canonical accepted run. It
+omitted the binding specification's explicit maximum baseline/no-op logit
+difference field even though normalized-L2 controls were zero. Add the field,
+freeze an exact zero maximum-absolute tolerance for raw baseline, baseline
+repeat, and alpha-zero no-op, regression-test the validator, commit and push a
+new pre-run execution SHA, and run the complete accepted pilot again. Retain
+both accepted attempts with explicit dispositions in final provenance.
+
+**Reason:** A passing runtime is not sufficient when one mandatory compact
+evidence field is absent. The specification requires every genuine validator
+correction before a fresh accepted execution from a new pre-run commit.
+
+**Alternatives considered:** Derive the value later from top-logit summaries,
+edit the accepted JSON by hand, accept normalized L2 as a substitute, or omit
+the first attempt. Each would weaken the frozen artifact contract or erase
+attempt provenance.

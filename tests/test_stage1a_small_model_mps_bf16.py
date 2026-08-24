@@ -32,6 +32,7 @@ from cfsus.reproduction.small_model_mps_bf16 import (
     within_bf16_ulps,
 )
 from cfsus.reproduction.small_model_mps_bf16_artifacts import (
+    _validate_intervention,
     scan_artifact_text,
     strict_json_load,
     validate_checksum_manifest,
@@ -56,6 +57,9 @@ def test_bf16_config_is_exact_and_separate() -> None:
     assert config["runtime"]["device"] == "mps"
     assert config["runtime"]["outer_autocast_allowed"] is False
     assert config["accepted"]["intervention_alphas"] == [0.0, 0.5, 1.0]
+    assert (
+        config["tolerances"]["baseline_noop_maximum_absolute_logit_difference"] == 0.0
+    )
 
 
 @pytest.mark.parametrize(
@@ -71,6 +75,7 @@ def test_bf16_config_is_exact_and_separate() -> None:
         ("accepted", "freeze_attention", False),
         ("tolerances", "fp32_reference_norm_ratio_minimum", 0.90),
         ("tolerances", "fp32_reference_magnitude_ratio_maximum", 3.0),
+        ("tolerances", "baseline_noop_maximum_absolute_logit_difference", 1.0),
     ],
 )
 def test_bf16_config_rejects_mutation(
@@ -264,6 +269,57 @@ def test_bf16_attempt_peak_hierarchy_is_fail_closed() -> None:
     broken["stage_peaks"]["stage"]["mps_driver_bytes"] = 21
     with pytest.raises(ArtifactValidationError, match="dominate"):
         validate_peak_hierarchy(broken)
+
+
+def test_intervention_validator_requires_explicit_maximum_absolute_difference() -> None:
+    diagnostics = {
+        "device": "mps:0",
+        "dtype": "torch.bfloat16",
+        "nan_count": 0,
+        "positive_infinity_count": 0,
+        "negative_infinity_count": 0,
+        "nonfinite_count": 0,
+    }
+    compact = {"diagnostics": diagnostics}
+    conditions = []
+    for alpha, desired, maximum in ((0.0, 8.0, 0.0), (0.5, 4.0, 2.0), (1.0, 0.0, 4.0)):
+        conditions.append(
+            {
+                "alpha": alpha,
+                "baseline_activation": 8.0,
+                "desired_absolute_activation": desired,
+                "sent_absolute_activation": desired,
+                "sent_device": "mps:0",
+                "sent_dtype": "torch.bfloat16",
+                "normalized_l2_from_baseline": 0.0 if alpha == 0.0 else 0.1,
+                "maximum_absolute_logit_difference_from_baseline": maximum,
+                "logits": compact,
+            }
+        )
+    record = {
+        "status": "passed",
+        "intervention": {
+            "freeze_attention": True,
+            "runtime_monkeypatches": 0,
+            "baseline_noop_normalized_l2_tolerance": 0.01,
+            "baseline_noop_maximum_absolute_logit_difference_tolerance": 0.0,
+            "raw_baseline": compact,
+            "baseline": compact,
+            "baseline_repeat": compact,
+            "raw_to_frozen_baseline_normalized_l2": 0.0,
+            "baseline_repeat_normalized_l2": 0.0,
+            "raw_to_frozen_baseline_maximum_absolute_logit_difference": 0.0,
+            "baseline_repeat_maximum_absolute_logit_difference": 0.0,
+            "conditions": conditions,
+        },
+    }
+    _validate_intervention(record)
+    broken = copy.deepcopy(record)
+    del broken["intervention"]["conditions"][0][
+        "maximum_absolute_logit_difference_from_baseline"
+    ]
+    with pytest.raises(ArtifactValidationError, match="maximum absolute"):
+        _validate_intervention(broken)
 
 
 def test_snapshot_validator_rejects_symlink_escape(tmp_path: Path) -> None:

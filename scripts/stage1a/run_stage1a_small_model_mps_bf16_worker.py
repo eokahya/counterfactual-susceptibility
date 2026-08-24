@@ -1108,9 +1108,23 @@ def _attribution_and_intervention(
 
     baseline_last = baseline_logits[0, -1]
     tolerance = float(config["tolerances"]["baseline_noop_normalized_l2_maximum"])
+    maximum_absolute_tolerance = float(
+        config["tolerances"]["baseline_noop_maximum_absolute_logit_difference"]
+    )
     repeat_error = normalized_l2(baseline_last, repeat_logits[0, -1], torch)
     raw_error = normalized_l2(baseline_last, raw_logits[0, -1], torch)
-    if repeat_error > tolerance or raw_error > tolerance:
+    repeat_difference = torch.abs(repeat_logits[0, -1] - baseline_last)
+    raw_difference = torch.abs(raw_logits[0, -1] - baseline_last)
+    assert_mps_bf16_tensor(repeat_difference, torch, "baseline repeat difference")
+    assert_mps_bf16_tensor(raw_difference, torch, "raw baseline difference")
+    repeat_maximum_absolute = float(torch.max(repeat_difference).item())
+    raw_maximum_absolute = float(torch.max(raw_difference).item())
+    if (
+        repeat_error > tolerance
+        or raw_error > tolerance
+        or repeat_maximum_absolute > maximum_absolute_tolerance
+        or raw_maximum_absolute > maximum_absolute_tolerance
+    ):
         raise RuntimeError("baseline repeat consistency exceeded frozen tolerance")
 
     conditions: list[dict[str, Any]] = []
@@ -1134,6 +1148,11 @@ def _attribution_and_intervention(
             assert_mps_bf16_tensor(logits, torch, "intervention logits")
             torch.mps.synchronize()
         condition_error = normalized_l2(baseline_last, logits[0, -1], torch)
+        condition_difference = torch.abs(logits[0, -1] - baseline_last)
+        assert_mps_bf16_tensor(
+            condition_difference, torch, "intervention logit difference"
+        )
+        condition_maximum_absolute = float(torch.max(condition_difference).item())
         conditions.append(
             {
                 "alpha": mapping["alpha"],
@@ -1145,12 +1164,20 @@ def _attribution_and_intervention(
                 "observed_post_intervention_activation": None,
                 "observed_post_intervention_activation_accessible": False,
                 "normalized_l2_from_baseline": condition_error,
+                "maximum_absolute_logit_difference_from_baseline": (
+                    condition_maximum_absolute
+                ),
                 "logits": _compact_logits(logits, model.tokenizer, torch),
             }
         )
     noop = next(condition for condition in conditions if condition["alpha"] == 0.0)
     if float(noop["normalized_l2_from_baseline"]) > tolerance:
         raise RuntimeError("no-op consistency exceeded frozen tolerance")
+    if (
+        float(noop["maximum_absolute_logit_difference_from_baseline"])
+        > maximum_absolute_tolerance
+    ):
+        raise RuntimeError("no-op maximum absolute difference exceeded tolerance")
 
     result = {
         "status": "passed",
@@ -1204,7 +1231,16 @@ def _attribution_and_intervention(
             "baseline_repeat": _compact_logits(repeat_logits, model.tokenizer, torch),
             "raw_to_frozen_baseline_normalized_l2": raw_error,
             "baseline_repeat_normalized_l2": repeat_error,
+            "raw_to_frozen_baseline_maximum_absolute_logit_difference": (
+                raw_maximum_absolute
+            ),
+            "baseline_repeat_maximum_absolute_logit_difference": (
+                repeat_maximum_absolute
+            ),
             "baseline_noop_normalized_l2_tolerance": tolerance,
+            "baseline_noop_maximum_absolute_logit_difference_tolerance": (
+                maximum_absolute_tolerance
+            ),
             "conditions": conditions,
             "suppression_formula": "desired=(1-alpha)*baseline",
             "freeze_attention": bool(settings["freeze_attention"]),

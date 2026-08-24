@@ -211,3 +211,22 @@ regression-tested corrections; no asset, prompt, dtype, tolerance, selection
 rule, or accepted scientific parameter changed. The accepted run remains
 unexecuted until this implementation, validator, schema, tests, and lock are
 committed and pushed as one clean execution commit.
+
+## Second pre-run freeze correction (2026-08-24)
+
+The first clean batch-64 accepted runtime pass was invalidated before
+publication because its compact intervention artifact omitted the explicit
+maximum baseline/no-op logit-difference field required by the binding
+specification. The full attempt and its rejected bundle remain preserved under
+ignored generated paths. No result was hand-edited or promoted.
+
+Before a fresh accepted run, the worker now records maximum absolute logit
+difference for raw baseline, baseline repeat, no-op, half suppression, and
+full ablation. Raw baseline, baseline repeat, and alpha-zero no-op use a frozen
+exact-zero BF16 tolerance. The independent validator requires every field and
+the final attempt manifest distinguishes the invalidated pass from exactly one
+canonical accepted pass. A regression fixture proves a missing field fails.
+These corrections do not change the prompt, model, PLT subset, backend,
+device, dtype, feature-selection rule, attribution settings, intervention
+mapping, or normalized-L2 tolerance. A new pre-run commit and push are required
+before the fresh accepted run.

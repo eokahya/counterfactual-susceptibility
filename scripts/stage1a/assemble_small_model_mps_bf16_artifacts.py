@@ -44,15 +44,26 @@ from cfsus.reproduction.small_model_mps_bf16_artifacts import (  # noqa: E402
 
 GENERATED_ROOT = Path("results/generated/stage1a_small_model_mps_bf16")
 ATTEMPT_SET_PATHS = (
-    "model_gate_verified_cache/model_gate_attempts.json",
-    "loaded_semantics/loaded_semantics_attempts.json",
-    "loaded_semantics_inference_fix/loaded_semantics_attempts.json",
-    "full_plt/full_plt_attempts.json",
-    "replacement_runtime/replacement_runtime_attempts.json",
-    "smoke/smoke_attempts.json",
-    "smoke_layerwise_threshold_fix/smoke_attempts.json",
-    "smoke_selection_audit/smoke_attempts.json",
-    "accepted/accepted_attempts.json",
+    ("model_gate_verified_cache/model_gate_attempts.json", "engineering_preflight"),
+    ("loaded_semantics/loaded_semantics_attempts.json", "engineering_preflight"),
+    (
+        "loaded_semantics_inference_fix/loaded_semantics_attempts.json",
+        "engineering_preflight",
+    ),
+    ("full_plt/full_plt_attempts.json", "engineering_preflight"),
+    (
+        "replacement_runtime/replacement_runtime_attempts.json",
+        "engineering_preflight",
+    ),
+    ("smoke/smoke_attempts.json", "engineering_preflight"),
+    ("smoke_layerwise_threshold_fix/smoke_attempts.json", "engineering_preflight"),
+    ("smoke_selection_audit/smoke_attempts.json", "engineering_preflight"),
+    ("smoke_max_abs_control/smoke_attempts.json", "engineering_preflight"),
+    (
+        "accepted_missing_max_abs/accepted_attempts.json",
+        "invalidated_missing_required_maximum_absolute_difference",
+    ),
+    ("accepted/accepted_attempts.json", "canonical_accepted"),
 )
 ORPHAN_ATTEMPT_PATHS = ("model_gate/model_forward_attempt.json",)
 
@@ -146,8 +157,8 @@ def main() -> int:
         raise RuntimeError("accepted empirical summary is not successful")
 
     attempt_sets = [
-        {"source": relative, "record": _read(relative)}
-        for relative in ATTEMPT_SET_PATHS
+        {"source": relative, "disposition": disposition, "record": _read(relative)}
+        for relative, disposition in ATTEMPT_SET_PATHS
     ]
     attempts_record = {
         "schema_version": 1,
