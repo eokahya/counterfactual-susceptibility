@@ -1,0 +1,52 @@
+{
+  "generated_from": "official_hugging_face_metadata_only",
+  "model": {
+    "files": [
+      {"path": "added_tokens.json", "reported_bytes": 35},
+      {"path": "config.json", "reported_bytes": 1352},
+      {"path": "generation_config.json", "reported_bytes": 133},
+      {"lfs_sha256": "abb58eb73aece5163624090d5383c59cbcdb9e9539ec84cb864f74386c4b21d5", "path": "model.safetensors", "reported_bytes": 536223056},
+      {"path": "special_tokens_map.json", "reported_bytes": 662},
+      {"lfs_sha256": "7d4046bf0505a327dd5a0abbb427ecd4fc82f99c2ceaa170bc61ecde12809b0c", "path": "tokenizer.json", "reported_bytes": 33384570},
+      {"lfs_sha256": "1299c11d7cf632ef3b4e11937501358ada021bbdf7c47638d13c0ee982f2e79c", "path": "tokenizer.model", "reported_bytes": 4689074},
+      {"path": "tokenizer_config.json", "reported_bytes": 1155375}
+    ],
+    "identifier": "google/gemma-3-270m",
+    "projected_bytes": 575454257,
+    "revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1"
+  },
+  "projected_total_bytes": 2087816677,
+  "schema_version": 1,
+  "transcoder": {
+    "excluded": [
+      "transcoder_all/width_16k_l0_small/config_orig.yaml",
+      "transcoder_all/width_16k_l0_small/features/**",
+      "all other subfolders and widths"
+    ],
+    "files": [
+      {"path": "transcoder_all/width_16k_l0_small/config.yaml", "reported_bytes": 260},
+      {"lfs_sha256": "95a7679af71cc42f21335563e20e7593e49e5e220bad7b5aa943ed78bf9eae6f", "path": "transcoder_all/width_16k_l0_small/layer_0.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "64472d207271b9552b916ce8737bd99f4d2a7d62729dc9466dc1387452365f0f", "path": "transcoder_all/width_16k_l0_small/layer_1.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "9ade8e100fe297678820d4d5da18cec89962fc556bf67a38a44855e358f13258", "path": "transcoder_all/width_16k_l0_small/layer_2.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "0bf482b009da48aea967a51a1c80cc4ac39bee36a8ea2bff618b0432f52cf99c", "path": "transcoder_all/width_16k_l0_small/layer_3.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "e1ebcead14226a370926f059b37106af5829d4afc46ca1748410df677d7afb47", "path": "transcoder_all/width_16k_l0_small/layer_4.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "72ab6fd20af194fa5291578befa15198e981793d1bf5667c39e7606d3237fac8", "path": "transcoder_all/width_16k_l0_small/layer_5.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "3cd54bc8047f7a1e30b8200d8f0d96a6220f53f282c1a56c3a27942ee7d4fd50", "path": "transcoder_all/width_16k_l0_small/layer_6.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "b7c7e29a01cf02c9175b7b78555448356552e7b2bb52c31c8e07d2c6a54fd49a", "path": "transcoder_all/width_16k_l0_small/layer_7.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "03a992ef36dc25a6391f3b65be5a85f5f4608c7974c644a79b6081b7696e164d", "path": "transcoder_all/width_16k_l0_small/layer_8.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "ea12c478b2fc56a0d301d2506ea424811e4a470131fdf7ee4a9d05be9423c3a6", "path": "transcoder_all/width_16k_l0_small/layer_9.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "c78837682363c37ded899c4d41040445355445d24f2d0217027d5f914f99e57b", "path": "transcoder_all/width_16k_l0_small/layer_10.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "ff59cab150a0f76e69773d1ced0d0b141c9c6e0ada850ce06672a37c46172c0a", "path": "transcoder_all/width_16k_l0_small/layer_11.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "b6189a87c24aff93ae57d3461602f6e898d0c639af5b6f95a79c23edca39a28c", "path": "transcoder_all/width_16k_l0_small/layer_12.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "1ddd51d4f506978597f6b7804812cbf2630fab7095bae0a5d9ceeab5be5d7696", "path": "transcoder_all/width_16k_l0_small/layer_13.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "61a7a5f6fbdeede936f05d3340947f99b187b1d63eb2f6f4f5da7a42f5087599", "path": "transcoder_all/width_16k_l0_small/layer_14.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "cf79045be5394a9521a43e8bdab102e1d941c367efaba6cb27e6e7a0c75996e3", "path": "transcoder_all/width_16k_l0_small/layer_15.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "411a783a10d08713961bc983678afce11b04fb5304c030ef67ff43cc0ec97fc8", "path": "transcoder_all/width_16k_l0_small/layer_16.safetensors", "reported_bytes": 84020120},
+      {"lfs_sha256": "7247771bbe1b78f89470a03bd334f916f5cbdd8b2e2cb5054811910e36fe4443", "path": "transcoder_all/width_16k_l0_small/layer_17.safetensors", "reported_bytes": 84020120}
+    ],
+    "identifier": "mwhanna/gemma-scope-2-270m-pt",
+    "projected_bytes": 1512362420,
+    "revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "subfolder": "transcoder_all/width_16k_l0_small"
+  }
+}

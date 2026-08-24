@@ -1,0 +1,123 @@
+experiment_name: stage1a_small_model_mps_fp16_pilot
+experiment_class: stage1a_small_model_mps_fp16_pilot
+completed_status: completed_small_model_mps_fp16_pilot
+claim_class: local_small_model_runtime_validation
+
+upstream:
+  repository: https://github.com/decoderesearch/circuit-tracer.git
+  version: 0.5.2
+  revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+
+model:
+  identifier: google/gemma-3-270m
+  revision: 9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1
+  architecture: Gemma3ForCausalLM
+  pretrained_variant: base
+  snapshot_name: google-gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1
+  allow_patterns:
+    - added_tokens.json
+    - config.json
+    - generation_config.json
+    - model.safetensors
+    - special_tokens_map.json
+    - tokenizer.json
+    - tokenizer.model
+    - tokenizer_config.json
+
+transcoder:
+  identifier: mwhanna/gemma-scope-2-270m-pt
+  revision: fada11860ac1d337c1e41e9da308798405b94c8e
+  subfolder: transcoder_all/width_16k_l0_small
+  model_kind: transcoder_set
+  feature_input_hook: mlp.hook_in
+  feature_output_hook: hook_mlp_out
+  layer_count: 18
+  feature_width: 16384
+  allow_patterns:
+    - transcoder_all/width_16k_l0_small/config.yaml
+    - transcoder_all/width_16k_l0_small/layer_0.safetensors
+    - transcoder_all/width_16k_l0_small/layer_1.safetensors
+    - transcoder_all/width_16k_l0_small/layer_2.safetensors
+    - transcoder_all/width_16k_l0_small/layer_3.safetensors
+    - transcoder_all/width_16k_l0_small/layer_4.safetensors
+    - transcoder_all/width_16k_l0_small/layer_5.safetensors
+    - transcoder_all/width_16k_l0_small/layer_6.safetensors
+    - transcoder_all/width_16k_l0_small/layer_7.safetensors
+    - transcoder_all/width_16k_l0_small/layer_8.safetensors
+    - transcoder_all/width_16k_l0_small/layer_9.safetensors
+    - transcoder_all/width_16k_l0_small/layer_10.safetensors
+    - transcoder_all/width_16k_l0_small/layer_11.safetensors
+    - transcoder_all/width_16k_l0_small/layer_12.safetensors
+    - transcoder_all/width_16k_l0_small/layer_13.safetensors
+    - transcoder_all/width_16k_l0_small/layer_14.safetensors
+    - transcoder_all/width_16k_l0_small/layer_15.safetensors
+    - transcoder_all/width_16k_l0_small/layer_16.safetensors
+    - transcoder_all/width_16k_l0_small/layer_17.safetensors
+
+runtime:
+  backend: nnsight
+  device: mps
+  dtype: float16
+  python: "3.11"
+  platform: macos-arm64
+  fallback_environment_variable: PYTORCH_ENABLE_MPS_FALLBACK
+  fallback_allowed: false
+  lazy_encoder: true
+  lazy_decoder: true
+  graph_metadata_device: cpu
+  scientific_tensor_device: mps
+
+prompt: The capital of France is
+
+smoke:
+  max_n_logits: 3
+  desired_logit_probability: 0.80
+  max_feature_nodes: 512
+  attribution_batch_size: 16
+  intervention_alphas: [0.0, 0.5]
+
+accepted:
+  max_n_logits: 10
+  desired_logit_probability: 0.95
+  max_feature_nodes: 4096
+  attribution_batch_sizes: [64, 32, 16]
+  intervention_alphas: [0.0, 0.5, 1.0]
+  baseline_repeat: true
+
+feature_selection:
+  primary_rule: highest_absolute_direct_contribution_to_baseline_top_logit_at_final_token
+  fallback_rule: highest_absolute_active_baseline_activation_at_final_token
+  tie_break: [layer_ascending, position_ascending, feature_ascending]
+  manual_selection_allowed: false
+
+tolerances:
+  loaded_semantics_absolute: 0.005
+  loaded_semantics_relative: 0.002
+  intervention_value_absolute: 0.005
+  intervention_value_relative: 0.002
+  baseline_noop_logits_absolute: 0.02
+  baseline_noop_logits_relative: 0.005
+
+safety_limits:
+  maximum_mps_driver_bytes: 25769803776
+  maximum_process_rss_bytes: 25769803776
+  maximum_swap_growth_bytes: 4294967296
+  minimum_available_memory_bytes: 4294967296
+  maximum_graph_buffer_bytes: 6442450944
+  maximum_transcoder_download_bytes: 6442450944
+  accepted_thermal_states: [nominal, fair]
+  sample_interval_seconds: 1.0
+
+artifacts:
+  result_directory: results/stage1a_small_model_mps_fp16
+  generated_directory: results/generated/stage1a_small_model_mps_fp16
+  environment_lock: environments/stage1a_small_model_mps/requirements-lock.txt
+  projected_download_manifest: configs/stage1a_small_model_projected_download.json
+
+readiness_on_success:
+  stage1b_engineering_readiness: true
+  stage1b_empirical_claim_readiness: false
+  official_bf16_reproduction: pending
+  reference_clt_reproduction: pending
+  counterfactual_susceptibility_result: none
+  paper_results_readiness: false

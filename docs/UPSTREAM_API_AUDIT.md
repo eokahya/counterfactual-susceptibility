@@ -323,3 +323,40 @@ These examples intentionally retain a model-revision warning and a transcoder re
 3. The scalar and batched behavior of tensor-valued intervention indices is weakly validated upstream; the local API should initially support validated scalar `(layer,position,feature)` references only.
 4. No current public contract promises target-only activation capture, inactive-target VJPs, or feature-chunked encoders. These must remain capability failures until the local adapter implements and tests the narrow wrappers described above.
 5. NNSight is explicitly experimental and its implementation uses wrapped/private module access for transcoder vectors ([`replacement_model_nnsight.py`, lines 711-713](https://github.com/decoderesearch/circuit-tracer/blob/8f1e2438df612464e229e44c4a00ff637bf9379b/circuit_tracer/replacement_model/replacement_model_nnsight.py#L711-L713)). TransformerLens should be the first adapter target for Gemma-2 2B unless the selected model/checkpoint forces NNSight.
+
+## 14. Stage 1A-S Gemma 3 / NNsight addendum (2026-08-24)
+
+This addendum is separate from the Gemma 2 / CLT audit above.
+
+- The newest tagged official release containing explicit Gemma 3 NNsight tests
+  is `circuit-tracer` v0.5.2 at
+  `8f1e2438df612464e229e44c4a00ff637bf9379b`.
+- `Gemma3ForCausalLM` maps `mlp.hook_in` to the output of
+  `model.layers[i].pre_feedforward_layernorm` and `hook_mlp_out` to the output
+  of `model.layers[i].post_feedforward_layernorm`.
+- The selected `mwhanna` files use canonical `W_enc`, `W_dec`, `b_enc`,
+  `b_dec`, and `activation_function.threshold` keys. Consequently the generic
+  PLT loader supports lazy encoder and decoder access; the lower-case native
+  GemmaScope-2 special loader and its non-lazy warning do not apply.
+- Loaded JumpReLU is strict: `x * (x > threshold)`. Equality is inactive.
+- NNsight intervention tuples carry an absolute post-gate activation. Upstream
+  subtracts the current activation internally, decodes the delta, and applies
+  it at the mapped MLP output. The project suppression mapping is therefore
+  exactly `desired=(1-alpha)*baseline`, never a delta argument.
+- NNsight defaults to CUDA unless a device is explicit. The audited constructor
+  maps explicit `mps` to `device_map={"": "mps"}`. Stage 1A-S never uses the
+  default.
+- Upstream NNsight attribution calls MPS-unsupported `to_sparse()` and mixes
+  CPU graph metadata with device indices. The isolated adapter retains dense
+  scientific values and indices on MPS while storing only COO graph metadata
+  on CPU. Tiny real-MPS equivalence tests observed zero activation error and
+  `0.00390625` maximum reconstruction error, inside the frozen FP16 tolerance.
+- The adapter was not used on a real attribution graph. The model-only gate
+  failed first, so no NNsight replacement, attribution, or intervention claim
+  is made.
+
+Immutable Hugging Face identities were verified as
+`google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1` and
+`mwhanna/gemma-scope-2-270m-pt@fada11860ac1d337c1e41e9da308798405b94c8e`.
+The selected subfolder contains exactly 18 layer safetensors plus the runtime
+`config.yaml`; feature-visualization data and other widths are excluded.

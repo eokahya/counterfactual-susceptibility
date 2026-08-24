@@ -50,6 +50,14 @@ def test_preserved_t4_verification_requires_exact_regular_file_hashes(
 def test_protected_git_state_requires_branch_refs_and_base_ancestry(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    # This unit test exercises Git ref/index policy, not the physical preserved
+    # artifact tree. A linked worktree intentionally does not copy untracked T4
+    # evidence, while the physical-alias helper has dedicated tests below.
+    monkeypatch.setattr(
+        runner,
+        "_validate_preserved_t4_index_aliases",
+        lambda _encoded_paths: None,
+    )
     values: dict[tuple[str, ...], str] = {
         ("symbolic-ref", "--quiet", "HEAD"): (f"refs/heads/{runner.EXPECTED_BRANCH}"),
         ("merge-base", runner.PROJECT_BASE_COMMIT, "HEAD"): runner.PROJECT_BASE_COMMIT,
