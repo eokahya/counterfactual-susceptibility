@@ -66,6 +66,7 @@ FORBIDDEN_PATH_PREFIXES = (
     (".venv",),
     (".venv-stage1a",),
     (".venv-stage1a-mps-py311",),
+    (".venv-stage1a-small-model-mps-bf16",),
     ("checkpoints",),
     ("data", "raw"),
     ("datasets",),

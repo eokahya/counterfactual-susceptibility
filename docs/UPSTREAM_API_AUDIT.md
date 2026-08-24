@@ -360,3 +360,60 @@ Immutable Hugging Face identities were verified as
 `mwhanna/gemma-scope-2-270m-pt@fada11860ac1d337c1e41e9da308798405b94c8e`.
 The selected subfolder contains exactly 18 layer safetensors plus the runtime
 `config.yaml`; feature-visualization data and other widths are excluded.
+
+## 15. Stage 1A-S-BF16 recovery addendum (2026-08-24)
+
+This addendum applies only to the separate native MPS/BF16 recovery class.
+
+- The smallest valid dependency starting point remains native arm64 CPython
+  3.11.13, PyTorch 2.6.0, NNsight 0.6.1, Transformers 4.57.3,
+  Hugging Face Hub 0.36.2, safetensors 0.8.0, and circuit-tracer v0.5.2 at
+  `8f1e2438df612464e229e44c4a00ff637bf9379b`. Source inspection showed no
+  reason to upgrade. A new isolated venv reproduced all 118 lock entries,
+  passed `pip check`, and retained the exact circuit-tracer VCS commit.
+- The exact model safetensors header contains 236 BF16 tensors. The selected
+  PLT layer headers each contain canonical `W_enc`, `W_dec`, `b_enc`, `b_dec`,
+  and `activation_function.threshold` tensors stored as FP32. The canonical
+  loader constructs/moves every PLT tensor to its explicit requested dtype;
+  accepted execution requests BF16 and verifies the observed result.
+- PyTorch 2.6 maps BF16 to native MPSGraph BF16 on supported macOS releases,
+  but source support is not universal operator evidence. Every critical
+  forward, indexing, gradient, sparse-boundary, and NNsight operation remains
+  gated by a real MPS/BF16 probe.
+- Transformers 4.57.3 performs three source-mandated FP32 subcomputations on
+  the same MPS device: Gemma 3 RMSNorm accumulation/weight multiplication,
+  rotary frequency/trigonometry, and attention softmax. Each casts back to the
+  input/query dtype. These exceptions are enumerated in the BF16 config. No
+  outer autocast, hidden FP16 conversion, or FP32 residual/model fallback is
+  permitted.
+- NNsight receives explicit `device_map={"": "mps"}` and the requested dtype
+  from circuit-tracer; its defaults must never select CUDA/CPU implicitly.
+  Transcoders are moved to the model device/dtype during replacement-model
+  configuration.
+- Native MPS `.to_sparse()` remains unsupported in the audited path. The prior
+  FP16 runtime adapter cannot be reused verbatim because it hard-codes FP16,
+  converts values to CPU FP32, and monkey-patches upstream objects at runtime.
+  The BF16 path must use isolated local classes/functions: BF16 scientific
+  values and dense reconstruction stay on MPS, only COO graph metadata moves
+  to CPU, and attribution context/index placement is explicit. No installed
+  third-party package is edited or monkey-patched.
+- Upstream intervention consumes an absolute post-gate activation and computes
+  the decoder delta internally. Baseline, repeat, no-op, half, and full must use
+  the same frozen attention/constraint convention. The prior FP16 worker used
+  different conventions for baseline and intervention; the BF16 path corrects
+  that control before any accepted run.
+
+Before the accepted execution commit, the audited local subclasses passed real
+MPS/BF16 model, one-layer PLT, full 18-PLT, NNsight replacement, attribution,
+and intervention engineering gates. The sparse adapter stored BF16 values and
+COO coordinates on CPU while keeping direct-effect vectors and gradients on
+MPS/BF16; adapter counters showed one component call, multiple batch calls,
+CPU-only partial ranking, and zero runtime monkeypatches. Full loaded semantics
+required each PLT layer's own threshold vector. All intervention controls used
+the same `freeze_attention=true` convention and passed the exact absolute
+activation `(1-alpha)*baseline` to upstream.
+
+These are pre-accepted engineering results only. They establish capability for
+freezing the accepted protocol; they do not establish the accepted pilot,
+CUDA equivalence, PLT/CLT equivalence, reference reproduction, Counterfactual
+Susceptibility, or paper Results evidence.

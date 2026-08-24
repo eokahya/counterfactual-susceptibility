@@ -25,6 +25,7 @@ htmlcov/
 .venv-stage1a/
 .venv-stage1a-mps-py311/
 .venv-stage1a-small-model-mps-py311/
+.venv-stage1a-small-model-mps-bf16/
 venv*/
 venv/
 env/

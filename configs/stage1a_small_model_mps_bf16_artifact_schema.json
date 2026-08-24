@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage1a-small-model-mps-bf16-artifact-bundle-v1",
+  "title": "Stage 1A-S-BF16 small derived artifact bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_class",
+    "completed_status",
+    "artifact_allowlist",
+    "maximum_json_bytes",
+    "maximum_checksum_bytes",
+    "runtime",
+    "provenance",
+    "readiness_on_success"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "experiment_class": {
+      "const": "stage1a_small_model_mps_bf16_pilot"
+    },
+    "completed_status": {
+      "const": "completed_small_model_mps_bf16_pilot"
+    },
+    "artifact_allowlist": {
+      "const": [
+        "asset_manifest.json",
+        "attempts.json",
+        "attribution_summary.json",
+        "checksums.sha256",
+        "environment_manifest.json",
+        "fp32_reference_summary.json",
+        "intervention_summary.json",
+        "loaded_semantics_summary.json",
+        "memory_timing_summary.json",
+        "model_forward_summary.json",
+        "operator_probe_summary.json",
+        "preflight_summary.json",
+        "run_manifest.json"
+      ]
+    },
+    "maximum_json_bytes": {
+      "const": 2097152
+    },
+    "maximum_checksum_bytes": {
+      "const": 4194304
+    },
+    "runtime": {
+      "const": {
+        "backend": "nnsight",
+        "device": "mps",
+        "dtype": "bfloat16",
+        "fallback_enabled": false,
+        "outer_autocast_enabled": false
+      }
+    },
+    "provenance": {
+      "const": {
+        "execution_base_commit": "3baf39a5ac81e172d11d22a6de332dee80a21079",
+        "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+        "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+        "transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+        "transcoder_subfolder": "transcoder_all/width_16k_l0_small"
+      }
+    },
+    "readiness_on_success": {
+      "const": {
+        "stage1b_engineering_readiness": true,
+        "stage1b_empirical_claim_readiness": false,
+        "official_bf16_reproduction": "pending",
+        "reference_clt_reproduction": "pending",
+        "counterfactual_susceptibility_result": "none",
+        "paper_results_readiness": false
+      }
+    }
+  }
+}

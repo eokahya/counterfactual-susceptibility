@@ -388,3 +388,114 @@ dtype/scientific runtime identity.
 **Revisit when:** A separately specified and reviewed experiment explicitly
 permits a different numerical execution policy. It must not be presented as
 this all-FP16 pilot or as the pending official BF16 reproduction.
+
+## D-021 — 2026-08-24 — Define MPS/BF16 recovery as a new experiment class
+
+**Decision:** Create Stage 1A-S-BF16 from exact protected commit
+`3baf39a5ac81e172d11d22a6de332dee80a21079` in a separate worktree and branch.
+Preserve the Stage 1A-S all-FP16 `failed_runtime` result unchanged. Native MPS
+with `torch.bfloat16` is a new scientific execution identity, not a retry,
+correction, or reclassification of the FP16 run.
+
+**Reason:** The BF16-trained checkpoint exceeded FP16 dynamic range at a
+reproducible residual addition. BF16 directly tests whether the checkpoint's
+native exponent range recovers finite execution without erasing the valid
+negative result or silently changing its declared runtime.
+
+**Alternatives considered:** Rewrite the FP16 report, call BF16 a retry under
+the same class, clamp or rescale residuals, or use mixed precision. Each would
+destroy provenance or change the accepted computation without a separate
+reviewed identity.
+
+## D-022 — 2026-08-24 — Permit only a separate CPU/FP32 diagnostic reference
+
+**Decision:** Accepted model, PLT, NNsight replacement, attribution, gradient,
+and intervention computation must remain native MPS/BF16 with fallback
+disabled. After a successful MPS/BF16 model-only worker exits, one short
+CPU/FP32 forward may run separately as a labeled diagnostic reference under
+thresholds frozen before model comparison. It is not fallback and cannot
+rescue a failed MPS/BF16 gate. CPU remains otherwise limited to explicit
+metadata, I/O, tokenization, checksums, telemetry, and the audited sparse-COO
+metadata boundary.
+
+**Reason:** A separately timed FP32 reference can detect catastrophic BF16
+divergence while preserving the accepted hardware/dtype identity and avoiding
+concurrent unified-memory pressure. Hidden CPU or FP32 model compute would make
+the empirical class ambiguous.
+
+**Alternatives considered:** Silent CPU fallback, FP32 upcast inside the
+accepted model, autocast/mixed precision, or concurrent reference execution.
+All either substitute the experiment or compromise resource/provenance claims.
+
+## D-023 — 2026-08-24 — Keep development and reference tracks scientifically separate
+
+**Decision:** Gemma 3 270M plus per-layer PLTs remains the Stage 1A-S
+development runtime. Gemma 2 2B plus the reference CLT remains the pending
+Stage 1A-R validation track. PLT and CLT are not equivalent; NNsight/MPS does
+not establish CUDA equivalence. Even full Stage 1A-S-BF16 success permits only
+engineering readiness and leaves empirical readiness, official BF16
+reproduction, reference CLT reproduction, Counterfactual Susceptibility, and
+paper Results pending.
+
+**Reason:** Small-model runtime capability is useful engineering evidence but
+does not answer the reference-model or proposed-algorithm questions.
+
+**Alternatives considered:** Promote a passing small-model pilot to official
+reproduction, treat PLTs and CLTs as interchangeable, or begin susceptibility
+and mediation work in this Goal. Each overstates the evidence or violates the
+predeclared Stage 1A boundary.
+
+## D-024 — 2026-08-24 — Use subclassed BF16/MPS adapters, never runtime monkeypatches
+
+**Decision:** Implement separate `MPSBF16TranscoderSet`,
+`MPSBF16AttributionContext`, and `MPSBF16ReplacementModel` subclasses plus a
+source-faithful local attribution function. Dense feature values,
+encoder/decoder vectors, residuals, gradients, and intervention tensors remain
+MPS/BF16. Only bit-exact BF16 COO and graph-ranking metadata cross to CPU. Do
+not assign replacement methods onto pinned upstream instances, classes, or
+modules.
+
+**Reason:** PyTorch 2.6.0 does not implement native MPS `to_sparse()`, while the
+prior FP16 workaround monkeypatched three upstream call sites and converted
+sparse values to FP32. Explicit subclasses make the deviation inspectable,
+typed, counted, and isolated while preserving pinned direct-effect math.
+
+**Alternatives considered:** Enable MPS fallback, edit site-packages, reuse the
+FP16 monkeypatch, or keep full scientific tensors on CPU. Each hides a runtime
+change, weakens provenance, or violates the accepted device/dtype identity.
+
+## D-025 — 2026-08-24 — Compare baseline and no-op under identical freeze semantics
+
+**Decision:** Establish the intervention baseline, baseline repeat, alpha-zero
+no-op, half suppression, and full ablation with the same baseline-active
+feature tuple, `freeze_attention=true`, and no constrained layers. Also compare
+the frozen no-op baseline to the raw replacement forward under the frozen
+normalized-L2 tolerance.
+
+**Reason:** Upstream does not build freeze hooks for an empty intervention
+list. The prior FP16 worker therefore compared an unfrozen empty baseline with
+frozen nonempty interventions. Sending the exact baseline activation as an
+absolute no-op exercises the same upstream path in every condition and leaves
+the model output unchanged when alpha is zero.
+
+**Alternatives considered:** Keep the mismatched prior control, set
+`freeze_attention=false` only for the baseline, or change the accepted
+constraint convention after effects are observed. Those choices confound the
+no-op control or make the protocol outcome-dependent.
+
+## D-026 — 2026-08-24 — Validate each loaded PLT against its own threshold vector
+
+**Decision:** Stack the 18 real loaded threshold vectors and independently
+recompute strict JumpReLU with layerwise broadcasting. Preserve the failed
+engineering attempt that incorrectly broadcast one selected layer's threshold
+vector to every layer, and require a synthetic opposing-threshold regression
+test before a fresh smoke run.
+
+**Reason:** Each PLT has distinct learned thresholds. A selected-layer vector
+cannot validate the full `[layer,position,feature]` cache. This was a validator
+mapping bug, not a runtime or scientific failure; the correction occurred
+before the execution commit and accepted pilot.
+
+**Alternatives considered:** Loosen the gate tolerance, validate only the
+selected scalar, or ignore discrepancies in other layers. Each would conceal
+incorrect loaded-semantics coverage.

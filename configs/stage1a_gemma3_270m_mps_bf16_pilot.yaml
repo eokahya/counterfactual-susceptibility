@@ -1,0 +1,192 @@
+schema_version: 1
+experiment_name: stage1a_small_model_mps_bf16_pilot
+experiment_class: stage1a_small_model_mps_bf16_pilot
+completed_status: completed_small_model_mps_bf16_pilot
+claim_class: local_small_model_runtime_validation
+execution_base_commit: 3baf39a5ac81e172d11d22a6de332dee80a21079
+
+upstream:
+  repository: https://github.com/decoderesearch/circuit-tracer.git
+  version: 0.5.2
+  revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+
+model:
+  identifier: google/gemma-3-270m
+  revision: 9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1
+  architecture: Gemma3ForCausalLM
+  pretrained_variant: base
+  layer_count: 18
+  hidden_size: 640
+  vocabulary_size: 262144
+  allow_patterns:
+    - added_tokens.json
+    - config.json
+    - generation_config.json
+    - model.safetensors
+    - special_tokens_map.json
+    - tokenizer.json
+    - tokenizer.model
+    - tokenizer_config.json
+
+transcoder:
+  identifier: mwhanna/gemma-scope-2-270m-pt
+  revision: fada11860ac1d337c1e41e9da308798405b94c8e
+  subfolder: transcoder_all/width_16k_l0_small
+  model_kind: transcoder_set
+  feature_input_hook: mlp.hook_in
+  feature_output_hook: hook_mlp_out
+  layer_count: 18
+  feature_width: 16384
+  storage_dtype: float32
+  execution_dtype: bfloat16
+  allow_patterns:
+    - transcoder_all/width_16k_l0_small/config.yaml
+    - transcoder_all/width_16k_l0_small/layer_0.safetensors
+    - transcoder_all/width_16k_l0_small/layer_1.safetensors
+    - transcoder_all/width_16k_l0_small/layer_2.safetensors
+    - transcoder_all/width_16k_l0_small/layer_3.safetensors
+    - transcoder_all/width_16k_l0_small/layer_4.safetensors
+    - transcoder_all/width_16k_l0_small/layer_5.safetensors
+    - transcoder_all/width_16k_l0_small/layer_6.safetensors
+    - transcoder_all/width_16k_l0_small/layer_7.safetensors
+    - transcoder_all/width_16k_l0_small/layer_8.safetensors
+    - transcoder_all/width_16k_l0_small/layer_9.safetensors
+    - transcoder_all/width_16k_l0_small/layer_10.safetensors
+    - transcoder_all/width_16k_l0_small/layer_11.safetensors
+    - transcoder_all/width_16k_l0_small/layer_12.safetensors
+    - transcoder_all/width_16k_l0_small/layer_13.safetensors
+    - transcoder_all/width_16k_l0_small/layer_14.safetensors
+    - transcoder_all/width_16k_l0_small/layer_15.safetensors
+    - transcoder_all/width_16k_l0_small/layer_16.safetensors
+    - transcoder_all/width_16k_l0_small/layer_17.safetensors
+
+runtime:
+  backend: nnsight
+  device: mps
+  dtype: bfloat16
+  torch_dtype: torch.bfloat16
+  python: "3.11"
+  platform: macos-arm64
+  fallback_environment_variable: PYTORCH_ENABLE_MPS_FALLBACK
+  fallback_allowed: false
+  outer_autocast_allowed: false
+  lazy_encoder: true
+  lazy_decoder: true
+  graph_metadata_device: cpu
+  scientific_tensor_device: mps
+  source_mandated_internal_fp32:
+    - gemma3_rmsnorm_accumulation_then_cast_back
+    - gemma3_rotary_frequency_trigonometry_then_cast_back
+    - gemma3_attention_softmax_then_cast_back
+  allowed_cpu_boundaries:
+    - file_io
+    - tokenization
+    - json_and_checksums
+    - telemetry
+    - sparse_coo_graph_metadata
+    - separate_post_mps_fp32_diagnostic
+
+prompts:
+  - id: bos_only
+    kind: bos_only
+    text: null
+  - id: hello
+    kind: text
+    text: Hello
+  - id: pilot
+    kind: text
+    text: The capital of France is
+
+smoke:
+  prompt_id: pilot
+  max_n_logits: 3
+  desired_logit_probability: 0.80
+  max_feature_nodes: 512
+  attribution_batch_sizes: [16, 8]
+  intervention_alphas: [0.0, 0.5, 1.0]
+  freeze_attention: true
+  constrained_layers: null
+
+accepted:
+  prompt_id: pilot
+  max_n_logits: 10
+  desired_logit_probability: 0.95
+  max_feature_nodes: 4096
+  attribution_batch_sizes: [64, 32, 16]
+  intervention_alphas: [0.0, 0.5, 1.0]
+  baseline_repeat: true
+  freeze_attention: true
+  constrained_layers: null
+
+feature_selection:
+  primary_rule: highest_absolute_direct_contribution_to_baseline_top_logit_at_final_token
+  fallback_rule: highest_absolute_active_baseline_activation_at_final_token
+  tie_break: [layer_ascending, position_ascending, feature_ascending]
+  manual_selection_allowed: false
+
+tolerances:
+  overflow_absolute: 512.0
+  overflow_relative: 0.005
+  operator_reference_absolute: 0.25
+  operator_reference_normalized_l2: 0.05
+  gate_value_bf16_ulps: 2
+  accumulated_value_bf16_ulps: 8
+  fp32_reference_cosine_minimum: 0.995
+  fp32_reference_normalized_l2_maximum: 0.05
+  fp32_reference_norm_ratio_minimum: 0.95
+  fp32_reference_norm_ratio_maximum: 1.05
+  fp32_reference_top10_overlap_minimum: 8
+  fp32_reference_top1_agreement_required: true
+  fp32_reference_magnitude_ratio_minimum: 0.5
+  fp32_reference_magnitude_ratio_maximum: 2.0
+  baseline_noop_normalized_l2_maximum: 0.01
+  intervention_value_bf16_exact_required: true
+
+safety_limits:
+  maximum_mps_driver_bytes: 25769803776
+  maximum_process_rss_bytes: 25769803776
+  maximum_swap_growth_bytes: 4294967296
+  minimum_available_memory_bytes: 4294967296
+  maximum_graph_buffer_bytes: 6442450944
+  maximum_transcoder_download_bytes: 6442450944
+  accepted_thermal_states: [nominal, fair]
+  sample_interval_seconds: 1.0
+  telemetry_failure_limit: 3
+  terminate_grace_seconds: 15.0
+  kill_grace_seconds: 5.0
+  stage_timeout_seconds:
+    model_forward: 900
+    fp32_reference: 1200
+    loaded_semantics: 900
+    full_plt: 900
+    replacement_runtime: 1200
+    smoke: 3600
+    accepted: 7200
+
+artifacts:
+  result_directory: results/stage1a_small_model_mps_bf16
+  generated_directory: results/generated/stage1a_small_model_mps_bf16
+  environment_lock: environments/stage1a_small_model_mps_bf16/requirements-lock.txt
+  projected_download_manifest: configs/stage1a_small_model_projected_download.json
+  required_files:
+    - environment_manifest.json
+    - asset_manifest.json
+    - preflight_summary.json
+    - operator_probe_summary.json
+    - model_forward_summary.json
+    - fp32_reference_summary.json
+    - loaded_semantics_summary.json
+    - attribution_summary.json
+    - intervention_summary.json
+    - memory_timing_summary.json
+    - attempts.json
+    - run_manifest.json
+    - checksums.sha256
+
+readiness_on_success:
+  stage1b_engineering_readiness: true
+  stage1b_empirical_claim_readiness: false
+  official_bf16_reproduction: pending
+  reference_clt_reproduction: pending
+  counterfactual_susceptibility_result: none
+  paper_results_readiness: false
