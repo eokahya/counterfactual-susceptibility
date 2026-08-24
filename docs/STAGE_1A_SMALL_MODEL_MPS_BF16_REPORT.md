@@ -35,7 +35,12 @@ rewrite the FP16 overflow observation.
 
 - Base commit: `3baf39a5ac81e172d11d22a6de332dee80a21079`
 - Execution commit: `6a5c21027fbb6b83e34c39db75987b0ce5b72d17`
+- Post-run artifact/report commit:
+  `7ba855ccbd1d6619561e61cafce46451708b8c64`
 - Branch: `stage-1a-small-model-mps-bf16`
+- Push status: the execution and post-run artifact/report commits were pushed
+  only to `origin/stage-1a-small-model-mps-bf16`; the remote ref was verified
+  equal to the local post-run commit before this provenance note.
 - Upstream: `decoderesearch/circuit-tracer` v0.5.2 at
   `8f1e2438df612464e229e44c4a00ff637bf9379b`
 - Model:
