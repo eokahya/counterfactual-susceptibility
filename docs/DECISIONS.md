@@ -632,3 +632,35 @@ post-outcome changes.
 **Alternatives considered:** Expand the claim to susceptibility, gate crossing,
 behavior, mediation, official BF16 reproduction, reference CLT reproduction,
 or paper readiness. None of those outcomes was measured in this Goal.
+
+# Stage 1C prospective prediction freeze
+
+**Decision:** Stage 1C starts exclusively from
+`efbf70a7e462e640a0e1819a93f3b92727bbd193` and separates baseline-only
+prediction from all inactive-target intervention execution. The prediction
+manifest, pair groups, schedule, tolerances, runtime code, validator, and
+artifact schema must be committed and pushed before the single canonical
+intervention attempt.
+
+**Reason:** A prospective test is only interpretable if outcome data cannot
+influence candidate selection, prediction definitions, or acceptance rules.
+
+**Decision:** Active sources are every exact-loaded, positive post-gate PLT
+feature that is strictly layer-upstream and causally positioned relative to at
+least one bounded inactive target. Targeted responses are computed by a
+graph-independent reverse-mode path in bounded target batches. Raw attribution
+edges, adjacency, and displayed edge normalizations are forbidden prediction
+inputs.
+
+**Decision:** The canonical edit is one absolute source-feature value with
+`freeze_attention=true` and `constrained_layers=null`. For each requested
+suppression, the desired high-precision value is
+`(1-alpha) * baseline_source_activation`; the actual MPS/BF16 value passed to
+the public intervention API and its realized suppression are recorded
+separately. Duplicate applied BF16 values are collapsed before execution.
+
+**Decision:** Target crossing uses the immutable loaded JumpReLU rule
+`z > threshold`; equality is inactive. Outcomes are limited to `supported`,
+`mixed`, `not_supported`, `no_eligible_pairs`, and `inconclusive_runtime` under
+the frozen classifier. A valid negative or mixed scientific result is not a
+runtime failure.

@@ -1,0 +1,502 @@
+#!/usr/bin/env python3
+"""Fresh baseline-only Stage 1C prediction worker; no suppression API is imported."""
+
+from __future__ import annotations
+
+import argparse
+import contextlib
+import gc
+import hashlib
+import json
+import os
+import platform
+import subprocess
+import sys
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+SOURCE_ROOT = REPOSITORY_ROOT / "src"
+if str(SOURCE_ROOT) not in sys.path:
+    sys.path.insert(0, str(SOURCE_ROOT))
+
+from cfsus.mps_telemetry import MPSTelemetrySampler  # noqa: E402
+from cfsus.reproduction.artifacts import write_json_atomic  # noqa: E402
+from cfsus.reproduction.small_model_mps_bf16 import (  # noqa: E402
+    assert_fallback_disabled,
+)
+from cfsus.scanning.near_threshold import compare_scanner_results  # noqa: E402
+from cfsus.stage1b_runtime import (  # noqa: E402
+    build_mps_bf16_replacement,
+    resolve_offline_snapshots,
+)
+from cfsus.stage1c.config import (  # noqa: E402
+    BASE_COMMIT,
+    BRANCH,
+    CONFIG_PATH,
+    load_stage1c_config,
+)
+from cfsus.stage1c.prediction import (  # noqa: E402
+    build_prospective_pair,
+    causally_eligible,
+    filter_source_pool,
+    filter_target_pool,
+    pair_score_digest,
+    select_pair_groups,
+    selected_group_records,
+    source_pool_digest,
+    target_pool_digest,
+)
+from cfsus.stage1c.runtime import Stage1CPredictionBackend  # noqa: E402
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=REPOSITORY_ROOT / CONFIG_PATH)
+    parser.add_argument("--hf-cache", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--emergency-output", type=Path, required=True)
+    return parser
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _git_identity() -> dict[str, Any]:
+    def run(*arguments: str) -> str:
+        result = subprocess.run(
+            ["git", "-C", str(REPOSITORY_ROOT), *arguments],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=15,
+            env={
+                key: value
+                for key, value in os.environ.items()
+                if not key.startswith("GIT_")
+            },
+        )
+        return result.stdout.strip()
+
+    return {
+        "head": run("rev-parse", "HEAD"),
+        "branch": run("branch", "--show-current"),
+        "working_tree_clean": run("status", "--porcelain") == "",
+    }
+
+
+def _verify_assets(cache: Path) -> dict[str, Any]:
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(
+                REPOSITORY_ROOT
+                / "scripts/stage1a/verify_small_model_mps_bf16_assets.py"
+            ),
+            "--hf-cache",
+            str(cache),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=300,
+        env={
+            **{
+                key: value
+                for key, value in os.environ.items()
+                if key
+                not in {
+                    "HF_TOKEN",
+                    "HUGGING_FACE_HUB_TOKEN",
+                    "GITHUB_TOKEN",
+                    "GH_TOKEN",
+                    "PYTORCH_ENABLE_MPS_FALLBACK",
+                }
+            },
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+        },
+    )
+    record = json.loads(result.stdout)
+    if record.get("status") != "verified":
+        raise RuntimeError("immutable asset verification failed")
+    return dict(record)
+
+
+def _protocol_hashes() -> dict[str, str]:
+    relative_paths = (
+        "configs/stage1c_first_prospective_prediction.yaml",
+        "configs/stage1c_first_prospective_prediction_artifact_schema.json",
+        "src/cfsus/stage1c/config.py",
+        "src/cfsus/stage1c/prediction.py",
+        "src/cfsus/stage1c/vjp.py",
+        "src/cfsus/stage1c/runtime.py",
+        "src/cfsus/stage1c/intervention.py",
+        "src/cfsus/stage1c/intervention_runtime.py",
+        "src/cfsus/stage1c/analysis.py",
+        "scripts/stage1c/run_stage1c_prediction_worker.py",
+        "scripts/stage1c/run_stage1c_intervention_worker.py",
+        "scripts/stage1c/preflight_stage1c.py",
+        "scripts/stage1c/run_stage1c.py",
+        "scripts/stage1c/assemble_stage1c_prediction.py",
+        "scripts/stage1c/assemble_stage1c_artifacts.py",
+        "scripts/stage1c/validate_stage1c_artifacts.py",
+    )
+    result: dict[str, str] = {}
+    for relative in relative_paths:
+        path = REPOSITORY_ROOT / relative
+        if not path.is_file() or path.is_symlink():
+            raise RuntimeError(f"frozen protocol file is missing: {relative}")
+        result[relative] = _sha256(path)
+    return result
+
+
+def _active_calibration_pairs(
+    sources: tuple[Any, ...], *, pair_count: int
+) -> tuple[tuple[Any, Any], ...]:
+    """Choose deterministic active-only endpoints disjoint from inactive targets."""
+
+    selected: list[tuple[Any, Any]] = []
+    used_sources: set[Any] = set()
+    used_targets: set[Any] = set()
+    for target_state in sources:
+        for source_state in sources:
+            source = source_state.feature
+            target = target_state.feature
+            if (
+                source in used_sources
+                or target in used_targets
+                or not causally_eligible(source, target)
+            ):
+                continue
+            selected.append((source_state, target_state))
+            used_sources.add(source)
+            used_targets.add(target)
+            break
+        if len(selected) == pair_count:
+            break
+    if len(selected) != pair_count:
+        raise RuntimeError("insufficient active-only VJP calibration endpoints")
+    return tuple(selected)
+
+
+def _execute(args: argparse.Namespace) -> dict[str, Any]:
+    config = load_stage1c_config(args.config)
+    assert_fallback_disabled()
+    if (
+        os.environ.get("HF_HUB_OFFLINE") != "1"
+        or os.environ.get("TRANSFORMERS_OFFLINE") != "1"
+    ):
+        raise RuntimeError("prediction worker requires offline mode")
+    git_start = _git_identity()
+    if git_start["branch"] != BRANCH or git_start["head"] != BASE_COMMIT:
+        raise RuntimeError("prediction worker must start from the exact Stage 1C base")
+
+    import nnsight  # type: ignore[import-not-found]
+    import torch  # type: ignore[import-not-found]
+    import transformers  # type: ignore[import-not-found]
+
+    if not torch.backends.mps.is_built() or not torch.backends.mps.is_available():
+        raise RuntimeError("native MPS is unavailable")
+    if torch.is_autocast_enabled():
+        raise RuntimeError("outer autocast must be disabled")
+    asset_manifest = _verify_assets(args.hf_cache)
+    model_snapshot, transcoder_snapshot = resolve_offline_snapshots(
+        args.hf_cache, REPOSITORY_ROOT
+    )
+    sampler = MPSTelemetrySampler(torch, config["safety_limits"], args.emergency_output)
+    sampler_finished = False
+    model: Any = None
+    pairs: list[Any] = []
+    try:
+        with sampler.stage("replacement_runtime_loading"):
+            model, module_guard = build_mps_bf16_replacement(
+                model_snapshot, transcoder_snapshot, torch
+            )
+            backend = Stage1CPredictionBackend(
+                model,
+                prompt=str(config["prompt"]["text"]),
+                prompt_id=str(config["prompt"]["id"]),
+                torch=torch,
+            )
+            tokens = model.ensure_tokenized(str(config["prompt"]["text"]))
+            token_ids = [int(item) for item in tokens.detach().cpu().tolist()]
+            if token_ids != config["prompt"]["expected_token_ids"]:
+                raise RuntimeError("prompt token identity changed")
+
+        scanner_config = config["scanner"]
+        groups = tuple(
+            (layer, position)
+            for layer in scanner_config["selected_layers"]
+            for position in scanner_config["selected_positions"]
+        )
+        with sampler.stage("prediction_dense_oracle"):
+            oracle = backend.scan(
+                groups=groups,
+                chunk_size=int(scanner_config["dense_oracle_chunk_size"]),
+                top_k_per_group=int(scanner_config["top_k_per_group"]),
+                global_top_k=int(scanner_config["global_top_k"]),
+            )
+        with sampler.stage("prediction_scanner_chunk_1024"):
+            scanner = backend.scan(
+                groups=groups,
+                chunk_size=int(scanner_config["canonical_chunk_size"]),
+                top_k_per_group=int(scanner_config["top_k_per_group"]),
+                global_top_k=int(scanner_config["global_top_k"]),
+            )
+            compare_scanner_results(oracle, scanner)
+        with sampler.stage("prediction_active_source_pool"):
+            raw_sources = backend.collect_active_sources(
+                groups=groups,
+                chunk_size=int(scanner_config["canonical_chunk_size"]),
+            )
+            eligible_targets = filter_target_pool(
+                scanner.global_candidates, raw_sources
+            )
+            sources = filter_source_pool(
+                raw_sources,
+                eligible_targets,
+                maximum_sources=int(config["source_pool"]["maximum_active_sources"]),
+            )
+            eligible_targets = filter_target_pool(eligible_targets, sources)
+            if not eligible_targets:
+                raise RuntimeError("bounded inactive target pool has no causal source")
+
+        calibration_count = int(config["engineering_calibration"]["pair_count"])
+        calibration_pairs = _active_calibration_pairs(
+            raw_sources, pair_count=calibration_count
+        )
+        with sampler.stage("prediction_many_source_vjp_active_calibration"):
+            reference = backend.targeted_local_responses(
+                tuple(
+                    (source.feature, target.feature)
+                    for source, target in calibration_pairs
+                ),
+                maximum_pairs=calibration_count,
+            )
+            calibration_tile = backend.response_tile(
+                targets=tuple(target.feature for _, target in calibration_pairs),
+                sources=tuple(source for source, _ in calibration_pairs),
+                maximum_targets=calibration_count,
+            )
+        calibration_values = tuple(
+            float(calibration_tile[index][index]) for index in range(calibration_count)
+        )
+        reference_values = tuple(float(item.response) for item in reference)
+        if calibration_values != reference_values:
+            raise RuntimeError(
+                "many-source VJP differs from the accepted Stage 1B pairwise path"
+            )
+        del calibration_tile, reference
+        gc.collect()
+        torch.mps.empty_cache()
+
+        target_by_feature = {item.feature: item for item in eligible_targets}
+        target_features = tuple(sorted(target_by_feature))
+        batch_size = int(config["responses"]["target_batch_size"])
+        runtime_fingerprint = (
+            "gemma3-270m@9b0cfec892e2/plt@fada11860ac1/"
+            "circuit-tracer@8f1e2438df61/nnsight/mps/bf16/stage1c"
+        )
+        for start in range(0, len(target_features), batch_size):
+            selected_targets = target_features[start : start + batch_size]
+            with sampler.stage(f"prediction_target_vjp_batch_{start // batch_size}"):
+                tile = backend.response_tile(
+                    targets=selected_targets,
+                    sources=sources,
+                    maximum_targets=batch_size,
+                )
+            for target, row in zip(selected_targets, tile, strict=True):
+                candidate = target_by_feature[target]
+                for source, response in zip(sources, row, strict=True):
+                    if not causally_eligible(source.feature, target):
+                        continue
+                    pairs.append(
+                        build_prospective_pair(
+                            source=source,
+                            target=candidate,
+                            targeted_response=response,
+                            seed=str(config["scoring"]["pair_seed"]),
+                            prompt_id=str(config["prompt"]["id"]),
+                            runtime_fingerprint=runtime_fingerprint,
+                            epsilon=float(config["scoring"]["epsilon"]),
+                            tolerance=float(config["scoring"]["crossing_tolerance"]),
+                        )
+                    )
+                    if len(pairs) > int(config["responses"]["maximum_eligible_pairs"]):
+                        raise RuntimeError("eligible pair count exceeds the frozen cap")
+            del tile
+            gc.collect()
+            torch.mps.empty_cache()
+        if not pairs:
+            raise RuntimeError("prediction produced no eligible pair score")
+        selected = select_pair_groups(
+            pairs,
+            selection=config["selection"],
+            tolerance=float(config["scoring"]["crossing_tolerance"]),
+        )
+        selected_records = selected_group_records(selected, schedule=config["schedule"])
+        status_counts = Counter(item.status.value for item in pairs)
+        q_counts = {
+            "positive": sum(item.q > 0.0 for item in pairs),
+            "zero": sum(item.q == 0.0 for item in pairs),
+            "negative": sum(item.q < 0.0 for item in pairs),
+        }
+        telemetry = sampler.finish()
+        sampler_finished = True
+        if telemetry["violations"] or telemetry["telemetry_failures"]:
+            raise RuntimeError("prediction telemetry contains a safety failure")
+        git_end = _git_identity()
+        if git_end != git_start:
+            raise RuntimeError("prediction worktree identity changed during execution")
+        prediction_manifest = {
+            "schema_version": 1,
+            "artifact_type": "stage1c_prediction_manifest",
+            "status": "prediction_frozen_ready_for_commit",
+            "experiment_class": config["experiment_class"],
+            "base_commit": BASE_COMMIT,
+            "branch": BRANCH,
+            "runtime_identity": {
+                "backend": "nnsight",
+                "device": "mps:0",
+                "dtype": "torch.bfloat16",
+                "model_revision": config["model"]["revision"],
+                "transcoder_revision": config["transcoder"]["revision"],
+                "transcoder_subfolder": config["transcoder"]["subfolder"],
+                "upstream_revision": config["upstream"]["revision"],
+            },
+            "prompt": {
+                "id": config["prompt"]["id"],
+                "text": config["prompt"]["text"],
+                "token_ids": token_ids,
+            },
+            "protocol": {
+                "scanner": dict(config["scanner"]),
+                "source_pool": dict(config["source_pool"]),
+                "responses": dict(config["responses"]),
+                "engineering_calibration": dict(config["engineering_calibration"]),
+                "scoring": dict(config["scoring"]),
+                "selection": dict(config["selection"]),
+                "schedule": dict(config["schedule"]),
+                "intervention_regime": dict(config["intervention"]),
+                "analysis": dict(config["analysis"]),
+            },
+            "baseline_pools": {
+                "scanner_candidate_count": len(scanner.global_candidates),
+                "eligible_target_count": len(eligible_targets),
+                "excluded_no_causal_source_target_count": len(scanner.global_candidates)
+                - len(eligible_targets),
+                "target_pool_sha256": target_pool_digest(eligible_targets),
+                "raw_active_source_count": len(raw_sources),
+                "eligible_source_count": len(sources),
+                "source_pool_sha256": source_pool_digest(sources),
+                "eligible_pair_count": len(pairs),
+                "pair_score_sha256": pair_score_digest(pairs),
+                "predicted_status_counts": dict(sorted(status_counts.items())),
+                "q_sign_counts": q_counts,
+                "complete_derivative_matrix_persisted": False,
+                "dense_scanner_arrays_persisted": False,
+                "many_source_vjp_engineering_calibration": {
+                    "endpoint_class": config["engineering_calibration"][
+                        "endpoint_class"
+                    ],
+                    "pair_count": calibration_count,
+                    "reference_method": config["engineering_calibration"][
+                        "reference_method"
+                    ],
+                    "comparison": "exact_bf16_identity",
+                    "passed": True,
+                    "inactive_target_intervention_calls": 0,
+                },
+            },
+            "selected_groups": selected_records,
+            "selection_audit": {
+                "primary_count": len(selected.primary),
+                "near_boundary_count": len(selected.near_boundary),
+                "directional_count": len(selected.directional),
+                "near_overlap_fallback_count": selected.near_overlap_fallback_count,
+                "directional_overlap_fallback_count": (
+                    selected.directional_overlap_fallback_count
+                ),
+                "groups_disjoint": True,
+                "primary_target_unique": True,
+                "primary_source_cap": 2,
+            },
+            "prediction_only_guards": {
+                "source_suppression_api_calls": 0,
+                "prior_inactive_target_outcome_read": False,
+                "intervention_worker_imported": False,
+                "raw_graph_read": False,
+                "raw_adjacency_read": False,
+            },
+            "protocol_file_sha256": _protocol_hashes(),
+            "config_sha256": _sha256(args.config),
+            "artifact_schema_sha256": _sha256(
+                REPOSITORY_ROOT
+                / "configs/stage1c_first_prospective_prediction_artifact_schema.json"
+            ),
+            "claim_boundary": {
+                "behavioral_importance_result": "none",
+                "mediation_result": "none",
+                "official_bf16_reproduction": "pending",
+                "reference_clt_reproduction": "pending",
+                "paper_results_readiness": False,
+            },
+        }
+        return {
+            "schema_version": 1,
+            "artifact_type": "stage1c_prediction_worker",
+            "status": "passed",
+            "git": git_end,
+            "prediction_manifest": prediction_manifest,
+            "asset_manifest": asset_manifest,
+            "environment": {
+                "machine": platform.machine(),
+                "python": platform.python_version(),
+                "torch": torch.__version__,
+                "nnsight": nnsight.__version__,
+                "transformers": transformers.__version__,
+                "mps_built": torch.backends.mps.is_built(),
+                "mps_available": torch.backends.mps.is_available(),
+                "fallback_variable_present": "PYTORCH_ENABLE_MPS_FALLBACK"
+                in os.environ,
+                "outer_autocast_enabled": torch.is_autocast_enabled(),
+            },
+            "module_guard": module_guard,
+            "scanner_validation": {
+                "group_count": len(groups),
+                "exact_dense_oracle_identity_and_order": True,
+                "bounded_oracle_recall": 1.0,
+                "dense_oracle_persisted": False,
+            },
+            "telemetry": telemetry,
+        }
+    finally:
+        if not sampler_finished:
+            with contextlib.suppress(Exception):
+                sampler.finish()
+        pairs.clear()
+        if model is not None:
+            del model
+        gc.collect()
+        torch.mps.empty_cache()
+
+
+def main() -> int:
+    args = _parser().parse_args()
+    if args.output.exists() or args.emergency_output.exists():
+        raise RuntimeError("prediction worker output paths must be new")
+    if not args.output.parent.is_dir() or not args.emergency_output.parent.is_dir():
+        raise RuntimeError("prediction worker output parents must exist")
+    result = _execute(args)
+    write_json_atomic(args.output, result)
+    print(
+        json.dumps({"status": result["status"], "phase": "prediction"}, sort_keys=True)
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

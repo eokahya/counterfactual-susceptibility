@@ -1,0 +1,1105 @@
+{
+  "artifact_schema_sha256": "f34773e34bdb6e97ebb15a0842732e402a2c616ab586c2720529e8673be60fed",
+  "artifact_type": "stage1c_prediction_manifest",
+  "base_commit": "efbf70a7e462e640a0e1819a93f3b92727bbd193",
+  "baseline_pools": {
+    "complete_derivative_matrix_persisted": false,
+    "dense_scanner_arrays_persisted": false,
+    "eligible_pair_count": 30283,
+    "eligible_source_count": 1908,
+    "eligible_target_count": 101,
+    "excluded_no_causal_source_target_count": 27,
+    "many_source_vjp_engineering_calibration": {
+      "comparison": "exact_bf16_identity",
+      "endpoint_class": "baseline_active_source_active_target_disjoint_from_inactive_pool",
+      "inactive_target_intervention_calls": 0,
+      "pair_count": 4,
+      "passed": true,
+      "reference_method": "stage1b_independent_pairwise_targeted_vjp"
+    },
+    "pair_score_sha256": "24af8096ef770e6d15188e1adb5b9e1a6808be7c5a41d53a92afcb67923364ae",
+    "predicted_status_counts": {
+      "boundary_ambiguous": 2952,
+      "definitely_crossing": 4248,
+      "not_crossing": 23083
+    },
+    "q_sign_counts": {
+      "negative": 15447,
+      "positive": 14836,
+      "zero": 0
+    },
+    "raw_active_source_count": 2152,
+    "scanner_candidate_count": 128,
+    "source_pool_sha256": "13b2954b9115c644fc05f37bb1db781d1912af548716e0b00c6fc0d3a118d352",
+    "target_pool_sha256": "318a0a1b4bf1fb5fbd75b732f8bed666c6a81261fc8894fb6f6e48190c15f73f"
+  },
+  "branch": "stage-1c-first-prospective-prediction",
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending"
+  },
+  "config_sha256": "842c73e32e040a2a4576121416d867758b2e395b91e02ab5e7837406afef5332",
+  "experiment_class": "stage1c_first_prospective_prediction",
+  "prediction_only_guards": {
+    "intervention_worker_imported": false,
+    "prior_inactive_target_outcome_read": false,
+    "raw_adjacency_read": false,
+    "raw_graph_read": false,
+    "source_suppression_api_calls": 0
+  },
+  "prompt": {
+    "id": "pilot",
+    "text": "The capital of France is",
+    "token_ids": [
+      2,
+      818,
+      5279,
+      529,
+      7001,
+      563
+    ]
+  },
+  "protocol": {
+    "analysis": {
+      "critical_bracket_distance_maximum": 0.125,
+      "median_movement_sne_maximum": 0.5,
+      "minimum_nonzero_points": 3,
+      "movement_sign_agreement_minimum": 0.8,
+      "p95_movement_sne_maximum": 1.0,
+      "undefined_metric_policy": "null_with_reason"
+    },
+    "engineering_calibration": {
+      "comparison": "exact_bf16_identity",
+      "endpoint_class": "baseline_active_source_active_target_disjoint_from_inactive_pool",
+      "inactive_target_intervention_calls": 0,
+      "pair_count": 4,
+      "reference_method": "stage1b_independent_pairwise_targeted_vjp"
+    },
+    "intervention_regime": {
+      "canonical_attempts": 1,
+      "constrained_layers": null,
+      "freeze_attention": true,
+      "mapping": "desired=(1-alpha)*baseline",
+      "source_count": 1,
+      "target_clamp_allowed": false
+    },
+    "responses": {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "graph_edge_input": "forbidden",
+      "maximum_eligible_pairs": 500000,
+      "method": "target_encoder_reverse_vjp_many_source_contraction",
+      "target_batch_size": 8
+    },
+    "scanner": {
+      "canonical_chunk_size": 1024,
+      "dense_oracle_chunk_size": 16384,
+      "dense_oracle_lifecycle": "one_group_ephemeral",
+      "feature_width": 16384,
+      "global_top_k": 128,
+      "selected_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tie_break": [
+        "margin",
+        "layer",
+        "position",
+        "feature_id"
+      ],
+      "top_k_per_group": 8
+    },
+    "schedule": {
+      "alpha_hat_offset": 0.015625,
+      "coarse_alphas": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "deduplicate_applied_bf16": true,
+      "maximum_bisection_steps": 8
+    },
+    "scoring": {
+      "crossing_tolerance": 1e-09,
+      "epsilon": 1e-12,
+      "pair_seed": "stage1c-first-prospective-v1"
+    },
+    "selection": {
+      "control_overlap_fallback": "deterministic_after_unique_exhausted",
+      "directional_maximum": 8,
+      "directional_order": [
+        "movement_over_margin_desc",
+        "target",
+        "source"
+      ],
+      "maximum_per_target": 1,
+      "maximum_primary_per_source": 2,
+      "near_boundary_maximum": 8,
+      "near_order": [
+        "distance_above_one_asc",
+        "target",
+        "source"
+      ],
+      "prefer_unused_control_targets": true,
+      "primary_maximum": 12,
+      "primary_order": [
+        "susceptibility_desc",
+        "alpha_hat_asc",
+        "target",
+        "source"
+      ]
+    },
+    "source_pool": {
+      "maximum_active_sources": 10000,
+      "ordering": [
+        "layer",
+        "position",
+        "feature_id"
+      ],
+      "raw_graph_input": "forbidden",
+      "require_causal_position": true,
+      "require_positive_activation": true,
+      "require_strictly_earlier_layer": true,
+      "selection": "all_exact_loaded_active_features_with_causal_target"
+    }
+  },
+  "protocol_file_sha256": {
+    "configs/stage1c_first_prospective_prediction.yaml": "842c73e32e040a2a4576121416d867758b2e395b91e02ab5e7837406afef5332",
+    "configs/stage1c_first_prospective_prediction_artifact_schema.json": "f34773e34bdb6e97ebb15a0842732e402a2c616ab586c2720529e8673be60fed",
+    "scripts/stage1c/assemble_stage1c_artifacts.py": "23557475b035414877f4b50316977ac1cfe0fe27cb87ca041d46b0636b72792a",
+    "scripts/stage1c/assemble_stage1c_prediction.py": "07e33aa25df1837477a2290fdc45553ff3da0e79b12f7e411fc6cd949fe9e25c",
+    "scripts/stage1c/preflight_stage1c.py": "38aed87f24e04cd1ba573cf481a1add036169c081614e776ac44dbad9f00d526",
+    "scripts/stage1c/run_stage1c.py": "7209b1fcafbfb148b32695fa54b998b756fcace04a67f5535d50d4fb43ee523b",
+    "scripts/stage1c/run_stage1c_intervention_worker.py": "c7b77e949b15bb52c52e257e1fd52692f18e341dc52b7f0708eac0280a9d7c5e",
+    "scripts/stage1c/run_stage1c_prediction_worker.py": "cb42e3e3ad5d8781fbb04cae0dfd4ecf6cfa1b52e777b39e7ebcec6d3b7280c9",
+    "scripts/stage1c/validate_stage1c_artifacts.py": "84dfd8b3d39ceacb4b0a9d1b52e9302e7e8683dc3571503eae1ab3e2dff4bebc",
+    "src/cfsus/stage1c/analysis.py": "fc15c4e66ffc6a58d16917cf2fae4d89d65f4a4831946c18eef3e39dda9cad4c",
+    "src/cfsus/stage1c/config.py": "979fd4412f78d043905b7f1eb11bd3f5a27492c821901b558f227387ff45f752",
+    "src/cfsus/stage1c/intervention.py": "2be400ec8969257eae3e2562b654e84985ccbbc33de1c31ce138f1a0c0ebb5ea",
+    "src/cfsus/stage1c/intervention_runtime.py": "7da3b3894470fa666ce3105c5080fe6d9a3dffd8245a2ad01549d62e6f2a95df",
+    "src/cfsus/stage1c/prediction.py": "7c2692d353c34a4955ad019a95627f68ac258f7629282ae685e94636963c903c",
+    "src/cfsus/stage1c/runtime.py": "6da7b680bf754c2eaacfd45716fe973ff3f99c2a630c03fb17604a055ea8d6b3",
+    "src/cfsus/stage1c/vjp.py": "f2d8444a08c8c13a3171742828e465d016dadb2a11031ba65c22dd99d183f28e"
+  },
+  "runtime_identity": {
+    "backend": "nnsight",
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "transcoder_subfolder": "transcoder_all/width_16k_l0_small",
+    "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b"
+  },
+  "schema_version": 1,
+  "selected_groups": {
+    "directional": [
+      {
+        "group": "directional",
+        "margin": 0.1875,
+        "pair_id": "aa9be1a6d1625d1cd0712ec9aea85da60f65015821b29f5c0f694d73f0e41f5c",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -147.375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 380,
+          "layer": 3,
+          "position": 3
+        },
+        "source_activation": 524.0,
+        "susceptibility": -785.999999995808,
+        "target": {
+          "feature_id": 1485,
+          "layer": 8,
+          "position": 3
+        },
+        "target_preactivation": 15.25,
+        "target_threshold": 15.4375,
+        "targeted_response": 0.28125
+      },
+      {
+        "group": "directional",
+        "margin": 0.5,
+        "pair_id": "186b91a448a9ee708ad81f5347426b43106960cc7a51df942c551c965ac0c78a",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -137.5,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 537,
+          "layer": 3,
+          "position": 1
+        },
+        "source_activation": 440.0,
+        "susceptibility": -274.99999999945004,
+        "target": {
+          "feature_id": 1008,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 37.25,
+        "target_threshold": 37.75,
+        "targeted_response": 0.3125
+      },
+      {
+        "group": "directional",
+        "margin": 0.15625,
+        "pair_id": "bb7a1840c7d896c4af223c6e2a22dfa43f123a27f9234e4ac5cd5c88ff78a273",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -35.84765625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 266,
+          "layer": 1,
+          "position": 1
+        },
+        "source_activation": 161.0,
+        "susceptibility": -229.42499999853166,
+        "target": {
+          "feature_id": 3293,
+          "layer": 2,
+          "position": 2
+        },
+        "target_preactivation": 4.09375,
+        "target_threshold": 4.25,
+        "targeted_response": 0.22265625
+      },
+      {
+        "group": "directional",
+        "margin": 0.328125,
+        "pair_id": "23dd4740e5642e1c892a3f9c7a44d673dd3092f80100ccd7a32bb4a3fba947d7",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -69.7265625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 453,
+          "layer": 1,
+          "position": 5
+        },
+        "source_activation": 204.0,
+        "susceptibility": -212.49999999935238,
+        "target": {
+          "feature_id": 278,
+          "layer": 2,
+          "position": 5
+        },
+        "target_preactivation": 2.328125,
+        "target_threshold": 2.65625,
+        "targeted_response": 0.341796875
+      },
+      {
+        "group": "directional",
+        "margin": 1.25,
+        "pair_id": "f333902c685ce52e8df6620c2648c37b5ed0dc0f56aada6f31ab77f0a7b5378d",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -249.21875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 537,
+          "layer": 3,
+          "position": 1
+        },
+        "source_activation": 440.0,
+        "susceptibility": -199.3749999998405,
+        "target": {
+          "feature_id": 4612,
+          "layer": 6,
+          "position": 1
+        },
+        "target_preactivation": 14.75,
+        "target_threshold": 16.0,
+        "targeted_response": 0.56640625
+      },
+      {
+        "group": "directional",
+        "margin": 0.6875,
+        "pair_id": "762a7cdf35e266d3c5c7866ae40bdddbef017b34560046a2272c06daae3d3d60",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -114.46875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 7717,
+          "layer": 5,
+          "position": 1
+        },
+        "source_activation": 99.0,
+        "susceptibility": -166.49999999975782,
+        "target": {
+          "feature_id": 451,
+          "layer": 6,
+          "position": 1
+        },
+        "target_preactivation": 6.5625,
+        "target_threshold": 7.25,
+        "targeted_response": 1.15625
+      },
+      {
+        "group": "directional",
+        "margin": 0.75,
+        "pair_id": "68e49310c63d58836a2ce804e1e6c20660fb90b6ba26f59bcf6524a146f03657",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -91.953125,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 537,
+          "layer": 3,
+          "position": 1
+        },
+        "source_activation": 440.0,
+        "susceptibility": -122.6041666665032,
+        "target": {
+          "feature_id": 4484,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 47.75,
+        "target_threshold": 48.5,
+        "targeted_response": 0.208984375
+      },
+      {
+        "group": "directional",
+        "margin": 0.078125,
+        "pair_id": "5ae975ee251f79ea14c958111b0e88f8065952d6f1b4bfe96dd6711cfaa54e7c",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -8.859375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 546,
+          "layer": 1,
+          "position": 4
+        },
+        "source_activation": 27.0,
+        "susceptibility": -113.39999999854847,
+        "target": {
+          "feature_id": 542,
+          "layer": 2,
+          "position": 4
+        },
+        "target_preactivation": 2.375,
+        "target_threshold": 2.453125,
+        "targeted_response": 0.328125
+      }
+    ],
+    "near_boundary": [
+      {
+        "group": "near_boundary",
+        "margin": 0.75,
+        "pair_id": "4233db1c02dff2982514ad249ac6ac9cfd907ee5e2428ec2f7c122b3d8da8bb5",
+        "predicted_alpha_star": 1.0002442002442002,
+        "predicted_status": "not_crossing",
+        "q": 0.74981689453125,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 7468,
+          "layer": 3,
+          "position": 3
+        },
+        "source_activation": 47.25,
+        "susceptibility": 0.9997558593736671,
+        "target": {
+          "feature_id": 3745,
+          "layer": 5,
+          "position": 4
+        },
+        "target_preactivation": 12.8125,
+        "target_threshold": 13.5625,
+        "targeted_response": -0.015869140625
+      },
+      {
+        "group": "near_boundary",
+        "margin": 1.0,
+        "pair_id": "e9540cc5ba5523197063ed8fc07535904498f9d15f143d04d48c2d956851afe1",
+        "predicted_alpha_star": 1.0003358060872485,
+        "predicted_status": "not_crossing",
+        "q": 0.999664306640625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 12501,
+          "layer": 1,
+          "position": 4
+        },
+        "source_activation": 5.71875,
+        "susceptibility": 0.9996643066396252,
+        "target": {
+          "feature_id": 14586,
+          "layer": 13,
+          "position": 4
+        },
+        "target_preactivation": 115.0,
+        "target_threshold": 116.0,
+        "targeted_response": -0.1748046875
+      },
+      {
+        "group": "near_boundary",
+        "margin": 0.5,
+        "pair_id": "ec665f470dbc1cac2fdf2ad69208fe049cb54e8f8fc566b0737e29a4f856401a",
+        "predicted_alpha_star": 1.0009775171065494,
+        "predicted_status": "not_crossing",
+        "q": 0.49951171875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 316,
+          "layer": 5,
+          "position": 1
+        },
+        "source_activation": 372.0,
+        "susceptibility": 0.999023437498002,
+        "target": {
+          "feature_id": 1464,
+          "layer": 8,
+          "position": 4
+        },
+        "target_preactivation": 16.5,
+        "target_threshold": 17.0,
+        "targeted_response": -0.0013427734375
+      },
+      {
+        "group": "near_boundary",
+        "margin": 0.75,
+        "pair_id": "5fca91cc2714dc58c316c709baffd1ad1c525deb9fe645f2a24d79776cd6f352",
+        "predicted_alpha_star": 1.0009775171065494,
+        "predicted_status": "not_crossing",
+        "q": 0.749267578125,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 724,
+          "layer": 0,
+          "position": 2
+        },
+        "source_activation": 11.625,
+        "susceptibility": 0.999023437498668,
+        "target": {
+          "feature_id": 153,
+          "layer": 9,
+          "position": 5
+        },
+        "target_preactivation": 17.0,
+        "target_threshold": 17.75,
+        "targeted_response": -0.064453125
+      },
+      {
+        "group": "near_boundary",
+        "margin": 1.125,
+        "pair_id": "dfa5d5a4a02b9076ce51e1416f3bb44f388b1fdf0ebf6e486099487a849bf9e5",
+        "predicted_alpha_star": 1.001303780964798,
+        "predicted_status": "not_crossing",
+        "q": 1.12353515625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 1472,
+          "layer": 6,
+          "position": 4
+        },
+        "source_activation": 88.5,
+        "susceptibility": 0.9986979166657789,
+        "target": {
+          "feature_id": 3017,
+          "layer": 9,
+          "position": 4
+        },
+        "target_preactivation": 25.0,
+        "target_threshold": 26.125,
+        "targeted_response": -0.0126953125
+      },
+      {
+        "group": "near_boundary",
+        "margin": 1.0,
+        "pair_id": "6d451b78a705b2113ef65cc75cab330a8c527308806b78d774f425c2899e7474",
+        "predicted_alpha_star": 1.0022021042329337,
+        "predicted_status": "not_crossing",
+        "q": 0.997802734375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 324,
+          "layer": 10,
+          "position": 3
+        },
+        "source_activation": 268.0,
+        "susceptibility": 0.9978027343740021,
+        "target": {
+          "feature_id": 9817,
+          "layer": 11,
+          "position": 4
+        },
+        "target_preactivation": 87.5,
+        "target_threshold": 88.5,
+        "targeted_response": -0.00372314453125
+      },
+      {
+        "group": "near_boundary",
+        "margin": 1.5,
+        "pair_id": "5229a08c747672c95d83fbdde668db7fab4f87ca3e449d71ee52d9dc7304b253",
+        "predicted_alpha_star": 1.0026518705887153,
+        "predicted_status": "not_crossing",
+        "q": 1.49603271484375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 419,
+          "layer": 2,
+          "position": 3
+        },
+        "source_activation": 386.0,
+        "susceptibility": 0.9973551432285017,
+        "target": {
+          "feature_id": 30,
+          "layer": 15,
+          "position": 4
+        },
+        "target_preactivation": 117.5,
+        "target_threshold": 119.0,
+        "targeted_response": -0.003875732421875
+      },
+      {
+        "group": "near_boundary",
+        "margin": 1.375,
+        "pair_id": "f7852fe6619e69b578530105be6cb181ba3ce8a2c177bd64134b460718c09ec5",
+        "predicted_alpha_star": 1.002670464660851,
+        "predicted_status": "not_crossing",
+        "q": 1.371337890625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 1566,
+          "layer": 3,
+          "position": 3
+        },
+        "source_activation": 82.0,
+        "susceptibility": 0.9973366477265473,
+        "target": {
+          "feature_id": 161,
+          "layer": 9,
+          "position": 4
+        },
+        "target_preactivation": 14.3125,
+        "target_threshold": 15.6875,
+        "targeted_response": -0.0167236328125
+      }
+    ],
+    "primary": [
+      {
+        "group": "primary",
+        "margin": 0.5,
+        "pair_id": "1d3be832a2a95763a3df197f83295dfab228509015e9c0fc565c8f914f7db5f2",
+        "predicted_alpha_star": 0.006225983754073642,
+        "predicted_status": "definitely_crossing",
+        "q": 80.30859375,
+        "requested_alphas": [
+          0.0,
+          0.006225983754073642,
+          0.02185098375407364,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 234,
+          "layer": 14,
+          "position": 1
+        },
+        "source_activation": 1848.0,
+        "susceptibility": 160.61718749967878,
+        "target": {
+          "feature_id": 771,
+          "layer": 15,
+          "position": 1
+        },
+        "target_preactivation": 108.5,
+        "target_threshold": 109.0,
+        "targeted_response": -0.04345703125
+      },
+      {
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "9fef73a2934067d0296e9eb8d72914366c15417944878360242bd18f721f407b",
+        "predicted_alpha_star": 0.007727835300510158,
+        "predicted_status": "definitely_crossing",
+        "q": 32.3505859375,
+        "requested_alphas": [
+          0.0,
+          0.007727835300510158,
+          0.023352835300510157,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 111,
+          "layer": 1,
+          "position": 3
+        },
+        "source_activation": 314.0,
+        "susceptibility": 129.4023437494824,
+        "target": {
+          "feature_id": 5755,
+          "layer": 10,
+          "position": 3
+        },
+        "target_preactivation": 45.5,
+        "target_threshold": 45.75,
+        "targeted_response": -0.10302734375
+      },
+      {
+        "group": "primary",
+        "margin": 0.125,
+        "pair_id": "adea8700ada5077ec76e06189b53972fb0a1a6362396a873596566967e0083f9",
+        "predicted_alpha_star": 0.007775955288257093,
+        "predicted_status": "definitely_crossing",
+        "q": 16.0751953125,
+        "requested_alphas": [
+          0.0,
+          0.007775955288257093,
+          0.023400955288257093,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 582,
+          "layer": 2,
+          "position": 3
+        },
+        "source_activation": 88.5,
+        "susceptibility": 128.6015624989712,
+        "target": {
+          "feature_id": 15884,
+          "layer": 3,
+          "position": 3
+        },
+        "target_preactivation": 21.25,
+        "target_threshold": 21.375,
+        "targeted_response": -0.181640625
+      },
+      {
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "005444146f6170c7b91125587ea2aa29264d60127ef71c69475f7584c709327a",
+        "predicted_alpha_star": 0.008495105359216857,
+        "predicted_status": "definitely_crossing",
+        "q": 29.4287109375,
+        "requested_alphas": [
+          0.0,
+          0.008495105359216857,
+          0.024120105359216857,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 761,
+          "layer": 9,
+          "position": 1
+        },
+        "source_activation": 205.0,
+        "susceptibility": 117.71484374952915,
+        "target": {
+          "feature_id": 2072,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 33.75,
+        "target_threshold": 34.0,
+        "targeted_response": -0.1435546875
+      },
+      {
+        "group": "primary",
+        "margin": 1.0,
+        "pair_id": "9ea8a228cbdcf78a0a0598b9d30ad703010f25bd47d68e4991448005206e7f80",
+        "predicted_alpha_star": 0.010408196454708083,
+        "predicted_status": "definitely_crossing",
+        "q": 96.078125,
+        "requested_alphas": [
+          0.0,
+          0.010408196454708083,
+          0.026033196454708085,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 326,
+          "layer": 11,
+          "position": 1
+        },
+        "source_activation": 688.0,
+        "susceptibility": 96.07812499990392,
+        "target": {
+          "feature_id": 11208,
+          "layer": 12,
+          "position": 1
+        },
+        "target_preactivation": 131.0,
+        "target_threshold": 132.0,
+        "targeted_response": -0.1396484375
+      },
+      {
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "087c92ec67fce4defca74e6df56739d606c90fd79cfe646e03bae138fbce42bc",
+        "predicted_alpha_star": 0.011077215984076502,
+        "predicted_status": "definitely_crossing",
+        "q": 22.56884765625,
+        "requested_alphas": [
+          0.0,
+          0.011077215984076502,
+          0.026702215984076502,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 2031,
+          "layer": 9,
+          "position": 5
+        },
+        "source_activation": 108.5,
+        "susceptibility": 90.2753906246389,
+        "target": {
+          "feature_id": 7271,
+          "layer": 10,
+          "position": 5
+        },
+        "target_preactivation": 43.75,
+        "target_threshold": 44.0,
+        "targeted_response": -0.2080078125
+      },
+      {
+        "group": "primary",
+        "margin": 0.5,
+        "pair_id": "a3d7fa50b181b96ac5979633f52e367795aa988f707dad5858f07c2db6f31ce0",
+        "predicted_alpha_star": 0.012364163245592853,
+        "predicted_status": "definitely_crossing",
+        "q": 40.439453125,
+        "requested_alphas": [
+          0.0,
+          0.012364163245592853,
+          0.027989163245592853,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 761,
+          "layer": 9,
+          "position": 1
+        },
+        "source_activation": 205.0,
+        "susceptibility": 80.87890624983825,
+        "target": {
+          "feature_id": 2082,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 39.5,
+        "target_threshold": 40.0,
+        "targeted_response": -0.197265625
+      },
+      {
+        "group": "primary",
+        "margin": 0.125,
+        "pair_id": "afe62a2b950838c2628f73557e2446baa26adcd481a16d8fb732695bcdb62483",
+        "predicted_alpha_star": 0.01241482990228171,
+        "predicted_status": "definitely_crossing",
+        "q": 10.068603515625,
+        "requested_alphas": [
+          0.0,
+          0.01241482990228171,
+          0.02803982990228171,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 324,
+          "layer": 4,
+          "position": 3
+        },
+        "source_activation": 466.0,
+        "susceptibility": 80.54882812435561,
+        "target": {
+          "feature_id": 10215,
+          "layer": 8,
+          "position": 3
+        },
+        "target_preactivation": 21.5,
+        "target_threshold": 21.625,
+        "targeted_response": -0.0216064453125
+      },
+      {
+        "group": "primary",
+        "margin": 0.3125,
+        "pair_id": "3c0d6e9cda7622090cbecd20f26c8156ecd22688633530f2d38f06dd54bd103b",
+        "predicted_alpha_star": 0.01294707881534229,
+        "predicted_status": "definitely_crossing",
+        "q": 24.13671875,
+        "requested_alphas": [
+          0.0,
+          0.01294707881534229,
+          0.028572078815342287,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 375,
+          "layer": 2,
+          "position": 5
+        },
+        "source_activation": 334.0,
+        "susceptibility": 77.23749999975284,
+        "target": {
+          "feature_id": 166,
+          "layer": 3,
+          "position": 5
+        },
+        "target_preactivation": 15.5625,
+        "target_threshold": 15.875,
+        "targeted_response": -0.072265625
+      },
+      {
+        "group": "primary",
+        "margin": 0.03125,
+        "pair_id": "65d7923bca5a9736c83cf3cb6a98e6b6d5d21ee86ff313e9511cd9f83312dff4",
+        "predicted_alpha_star": 0.014012041598248495,
+        "predicted_status": "definitely_crossing",
+        "q": 2.230224609375,
+        "requested_alphas": [
+          0.0,
+          0.014012041598248495,
+          0.029637041598248495,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 1386,
+          "layer": 0,
+          "position": 1
+        },
+        "source_activation": 11.25,
+        "susceptibility": 71.36718749771626,
+        "target": {
+          "feature_id": 4617,
+          "layer": 1,
+          "position": 1
+        },
+        "target_preactivation": 4.125,
+        "target_threshold": 4.15625,
+        "targeted_response": -0.1982421875
+      },
+      {
+        "group": "primary",
+        "margin": 1.25,
+        "pair_id": "6e09f69a54bb1baf9df376e9eaec7f51c46bf1f0bebb90e35b4946a27d7c1208",
+        "predicted_alpha_star": 0.015460430959512996,
+        "predicted_status": "definitely_crossing",
+        "q": 80.8515625,
+        "requested_alphas": [
+          0.0,
+          0.015460430959512996,
+          0.031085430959512994,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 206,
+          "layer": 10,
+          "position": 1
+        },
+        "source_activation": 1264.0,
+        "susceptibility": 64.68124999994825,
+        "target": {
+          "feature_id": 774,
+          "layer": 11,
+          "position": 1
+        },
+        "target_preactivation": 58.75,
+        "target_threshold": 60.0,
+        "targeted_response": -0.06396484375
+      },
+      {
+        "group": "primary",
+        "margin": 1.25,
+        "pair_id": "5e894ec732046044dc5d8c54adda097897267a14d1424ca8f5adfe0ae6df2075",
+        "predicted_alpha_star": 0.016772807086510994,
+        "predicted_status": "definitely_crossing",
+        "q": 74.525390625,
+        "requested_alphas": [
+          0.0,
+          0.0011478070865109935,
+          0.016772807086510994,
+          0.032397807086510994,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 503,
+          "layer": 7,
+          "position": 1
+        },
+        "source_activation": 644.0,
+        "susceptibility": 59.6203124999523,
+        "target": {
+          "feature_id": 30,
+          "layer": 8,
+          "position": 1
+        },
+        "target_preactivation": 10.375,
+        "target_threshold": 11.625,
+        "targeted_response": -0.11572265625
+      }
+    ]
+  },
+  "selection_audit": {
+    "directional_count": 8,
+    "directional_overlap_fallback_count": 0,
+    "groups_disjoint": true,
+    "near_boundary_count": 8,
+    "near_overlap_fallback_count": 0,
+    "primary_count": 12,
+    "primary_source_cap": 2,
+    "primary_target_unique": true
+  },
+  "status": "prediction_frozen_ready_for_commit"
+}

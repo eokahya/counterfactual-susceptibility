@@ -1,0 +1,132 @@
+schema_version: 1
+experiment_name: stage1c_first_prospective_prediction
+experiment_class: stage1c_first_prospective_prediction
+completed_status: completed_stage1c_first_prospective_prediction
+branch: stage-1c-first-prospective-prediction
+base_commit: efbf70a7e462e640a0e1819a93f3b92727bbd193
+phase: prediction_only_open
+
+upstream:
+  repository: https://github.com/decoderesearch/circuit-tracer.git
+  version: 0.5.2
+  revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+model:
+  identifier: google/gemma-3-270m
+  revision: 9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1
+transcoder:
+  identifier: mwhanna/gemma-scope-2-270m-pt
+  revision: fada11860ac1d337c1e41e9da308798405b94c8e
+  subfolder: transcoder_all/width_16k_l0_small
+  layer_count: 18
+  feature_width: 16384
+runtime:
+  backend: nnsight
+  device: mps
+  dtype: bfloat16
+  python: 3.11.13
+  torch: 2.6.0
+  nnsight: 0.6.1
+  transformers: 4.57.3
+  platform: macos-arm64
+  fallback_allowed: false
+  outer_autocast_allowed: false
+  scientific_tensor_device: mps
+  metadata_device: cpu
+prompt:
+  id: pilot
+  text: The capital of France is
+  expected_token_ids: [2, 818, 5279, 529, 7001, 563]
+  zero_positions: [0]
+scanner:
+  selected_layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  selected_positions: [1, 2, 3, 4, 5]
+  feature_width: 16384
+  dense_oracle_chunk_size: 16384
+  canonical_chunk_size: 1024
+  top_k_per_group: 8
+  global_top_k: 128
+  tie_break: [margin, layer, position, feature_id]
+  dense_oracle_lifecycle: one_group_ephemeral
+source_pool:
+  selection: all_exact_loaded_active_features_with_causal_target
+  ordering: [layer, position, feature_id]
+  require_positive_activation: true
+  require_strictly_earlier_layer: true
+  require_causal_position: true
+  raw_graph_input: forbidden
+  maximum_active_sources: 10000
+responses:
+  method: target_encoder_reverse_vjp_many_source_contraction
+  convention: attribution_matched_target_preactivation_pre_gate
+  graph_edge_input: forbidden
+  target_batch_size: 8
+  maximum_eligible_pairs: 500000
+engineering_calibration:
+  endpoint_class: baseline_active_source_active_target_disjoint_from_inactive_pool
+  pair_count: 4
+  reference_method: stage1b_independent_pairwise_targeted_vjp
+  comparison: exact_bf16_identity
+  inactive_target_intervention_calls: 0
+scoring:
+  epsilon: 1.0e-12
+  crossing_tolerance: 1.0e-9
+  pair_seed: stage1c-first-prospective-v1
+selection:
+  primary_maximum: 12
+  near_boundary_maximum: 8
+  directional_maximum: 8
+  maximum_per_target: 1
+  maximum_primary_per_source: 2
+  primary_order: [susceptibility_desc, alpha_hat_asc, target, source]
+  near_order: [distance_above_one_asc, target, source]
+  directional_order: [movement_over_margin_desc, target, source]
+  prefer_unused_control_targets: true
+  control_overlap_fallback: deterministic_after_unique_exhausted
+schedule:
+  coarse_alphas: [0.0, 0.25, 0.5, 0.75, 1.0]
+  alpha_hat_offset: 0.015625
+  maximum_bisection_steps: 8
+  deduplicate_applied_bf16: true
+intervention:
+  source_count: 1
+  mapping: desired=(1-alpha)*baseline
+  freeze_attention: true
+  constrained_layers: null
+  target_clamp_allowed: false
+  canonical_attempts: 1
+analysis:
+  minimum_nonzero_points: 3
+  movement_sign_agreement_minimum: 0.80
+  median_movement_sne_maximum: 0.50
+  p95_movement_sne_maximum: 1.00
+  critical_bracket_distance_maximum: 0.125
+  undefined_metric_policy: null_with_reason
+safety_limits:
+  maximum_mps_driver_bytes: 25769803776
+  maximum_process_rss_bytes: 25769803776
+  maximum_swap_growth_bytes: 4294967296
+  minimum_available_memory_bytes: 4294967296
+  maximum_artifact_bundle_bytes: 5242880
+  maximum_artifact_file_bytes: 2097152
+  accepted_thermal_states: [nominal, fair]
+  sample_interval_seconds: 1.0
+  telemetry_failure_limit: 3
+  terminate_grace_seconds: 15.0
+  kill_grace_seconds: 5.0
+  prediction_timeout_seconds: 7200
+  canonical_timeout_seconds: 14400
+artifacts:
+  result_directory: results/stage1c_first_prospective_prediction
+  generated_directory: results/generated/stage1c_first_prospective_prediction
+  environment_lock: environments/stage1a_small_model_mps_bf16/requirements-lock.txt
+  required_files:
+    - run_manifest.json
+    - asset_manifest.json
+    - environment_manifest.json
+    - prediction_manifest.json
+    - intervention_sweeps.json
+    - crossing_summary.json
+    - local_linearity_summary.json
+    - memory_timing_summary.json
+    - attempts.json
+    - checksums.sha256
