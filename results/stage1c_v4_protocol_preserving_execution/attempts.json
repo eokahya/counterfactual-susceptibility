@@ -1,0 +1,12 @@
+{
+  "artifact_type": "stage1c_v3_attempts",
+  "canonical_source_suppression_api_calls": 248,
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "instrumented_source_suppression_api_calls": 248,
+  "intervention_attempts": 1,
+  "intervention_required": true,
+  "prediction_attempts": 1,
+  "schema_version": 3,
+  "scientific_retry_count": 0,
+  "status": "passed"
+}

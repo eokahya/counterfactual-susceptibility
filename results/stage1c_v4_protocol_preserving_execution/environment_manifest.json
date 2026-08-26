@@ -1,0 +1,34 @@
+{
+  "accelerator": {
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "fallback_variable_present": false,
+    "metadata_device": "cpu",
+    "mps_available": true,
+    "mps_built": true,
+    "outer_autocast_enabled": false,
+    "scientific_tensor_device": "mps"
+  },
+  "artifact_type": "stage1c_v3_environment_manifest",
+  "execution_commit": "cc65c5da3ac0475e0733c83658de225777f9f15a",
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "packages": {
+    "circuit-tracer": "0.5.2",
+    "nnsight": "0.6.1",
+    "torch": "2.6.0",
+    "transformers": "4.57.3"
+  },
+  "platform": {
+    "machine": "arm64",
+    "python": "3.11.13",
+    "system": "Darwin"
+  },
+  "privacy": {
+    "credential_values_read": false,
+    "network_accessed": false,
+    "private_paths_recorded": false,
+    "secret_values_recorded": false
+  },
+  "schema_version": 3,
+  "status": "passed"
+}

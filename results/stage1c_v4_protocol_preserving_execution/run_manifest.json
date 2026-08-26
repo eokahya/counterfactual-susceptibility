@@ -1,0 +1,38 @@
+{
+  "artifact_type": "stage1c_v3_final_bundle_run_manifest",
+  "base_commit": "92ba35cde279c46e1907f0a48ccb56ad378ccbd5",
+  "branch": "stage-1c-v4-protocol-preserving-execution",
+  "canonical_source_suppression_api_calls": 248,
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending"
+  },
+  "execution_class": "stage1c_v4_protocol_preserving_execution",
+  "execution_commit": "cc65c5da3ac0475e0733c83658de225777f9f15a",
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "final_bundle_type": "stage1c_v4_protocol_preserving_execution_bundle",
+  "fresh_canonical_run": true,
+  "instrumented_source_suppression_api_calls": 248,
+  "intervention_required": true,
+  "pre_intervention_commit": "cc65c5da3ac0475e0733c83658de225777f9f15a",
+  "prediction_manifest_sha256": "b2c489317852a2f54d50db783abc17dfdc08590353b0473dbab01ec3d04574cc",
+  "readiness": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending",
+    "stage1b_measurement_primitives": "completed",
+    "stage1c_v3_prediction_manifest": "frozen_reused_byte_identical",
+    "stage1c_v4_prospective_prediction": "completed",
+    "stage1c_v4_scientific_outcome": "mixed"
+  },
+  "schema_version": 3,
+  "scientific_outcome": "mixed",
+  "scientific_retry_count": 0,
+  "status": "completed_stage1c_v4_prospective_prediction",
+  "verdict": "completed_stage1c_v4_prospective_prediction"
+}

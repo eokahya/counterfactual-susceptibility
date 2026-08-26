@@ -1,0 +1,1013 @@
+{
+  "aggregate_metrics": {
+    "critical_suppression_spearman": 0.38461538461538464,
+    "critical_suppression_spearman_pair_count": 12,
+    "critical_suppression_spearman_undefined_reason": null,
+    "directional_fraction_undefined_reason": null,
+    "directional_pair_count": 8,
+    "directional_violation_count": 0,
+    "directional_violation_fraction": 0.0,
+    "near_boundary_crossing_count": 6,
+    "near_boundary_crossing_fraction": 0.75,
+    "near_boundary_fraction_undefined_reason": null,
+    "near_boundary_pair_count": 8,
+    "primary_bracket_distance_count": 12,
+    "primary_bracket_distance_median": 0.03173839929184097,
+    "primary_bracket_distance_p95": 0.35354691075514877,
+    "primary_bracket_distance_undefined_reason": null,
+    "primary_full_ablation_crossing_count": 10,
+    "primary_full_ablation_crossing_precision": 0.8333333333333334,
+    "primary_pair_count": 12,
+    "primary_pair_median_movement_sne_median": 0.3724102993300433,
+    "primary_pair_median_movement_sne_p95": 2.0,
+    "primary_pair_movement_error_undefined_reason": null,
+    "primary_pair_p95_movement_sne_median": 2.0,
+    "primary_precision_undefined_reason": null,
+    "supporting_primary_count": 2
+  },
+  "artifact_type": "stage1c_v3_crossing_summary",
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "pairs": [
+    {
+      "critical_bracket_distance": 0.0,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 359,
+          "layer": 0,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 4517,
+          "layer": 2,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": -1.1875,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 2.0,
+      "movement_sign_agreement": 0.16666666666666666,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": true,
+      "nonzero_point_count": 6,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.0,
+        "upper_realized_suppression": 0.00694444444444442
+      },
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "1aa029b46ca769341babd236248d82a1e39fa79641f6b201916bf9f2f060040c",
+      "point_count": 7,
+      "predicted_alpha_star": 0.005772005772005772,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.002835343849881429,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 423,
+          "layer": 10,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 771,
+          "layer": 15,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": 57.5,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.36170206493774854,
+      "movement_sign_agreement": 0.75,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 8,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.009433962264150941,
+        "upper_realized_suppression": 0.014150943396226467
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "df31777b84dd3949cf9f5fad718ec37a10af80010807efdd4bbfd81c3017ab3b",
+      "point_count": 9,
+      "predicted_alpha_star": 0.0065986184142695125,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.012359932088285184,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 578,
+          "layer": 2,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 15884,
+          "layer": 3,
+          "position": 3
+        }
+      },
+      "full_ablation_observed_movement": 14.75,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.07357859531772576,
+      "movement_sign_agreement": 0.8571428571428571,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 7,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.021052631578947323,
+        "upper_realized_suppression": 0.02631578947368418
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "673f5fe9ea0c7e595c6b01c97fb578523a3488776f9138228fa6ffc5d41a37c4",
+      "point_count": 8,
+      "predicted_alpha_star": 0.00869269949066214,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.032449544914918874,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 603,
+          "layer": 8,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 2072,
+          "layer": 10,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": 19.5,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.3831185337223381,
+      "movement_sign_agreement": 0.8333333333333334,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 12,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.045112781954887216,
+        "upper_realized_suppression": 0.048872180451127845
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "802274d418baa8b783c2451548f24d8942cedd67cc959fd765f263dfbb73ae3f",
+      "point_count": 13,
+      "predicted_alpha_star": 0.012663237039968342,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.031027253668763057,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 3228,
+          "layer": 9,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 5755,
+          "layer": 10,
+          "position": 3
+        }
+      },
+      "full_ablation_observed_movement": 18.25,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.11139800811508668,
+      "movement_sign_agreement": 0.9090909090909091,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 11,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.0444444444444444,
+        "upper_realized_suppression": 0.050000000000000044
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "b2adc9dd2b4c0619842d0dd24abacbb75b594417dc31491ac47bee23b2cf86d4",
+      "point_count": 12,
+      "predicted_alpha_star": 0.013417190775681341,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.07420534458509145,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 181,
+          "layer": 3,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 10215,
+          "layer": 8,
+          "position": 3
+        }
+      },
+      "full_ablation_observed_movement": 10.375,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.32013123974689456,
+      "movement_sign_agreement": 0.7272727272727273,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 11,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.08860759493670889,
+        "upper_realized_suppression": 0.09493670886075944
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "d6cff521a2452d326553305c32345351736782b1140aa168b1a7b2b80d05507f",
+      "point_count": 12,
+      "predicted_alpha_star": 0.01440225035161744,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.05535290371142377,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 423,
+          "layer": 10,
+          "position": 5
+        },
+        "target": {
+          "feature_id": 11566,
+          "layer": 12,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": 33.5,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.6360563428250315,
+      "movement_sign_agreement": 0.6666666666666666,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 12,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.07017543859649122,
+        "upper_realized_suppression": 0.07602339181286555
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "70edac03b024afb70e5793909866e1c50f363de475c4f36a12fd2ac78a4ac356",
+      "point_count": 13,
+      "predicted_alpha_star": 0.014822534885067453,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.35354691075514877,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 375,
+          "layer": 4,
+          "position": 5
+        },
+        "target": {
+          "feature_id": 242,
+          "layer": 6,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": -6.21875,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 1.9198698393329265,
+      "movement_sign_agreement": 0.75,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": true,
+      "nonzero_point_count": 12,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.368421052631579,
+        "upper_realized_suppression": 0.3717105263157895
+      },
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "38afce33fff552d273dafed2fd31d4329ee6f639c4389c5eef41abf2435666ba",
+      "point_count": 13,
+      "predicted_alpha_star": 0.014874141876430207,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 9.859016070201676e-05,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 781,
+          "layer": 10,
+          "position": 5
+        },
+        "target": {
+          "feature_id": 173,
+          "layer": 12,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": 78.25,
+      "group": "primary",
+      "local_calibration_passed": true,
+      "median_movement_symmetric_normalized_error": 0.06869375527250429,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 8,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.015873015873015928,
+        "upper_realized_suppression": 0.019841269841269882
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 0.5307984790874515,
+      "pair_id": "ffac290bca4992cc819a1839c736e9daa7b953d905ebd3c741f3d4de15edffa5",
+      "point_count": 9,
+      "predicted_alpha_star": 0.01577442571231391,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": true
+    },
+    {
+      "critical_bracket_distance": 0.037227214377406975,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "both_endpoints_seen_but_not_as_exact_v1_pair",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 761,
+          "layer": 9,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 774,
+          "layer": 11,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": 47.75,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.6118207274524194,
+      "movement_sign_agreement": 0.8333333333333334,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 12,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.0536585365853659,
+        "upper_realized_suppression": 0.05853658536585371
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "26b7bdf73a65ca40893f1a510c61572a51666147ab477194bda864d72673d6bf",
+      "point_count": 13,
+      "predicted_alpha_star": 0.016431322207958923,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.04009530292716131,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 833,
+          "layer": 7,
+          "position": 4
+        },
+        "target": {
+          "feature_id": 3879,
+          "layer": 9,
+          "position": 4
+        }
+      },
+      "full_ablation_observed_movement": 15.5,
+      "group": "primary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.8043409615927937,
+      "movement_sign_agreement": 0.75,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 12,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.05752212389380529,
+        "upper_realized_suppression": 0.06194690265486724
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "148b4763243fe84c7b9a54b1d7934a003ca31f24e206a1a3d62e068778eb571a",
+      "point_count": 13,
+      "predicted_alpha_star": 0.017426820966643976,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.0,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 546,
+          "layer": 3,
+          "position": 4
+        },
+        "target": {
+          "feature_id": 5212,
+          "layer": 4,
+          "position": 4
+        }
+      },
+      "full_ablation_observed_movement": 15.6875,
+      "group": "primary",
+      "local_calibration_passed": true,
+      "median_movement_symmetric_normalized_error": 0.11388558594266085,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 7,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.012048192771084376,
+        "upper_realized_suppression": 0.01807228915662651
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 0.39252336448598113,
+      "pair_id": "878c404452a4024b97c0a2a36faf6d81d8200293e3796a2b7f37b3006905c96d",
+      "point_count": 8,
+      "predicted_alpha_star": 0.017932193891846457,
+      "predicted_full_ablation_crossing": true,
+      "supporting_primary": true
+    },
+    {
+      "critical_bracket_distance": 0.8122100122100122,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 217,
+          "layer": 8,
+          "position": 2
+        },
+        "target": {
+          "feature_id": 6217,
+          "layer": 11,
+          "position": 4
+        }
+      },
+      "full_ablation_observed_movement": 1.0,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 1.422435580974449,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": true,
+      "nonmonotonic_gate": true,
+      "nonzero_point_count": 10,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.18376068376068377,
+        "upper_realized_suppression": 0.18803418803418803
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 1.7641292694133863,
+      "pair_id": "4391af3118283a7e52f0698e23f8e81d16984c26cfe8d9bb125e193feb55fe26",
+      "point_count": 11,
+      "predicted_alpha_star": 1.0002442002442002,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 3956,
+          "layer": 5,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 2309,
+          "layer": 14,
+          "position": 4
+        }
+      },
+      "full_ablation_observed_movement": -2.5,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 2.0,
+      "movement_sign_agreement": 0.25,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "9c31e7e7ad50003855c63c85683cd9ed07916fdb4b7d905f0a9a9883c744905c",
+      "point_count": 5,
+      "predicted_alpha_star": 1.0002442002442002,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.9367521367521368,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 3024,
+          "layer": 9,
+          "position": 2
+        },
+        "target": {
+          "feature_id": 183,
+          "layer": 15,
+          "position": 4
+        }
+      },
+      "full_ablation_observed_movement": -2.0,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 1.9298044548846447,
+      "movement_sign_agreement": 0.6,
+      "near_boundary_control_crossing": true,
+      "nonmonotonic_gate": true,
+      "nonzero_point_count": 10,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.059523809523809534,
+        "upper_realized_suppression": 0.06349206349206349
+      },
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "bdea0746401c4b5681868fd35b085e59c100e217b995ae75ad1e567e4ffdf239",
+      "point_count": 11,
+      "predicted_alpha_star": 1.0002442002442002,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.19430874450415236,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 478,
+          "layer": 3,
+          "position": 2
+        },
+        "target": {
+          "feature_id": 552,
+          "layer": 6,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": 1.03125,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.7212502503477536,
+      "movement_sign_agreement": 0.6666666666666666,
+      "near_boundary_control_crossing": true,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 12,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.8047752808988764,
+        "upper_realized_suppression": 0.8061797752808989
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "22522c7cfa3e025f8f3789af05849c8dc6cf1fb313acdc46fab0227e4b3870eb",
+      "point_count": 13,
+      "predicted_alpha_star": 1.0004885197850513,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.8345055348296742,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 645,
+          "layer": 3,
+          "position": 4
+        },
+        "target": {
+          "feature_id": 15,
+          "layer": 6,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": 3.0,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 1.4675979063387792,
+      "movement_sign_agreement": 0.8,
+      "near_boundary_control_crossing": true,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 10,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.1624365482233503,
+        "upper_realized_suppression": 0.1675126903553299
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "7ba49c1e4ff510bfa1561678fe291a627efa81357b051c6736de99a7ef4e9aba",
+      "point_count": 11,
+      "predicted_alpha_star": 1.002018225185004,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 2996,
+          "layer": 2,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 1641,
+          "layer": 4,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": -2.15625,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 2.0,
+      "movement_sign_agreement": 0.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "fe64ee563500d7fed92df29c3b2ab8b5d85b053a10616b3eb7bdd0aaee7a87e4",
+      "point_count": 5,
+      "predicted_alpha_star": 1.0022371364653244,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.27678097570932836,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 1918,
+          "layer": 7,
+          "position": 2
+        },
+        "target": {
+          "feature_id": 2797,
+          "layer": 8,
+          "position": 2
+        }
+      },
+      "full_ablation_observed_movement": 0.5,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.5819109434556934,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": true,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 11,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.7253521126760563,
+        "upper_realized_suppression": 0.7265258215962441
+      },
+      "observed_full_ablation_crossing": true,
+      "p95_movement_symmetric_normalized_error": 0.7377260733064965,
+      "pair_id": "6f687df2193992907c57c74b81041a518dca0e317f4e65b45e14a892da88f65d",
+      "point_count": 12,
+      "predicted_alpha_star": 1.0033067973055725,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": 0.8650326797385621,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "source_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 1386,
+          "layer": 0,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 7715,
+          "layer": 10,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": -1.0,
+      "group": "near_boundary",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 1.6239769962397699,
+      "movement_sign_agreement": 0.6666666666666666,
+      "near_boundary_control_crossing": true,
+      "nonmonotonic_gate": true,
+      "nonzero_point_count": 9,
+      "observed_critical_bracket": {
+        "lower_realized_suppression": 0.1333333333333333,
+        "upper_realized_suppression": 0.13888888888888884
+      },
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 2.0,
+      "pair_id": "fc948d45b8e855158e74701b2f0f99bc1f7e7f585c0a2ea02aba7950713f0d08",
+      "point_count": 10,
+      "predicted_alpha_star": 1.003921568627451,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 149,
+          "layer": 0,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 4617,
+          "layer": 1,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": -11.375,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.3568302784917263,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.4048268926878324,
+      "pair_id": "89c78eac8ee6026cc079096308960a93d7dfafa088631a03fde9b5b715c67f3e",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "both_endpoints_seen_but_not_as_exact_v1_pair",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 111,
+          "layer": 1,
+          "position": 3
+        },
+        "target": {
+          "feature_id": 1485,
+          "layer": 8,
+          "position": 3
+        }
+      },
+      "full_ablation_observed_movement": -105.75,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.5578005803200807,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.668901266821117,
+      "pair_id": "7f38b9f05d0038ac6b362051d9336e95a1c9346ebefd50a5e36d4ed7578418c9",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "source_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 453,
+          "layer": 1,
+          "position": 5
+        },
+        "target": {
+          "feature_id": 284,
+          "layer": 2,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": -112.921875,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.09172606652847168,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.13719109450011277,
+      "pair_id": "e843aed10ac24ab3cef09f1bc66e5604969777d649866bf3ef30d69166b1db3f",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 523,
+          "layer": 3,
+          "position": 5
+        },
+        "target": {
+          "feature_id": 13488,
+          "layer": 4,
+          "position": 5
+        }
+      },
+      "full_ablation_observed_movement": -54.75,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.02629060558387919,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.04303510758776922,
+      "pair_id": "5ef0643928032da8e3c4082a63e6c17bcafe298ab143665b5ffba363c0934f9f",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 507,
+          "layer": 5,
+          "position": 4
+        },
+        "target": {
+          "feature_id": 5391,
+          "layer": 7,
+          "position": 4
+        }
+      },
+      "full_ablation_observed_movement": -46.25,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.13280688612282948,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.19318181818181818,
+      "pair_id": "623f68583586e4b4f36cd447a001ef57dd3ec0ee42fac798766224956412eff8",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 376,
+          "layer": 9,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 1008,
+          "layer": 10,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": -53.25,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.11086363416538914,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.1909637213443134,
+      "pair_id": "e6dabe4f17192f69d3b38e01830b30afddc5fce4b59e2b48662da25e974d3127",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 444,
+          "layer": 8,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 2082,
+          "layer": 10,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": -19.875,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 1.1541345921861277,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 1.2727272727272727,
+      "pair_id": "a70e6598797bf598be7f8c22262e46ef975925e0850ecae1199eb6b8d9f8882c",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    },
+    {
+      "critical_bracket_distance": null,
+      "directional_control_violation": false,
+      "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+      "exact_pair_key": {
+        "source": {
+          "feature_id": 1021,
+          "layer": 5,
+          "position": 1
+        },
+        "target": {
+          "feature_id": 451,
+          "layer": 6,
+          "position": 1
+        }
+      },
+      "full_ablation_observed_movement": -60.5625,
+      "group": "directional",
+      "local_calibration_passed": false,
+      "median_movement_symmetric_normalized_error": 0.019286478895890333,
+      "movement_sign_agreement": 1.0,
+      "near_boundary_control_crossing": false,
+      "nonmonotonic_gate": false,
+      "nonzero_point_count": 4,
+      "observed_critical_bracket": null,
+      "observed_full_ablation_crossing": false,
+      "p95_movement_symmetric_normalized_error": 0.0349820122268783,
+      "pair_id": "8b32929d0849dce77e5a84bb6aa2bf04bdad9650cc1f08948efc29b34898159a",
+      "point_count": 5,
+      "predicted_alpha_star": null,
+      "predicted_full_ablation_crossing": false,
+      "supporting_primary": false
+    }
+  ],
+  "schema_version": 3,
+  "scientific_outcome": "mixed",
+  "status": "passed"
+}

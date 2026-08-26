@@ -464,3 +464,54 @@ Never record a planned, configured, or partially scaffolded run as completed.
 - **Claim boundary:** Stage 1B measurement primitives remain completed;
   Counterfactual Susceptibility, gate crossing, behavior, mediation,
   official/reference reproduction, and paper readiness remain unestablished.
+
+---
+
+## EXP-20260826-004 — Stage 1C-v4 protocol-preserving execution
+
+- **Status:** `completed_stage1c_v4_prospective_prediction`; scientific
+  outcome `mixed`
+- **Base/branch:** `92ba35cde279c46e1907f0a48ccb56ad378ccbd5` /
+  `stage-1c-v4-protocol-preserving-execution`
+- **Pre-run execution commit:**
+  `cc65c5da3ac0475e0733c83658de225777f9f15a`, pushed to the exact origin
+  branch before the first frozen-pair suppression call
+- **Repair:** added the missing production `measure_states` adapter surface
+  using the same loaded NNsight PLT runtime, an explicit complete backend
+  protocol, first-call attempt boundary, and fsynced append-only point
+  journal. Frozen prompt, pairs, schedules, tolerances, classifier, and
+  prediction bytes were unchanged.
+- **Rehearsals:** deterministic synthetic production chain passed through
+  baseline remeasurement, all three pair groups, 20 calls/points, detachment,
+  assembly, and standalone validation. Exact MPS/BF16 active-only rehearsal
+  passed with 2 engineering calls/points, no frozen exact-pair overlap, and 0
+  scientific calls.
+- **Prediction freeze:** `The capital of Norway is`, token IDs
+  `[2, 818, 5279, 529, 32649, 563]`; byte-identical manifest SHA-256
+  `b2c489317852a2f54d50db783abc17dfdc08590353b0473dbab01ec3d04574cc`.
+- **Canonical intervention:** one attempt, zero retries, all 28 frozen pairs,
+  and exact equality among 248 instrumented API calls, 248 completed journal
+  records, and 248 serialized points. Group totals were 12 primary/130 points,
+  8 near-boundary/78 points, and 8 directional/40 points.
+- **Primary/control result:** 10/12 primary pairs crossed under full ablation;
+  2/12 met the complete supporting-primary definition; 2 primary gates were
+  nonmonotonic. Near-boundary crossings were 6/8; directional violations were
+  0/8.
+- **Metrics:** critical-suppression Spearman 0.38461538461538464 over 12
+  primary pairs; critical-bracket-distance median 0.03173839929184097 and p95
+  0.35354691075514877; all-point movement-SNE median 0.021928147628685273 and
+  p95 1.385694249649369.
+- **Quantization:** 168 frozen requested alpha values mapped to 164 distinct
+  BF16 values. Four primary pairs each had one tiny positive request collapse
+  into no-op; all 28 retained a distinct nonzero suppression point.
+- **Safety:** peak MPS driver 2,865,397,760 bytes, peak process RSS
+  789,528,576 bytes, minimum available memory 14,193,917,952 bytes, zero swap
+  growth, nominal thermal state, and no timeout/safety/telemetry failure.
+- **Validation/artifacts:** standalone recomputation passed 10 small
+  allowlisted artifacts, 248 calls, and 248 points; all checksums pass. No
+  weight, cache, graph, adjacency, dense tensor, gradient, secret, private
+  path, journal, emergency output, or rehearsal output is tracked.
+- **Claim boundary:** Stage 1B measurement primitives remain completed and the
+  v4 prospective execution is complete with a mixed result. Behavioral
+  importance and mediation remain `none`; official BF16 and reference CLT
+  reproduction remain `pending`; paper Results readiness remains false.

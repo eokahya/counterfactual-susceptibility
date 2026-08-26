@@ -1,0 +1,1542 @@
+{
+  "artifact_schema_sha256": "90f4f43cad871c3bb754efa8f031fcb0d319ca2286a6d52643632f7c47fb1832",
+  "artifact_type": "stage1c_v3_prediction_manifest",
+  "base_commit": "ee9cc944fbdabaa6437b7be3c997725fce5de0a6",
+  "baseline_pools": {
+    "complete_derivative_matrix_persisted": false,
+    "dense_scanner_arrays_persisted": false,
+    "eligible_pair_count_after_historical_mask": 39219,
+    "eligible_pair_count_before_historical_mask": 39235,
+    "eligible_source_count": 1930,
+    "eligible_target_count": 105,
+    "excluded_exact_historical_pair_count": 16,
+    "excluded_no_causal_source_target_count": 23,
+    "many_source_vjp_engineering_calibration": {
+      "comparison": "exact_bf16_identity",
+      "endpoint_class": "baseline_active_source_active_target_disjoint_from_inactive_pool",
+      "inactive_target_intervention_calls": 0,
+      "pair_count": 4,
+      "passed": true,
+      "reference_method": "stage1b_independent_pairwise_targeted_vjp"
+    },
+    "pair_score_sha256_after_historical_mask": "8ae8d320adb0810571e5f89d7b35f9b85b913dd1ddf1079841da4933065ce387",
+    "pair_score_sha256_before_historical_mask": "2709cac2c8ad99c3eb3b102199ccfe26b86b94c1a68531118f4f701210aff6a4",
+    "predicted_status_counts": {
+      "boundary_ambiguous": 5054,
+      "definitely_crossing": 5575,
+      "not_crossing": 28590
+    },
+    "q_sign_counts": {
+      "negative": 19997,
+      "positive": 19222,
+      "zero": 0
+    },
+    "raw_active_source_count": 2160,
+    "scanner_candidate_count": 128,
+    "scanner_dense_oracle_validation": {
+      "bounded_oracle_recall": 1.0,
+      "dense_oracle_persisted": false,
+      "exact_dense_oracle_identity_and_order": true,
+      "group_count": 90
+    },
+    "source_pool_sha256": "6f4bb53c054190709f6bf16d0b1600f7044406a1238ec181d8909cd944610f05",
+    "target_pool_sha256": "8de84aec06f12ec37c312e585e018343aad95bdd306401bd30540c291c978a2c"
+  },
+  "branch": "stage-1c-v3-preregistered-prospective-prediction",
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending"
+  },
+  "config_sha256": "5995c267ed7092c4e8b2235f6848f5eef8b77ff7d8d7dba38afe1e2ad7b30a39",
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "historical_independence": {
+    "denylist_path": "configs/stage1c_v3_v1_exact_pair_denylist.json",
+    "denylist_sha256": "ee31e29e2eb2be5aa5cbf72b95d75ea275098592eb54106f20aa7b3ba87405ad",
+    "endpoint_overlap_policy": "audit_only",
+    "exact_pair_count": 28,
+    "historical_endpoint_count": 53,
+    "historical_intervention_outcome_read": false,
+    "mask_applied_before_ranking": true,
+    "source_manifest_freeze_commit": "6ec950d93fe1215fdcfee68c87e1f58a23a78ae8",
+    "source_manifest_git_blob_sha1": "847e9c3389097b529c0ac2861b3d519afe18d050",
+    "source_manifest_path": "results/stage1c_first_prospective_prediction/prediction_manifest.json",
+    "source_manifest_sha256": "43cf17f3f87ff97f9fa2aa6b827c84416add5dced2824b69c057d99a5f2b882a",
+    "v2_temporary_baseline_artifact_read": false
+  },
+  "pair_id_domain": "stage1c_v3_preregistered_prospective_prediction:capital_norway_preregistered_v3",
+  "prediction_only_guards": {
+    "historical_intervention_outcome_read": false,
+    "intervention_worker_imported": false,
+    "prior_inactive_target_outcome_read": false,
+    "raw_adjacency_read": false,
+    "raw_graph_read": false,
+    "source_suppression_api_calls": 0,
+    "v2_temporary_baseline_artifact_read": false
+  },
+  "prompt": {
+    "id": "capital_norway_preregistered_v3",
+    "text": "The capital of Norway is",
+    "token_ids": [
+      2,
+      818,
+      5279,
+      529,
+      32649,
+      563
+    ]
+  },
+  "prompt_derivation": {
+    "algorithm": "sha256_prefix16_mod_pool_length",
+    "base_commit": "ee9cc944fbdabaa6437b7be3c997725fce5de0a6",
+    "index": 7,
+    "message": "ee9cc944fbdabaa6437b7be3c997725fce5de0a6|stage1c-v3-prompt-v1",
+    "pool": [
+      "The capital of Italy is",
+      "The capital of Spain is",
+      "The capital of Japan is",
+      "The capital of Canada is",
+      "The capital of Brazil is",
+      "The capital of India is",
+      "The capital of Egypt is",
+      "The capital of Norway is",
+      "The capital of Poland is",
+      "The capital of Chile is",
+      "The capital of Kenya is",
+      "The capital of Peru is"
+    ],
+    "prompt": "The capital of Norway is",
+    "prompt_id": "capital_norway_preregistered_v3",
+    "salt": "stage1c-v3-prompt-v1",
+    "sha256_hex": "66e7d4281197efefdbc83bf369d9d317faa7641990c27fa1c3842de99c358e41"
+  },
+  "protocol": {
+    "analysis": {
+      "critical_bracket_distance_maximum": 0.125,
+      "median_movement_sne_maximum": 0.5,
+      "minimum_nonzero_points": 3,
+      "movement_sign_agreement_minimum": 0.8,
+      "p95_movement_sne_maximum": 1.0,
+      "undefined_metric_policy": "null_with_reason"
+    },
+    "engineering_calibration": {
+      "comparison": "exact_bf16_identity",
+      "endpoint_class": "baseline_active_source_active_target_disjoint_from_inactive_pool",
+      "inactive_target_intervention_calls": 0,
+      "pair_count": 4,
+      "reference_method": "stage1b_independent_pairwise_targeted_vjp"
+    },
+    "intervention_regime": {
+      "canonical_attempts": 1,
+      "constrained_layers": null,
+      "freeze_attention": true,
+      "mapping": "desired=(1-alpha)*baseline",
+      "scientific_retries": 0,
+      "source_count": 1,
+      "target_clamp_allowed": false
+    },
+    "responses": {
+      "convention": "attribution_matched_target_preactivation_pre_gate",
+      "graph_edge_input": "forbidden",
+      "maximum_eligible_pairs": 500000,
+      "method": "target_encoder_reverse_vjp_many_source_contraction",
+      "target_batch_size": 8
+    },
+    "scanner": {
+      "canonical_chunk_size": 1024,
+      "dense_oracle_chunk_size": 16384,
+      "dense_oracle_lifecycle": "one_group_ephemeral",
+      "feature_width": 16384,
+      "global_top_k": 128,
+      "selected_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tie_break": [
+        "margin",
+        "layer",
+        "position",
+        "feature_id"
+      ],
+      "top_k_per_group": 8
+    },
+    "schedule": {
+      "alpha_hat_offset": 0.015625,
+      "coarse_alphas": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "deduplicate_applied_bf16": true,
+      "maximum_bisection_steps": 8
+    },
+    "scoring": {
+      "crossing_tolerance": 1e-09,
+      "epsilon": 1e-12,
+      "pair_seed": "stage1c-v3-preregistered-prospective-prediction"
+    },
+    "selection": {
+      "control_overlap_fallback": "deterministic_after_unique_exhausted",
+      "directional_maximum": 8,
+      "directional_order": [
+        "movement_over_margin_desc",
+        "target",
+        "source"
+      ],
+      "maximum_per_target": 1,
+      "maximum_primary_per_source": 2,
+      "near_boundary_maximum": 8,
+      "near_order": [
+        "distance_above_one_asc",
+        "target",
+        "source"
+      ],
+      "prefer_unused_control_targets": true,
+      "primary_maximum": 12,
+      "primary_order": [
+        "susceptibility_desc",
+        "alpha_hat_asc",
+        "target",
+        "source"
+      ]
+    },
+    "source_pool": {
+      "maximum_active_sources": 10000,
+      "ordering": [
+        "layer",
+        "position",
+        "feature_id"
+      ],
+      "raw_graph_input": "forbidden",
+      "require_causal_position": true,
+      "require_positive_activation": true,
+      "require_strictly_earlier_layer": true,
+      "selection": "all_exact_loaded_active_features_with_causal_target"
+    }
+  },
+  "protocol_file_sha256": {
+    "configs/stage1c_v3_preregistered_prospective_prediction.yaml": "5995c267ed7092c4e8b2235f6848f5eef8b77ff7d8d7dba38afe1e2ad7b30a39",
+    "configs/stage1c_v3_preregistered_prospective_prediction_artifact_schema.json": "90f4f43cad871c3bb754efa8f031fcb0d319ca2286a6d52643632f7c47fb1832",
+    "configs/stage1c_v3_v1_exact_pair_denylist.json": "ee31e29e2eb2be5aa5cbf72b95d75ea275098592eb54106f20aa7b3ba87405ad",
+    "scripts/stage1c_v3/assemble_stage1c_artifacts.py": "ca99bacae5c31f1cea39edef0fd5e699f47a8f0015edf69ad33f3e99b9f83ba8",
+    "scripts/stage1c_v3/assemble_stage1c_prediction.py": "b5beb51a1151b3e302b6a6a0e7fa41ce424e7a41902873b9766ec332ef21557b",
+    "scripts/stage1c_v3/preflight_stage1c_v3.py": "b91a1f41548320d85890e8ca84d0c6905e018081fdcdea261b896f6baeeafe27",
+    "scripts/stage1c_v3/run_stage1c_v3.py": "04b62fa1052b3d39435b05a930903b2c55916ecaf7728d8a0aa30ad75a5aa583",
+    "scripts/stage1c_v3/run_stage1c_v3_intervention_worker.py": "5eb61996d3923b937bfecf09bb6c00e7839cc185632c44c7fb3744f8221d87b0",
+    "scripts/stage1c_v3/run_stage1c_v3_prediction_worker.py": "3825952b0b3924adae585ea38fa6028b49c51e8ee260aa6fffd893a3533557d6",
+    "scripts/stage1c_v3/validate_stage1c_v3_artifacts.py": "1328e80832830da3067fd3e6c0f177ab748f60a1b02a0cd301b43bae81f830b2",
+    "scripts/stage1c_v3/validate_stage1c_v3_denylist.py": "42e10cba25a997771bea42e90d83ce46ca3ea694417ffa239c2a070059c8380a",
+    "src/cfsus/stage1c_v3/__init__.py": "9c13233503187ecfacd7cc0633bfebf58a0ff732923bab36d5409c598e4df1e2",
+    "src/cfsus/stage1c_v3/analysis.py": "e41e37e841e135a05a4b58f9c447376af58e5435e34dd436717dcf920d73fda4",
+    "src/cfsus/stage1c_v3/config.py": "0dec31fdc38f30a751cc85fe08bb2ab3f4ce0044badda8e7080d271c7861aa89",
+    "src/cfsus/stage1c_v3/historical.py": "37cdb96c369bec356e928af2c95f45953fbb59e926d0f9667618cd9c2aa2f228",
+    "src/cfsus/stage1c_v3/intervention.py": "e6b8586be54f4080f22911c202d7f335af7143c9c5b352790786f8c5574e747b",
+    "src/cfsus/stage1c_v3/intervention_runtime.py": "0b64f76493c5ff201a83f86190b1b8d06c164ffe20a86ff98ee2442af21d3c1e",
+    "src/cfsus/stage1c_v3/prediction.py": "715996fecc413f474d01595387c395c25ad9414935799ea3ecf05db1998ec6dd",
+    "src/cfsus/stage1c_v3/runtime.py": "ec759932bd84da7c026c8cd7047f7cfd78081aea7a1922ef34003a2b6809ce11",
+    "src/cfsus/stage1c_v3/serialization.py": "03f3d70af33a32ac162f01d9135c48826824d3a2cd502e123e13f444d60336c1",
+    "src/cfsus/stage1c_v3/vjp.py": "f9adb8d343f444ac017456e62bb2d538fc6d4658143a85f5c0672ab788352564",
+    "src/cfsus/stage1c_v3/worker_result.py": "ae2c49c469ebf7a321f353eb7fb878786b17e96a4528a5874479249323923652"
+  },
+  "runtime_identity": {
+    "backend": "nnsight",
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "feature_width": 16384,
+    "layer_count": 18,
+    "model_identifier": "google/gemma-3-270m",
+    "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "transcoder_identifier": "mwhanna/gemma-scope-2-270m-pt",
+    "transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "transcoder_subfolder": "transcoder_all/width_16k_l0_small",
+    "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b"
+  },
+  "schema_version": 3,
+  "selected_groups": {
+    "directional": [
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 149,
+            "layer": 0,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 4617,
+            "layer": 1,
+            "position": 1
+          }
+        },
+        "group": "directional",
+        "margin": 0.03125,
+        "pair_id": "89c78eac8ee6026cc079096308960a93d7dfafa088631a03fde9b5b715c67f3e",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -16.28173828125,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 149,
+          "layer": 0,
+          "position": 1
+        },
+        "source_activation": 123.5,
+        "susceptibility": -521.0156249833275,
+        "target": {
+          "feature_id": 4617,
+          "layer": 1,
+          "position": 1
+        },
+        "target_preactivation": 4.125,
+        "target_threshold": 4.15625,
+        "targeted_response": 0.1318359375
+      },
+      {
+        "endpoint_overlap_category": "both_endpoints_seen_but_not_as_exact_v1_pair",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 111,
+            "layer": 1,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 1485,
+            "layer": 8,
+            "position": 3
+          }
+        },
+        "group": "directional",
+        "margin": 0.1875,
+        "pair_id": "7f38b9f05d0038ac6b362051d9336e95a1c9346ebefd50a5e36d4ed7578418c9",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -52.7421875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 111,
+          "layer": 1,
+          "position": 3
+        },
+        "source_activation": 314.0,
+        "susceptibility": -281.2916666651664,
+        "target": {
+          "feature_id": 1485,
+          "layer": 8,
+          "position": 3
+        },
+        "target_preactivation": 15.25,
+        "target_threshold": 15.4375,
+        "targeted_response": 0.16796875
+      },
+      {
+        "endpoint_overlap_category": "source_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 453,
+            "layer": 1,
+            "position": 5
+          },
+          "target": {
+            "feature_id": 284,
+            "layer": 2,
+            "position": 5
+          }
+        },
+        "group": "directional",
+        "margin": 0.546875,
+        "pair_id": "e843aed10ac24ab3cef09f1bc66e5604969777d649866bf3ef30d69166b1db3f",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -129.5546875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 453,
+          "layer": 1,
+          "position": 5
+        },
+        "source_activation": 206.0,
+        "susceptibility": -236.89999999956683,
+        "target": {
+          "feature_id": 284,
+          "layer": 2,
+          "position": 5
+        },
+        "target_preactivation": 2.421875,
+        "target_threshold": 2.96875,
+        "targeted_response": 0.62890625
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 523,
+            "layer": 3,
+            "position": 5
+          },
+          "target": {
+            "feature_id": 13488,
+            "layer": 4,
+            "position": 5
+          }
+        },
+        "group": "directional",
+        "margin": 0.4375,
+        "pair_id": "5ef0643928032da8e3c4082a63e6c17bcafe298ab143665b5ffba363c0934f9f",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -57.015625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 523,
+          "layer": 3,
+          "position": 5
+        },
+        "source_activation": 356.0,
+        "susceptibility": -130.3214285711307,
+        "target": {
+          "feature_id": 13488,
+          "layer": 4,
+          "position": 5
+        },
+        "target_preactivation": 10.5,
+        "target_threshold": 10.9375,
+        "targeted_response": 0.16015625
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 507,
+            "layer": 5,
+            "position": 4
+          },
+          "target": {
+            "feature_id": 5391,
+            "layer": 7,
+            "position": 4
+          }
+        },
+        "group": "directional",
+        "margin": 0.375,
+        "pair_id": "623f68583586e4b4f36cd447a001ef57dd3ec0ee42fac798766224956412eff8",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -48.25,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 507,
+          "layer": 5,
+          "position": 4
+        },
+        "source_activation": 1024.0,
+        "susceptibility": -128.66666666632355,
+        "target": {
+          "feature_id": 5391,
+          "layer": 7,
+          "position": 4
+        },
+        "target_preactivation": 18.625,
+        "target_threshold": 19.0,
+        "targeted_response": 0.047119140625
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 376,
+            "layer": 9,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 1008,
+            "layer": 10,
+            "position": 1
+          }
+        },
+        "group": "directional",
+        "margin": 0.5,
+        "pair_id": "e6dabe4f17192f69d3b38e01830b30afddc5fce4b59e2b48662da25e974d3127",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -57.6796875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 376,
+          "layer": 9,
+          "position": 1
+        },
+        "source_activation": 856.0,
+        "susceptibility": -115.35937499976929,
+        "target": {
+          "feature_id": 1008,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 37.25,
+        "target_threshold": 37.75,
+        "targeted_response": 0.0673828125
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 444,
+            "layer": 8,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 2082,
+            "layer": 10,
+            "position": 1
+          }
+        },
+        "group": "directional",
+        "margin": 0.5,
+        "pair_id": "a70e6598797bf598be7f8c22262e46ef975925e0850ecae1199eb6b8d9f8882c",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -45.1875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 444,
+          "layer": 8,
+          "position": 1
+        },
+        "source_activation": 964.0,
+        "susceptibility": -90.37499999981925,
+        "target": {
+          "feature_id": 2082,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 39.5,
+        "target_threshold": 40.0,
+        "targeted_response": 0.046875
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 1021,
+            "layer": 5,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 451,
+            "layer": 6,
+            "position": 1
+          }
+        },
+        "group": "directional",
+        "margin": 0.6875,
+        "pair_id": "8b32929d0849dce77e5a84bb6aa2bf04bdad9650cc1f08948efc29b34898159a",
+        "predicted_alpha_star": null,
+        "predicted_status": "not_crossing",
+        "q": -62.0068359375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 1021,
+          "layer": 5,
+          "position": 1
+        },
+        "source_activation": 127.5,
+        "susceptibility": -90.19176136350518,
+        "target": {
+          "feature_id": 451,
+          "layer": 6,
+          "position": 1
+        },
+        "target_preactivation": 6.5625,
+        "target_threshold": 7.25,
+        "targeted_response": 0.486328125
+      }
+    ],
+    "near_boundary": [
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 217,
+            "layer": 8,
+            "position": 2
+          },
+          "target": {
+            "feature_id": 6217,
+            "layer": 11,
+            "position": 4
+          }
+        },
+        "group": "near_boundary",
+        "margin": 0.5,
+        "pair_id": "4391af3118283a7e52f0698e23f8e81d16984c26cfe8d9bb125e193feb55fe26",
+        "predicted_alpha_star": 1.0002442002442002,
+        "predicted_status": "not_crossing",
+        "q": 0.4998779296875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 217,
+          "layer": 8,
+          "position": 2
+        },
+        "source_activation": 117.0,
+        "susceptibility": 0.9997558593730005,
+        "target": {
+          "feature_id": 6217,
+          "layer": 11,
+          "position": 4
+        },
+        "target_preactivation": 89.0,
+        "target_threshold": 89.5,
+        "targeted_response": -0.0042724609375
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 3956,
+            "layer": 5,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 2309,
+            "layer": 14,
+            "position": 4
+          }
+        },
+        "group": "near_boundary",
+        "margin": 1.5,
+        "pair_id": "9c31e7e7ad50003855c63c85683cd9ed07916fdb4b7d905f0a9a9883c744905c",
+        "predicted_alpha_star": 1.0002442002442002,
+        "predicted_status": "not_crossing",
+        "q": 1.4996337890625,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 3956,
+          "layer": 5,
+          "position": 3
+        },
+        "source_activation": 33.75,
+        "susceptibility": 0.9997558593743334,
+        "target": {
+          "feature_id": 2309,
+          "layer": 14,
+          "position": 4
+        },
+        "target_preactivation": 88.5,
+        "target_threshold": 90.0,
+        "targeted_response": -0.04443359375
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 3024,
+            "layer": 9,
+            "position": 2
+          },
+          "target": {
+            "feature_id": 183,
+            "layer": 15,
+            "position": 4
+          }
+        },
+        "group": "near_boundary",
+        "margin": 1.0,
+        "pair_id": "bdea0746401c4b5681868fd35b085e59c100e217b995ae75ad1e567e4ffdf239",
+        "predicted_alpha_star": 1.0002442002442002,
+        "predicted_status": "not_crossing",
+        "q": 0.999755859375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 3024,
+          "layer": 9,
+          "position": 2
+        },
+        "source_activation": 31.5,
+        "susceptibility": 0.9997558593740001,
+        "target": {
+          "feature_id": 183,
+          "layer": 15,
+          "position": 4
+        },
+        "target_preactivation": 88.0,
+        "target_threshold": 89.0,
+        "targeted_response": -0.03173828125
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 478,
+            "layer": 3,
+            "position": 2
+          },
+          "target": {
+            "feature_id": 552,
+            "layer": 6,
+            "position": 5
+          }
+        },
+        "group": "near_boundary",
+        "margin": 0.5625,
+        "pair_id": "22522c7cfa3e025f8f3789af05849c8dc6cf1fb313acdc46fab0227e4b3870eb",
+        "predicted_alpha_star": 1.0004885197850513,
+        "predicted_status": "not_crossing",
+        "q": 0.562225341796875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 478,
+          "layer": 3,
+          "position": 2
+        },
+        "source_activation": 22.25,
+        "susceptibility": 0.9995117187482231,
+        "target": {
+          "feature_id": 552,
+          "layer": 6,
+          "position": 5
+        },
+        "target_preactivation": 7.21875,
+        "target_threshold": 7.78125,
+        "targeted_response": -0.0252685546875
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 645,
+            "layer": 3,
+            "position": 4
+          },
+          "target": {
+            "feature_id": 15,
+            "layer": 6,
+            "position": 5
+          }
+        },
+        "group": "near_boundary",
+        "margin": 0.5,
+        "pair_id": "7ba49c1e4ff510bfa1561678fe291a627efa81357b051c6736de99a7ef4e9aba",
+        "predicted_alpha_star": 1.002018225185004,
+        "predicted_status": "not_crossing",
+        "q": 0.498992919921875,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 645,
+          "layer": 3,
+          "position": 4
+        },
+        "source_activation": 49.25,
+        "susceptibility": 0.997985839841754,
+        "target": {
+          "feature_id": 15,
+          "layer": 6,
+          "position": 5
+        },
+        "target_preactivation": 5.75,
+        "target_threshold": 6.25,
+        "targeted_response": -0.0101318359375
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 2996,
+            "layer": 2,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 1641,
+            "layer": 4,
+            "position": 5
+          }
+        },
+        "group": "near_boundary",
+        "margin": 0.4375,
+        "pair_id": "fe64ee563500d7fed92df29c3b2ab8b5d85b053a10616b3eb7bdd0aaee7a87e4",
+        "predicted_alpha_star": 1.0022371364653244,
+        "predicted_status": "not_crossing",
+        "q": 0.4365234375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 2996,
+          "layer": 2,
+          "position": 3
+        },
+        "source_activation": 48.0,
+        "susceptibility": 0.9977678571405766,
+        "target": {
+          "feature_id": 1641,
+          "layer": 4,
+          "position": 5
+        },
+        "target_preactivation": 8.3125,
+        "target_threshold": 8.75,
+        "targeted_response": -0.00909423828125
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 1918,
+            "layer": 7,
+            "position": 2
+          },
+          "target": {
+            "feature_id": 2797,
+            "layer": 8,
+            "position": 2
+          }
+        },
+        "group": "near_boundary",
+        "margin": 0.375,
+        "pair_id": "6f687df2193992907c57c74b81041a518dca0e317f4e65b45e14a892da88f65d",
+        "predicted_alpha_star": 1.0033067973055725,
+        "predicted_status": "not_crossing",
+        "q": 0.3737640380859375,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 1918,
+          "layer": 7,
+          "position": 2
+        },
+        "source_activation": 26.625,
+        "susceptibility": 0.9967041015598421,
+        "target": {
+          "feature_id": 2797,
+          "layer": 8,
+          "position": 2
+        },
+        "target_preactivation": 19.25,
+        "target_threshold": 19.625,
+        "targeted_response": -0.0140380859375
+      },
+      {
+        "endpoint_overlap_category": "source_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 1386,
+            "layer": 0,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 7715,
+            "layer": 10,
+            "position": 1
+          }
+        },
+        "group": "near_boundary",
+        "margin": 0.75,
+        "pair_id": "fc948d45b8e855158e74701b2f0f99bc1f7e7f585c0a2ea02aba7950713f0d08",
+        "predicted_alpha_star": 1.003921568627451,
+        "predicted_status": "not_crossing",
+        "q": 0.7470703125,
+        "requested_alphas": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 1386,
+          "layer": 0,
+          "position": 1
+        },
+        "source_activation": 11.25,
+        "susceptibility": 0.996093749998672,
+        "target": {
+          "feature_id": 7715,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 57.0,
+        "target_threshold": 57.75,
+        "targeted_response": -0.06640625
+      }
+    ],
+    "primary": [
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 359,
+            "layer": 0,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 4517,
+            "layer": 2,
+            "position": 5
+          }
+        },
+        "group": "primary",
+        "margin": 0.03125,
+        "pair_id": "1aa029b46ca769341babd236248d82a1e39fa79641f6b201916bf9f2f060040c",
+        "predicted_alpha_star": 0.005772005772005772,
+        "predicted_status": "definitely_crossing",
+        "q": 5.4140625,
+        "requested_alphas": [
+          0.0,
+          0.005772005772005772,
+          0.021397005772005772,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 359,
+          "layer": 0,
+          "position": 3
+        },
+        "source_activation": 72.0,
+        "susceptibility": 173.249999994456,
+        "target": {
+          "feature_id": 4517,
+          "layer": 2,
+          "position": 5
+        },
+        "target_preactivation": 4.75,
+        "target_threshold": 4.78125,
+        "targeted_response": -0.0751953125
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 423,
+            "layer": 10,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 771,
+            "layer": 15,
+            "position": 1
+          }
+        },
+        "group": "primary",
+        "margin": 0.5,
+        "pair_id": "df31777b84dd3949cf9f5fad718ec37a10af80010807efdd4bbfd81c3017ab3b",
+        "predicted_alpha_star": 0.0065986184142695125,
+        "predicted_status": "definitely_crossing",
+        "q": 75.7734375,
+        "requested_alphas": [
+          0.0,
+          0.0065986184142695125,
+          0.02222361841426951,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 423,
+          "layer": 10,
+          "position": 1
+        },
+        "source_activation": 848.0,
+        "susceptibility": 151.5468749996969,
+        "target": {
+          "feature_id": 771,
+          "layer": 15,
+          "position": 1
+        },
+        "target_preactivation": 108.5,
+        "target_threshold": 109.0,
+        "targeted_response": -0.08935546875
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 578,
+            "layer": 2,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 15884,
+            "layer": 3,
+            "position": 3
+          }
+        },
+        "group": "primary",
+        "margin": 0.125,
+        "pair_id": "673f5fe9ea0c7e595c6b01c97fb578523a3488776f9138228fa6ffc5d41a37c4",
+        "predicted_alpha_star": 0.00869269949066214,
+        "predicted_status": "definitely_crossing",
+        "q": 14.3798828125,
+        "requested_alphas": [
+          0.0,
+          0.00869269949066214,
+          0.02431769949066214,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 578,
+          "layer": 2,
+          "position": 3
+        },
+        "source_activation": 47.5,
+        "susceptibility": 115.03906249907968,
+        "target": {
+          "feature_id": 15884,
+          "layer": 3,
+          "position": 3
+        },
+        "target_preactivation": 21.25,
+        "target_threshold": 21.375,
+        "targeted_response": -0.302734375
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 603,
+            "layer": 8,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 2072,
+            "layer": 10,
+            "position": 1
+          }
+        },
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "802274d418baa8b783c2451548f24d8942cedd67cc959fd765f263dfbb73ae3f",
+        "predicted_alpha_star": 0.012663237039968342,
+        "predicted_status": "definitely_crossing",
+        "q": 19.7421875,
+        "requested_alphas": [
+          0.0,
+          0.012663237039968342,
+          0.028288237039968342,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 603,
+          "layer": 8,
+          "position": 1
+        },
+        "source_activation": 266.0,
+        "susceptibility": 78.96874999968414,
+        "target": {
+          "feature_id": 2072,
+          "layer": 10,
+          "position": 1
+        },
+        "target_preactivation": 33.75,
+        "target_threshold": 34.0,
+        "targeted_response": -0.07421875
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 3228,
+            "layer": 9,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 5755,
+            "layer": 10,
+            "position": 3
+          }
+        },
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "b2adc9dd2b4c0619842d0dd24abacbb75b594417dc31491ac47bee23b2cf86d4",
+        "predicted_alpha_star": 0.013417190775681341,
+        "predicted_status": "definitely_crossing",
+        "q": 18.6328125,
+        "requested_alphas": [
+          0.0,
+          0.013417190775681341,
+          0.02904219077568134,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 3228,
+          "layer": 9,
+          "position": 3
+        },
+        "source_activation": 90.0,
+        "susceptibility": 74.53124999970188,
+        "target": {
+          "feature_id": 5755,
+          "layer": 10,
+          "position": 3
+        },
+        "target_preactivation": 45.5,
+        "target_threshold": 45.75,
+        "targeted_response": -0.20703125
+      },
+      {
+        "endpoint_overlap_category": "target_endpoint_seen_in_v1_only",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 181,
+            "layer": 3,
+            "position": 3
+          },
+          "target": {
+            "feature_id": 10215,
+            "layer": 8,
+            "position": 3
+          }
+        },
+        "group": "primary",
+        "margin": 0.125,
+        "pair_id": "d6cff521a2452d326553305c32345351736782b1140aa168b1a7b2b80d05507f",
+        "predicted_alpha_star": 0.01440225035161744,
+        "predicted_status": "definitely_crossing",
+        "q": 8.67919921875,
+        "requested_alphas": [
+          0.0,
+          0.01440225035161744,
+          0.030027250351617442,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 181,
+          "layer": 3,
+          "position": 3
+        },
+        "source_activation": 316.0,
+        "susceptibility": 69.43359374944453,
+        "target": {
+          "feature_id": 10215,
+          "layer": 8,
+          "position": 3
+        },
+        "target_preactivation": 21.5,
+        "target_threshold": 21.625,
+        "targeted_response": -0.0274658203125
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 423,
+            "layer": 10,
+            "position": 5
+          },
+          "target": {
+            "feature_id": 11566,
+            "layer": 12,
+            "position": 5
+          }
+        },
+        "group": "primary",
+        "margin": 0.5,
+        "pair_id": "70edac03b024afb70e5793909866e1c50f363de475c4f36a12fd2ac78a4ac356",
+        "predicted_alpha_star": 0.014822534885067453,
+        "predicted_status": "definitely_crossing",
+        "q": 33.732421875,
+        "requested_alphas": [
+          0.0,
+          0.014822534885067453,
+          0.030447534885067455,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 423,
+          "layer": 10,
+          "position": 5
+        },
+        "source_activation": 342.0,
+        "susceptibility": 67.46484374986507,
+        "target": {
+          "feature_id": 11566,
+          "layer": 12,
+          "position": 5
+        },
+        "target_preactivation": 107.5,
+        "target_threshold": 108.0,
+        "targeted_response": -0.0986328125
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 375,
+            "layer": 4,
+            "position": 5
+          },
+          "target": {
+            "feature_id": 242,
+            "layer": 6,
+            "position": 5
+          }
+        },
+        "group": "primary",
+        "margin": 1.015625,
+        "pair_id": "38afce33fff552d273dafed2fd31d4329ee6f639c4389c5eef41abf2435666ba",
+        "predicted_alpha_star": 0.014874141876430207,
+        "predicted_status": "definitely_crossing",
+        "q": 68.28125,
+        "requested_alphas": [
+          0.0,
+          0.014874141876430207,
+          0.030499141876430207,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 375,
+          "layer": 4,
+          "position": 5
+        },
+        "source_activation": 608.0,
+        "susceptibility": 67.23076923070303,
+        "target": {
+          "feature_id": 242,
+          "layer": 6,
+          "position": 5
+        },
+        "target_preactivation": 3.578125,
+        "target_threshold": 4.59375,
+        "targeted_response": -0.1123046875
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 781,
+            "layer": 10,
+            "position": 5
+          },
+          "target": {
+            "feature_id": 173,
+            "layer": 12,
+            "position": 5
+          }
+        },
+        "group": "primary",
+        "margin": 1.25,
+        "pair_id": "ffac290bca4992cc819a1839c736e9daa7b953d905ebd3c741f3d4de15edffa5",
+        "predicted_alpha_star": 0.01577442571231391,
+        "predicted_status": "definitely_crossing",
+        "q": 79.2421875,
+        "requested_alphas": [
+          0.0,
+          0.00014942571231391089,
+          0.01577442571231391,
+          0.03139942571231391,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 781,
+          "layer": 10,
+          "position": 5
+        },
+        "source_activation": 504.0,
+        "susceptibility": 63.39374999994928,
+        "target": {
+          "feature_id": 173,
+          "layer": 12,
+          "position": 5
+        },
+        "target_preactivation": 62.75,
+        "target_threshold": 64.0,
+        "targeted_response": -0.1572265625
+      },
+      {
+        "endpoint_overlap_category": "both_endpoints_seen_but_not_as_exact_v1_pair",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 761,
+            "layer": 9,
+            "position": 1
+          },
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          }
+        },
+        "group": "primary",
+        "margin": 1.25,
+        "pair_id": "26b7bdf73a65ca40893f1a510c61572a51666147ab477194bda864d72673d6bf",
+        "predicted_alpha_star": 0.016431322207958923,
+        "predicted_status": "definitely_crossing",
+        "q": 76.07421875,
+        "requested_alphas": [
+          0.0,
+          0.0008063222079589226,
+          0.016431322207958923,
+          0.032056322207958926,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 761,
+          "layer": 9,
+          "position": 1
+        },
+        "source_activation": 205.0,
+        "susceptibility": 60.85937499995131,
+        "target": {
+          "feature_id": 774,
+          "layer": 11,
+          "position": 1
+        },
+        "target_preactivation": 58.75,
+        "target_threshold": 60.0,
+        "targeted_response": -0.37109375
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 833,
+            "layer": 7,
+            "position": 4
+          },
+          "target": {
+            "feature_id": 3879,
+            "layer": 9,
+            "position": 4
+          }
+        },
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "148b4763243fe84c7b9a54b1d7934a003ca31f24e206a1a3d62e068778eb571a",
+        "predicted_alpha_star": 0.017426820966643976,
+        "predicted_status": "definitely_crossing",
+        "q": 14.345703125,
+        "requested_alphas": [
+          0.0,
+          0.0018018209666439758,
+          0.017426820966643976,
+          0.033051820966643976,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 833,
+          "layer": 7,
+          "position": 4
+        },
+        "source_activation": 226.0,
+        "susceptibility": 57.38281249977047,
+        "target": {
+          "feature_id": 3879,
+          "layer": 9,
+          "position": 4
+        },
+        "target_preactivation": 23.75,
+        "target_threshold": 24.0,
+        "targeted_response": -0.0634765625
+      },
+      {
+        "endpoint_overlap_category": "neither_endpoint_seen_in_v1",
+        "exact_pair_key": {
+          "source": {
+            "feature_id": 546,
+            "layer": 3,
+            "position": 4
+          },
+          "target": {
+            "feature_id": 5212,
+            "layer": 4,
+            "position": 4
+          }
+        },
+        "group": "primary",
+        "margin": 0.25,
+        "pair_id": "878c404452a4024b97c0a2a36faf6d81d8200293e3796a2b7f37b3006905c96d",
+        "predicted_alpha_star": 0.017932193891846457,
+        "predicted_status": "definitely_crossing",
+        "q": 13.94140625,
+        "requested_alphas": [
+          0.0,
+          0.002307193891846457,
+          0.017932193891846457,
+          0.03355719389184646,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "source": {
+          "feature_id": 546,
+          "layer": 3,
+          "position": 4
+        },
+        "source_activation": 166.0,
+        "susceptibility": 55.76562499977694,
+        "target": {
+          "feature_id": 5212,
+          "layer": 4,
+          "position": 4
+        },
+        "target_preactivation": 9.9375,
+        "target_threshold": 10.1875,
+        "targeted_response": -0.083984375
+      }
+    ]
+  },
+  "selection_audit": {
+    "directional_count": 8,
+    "directional_overlap_fallback_count": 0,
+    "endpoint_overlap_category_counts": {
+      "both_endpoints_seen_but_not_as_exact_v1_pair": 2,
+      "neither_endpoint_seen_in_v1": 15,
+      "source_endpoint_seen_in_v1_only": 2,
+      "target_endpoint_seen_in_v1_only": 9
+    },
+    "endpoint_overlap_used_for_ranking_or_quota": false,
+    "exact_pair_mask_applied_before_ranking": true,
+    "groups_disjoint": true,
+    "near_boundary_count": 8,
+    "near_overlap_fallback_count": 0,
+    "primary_count": 12,
+    "primary_source_cap": 2,
+    "primary_target_unique": true,
+    "selected_exact_pair_overlap_count": 0
+  },
+  "status": "prediction_frozen_ready_for_commit"
+}

@@ -129,3 +129,54 @@ used environments, import checks, diff whitespace, private-path/credential
 scans, and the two-megabyte file ceiling also passed. The final rehearsal and
 quantization outputs remain ignored temporary diagnostics and are not part of
 the commit.
+
+## Canonical execution and independent result
+
+Pre-run commit `cc65c5da3ac0475e0733c83658de225777f9f15a` was pushed to
+the exact v4 origin branch before the canonical worker started. A separate
+intervention preflight then reverified the clean local/origin identity,
+protected historical refs, exact Python and package lock, immutable offline
+asset allowlist, Norway token IDs, native MPS/BF16 operator support, fallback
+absence, memory floor, and nominal thermal state.
+
+The single canonical attempt began at the first frozen-pair instrumented
+source-suppression call. It completed 248 calls and 248 point records over all
+28 frozen pairs: 130 points for 12 primary pairs, 78 points for 8
+near-boundary controls, and 40 points for 8 directional controls. The durable
+journal contains exactly 248 alternating call-start/completed-point pairs;
+every completed journal point equals its cleanup-safe worker record. There
+were zero scientific retries.
+
+The standalone validator reconstructed requested, desired, applied BF16, and
+realized suppression values; strict `z_i > tau_i` crossing; bisection
+brackets; local errors; control outcomes; aggregate metrics; and the final
+classifier result from serialized points. It passed 10 allowlisted artifacts
+with 248 API calls and 248 points. The terminal class is
+`completed_stage1c_v4_prospective_prediction`, and the frozen classifier's
+scientific outcome is `mixed`.
+
+Primary full-ablation crossing was observed for 10 of 12 pairs, but only 2 of
+12 satisfied the complete supporting-primary definition, including frozen
+local-calibration requirements. Two primary gates were nonmonotonic. Six of 8
+near-boundary controls crossed, while 0 of 8 directional controls violated
+the expected direction. Predicted versus observed critical-suppression
+Spearman correlation was 0.38461538461538464 over 12 primary pairs. Primary
+critical-bracket distance had median 0.03173839929184097 and p95
+0.35354691075514877. Across all 248 points, median movement symmetric
+normalized error was 0.021928147628685273 and p95 was 1.385694249649369;
+the primary per-pair median-error median was 0.3724102993300433.
+
+The canonical worker's peak MPS driver allocation was 2,865,397,760 bytes,
+peak process RSS was 789,528,576 bytes, minimum available memory was
+14,193,917,952 bytes, and swap growth was zero. The outer supervisor observed
+peak process-group RSS of 798,982,144 bytes and minimum available memory of
+14,200,029,184 bytes. Thermal state remained nominal; no timeout, safety
+termination, telemetry failure, or memory violation occurred.
+
+All bundle checksums pass. Its prediction manifest remains byte-identical to
+the v3 freeze with SHA-256
+`b2c489317852a2f54d50db783abc17dfdc08590353b0473dbab01ec3d04574cc`.
+The result does not establish behavioral importance, mediation, an official
+BF16 reproduction, a reference CLT reproduction, or paper Results readiness.
+The four frozen tiny-alpha BF16 request collapses remain a disclosed
+quantization limitation; no pair lost all distinct nonzero suppression.

@@ -1,0 +1,24 @@
+{
+  "actual_total_bytes": 2087816677,
+  "artifact_type": "stage1c_v3_asset_manifest",
+  "authentication_used": false,
+  "authentication_value_recorded": false,
+  "download_performed": false,
+  "exact_allowlist_hashes_verified": true,
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "model": {
+    "identifier": "google/gemma-3-270m",
+    "revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "total_bytes": 575454257
+  },
+  "network_accessed": false,
+  "schema_version": 3,
+  "status": "verified",
+  "transcoder": {
+    "identifier": "mwhanna/gemma-scope-2-270m-pt",
+    "layer_count": 18,
+    "revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "subfolder": "transcoder_all/width_16k_l0_small",
+    "total_bytes": 1512362420
+  }
+}
