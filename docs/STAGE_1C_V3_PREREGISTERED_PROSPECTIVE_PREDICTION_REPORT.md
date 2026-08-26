@@ -195,10 +195,14 @@ Pre-intervention checks included a full offline result of `595 passed, 1
 skipped, 1 deselected`; the skip was the explicit opt-in real MPS/BF16 test,
 which was also run separately and passed. Focused v3, inherited serialization,
 Ruff, formatting, relevant strict MyPy, development/runtime `pip check`, JSON,
-compile, denylist, prediction-validator, and staged secret/private-path checks
-passed. The standalone final-bundle validator, checksum verification, and
-crossing/local-linearity recomputation are inapplicable and explicitly not
-claimed because no final bundle exists.
+compile, deterministic-math, package-import, denylist, prediction-validator,
+and staged secret/private-path checks passed. The strict v3 scope covered 81
+source/test files. A monolithic `mypy src scripts tests` invocation remains
+unusable because unchanged historical script directories contain duplicate
+module basenames; no repository-wide monolithic MyPy pass is claimed. The
+standalone final-bundle validator, checksum verification, and crossing/local-
+linearity recomputation are inapplicable and explicitly not claimed because no
+final bundle exists.
 
 The whole-repository tracked-content scanner still reports four pre-existing
 test-fixture literals outside the v3 diff: three private-path examples and one
