@@ -664,3 +664,24 @@ separately. Duplicate applied BF16 values are collapsed before execution.
 `mixed`, `not_supported`, `no_eligible_pairs`, and `inconclusive_runtime` under
 the frozen classifier. A valid negative or mixed scientific result is not a
 runtime failure.
+
+## D-035 — 2026-08-26 — Invalidate the sole Stage 1C canonical process
+
+**Decision:** Classify Stage 1C as `failed_runtime` with scientific outcome
+`inconclusive_runtime`. Retain the validated frozen prediction manifest, but do
+not assemble, commit, or claim the canonical intervention result.
+
+**Reason:** The one permitted canonical process reported 228 source-
+suppression API calls, yet the frozen worker cleared its shared `sweeps` list
+in cleanup before the returned object was serialized. The two serialized
+sweep collections consequently contain zero rows instead of the 28 frozen
+selected pairs. Without point-level requested and applied BF16 values,
+realized suppression, target preactivation, and strict gate evidence, the
+standalone validator cannot independently recompute the result. The assembler
+and validator both failed closed.
+
+**Alternatives considered:** Treat the worker's pre-cleanup `mixed` summary as
+evidence, reconstruct missing points from aggregates, patch the frozen worker
+and rerun, or relax the artifact validator. Each would violate prospective
+separation, independent validation, or the one-canonical-run rule. A corrected
+run requires a new explicitly versioned experiment class and a new freeze.

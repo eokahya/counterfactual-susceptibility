@@ -1,12 +1,14 @@
 # Counterfactual Susceptibility
 
-**Status:** Stage 1B measurement primitives completed on the pinned local
-Gemma 3 270M + 18-PLT NNsight runtime on Apple MPS/BF16. The result validates
-an exact loaded-JumpReLU near-threshold scanner and a graph-independent
-targeted local derivative, but it is not a Counterfactual Susceptibility,
-gate-crossing, behavioral, mediation, Gemma 2, or reference-CLT result. The
-reference Stage 1A reproduction remains pending; empirical claim readiness
-and paper Results readiness remain false. See
+**Status:** Stage 1B measurement primitives remain completed on the pinned
+local Gemma 3 270M + 18-PLT NNsight runtime on Apple MPS/BF16. Stage 1C froze
+its first baseline-only prospective prediction, but the only permitted
+canonical intervention process lost all point-level sweep evidence during
+worker cleanup. The final assembler and standalone validator rejected the
+incomplete bundle, so Stage 1C is `failed_runtime` with
+`inconclusive_runtime`; no susceptibility or gate-crossing result is accepted.
+The reference Stage 1A reproduction remains pending, and paper Results
+readiness remains false. See
 [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current experiment
 classes and readiness boundary.
 
@@ -61,6 +63,23 @@ This establishes engineering readiness for a separately specified first
 prediction stage only. No inactive-target susceptibility score, source
 suppression, gate crossing, behavioral importance, mediation result, or paper
 result was produced.
+
+## Stage 1C status
+
+Stage 1C completed and pushed its baseline-only prediction freeze before any
+selected inactive-target intervention. The frozen manifest contains 101
+eligible inactive targets, 1,908 eligible active sources, 30,283 eligible
+pairs, and disjoint selections of 12 primary, 8 near-boundary, and 8
+directional-control pairs. Its prediction-only guards and independent
+recomputation passed.
+
+The one permitted canonical intervention process subsequently reported 228
+source-suppression API calls, but the frozen worker cleared its shared sweep
+list before serialization. Both persisted sweep collections therefore had
+zero rows. The frozen assembler and standalone validator failed closed, no
+canonical result bundle was committed, and the scientific outcome is
+`inconclusive_runtime`. See
+[`docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md`](docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md).
 
 Stage 1A selected the immutable model snapshot
 `google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the direct

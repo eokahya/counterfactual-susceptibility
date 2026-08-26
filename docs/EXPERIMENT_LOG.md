@@ -306,3 +306,66 @@ Never record a planned, configured, or partially scaffolded run as completed.
   reproduction, or a paper result.
 - **Follow-up:** a separately specified Stage 1C may make the first prediction;
   the frozen Stage 1B canonical evidence and claim boundary must remain intact.
+
+---
+
+## EXP-20260826-001 — Stage 1C first prospective prediction
+
+- **Status:** `failed_runtime`; scientific outcome `inconclusive_runtime`
+- **Experiment class:** Stage 1C first prospective Counterfactual
+  Susceptibility prediction
+- **Base/branch:** `efbf70a7e462e640a0e1819a93f3b92727bbd193` /
+  `stage-1c-first-prospective-prediction`
+- **Clean pre-intervention/execution commit:**
+  `6ec950d93fe1215fdcfee68c87e1f58a23a78ae8`, pushed to the exact origin
+  branch before the canonical intervention
+- **Runtime:** native arm64 CPython 3.11.13; PyTorch 2.6.0; NNsight 0.6.1;
+  circuit-tracer 0.5.2; Transformers 4.57.3; Apple MPS/BF16; no CPU fallback,
+  autocast, network, download, or authentication
+- **Immutable assets:** `google/gemma-3-270m` at
+  `9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1`; 18-layer PLT subset
+  `transcoder_all/width_16k_l0_small` from
+  `mwhanna/gemma-scope-2-270m-pt` at
+  `fada11860ac1d337c1e41e9da308798405b94c8e`; circuit-tracer at
+  `8f1e2438df612464e229e44c4a00ff637bf9379b`
+- **Prompt:** `The capital of France is`; token IDs
+  `[2, 818, 5279, 529, 7001, 563]`
+- **Prediction phase:** passed from baseline data only. Exact dense-oracle
+  scanner agreement and the disjoint four-pair active-active VJP calibration
+  passed. Pools contained 128 scanner candidates, 101 eligible inactive
+  targets, 1,908 eligible active sources, and 30,283 eligible pairs. Frozen
+  groups contained 12 primary, 8 near-boundary, and 8 directional pairs.
+  Prediction-manifest SHA-256:
+  `43cf17f3f87ff97f9fa2aa6b827c84416add5dced2824b69c057d99a5f2b882a`.
+- **Canonical intervention:** exactly one process and zero scientific retries.
+  It remeasured 53 selected baseline feature states and reported 228 public
+  source-suppression API calls with one source, `freeze_attention=true`,
+  `constrained_layers=null`, and the frozen absolute-activation mapping.
+- **Failure:** the returned object retained the same mutable `sweeps` list that
+  the worker's `finally` block cleared before JSON serialization. Both
+  serialized sweep collections contained zero rows although 28 rows were
+  required. Point-level requested/applied BF16 values, realized suppression,
+  target preactivations, and strict gate states were therefore unavailable to
+  the independent validator.
+- **Disposition:** frozen assembler failed with `canonical sweeps differ from
+  the frozen selected groups`; standalone validator rejected the incomplete
+  allowlist. The worker's provisional `mixed` summary is invalidated and is
+  not a scientific result. No retry or post-outcome protocol change was made.
+- **Safety:** prediction peak MPS driver allocation 2,865,414,144 bytes and
+  process RSS 969,228,288 bytes; intervention peak MPS driver allocation
+  2,865,414,144 bytes and process-group RSS 793,853,952 bytes; zero swap
+  growth; nominal thermal state; no timeout, safety termination, or telemetry
+  failure.
+- **Tests:** pre-intervention Ruff, formatting, diff, strict MyPy, and full
+  offline tests passed; full result `446 passed, 1 skipped, 1 deselected`.
+  Prediction-only independent recomputation passed. Final artifact acceptance
+  failed as required.
+- **Artifacts:** only the validated 31,717-byte prediction manifest remains
+  tracked. No final canonical bundle or checksum manifest was created, and no
+  invalid worker record, weight, cache, graph, adjacency, dense tensor,
+  gradient, secret, or private path was committed.
+- **Claim boundary:** no accepted Counterfactual Susceptibility, gate crossing,
+  behavior, mediation, benchmark, Gemma 2, reference-CLT, or paper result.
+- **Follow-up:** any retry must be a new explicitly versioned experiment class
+  that fixes sweep serialization and proves a nonempty returned bundle before
+  a new prediction freeze. No such retry began in this experiment.

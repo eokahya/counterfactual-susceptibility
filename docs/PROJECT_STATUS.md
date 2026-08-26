@@ -1,9 +1,10 @@
 # Project status
 
-Status date: 2026-08-24
+Status date: 2026-08-26
 
-No Counterfactual Susceptibility experiment has completed successfully, and
-the paper Results section remains pending.
+No valid Counterfactual Susceptibility intervention experiment has completed,
+and the paper Results section remains pending. Stage 1C froze a valid first
+prospective prediction, but its canonical intervention artifact failed closed.
 
 ## Current experiment classes
 
@@ -37,6 +38,15 @@ the paper Results section remains pending.
   tool engineering evidence only; it contains no inactive-target score,
   suppression sweep, gate crossing, behavior, mediation, Gemma 2, or CLT
   result.
+- **Stage 1C — first prospective prediction:** `failed_runtime` with
+  `inconclusive_runtime`. The baseline-only phase passed and was frozen at
+  `6ec950d93fe1215fdcfee68c87e1f58a23a78ae8` before intervention. It selected
+  12 primary, 8 near-boundary, and 8 directional-control pairs from 30,283
+  eligible source-target pairs. The one allowed canonical process reported 228
+  source-suppression API calls, but a frozen cleanup aliasing bug erased every
+  point-level sweep row before serialization. The assembler and standalone
+  validator rejected the incomplete bundle. No retry, post-outcome code
+  change, susceptibility result, or gate-crossing result was accepted.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -48,7 +58,9 @@ Current readiness:
 
 ```text
 stage1b_measurement_primitives: completed
-stage1c_first_prediction_readiness: true
+stage1c_first_prediction: failed
+stage1c_scientific_outcome: inconclusive_runtime
+stage1c_first_prediction_readiness: false
 stage1b_empirical_claim_readiness: false
 counterfactual_susceptibility_result: none
 gate_crossing_result: none
@@ -60,5 +72,7 @@ paper_results_readiness: false
 ```
 
 See `docs/STAGE_1B_MEASUREMENT_PRIMITIVES_REPORT.md` for the completed Stage 1B
-engineering evidence and its claim boundary. Historical reports remain
-unchanged and retain their original scope.
+engineering evidence and
+`docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md` for the Stage 1C frozen
+prediction, invalidated canonical attempt, and exact claim boundary.
+Historical reports remain unchanged and retain their original scope.
