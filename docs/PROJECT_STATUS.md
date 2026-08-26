@@ -7,7 +7,10 @@ and the paper Results section remains pending. Stage 1C froze a valid first
 prospective prediction, but its canonical intervention artifact failed closed.
 Stage 1C-v2 repaired that serialization path, then stopped before prediction
 freeze when the held-out baseline selection hit its frozen historical-endpoint
-guard.
+guard. Stage 1C-v3 corrected that exclusion policy and froze an independently
+validated preregistered prediction, but its sole canonical process failed
+before the first intervention API call because the frozen adapter lacked the
+required baseline-remeasurement method.
 
 ## Current experiment classes
 
@@ -59,6 +62,16 @@ guard.
   was filtered or reranked after this result; no prediction manifest,
   pre-intervention commit, canonical intervention, suppression API call, or
   scientific artifact bundle exists.
+- **Stage 1C-v3 — preregistered prospective prediction:** `failed_runtime`
+  with `inconclusive_runtime`. The Norway prompt and authenticated 28-pair
+  exact denylist were frozen before baseline. The exact-pair mask removed 16
+  of 39,235 eligible pairs before ranking; all endpoint-only overlaps remained
+  audit metadata. The validated manifest froze 12 primary, 8 near-boundary,
+  and 8 directional rows with zero exact historical overlap. The sole
+  canonical process then failed during baseline remeasurement because the
+  intervention adapter lacked `measure_states`. It made zero suppression API
+  calls and serialized zero points. No retry or post-freeze protocol change
+  occurred.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -75,6 +88,8 @@ stage1c_scientific_outcome: inconclusive_runtime
 stage1c_first_prediction_readiness: false
 stage1c_v2_prospective_prediction: blocked_engineering
 stage1c_v2_scientific_outcome: none
+stage1c_v3_prospective_prediction: failed_runtime
+stage1c_v3_scientific_outcome: inconclusive_runtime
 stage1b_empirical_claim_readiness: false
 counterfactual_susceptibility_result: none
 gate_crossing_result: none
@@ -90,5 +105,7 @@ engineering evidence and
 `docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md` for the Stage 1C frozen
 prediction, invalidated canonical attempt, and exact claim boundary, and
 `docs/STAGE_1C_V2_HELDOUT_PROSPECTIVE_PREDICTION_REPORT.md` for the v2
-serialization recovery and held-out selection blocker.
+serialization recovery and held-out selection blocker, and
+`docs/STAGE_1C_V3_PREREGISTERED_PROSPECTIVE_PREDICTION_REPORT.md` for the v3
+exact-pair-masked prediction and canonical runtime blocker.
 Historical reports remain unchanged and retain their original scope.

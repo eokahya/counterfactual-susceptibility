@@ -705,3 +705,24 @@ filter the historical endpoint and take the next-ranked pair, change the seed,
 or switch prompts. Each requires an outcome-dependent protocol change. A
 future attempt must use a newly specified experiment class with its disjoint
 selection behavior fixed before baseline execution.
+
+## D-037 — 2026-08-26 — Invalidate the sole Stage 1C-v3 canonical process
+
+**Decision:** Classify Stage 1C-v3 as `failed_runtime` with scientific outcome
+`inconclusive_runtime`. Retain the independently validated, exact-pair-masked
+prediction manifest, but do not assemble or claim an intervention result.
+
+**Reason:** The one permitted canonical process passed preflight, then failed
+during selected-baseline remeasurement because the frozen intervention adapter
+does not implement the worker-required `measure_states` method. The exception
+occurred before the first source-suppression API call and produced no point
+record. Without serialized requested/applied values, target preactivations, or
+strict gate states, crossing and local-linearity outcomes cannot be
+independently recomputed.
+
+**Alternatives considered:** Add `measure_states` and rerun v3, reuse the
+frozen prediction without a new experiment class, classify the result as
+`no_eligible_pairs`, or infer zero crossings from zero API calls. Each would
+violate the one-canonical-attempt rule or manufacture a scientific conclusion
+without intervention evidence. A corrected attempt requires a new explicitly
+versioned class and a new freeze.

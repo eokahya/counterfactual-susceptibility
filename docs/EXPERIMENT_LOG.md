@@ -417,3 +417,50 @@ Never record a planned, configured, or partially scaffolded run as completed.
   mediation, benchmark, Gemma 2, CLT, or paper result. Stage 1B measurement
   primitives remain completed; official/reference reproductions remain
   pending and paper Results readiness remains false.
+
+---
+
+## EXP-20260826-003 — Stage 1C-v3 preregistered prospective prediction
+
+- **Status:** `failed_runtime`; scientific outcome `inconclusive_runtime`
+- **Base/branch:** `ee9cc944fbdabaa6437b7be3c997725fce5de0a6` /
+  `stage-1c-v3-preregistered-prospective-prediction`
+- **Protocol commits:** `9953cb2cd723659a3446b64d75540020c9fcf4d0`
+  and metadata-only serialization commit
+  `2055520bd2f4f3ebb53ec279b63328d0e3f59fe9`
+- **Pre-intervention commit:**
+  `10f7234a036562e9337514fc085415a017e99102`, pushed to the exact origin
+  branch before intervention
+- **Prompt:** deterministically derived `The capital of Norway is`; token IDs
+  `[2, 818, 5279, 529, 32649, 563]`; prompt digest
+  `66e7d4281197efefdbc83bf369d9d317faa7641990c27fa1c3842de99c358e41`
+- **Historical exclusion:** authenticated 28-pair v1 exact-pair denylist,
+  applied before ranking. Sixteen of 39,235 eligible baseline pairs were
+  removed; endpoint overlap remained audit-only.
+- **Prediction freeze:** standalone validation passed for 39,219 post-mask
+  pairs and 12 primary, 8 near-boundary, and 8 directional selected rows.
+  Exact historical overlap was zero. Prediction-manifest SHA-256:
+  `b2c489317852a2f54d50db783abc17dfdc08590353b0473dbab01ec3d04574cc`.
+- **Preliminary baseline process:** invalidated before publication when strict
+  JSON rejected PyTorch's `TorchVersion` string subclass. A minimal metadata-
+  only cast and regression test were committed and pushed before the fresh
+  accepted baseline; no scientific protocol or viewed pair artifact changed.
+- **Canonical intervention:** one attempt, zero scientific retries, zero
+  source-suppression API calls, and zero serialized sweep pairs/points. The
+  adapter lacked the `measure_states` method required for frozen baseline
+  remeasurement and failed before the pair-sweep loop.
+- **Disposition:** no crossing, observed critical alpha, local-linearity
+  metric, or susceptibility outcome is available. No retry or post-freeze code
+  change was made; a corrected run requires a future versioned class.
+- **Safety:** accepted prediction peak MPS driver 2,865,414,144 bytes, process
+  RSS 953,188,352 bytes, minimum available memory 12,544,540,672 bytes, zero
+  swap growth, and nominal thermal state. Canonical peak process-group RSS was
+  668,663,808 bytes with minimum available memory 12,566,364,160 bytes, zero
+  swap growth, nominal thermal state, and no timeout/safety/telemetry failure.
+- **Artifacts:** only the 45,173-byte validated prediction manifest is
+  tracked. No final bundle, checksum manifest, sweep, weight, cache, graph,
+  dense tensor, gradient, secret, private path, or raw emergency output exists
+  in Git.
+- **Claim boundary:** Stage 1B measurement primitives remain completed;
+  Counterfactual Susceptibility, gate crossing, behavior, mediation,
+  official/reference reproduction, and paper readiness remain unestablished.
