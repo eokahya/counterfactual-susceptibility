@@ -1,0 +1,353 @@
+{
+  "artifact_type": "stage1c_v3_historical_exact_pair_denylist",
+  "pair_count": 28,
+  "pairs": [
+    {
+      "source": {
+        "feature_id": 1386,
+        "layer": 0,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 4617,
+        "layer": 1,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 724,
+        "layer": 0,
+        "position": 2
+      },
+      "target": {
+        "feature_id": 153,
+        "layer": 9,
+        "position": 5
+      }
+    },
+    {
+      "source": {
+        "feature_id": 266,
+        "layer": 1,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 3293,
+        "layer": 2,
+        "position": 2
+      }
+    },
+    {
+      "source": {
+        "feature_id": 111,
+        "layer": 1,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 5755,
+        "layer": 10,
+        "position": 3
+      }
+    },
+    {
+      "source": {
+        "feature_id": 546,
+        "layer": 1,
+        "position": 4
+      },
+      "target": {
+        "feature_id": 542,
+        "layer": 2,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 12501,
+        "layer": 1,
+        "position": 4
+      },
+      "target": {
+        "feature_id": 14586,
+        "layer": 13,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 453,
+        "layer": 1,
+        "position": 5
+      },
+      "target": {
+        "feature_id": 278,
+        "layer": 2,
+        "position": 5
+      }
+    },
+    {
+      "source": {
+        "feature_id": 419,
+        "layer": 2,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 30,
+        "layer": 15,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 582,
+        "layer": 2,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 15884,
+        "layer": 3,
+        "position": 3
+      }
+    },
+    {
+      "source": {
+        "feature_id": 375,
+        "layer": 2,
+        "position": 5
+      },
+      "target": {
+        "feature_id": 166,
+        "layer": 3,
+        "position": 5
+      }
+    },
+    {
+      "source": {
+        "feature_id": 537,
+        "layer": 3,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 4612,
+        "layer": 6,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 537,
+        "layer": 3,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 1008,
+        "layer": 10,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 537,
+        "layer": 3,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 4484,
+        "layer": 10,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 380,
+        "layer": 3,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 1485,
+        "layer": 8,
+        "position": 3
+      }
+    },
+    {
+      "source": {
+        "feature_id": 1566,
+        "layer": 3,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 161,
+        "layer": 9,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 7468,
+        "layer": 3,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 3745,
+        "layer": 5,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 324,
+        "layer": 4,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 10215,
+        "layer": 8,
+        "position": 3
+      }
+    },
+    {
+      "source": {
+        "feature_id": 316,
+        "layer": 5,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 1464,
+        "layer": 8,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 7717,
+        "layer": 5,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 451,
+        "layer": 6,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 1472,
+        "layer": 6,
+        "position": 4
+      },
+      "target": {
+        "feature_id": 3017,
+        "layer": 9,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 503,
+        "layer": 7,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 30,
+        "layer": 8,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 761,
+        "layer": 9,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 2072,
+        "layer": 10,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 761,
+        "layer": 9,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 2082,
+        "layer": 10,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 2031,
+        "layer": 9,
+        "position": 5
+      },
+      "target": {
+        "feature_id": 7271,
+        "layer": 10,
+        "position": 5
+      }
+    },
+    {
+      "source": {
+        "feature_id": 206,
+        "layer": 10,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 774,
+        "layer": 11,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 324,
+        "layer": 10,
+        "position": 3
+      },
+      "target": {
+        "feature_id": 9817,
+        "layer": 11,
+        "position": 4
+      }
+    },
+    {
+      "source": {
+        "feature_id": 326,
+        "layer": 11,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 11208,
+        "layer": 12,
+        "position": 1
+      }
+    },
+    {
+      "source": {
+        "feature_id": 234,
+        "layer": 14,
+        "position": 1
+      },
+      "target": {
+        "feature_id": 771,
+        "layer": 15,
+        "position": 1
+      }
+    }
+  ],
+  "schema_version": 1,
+  "source_manifest": {
+    "artifact_type": "stage1c_prediction_manifest",
+    "branch": "stage-1c-first-prospective-prediction",
+    "experiment_class": "stage1c_first_prospective_prediction",
+    "freeze_commit": "6ec950d93fe1215fdcfee68c87e1f58a23a78ae8",
+    "git_blob_sha1": "847e9c3389097b529c0ac2861b3d519afe18d050",
+    "path": "results/stage1c_first_prospective_prediction/prediction_manifest.json",
+    "schema_version": 1,
+    "sha256": "43cf17f3f87ff97f9fa2aa6b827c84416add5dced2824b69c057d99a5f2b882a"
+  }
+}

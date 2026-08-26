@@ -1,0 +1,62 @@
+{
+  "artifact_type": "stage1c_v3_artifact_schema",
+  "canonical_attempts": 1,
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending"
+  },
+  "endpoint_overlap_policy": "audit_only",
+  "experiment_class": "stage1c_v3_preregistered_prospective_prediction",
+  "final_bundle_type": "stage1c_v3_final_bundle",
+  "forbidden_payload_classes": [
+    "model_weight",
+    "transcoder_weight",
+    "cache",
+    "raw_graph",
+    "adjacency",
+    "full_derivative_matrix",
+    "dense_preactivation_tensor",
+    "dense_activation_tensor",
+    "gradient_tensor",
+    "tokenizer_payload",
+    "secret",
+    "private_absolute_path"
+  ],
+  "historical_denylist_path": "configs/stage1c_v3_v1_exact_pair_denylist.json",
+  "historical_denylist_sha256": "ee31e29e2eb2be5aa5cbf72b95d75ea275098592eb54106f20aa7b3ba87405ad",
+  "historical_denylist_type": "stage1c_v3_historical_exact_pair_denylist",
+  "historical_exact_pair_count": 28,
+  "historical_mask_stage": "before_ranking_and_quota_selection",
+  "maximum_bundle_bytes": 5242880,
+  "maximum_file_bytes": 2097152,
+  "point_level_evidence_required_for_nonzero_api_calls": true,
+  "prediction_manifest_forbidden_recursive_keys": [
+    "observed",
+    "observed_outcome",
+    "observed_crossing",
+    "realized_suppression",
+    "actual_bf16_value_passed",
+    "target_activation_after_intervention",
+    "intervention_sweeps",
+    "scientific_outcome"
+  ],
+  "prediction_manifest_type": "stage1c_v3_prediction_manifest",
+  "required_files": [
+    "run_manifest.json",
+    "asset_manifest.json",
+    "environment_manifest.json",
+    "prediction_manifest.json",
+    "intervention_sweeps.json",
+    "crossing_summary.json",
+    "local_linearity_summary.json",
+    "memory_timing_summary.json",
+    "attempts.json",
+    "checksums.sha256"
+  ],
+  "schema_version": 3,
+  "scientific_retries": 0,
+  "worker_artifact_type": "stage1c_v3_intervention_worker"
+}
