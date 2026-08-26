@@ -85,6 +85,19 @@ def test_supervisor_uses_only_v2_worker_paths_and_offline_child_environment(
     assert environment["PYTHONPATH"] == "/synthetic/src"
 
 
+def test_supervisor_tail_is_strict_json_safe() -> None:
+    module = _module("stage1c_v2_supervisor_tail", "run_stage1c_v2.py")
+    rendered = module._safe_process_tail(
+        "first line\n\x1b[31mcolored\x1b[0m\tmessage\r\nlast line"
+    )
+    assert not any(
+        ord(character) < 0x20 or 0x7F <= ord(character) <= 0x9F
+        for character in rendered
+    )
+    assert "first line" in rendered
+    assert "last line" in rendered
+
+
 def test_v1_config_identity_is_rejected_by_v2_preflight() -> None:
     module = _module("stage1c_v2_preflight_identity", "preflight_stage1c_v2.py")
     invalid = {

@@ -103,7 +103,8 @@ def _host_sampler(limits: dict[str, Any], swap_start: int) -> Any:
 
 
 def _safe_process_tail(value: str) -> str:
-    normalized = "\n".join(line.rstrip() for line in value.splitlines()[-80:])
+    normalized = " | ".join(line.rstrip() for line in value.splitlines()[-80:])
+    normalized = re.sub(r"[\x00-\x1f\x7f-\x9f]+", " ", normalized)
     normalized = re.sub(
         r"/(?:Users|home)/[^/\s]+(?:/[^\s:\"]+)*", "<LOCAL_PATH>", normalized
     )
