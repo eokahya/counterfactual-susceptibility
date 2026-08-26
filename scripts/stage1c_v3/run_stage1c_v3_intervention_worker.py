@@ -54,6 +54,9 @@ from cfsus.stage1c_v3.config import (  # noqa: E402
     selected_positions_for_token_ids,
     validate_prompt_token_ids,
 )
+from cfsus.stage1c_v3.execution_journal import (  # noqa: E402
+    CanonicalExecutionJournal,
+)
 from cfsus.stage1c_v3.historical import (  # noqa: E402
     DENYLIST_PATH,
     HISTORICAL_MANIFEST_FREEZE_COMMIT,
@@ -70,6 +73,7 @@ from cfsus.stage1c_v3.intervention import (  # noqa: E402
 )
 from cfsus.stage1c_v3.intervention_runtime import (  # noqa: E402
     Stage1CInterventionBackend,
+    Stage1CInterventionBackendProtocol,
 )
 from cfsus.stage1c_v3.prediction import canonical_v3_pair_id  # noqa: E402
 from cfsus.stage1c_v3.serialization import (  # noqa: E402
@@ -87,6 +91,13 @@ PREDICTION_MANIFEST_RELATIVE = (
 RUNTIME_FINGERPRINT = (
     "gemma3-270m@9b0cfec892e2/plt@fada11860ac1/"
     "circuit-tracer@8f1e2438df61/nnsight/mps/bf16/stage1c-v3"
+)
+PREDICTION_FREEZE_COMMIT = "10f7234a036562e9337514fc085415a017e99102"
+PREDICTION_MANIFEST_SHA256 = (
+    "b2c489317852a2f54d50db783abc17dfdc08590353b0473dbab01ec3d04574cc"
+)
+PREDICTION_PROTOCOL_MAP_SHA256 = (
+    "9ac9c59aeef736ed495d688bdeb6866250b089a191430c9d175661c702ec3db8"
 )
 FORBIDDEN_PREDICTION_KEYS = frozenset(
     {
@@ -111,6 +122,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--pre-intervention-commit", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--emergency-output", type=Path, required=True)
+    parser.add_argument("--attempt-lock", type=Path, required=True)
+    parser.add_argument("--point-journal", type=Path, required=True)
     return parser
 
 
@@ -124,32 +137,14 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _protocol_hashes() -> dict[str, str]:
-    paths = (
-        CONFIG_PATH.as_posix(),
-        SCHEMA_PATH.as_posix(),
-        DENYLIST_PATH.as_posix(),
-        "src/cfsus/stage1c_v3/__init__.py",
-        "src/cfsus/stage1c_v3/config.py",
-        "src/cfsus/stage1c_v3/historical.py",
-        "src/cfsus/stage1c_v3/prediction.py",
-        "src/cfsus/stage1c_v3/vjp.py",
-        "src/cfsus/stage1c_v3/runtime.py",
-        "src/cfsus/stage1c_v3/intervention.py",
-        "src/cfsus/stage1c_v3/intervention_runtime.py",
-        "src/cfsus/stage1c_v3/analysis.py",
-        "src/cfsus/stage1c_v3/serialization.py",
-        "src/cfsus/stage1c_v3/worker_result.py",
-        "scripts/stage1c_v3/preflight_stage1c_v3.py",
-        "scripts/stage1c_v3/run_stage1c_v3.py",
-        "scripts/stage1c_v3/run_stage1c_v3_prediction_worker.py",
-        "scripts/stage1c_v3/run_stage1c_v3_intervention_worker.py",
-        "scripts/stage1c_v3/assemble_stage1c_prediction.py",
-        "scripts/stage1c_v3/assemble_stage1c_artifacts.py",
-        "scripts/stage1c_v3/validate_stage1c_v3_artifacts.py",
-        "scripts/stage1c_v3/validate_stage1c_v3_denylist.py",
-    )
-    return {path: _sha256(REPOSITORY_ROOT / path) for path in paths}
+def _prediction_protocol_map_digest(value: Any) -> str:
+    if not isinstance(value, dict) or any(
+        not isinstance(key, str) or not isinstance(item, str)
+        for key, item in value.items()
+    ):
+        raise RuntimeError("prediction protocol hash map is malformed")
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def _finite(value: Any, label: str) -> float:
@@ -219,6 +214,28 @@ def _verify_tracked_prediction_manifest(path: Path) -> None:
         raise RuntimeError(
             "working prediction manifest differs from tracked HEAD bytes"
         )
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != PREDICTION_MANIFEST_SHA256:
+        raise RuntimeError("tracked prediction manifest digest differs")
+    try:
+        frozen = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(REPOSITORY_ROOT),
+                "show",
+                f"{PREDICTION_FREEZE_COMMIT}:{PREDICTION_MANIFEST_RELATIVE}",
+            ],
+            check=True,
+            capture_output=True,
+            timeout=15,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise RuntimeError("prediction-freeze manifest is unavailable") from error
+    if raw != frozen:
+        raise RuntimeError(
+            "tracked manifest is not byte-identical to prediction freeze"
+        )
 
 
 def _validate_prediction_manifest(
@@ -241,8 +258,13 @@ def _validate_prediction_manifest(
         raise RuntimeError("prediction manifest config digest differs")
     if manifest.get("artifact_schema_sha256") != _sha256(REPOSITORY_ROOT / SCHEMA_PATH):
         raise RuntimeError("prediction manifest schema digest differs")
-    if manifest.get("protocol_file_sha256") != _protocol_hashes():
-        raise RuntimeError("prediction protocol file hashes differ from manifest")
+    if (
+        _prediction_protocol_map_digest(manifest.get("protocol_file_sha256"))
+        != PREDICTION_PROTOCOL_MAP_SHA256
+    ):
+        raise RuntimeError(
+            "prediction protocol hashes differ from the authenticated freeze commit"
+        )
     if manifest.get("prompt_derivation") != {
         "algorithm": config["prompt_derivation"]["algorithm"],
         "base_commit": config["prompt_derivation"]["base_commit"],
@@ -429,7 +451,10 @@ def _validate_prediction_manifest(
 
 
 def _verify_baselines(
-    backend: Any, groups: dict[str, list[dict[str, Any]]], *, token_count: int
+    backend: Stage1CInterventionBackendProtocol,
+    groups: dict[str, list[dict[str, Any]]],
+    *,
+    token_count: int,
 ) -> dict[FeatureRef, Any]:
     features: list[FeatureRef] = []
     for rows in groups.values():
@@ -543,6 +568,7 @@ def _run_pair(
     config: dict[str, Any],
     torch: Any,
     sampler: Any,
+    journal: CanonicalExecutionJournal,
 ) -> dict[str, Any]:
     source_tensor = torch.tensor(
         source_baseline, device="mps", dtype=torch.bfloat16
@@ -567,6 +593,7 @@ def _run_pair(
         point["bisection_step"] = None
         _bind_point_evidence(point, row, telemetry_stage=telemetry_stage)
         _add_local_prediction_fields(point, row)
+        journal.append_completed_point(point)
         points.append(point)
     bisection_steps = 0
     while bisection_steps < int(config["schedule"]["maximum_bisection_steps"]):
@@ -603,6 +630,7 @@ def _run_pair(
         point["bisection_step"] = bisection_steps
         _bind_point_evidence(point, row, telemetry_stage=telemetry_stage)
         _add_local_prediction_fields(point, row)
+        journal.append_completed_point(point)
         points.append(point)
         bisection_steps += 1
     ordered = sorted(points, key=lambda item: float(item["realized_suppression"]))
@@ -697,6 +725,41 @@ def _artifact_bundle(
             "intervention_required": bool(sweeps),
         },
     }, outcome
+
+
+def _execute_production_sweeps(
+    backend: Stage1CInterventionBackendProtocol,
+    groups: dict[str, list[dict[str, Any]]],
+    *,
+    token_count: int,
+    config: dict[str, Any],
+    torch: Any,
+    sampler: Any,
+    journal: CanonicalExecutionJournal,
+) -> tuple[list[dict[str, Any]], dict[FeatureRef, Any]]:
+    """Run the exact baseline-and-point path shared by production and rehearsals."""
+
+    if not isinstance(backend, Stage1CInterventionBackendProtocol):
+        raise RuntimeError(
+            "production backend does not satisfy the complete worker protocol"
+        )
+    states = _verify_baselines(backend, groups, token_count=token_count)
+    sweeps: list[dict[str, Any]] = []
+    for group in ("primary", "near_boundary", "directional"):
+        for row in groups[group]:
+            source = FeatureRef(**row["source"])
+            sweeps.append(
+                _run_pair(
+                    backend,
+                    row,
+                    float(states[source].activation),
+                    config,
+                    torch,
+                    sampler,
+                    journal,
+                )
+            )
+    return sweeps, states
 
 
 def _verify_assets(cache: Path) -> dict[str, Any]:
@@ -817,6 +880,18 @@ def _execute(args: argparse.Namespace) -> dict[str, Any]:
     sampler_finished = False
     model: Any = None
     sweeps: list[dict[str, Any]] = []
+    pair_ids = tuple(
+        row["pair_id"]
+        for group in ("primary", "near_boundary", "directional")
+        for row in groups[group]
+    )
+    journal = CanonicalExecutionJournal(
+        args.point_journal,
+        args.attempt_lock,
+        frozen_pair_ids=pair_ids,
+        pre_intervention_commit=args.pre_intervention_commit,
+        prediction_manifest_sha256=args.prediction_manifest_sha256,
+    )
     try:
         with sampler.stage("replacement_runtime_loading"):
             model, module_guard = build_mps_bf16_replacement(
@@ -831,24 +906,21 @@ def _execute(args: argparse.Namespace) -> dict[str, Any]:
                     "intervention prompt token identity differs from manifest"
                 )
             backend = Stage1CInterventionBackend(
-                model, prompt=prompt, torch=torch, token_count=len(token_ids)
+                model,
+                prompt=prompt,
+                torch=torch,
+                token_count=len(token_ids),
+                attempt_recorder=journal.before_source_suppression,
             )
-        states = _verify_baselines(
-            backend, groups, token_count=len(manifest["prompt"]["token_ids"])
+        sweeps, states = _execute_production_sweeps(
+            backend,
+            groups,
+            token_count=len(manifest["prompt"]["token_ids"]),
+            config=config,
+            torch=torch,
+            sampler=sampler,
+            journal=journal,
         )
-        for group in ("primary", "near_boundary", "directional"):
-            for row in groups[group]:
-                source = FeatureRef(**row["source"])
-                sweeps.append(
-                    _run_pair(
-                        backend,
-                        row,
-                        float(states[source].activation),
-                        config,
-                        torch,
-                        sampler,
-                    )
-                )
         telemetry = sampler.finish()
         sampler_finished = True
         if telemetry["violations"] or telemetry["telemetry_failures"]:
@@ -859,6 +931,7 @@ def _execute(args: argparse.Namespace) -> dict[str, Any]:
             raise RuntimeError(
                 "instrumented suppression API calls differ from serialized points"
             )
+        journal.verify_complete(expected_point_count=serialized_point_count)
         git_end = verify_git("intervention", args.pre_intervention_commit)
         if git_end != git_start:
             raise RuntimeError("v3 worktree identity changed during intervention")
@@ -903,6 +976,7 @@ def _execute(args: argparse.Namespace) -> dict[str, Any]:
             telemetry=telemetry,
         )
     finally:
+        journal.close()
         if not sampler_finished:
             with contextlib.suppress(Exception):
                 sampler.finish()
@@ -917,14 +991,25 @@ def _execute(args: argparse.Namespace) -> dict[str, Any]:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    expected_attempt_parent = (
+        REPOSITORY_ROOT
+        / "results/generated/stage1c_v3_preregistered_prospective_prediction"
+    ).resolve()
     if (
         args.output.exists()
         or args.emergency_output.exists()
+        or args.attempt_lock.exists()
+        or args.point_journal.exists()
         or not args.output.parent.is_dir()
         or not args.emergency_output.parent.is_dir()
+        or not args.attempt_lock.parent.is_dir()
+        or args.attempt_lock.resolve(strict=False).parent != expected_attempt_parent
+        or args.attempt_lock.name != "canonical_attempt_v1.lock"
+        or args.point_journal.parent.resolve() != args.output.parent.resolve()
+        or args.point_journal.name != "point_journal.jsonl"
     ):
         raise RuntimeError(
-            "v3 intervention output paths must be new with existing parents"
+            "v4 intervention output, journal, or attempt-lock path is unsafe"
         )
     result = _execute(args)
     write_json_new(args.output, result)

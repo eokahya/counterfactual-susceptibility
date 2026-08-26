@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 import importlib.util
+import json
 from pathlib import Path
 from types import ModuleType
 from typing import cast
@@ -143,24 +144,22 @@ def test_v3_config_keeps_exact_prompt_and_dynamic_position_contract() -> None:
     assert config["scanner"]["selected_positions"] == [1, 2, 3, 4, 5]
 
 
-def test_prediction_and_intervention_workers_freeze_the_same_protocol_files() -> None:
-    prediction = _module(
-        "stage1c_v3_prediction_worker_hashes",
-        "run_stage1c_v3_prediction_worker.py",
-    )
+def test_intervention_authenticates_prediction_time_protocol_files() -> None:
     intervention = _module(
         "stage1c_v3_intervention_worker_hashes",
         "run_stage1c_v3_intervention_worker.py",
     )
-    validator = _module(
-        "stage1c_v3_validator_hashes", "validate_stage1c_v3_artifacts.py"
+    manifest = json.loads(
+        (
+            REPOSITORY_ROOT
+            / "results/stage1c_v3_preregistered_prospective_prediction"
+            / "prediction_manifest.json"
+        ).read_text(encoding="utf-8")
     )
-    expected = {
-        path: prediction._sha256(REPOSITORY_ROOT / path)
-        for path in validator.PROTOCOL_PATHS
-    }
-    assert prediction._protocol_hashes() == expected
-    assert intervention._protocol_hashes() == expected
+    assert (
+        intervention._prediction_protocol_map_digest(manifest["protocol_file_sha256"])
+        == intervention.PREDICTION_PROTOCOL_MAP_SHA256
+    )
 
 
 def test_workers_normalize_torch_version_to_builtin_string() -> None:
@@ -207,10 +206,10 @@ def test_prediction_git_gate_requires_clean_protocol_descendant(
         if arguments == ("rev-parse", "HEAD"):
             return head
         if arguments == ("branch", "--show-current"):
-            return cast(str, module.V3_BRANCH)
+            return cast(str, module.V4_BRANCH)
         if arguments == (
             "rev-parse",
-            f"refs/remotes/origin/{module.V3_BRANCH}",
+            f"refs/remotes/origin/{module.V4_BRANCH}",
         ):
             return head
         if arguments == (
@@ -219,14 +218,19 @@ def test_prediction_git_gate_requires_clean_protocol_descendant(
             "--symbolic-full-name",
             "@{u}",
         ):
-            return f"origin/{module.V3_BRANCH}"
+            return f"origin/{module.V4_BRANCH}"
         if len(arguments) == 2 and arguments[0] == "rev-parse":
             prefix = "refs/remotes/origin/"
             if arguments[1].startswith(prefix):
                 name = arguments[1][len(prefix) :]
                 if name in module.PROTECTED_ORIGIN_REFS:
                     return cast(str, module.PROTECTED_ORIGIN_REFS[name])
-        if arguments == ("merge-base", "--is-ancestor", module.V3_BASE_COMMIT, head):
+        if arguments == (
+            "merge-base",
+            "--is-ancestor",
+            module.V4_START_COMMIT,
+            head,
+        ):
             return ""
         if arguments == (
             "ls-tree",

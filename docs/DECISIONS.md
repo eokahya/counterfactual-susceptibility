@@ -726,3 +726,28 @@ frozen prediction without a new experiment class, classify the result as
 violate the one-canonical-attempt rule or manufacture a scientific conclusion
 without intervention evidence. A corrected attempt requires a new explicitly
 versioned class and a new freeze.
+
+## D-038 — 2026-08-26 — Preserve the v3 prediction freeze for v4 execution
+
+**Decision:** Treat the first instrumented source-suppression API call on one
+of the frozen 28 Norway pairs as the v4 scientific-attempt boundary. Preserve
+the v3 prediction manifest byte-for-byte and authenticate its embedded
+protocol hashes against prediction-freeze commit
+`10f7234a036562e9337514fc085415a017e99102`. Fix only the execution interface,
+durable point recording, and independent reconstruction path in the new v4
+branch.
+
+**Reason:** The v3 process failed in selected-baseline remeasurement before
+the first source-suppression API call and produced no intervention outcome.
+The later binding v4 protocol explicitly authorizes execution of the unused
+frozen predictions under a new versioned execution class, while forbidding a
+new prompt, pair selection, prediction manifest, schedule, tolerance, or
+classifier. Comparing prediction-time hashes to their authenticated freeze
+commit separates immutable scientific provenance from the pushed v4
+engineering repair.
+
+**Alternatives considered:** Regenerate a v4 prediction manifest, mutate the
+v3 embedded hashes, duplicate the full Stage 1C script tree, or continue to
+treat supervisor startup as the scientific attempt. Each would either alter
+the prospective artifact, expand the implementation, or consume an attempt
+before any scientific intervention call.

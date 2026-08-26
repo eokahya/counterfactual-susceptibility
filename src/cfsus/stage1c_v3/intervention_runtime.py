@@ -5,11 +5,36 @@ from __future__ import annotations
 import gc
 import math
 import time
-from typing import Any
+from collections.abc import Callable, Sequence
+from typing import Any, Protocol, runtime_checkable
 
+from cfsus.backends.nnsight_plt import NNSightPLTMeasurementBackend
 from cfsus.exceptions import ScientificInputError
 from cfsus.stage1c_v3.intervention import AppliedValuePlan, applied_plan_record
-from cfsus.types import FeatureRef
+from cfsus.types import FeatureRef, MeasuredFeatureState
+
+AttemptRecorder = Callable[[dict[str, Any], int], None]
+
+
+@runtime_checkable
+class Stage1CInterventionBackendProtocol(Protocol):
+    """Complete production surface consumed by the intervention worker."""
+
+    source_suppression_api_calls: int
+
+    def measure_states(
+        self, features: Sequence[FeatureRef]
+    ) -> dict[FeatureRef, MeasuredFeatureState]: ...
+
+    def measure_point(
+        self,
+        pair: dict[str, Any],
+        plan: AppliedValuePlan,
+        *,
+        freeze_attention: bool,
+        constrained_layers: None,
+        stage: str,
+    ) -> dict[str, Any]: ...
 
 
 def _feature(value: dict[str, Any], label: str) -> FeatureRef:
@@ -32,7 +57,13 @@ class Stage1CVersion3InterventionBackend:
     """Execute one absolute source edit and return one downstream target scalar."""
 
     def __init__(
-        self, model: Any, *, prompt: str, torch: Any, token_count: int | None = None
+        self,
+        model: Any,
+        *,
+        prompt: str,
+        torch: Any,
+        token_count: int | None = None,
+        attempt_recorder: AttemptRecorder | None = None,
     ) -> None:
         self.model = model
         self.prompt = prompt
@@ -56,7 +87,52 @@ class Stage1CVersion3InterventionBackend:
             )
         self.token_count = token_count
         self.transcoders = getattr(model.transcoders, "_module", model.transcoders)
+        self._measurement_backend = NNSightPLTMeasurementBackend(
+            model,
+            prompt=prompt,
+            prompt_id="capital_norway_preregistered_v3",
+            torch=torch,
+        )
         self.source_suppression_api_calls = 0
+        self._attempt_recorder = attempt_recorder
+
+    def measure_states(
+        self, features: Sequence[FeatureRef]
+    ) -> dict[FeatureRef, MeasuredFeatureState]:
+        """Remeasure endpoints through the loaded runtime's canonical primitive."""
+
+        unique = tuple(sorted(set(features)))
+        if not unique or len(unique) != len(features):
+            raise ScientificInputError(
+                "baseline feature set must be nonempty and duplicate-free"
+            )
+        if any(
+            not isinstance(feature, FeatureRef)
+            or feature.layer >= 18
+            or feature.position < 1
+            or feature.position >= self.token_count
+            or feature.feature_id >= 16_384
+            for feature in unique
+        ):
+            raise ScientificInputError(
+                "baseline feature set is outside the frozen runtime domain"
+            )
+        states = self._measurement_backend.measure_states(unique)
+        if not isinstance(states, dict) or set(states) != set(unique):
+            raise ScientificInputError(
+                "loaded runtime returned an incomplete baseline state map"
+            )
+        for feature, state in states.items():
+            if (
+                not isinstance(state, MeasuredFeatureState)
+                or state.feature != feature
+                or state.device != "mps:0"
+                or state.dtype != "torch.bfloat16"
+            ):
+                raise ScientificInputError(
+                    "loaded baseline state changed identity, device, or dtype"
+                )
+        return states
 
     def measure_point(
         self,
@@ -90,6 +166,9 @@ class Stage1CVersion3InterventionBackend:
         cache: Any = None
         started = time.perf_counter()
         try:
+            next_call_index = self.source_suppression_api_calls + 1
+            if self._attempt_recorder is not None:
+                self._attempt_recorder(pair, next_call_index)
             self.source_suppression_api_calls += 1
             logits, cache = self.model.feature_intervention(
                 self.prompt,
@@ -202,4 +281,18 @@ class Stage1CVersion3InterventionBackend:
 # Short alias for worker code that is shared structurally with the v1 runner.
 Stage1CInterventionBackend = Stage1CVersion3InterventionBackend
 
-__all__ = ["Stage1CInterventionBackend", "Stage1CVersion3InterventionBackend"]
+
+def _static_protocol_check(
+    backend: Stage1CVersion3InterventionBackend,
+) -> Stage1CInterventionBackendProtocol:
+    """Give strict type checking a concrete adapter-to-protocol assignment."""
+
+    return backend
+
+
+__all__ = [
+    "AttemptRecorder",
+    "Stage1CInterventionBackend",
+    "Stage1CInterventionBackendProtocol",
+    "Stage1CVersion3InterventionBackend",
+]

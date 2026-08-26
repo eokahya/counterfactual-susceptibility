@@ -46,6 +46,8 @@ V3_BRANCH = "stage-1c-v3-preregistered-prospective-prediction"
 V3_BASE_COMMIT = "ee9cc944fbdabaa6437b7be3c997725fce5de0a6"
 V3_PROMPT_ID = "capital_norway_preregistered_v3"
 V3_PROMPT_TEXT = "The capital of Norway is"
+V4_BRANCH = "stage-1c-v4-protocol-preserving-execution"
+V4_START_COMMIT = "92ba35cde279c46e1907f0a48ccb56ad378ccbd5"
 V3_CONFIG_RELATIVE = "configs/stage1c_v3_preregistered_prospective_prediction.yaml"
 V3_SCHEMA_RELATIVE = (
     "configs/stage1c_v3_preregistered_prospective_prediction_artifact_schema.json"
@@ -79,6 +81,7 @@ PROTECTED_ORIGIN_REFS = {
         "cc47cb604fc2422deb50aacbc7fde77499b532c5"
     ),
     "stage-1c-v2-heldout-prospective-prediction": V3_BASE_COMMIT,
+    "stage-1c-v3-preregistered-prospective-prediction": V4_START_COMMIT,
 }
 
 
@@ -138,10 +141,10 @@ def verify_git(
     head = _git("rev-parse", "HEAD")
     branch = _git("branch", "--show-current")
     tracked, untracked = _status_paths()
-    if SHA40_RE.fullmatch(head) is None or branch != V3_BRANCH:
-        raise RuntimeError("Stage 1C-v3 branch identity is invalid")
+    if SHA40_RE.fullmatch(head) is None or branch != V4_BRANCH:
+        raise RuntimeError("Stage 1C-v4 execution branch identity is invalid")
 
-    _git("merge-base", "--is-ancestor", V3_BASE_COMMIT, head)
+    _git("merge-base", "--is-ancestor", V4_START_COMMIT, head)
     protected = {
         name: _git("rev-parse", f"refs/remotes/origin/{name}")
         for name in PROTECTED_ORIGIN_REFS
@@ -161,20 +164,20 @@ def verify_git(
     if historical_tree != expected_historical_tree:
         raise RuntimeError("frozen historical manifest Git blob changed")
 
-    origin_head = _git("rev-parse", f"refs/remotes/origin/{V3_BRANCH}")
+    origin_head = _git("rev-parse", f"refs/remotes/origin/{V4_BRANCH}")
     upstream = _git("rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}")
-    if upstream != f"origin/{V3_BRANCH}":
-        raise RuntimeError("v3 branch does not track its exact origin branch")
+    if upstream != f"origin/{V4_BRANCH}":
+        raise RuntimeError("v4 branch does not track its exact origin branch")
 
     if phase == "prediction":
-        if head == V3_BASE_COMMIT or tracked or untracked:
+        if head == V4_START_COMMIT or tracked or untracked:
             raise RuntimeError(
-                "prediction requires a clean committed v3 protocol descendant"
+                "prediction requires a clean committed v4 execution descendant"
             )
         if pre_intervention_commit is not None:
             raise RuntimeError("prediction must not receive an intervention commit")
         if origin_head != head:
-            raise RuntimeError("origin v3 branch is not at the protocol commit")
+            raise RuntimeError("origin v4 branch is not at the protocol commit")
         return {
             "phase": phase,
             "branch": branch,
@@ -183,7 +186,7 @@ def verify_git(
             "protocol_commit": head,
             "origin_branch_head": origin_head,
             "upstream": upstream,
-            "base_commit": V3_BASE_COMMIT,
+            "base_commit": V4_START_COMMIT,
             "base_ancestry_verified": True,
             "protected_origin_refs": protected,
         }
@@ -195,10 +198,10 @@ def verify_git(
         raise RuntimeError("intervention requires a valid v3 pre-intervention commit")
     if head != pre_intervention_commit or tracked or untracked:
         raise RuntimeError(
-            "intervention requires a clean exact v3 pre-intervention commit"
+            "intervention requires a clean exact v4 pre-intervention commit"
         )
     if origin_head != pre_intervention_commit:
-        raise RuntimeError("origin v3 branch is not at the pre-intervention commit")
+        raise RuntimeError("origin v4 branch is not at the pre-intervention commit")
     return {
         "phase": phase,
         "branch": branch,
@@ -207,7 +210,7 @@ def verify_git(
         "pre_intervention_commit": pre_intervention_commit,
         "origin_branch_head": origin_head,
         "upstream": upstream,
-        "base_commit": V3_BASE_COMMIT,
+        "base_commit": V4_START_COMMIT,
         "base_ancestry_verified": True,
         "protected_origin_refs": protected,
     }

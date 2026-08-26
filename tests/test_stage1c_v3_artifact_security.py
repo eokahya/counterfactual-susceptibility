@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import json
 import os
 import sys
 import zipfile
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -32,8 +34,18 @@ validator = _load_script(
 assembler = _load_script(
     "stage1c_v3_artifact_security_assembler", "assemble_stage1c_artifacts.py"
 )
+worker = _load_script(
+    "stage1c_v4_production_worker", "run_stage1c_v3_intervention_worker.py"
+)
 
+from cfsus.stage1c_v3.execution_journal import CanonicalExecutionJournal  # noqa: E402
+from cfsus.stage1c_v3.intervention import applied_plan_record  # noqa: E402
 from cfsus.stage1c_v3.worker_result import build_detached_worker_result  # noqa: E402
+from cfsus.types import (  # noqa: E402
+    FeatureActivity,
+    FeatureRef,
+    MeasuredFeatureState,
+)
 
 
 def _protocol() -> dict[str, Any]:
@@ -247,10 +259,13 @@ def _point(
 
 
 def _protocol_hashes() -> dict[str, str]:
-    return {
-        path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
-        for path in validator.PROTOCOL_PATHS
-    }
+    return json.loads(
+        (
+            ROOT
+            / "results/stage1c_v3_preregistered_prospective_prediction"
+            / "prediction_manifest.json"
+        ).read_text(encoding="utf-8")
+    )["protocol_file_sha256"]
 
 
 def _asset_evidence() -> dict[str, Any]:
@@ -567,6 +582,237 @@ def test_synthetic_nonempty_assembly_passes_standalone_validator(
     assert result["status"] == "passed"
     assert result["point_count"] == 17
     assert result["api_call_count"] == 17
+
+
+class _FakeDevice:
+    type = "mps"
+
+
+class _FakeTensor:
+    def __init__(self, value: float, dtype: object) -> None:
+        self._value = validator.bf16_round(float(value))
+        self.device = _FakeDevice()
+        self.dtype = dtype
+
+    def reshape(self, *_: object) -> _FakeTensor:
+        return self
+
+    def numel(self) -> int:
+        return 1
+
+    def item(self) -> float:
+        return self._value
+
+
+class _FakeTorch:
+    bfloat16 = object()
+    Tensor = _FakeTensor
+
+    @classmethod
+    def tensor(cls, value: float, *, device: str, dtype: object) -> _FakeTensor:
+        assert device == "mps" and dtype is cls.bfloat16
+        return _FakeTensor(value, dtype)
+
+
+class _SyntheticBackend:
+    def __init__(
+        self,
+        groups: dict[str, list[dict[str, Any]]],
+        recorder: Any,
+    ) -> None:
+        self.groups = groups
+        self.recorder = recorder
+        self.source_suppression_api_calls = 0
+
+    def _row_for(self, feature: FeatureRef) -> tuple[dict[str, Any], bool]:
+        for rows in self.groups.values():
+            for row in rows:
+                if feature == FeatureRef(**row["source"]):
+                    return row, True
+                if feature == FeatureRef(**row["target"]):
+                    return row, False
+        raise AssertionError("unexpected synthetic feature")
+
+    def measure_states(
+        self, features: tuple[FeatureRef, ...]
+    ) -> dict[FeatureRef, MeasuredFeatureState]:
+        result: dict[FeatureRef, MeasuredFeatureState] = {}
+        for feature in features:
+            row, is_source = self._row_for(feature)
+            if is_source:
+                activation = float(row["source_activation"])
+                result[feature] = MeasuredFeatureState(
+                    feature=feature,
+                    preactivation=activation,
+                    activation=activation,
+                    threshold=0.0,
+                    activity=FeatureActivity.ACTIVE,
+                    device="mps:0",
+                    dtype="torch.bfloat16",
+                )
+            else:
+                result[feature] = MeasuredFeatureState(
+                    feature=feature,
+                    preactivation=float(row["target_preactivation"]),
+                    activation=0.0,
+                    threshold=float(row["target_threshold"]),
+                    activity=FeatureActivity.INACTIVE,
+                    device="mps:0",
+                    dtype="torch.bfloat16",
+                )
+        return result
+
+    def measure_point(
+        self,
+        pair: dict[str, Any],
+        plan: Any,
+        *,
+        freeze_attention: bool,
+        constrained_layers: None,
+        stage: str,
+    ) -> dict[str, Any]:
+        assert freeze_attention is True and constrained_layers is None
+        next_index = self.source_suppression_api_calls + 1
+        self.recorder(pair, next_index)
+        self.source_suppression_api_calls = next_index
+        z = float(pair["target_preactivation"]) + float(
+            plan.realized_suppression
+        ) * float(pair["q"])
+        tau = float(pair["target_threshold"])
+        active = z > tau
+        result = applied_plan_record(plan)
+        result.update(
+            {
+                "source_suppression_api_call_index": next_index,
+                "point_elapsed_seconds": 0.01,
+                "stage": stage,
+                "target_preactivation": z,
+                "target_threshold": tau,
+                "target_activation": z if active else 0.0,
+                "target_active": active,
+                "loaded_gate": "a=z*1[z>tau]",
+                "threshold_equality_activity": "inactive",
+                "source_activation_observation": (
+                    "actual_bf16_value_passed_to_absolute_intervention_tuple"
+                ),
+                "freeze_attention": True,
+                "constrained_layers": None,
+                "target_clamped": False,
+                "source_value_device": "mps:0",
+                "source_value_dtype": "torch.bfloat16",
+                "target_value_device": "mps:0",
+                "target_value_dtype": "torch.bfloat16",
+                "finite_checks": {
+                    "applied_source": True,
+                    "logits": True,
+                    "preactivation_cache": True,
+                    "target_preactivation": True,
+                    "target_threshold": True,
+                    "target_activation": True,
+                },
+                "logits_finite": True,
+                "logits_shape": [1, 6, 262_144],
+            }
+        )
+        return result
+
+
+class _SyntheticSampler:
+    def __init__(self) -> None:
+        self.stages: list[str] = []
+
+    @contextmanager
+    def stage(self, name: str) -> Any:
+        self.stages.append(name)
+        yield
+
+
+def test_actual_production_sweep_path_reaches_standalone_validator(
+    tmp_path: Path,
+) -> None:
+    prediction, prediction_worker, _ = _fixture()
+    groups = prediction["selected_groups"]
+    pair_ids = tuple(
+        row["pair_id"]
+        for group in ("primary", "near_boundary", "directional")
+        for row in groups[group]
+    )
+    journal_path = tmp_path / "point_journal.jsonl"
+    lock_path = tmp_path / "canonical_attempt_v1.lock"
+    journal = CanonicalExecutionJournal(
+        journal_path,
+        lock_path,
+        frozen_pair_ids=pair_ids,
+        pre_intervention_commit=validator.EXECUTION_START_COMMIT,
+        prediction_manifest_sha256="f" * 64,
+    )
+    sampler = _SyntheticSampler()
+    backend = _SyntheticBackend(groups, journal.before_source_suppression)
+    try:
+        sweeps, states = worker._execute_production_sweeps(
+            backend,
+            groups,
+            token_count=6,
+            config={"schedule": prediction["protocol"]["schedule"]},
+            torch=_FakeTorch,
+            sampler=sampler,
+            journal=journal,
+        )
+        point_count = sum(item["point_count"] for item in sweeps)
+        journal.verify_complete(expected_point_count=point_count)
+    finally:
+        journal.close()
+    assert len(states) == 6
+    assert {item["group"] for item in sweeps} == {
+        "primary",
+        "near_boundary",
+        "directional",
+    }
+    journal_rows = [json.loads(line) for line in journal_path.read_text().splitlines()]
+    assert sum(row["record_type"] == "point_completed" for row in journal_rows) == (
+        point_count
+    )
+    assert backend.source_suppression_api_calls == point_count
+
+    telemetry = _telemetry(sampler.stages)
+    artifacts, outcome = worker._artifact_bundle(
+        sweeps, {"analysis": prediction["protocol"]["analysis"]}, telemetry
+    )
+    intervention_worker = build_detached_worker_result(
+        sweeps,
+        intervention_artifacts=artifacts,
+        canonical_source_suppression_api_calls=point_count,
+        instrumented_source_suppression_api_calls=point_count,
+        schema_version=3,
+        artifact_type="stage1c_v3_intervention_worker",
+        status="passed",
+        prediction_manifest_sha256=hashlib.sha256(
+            assembler._canonical_bytes(prediction)
+        ).hexdigest(),
+        scientific_outcome=outcome,
+        attempt_count=1,
+        asset_manifest=_asset_evidence(),
+        environment=_environment_evidence(),
+        telemetry=telemetry,
+    )
+    records = assembler.records(
+        prediction,
+        prediction_worker,
+        intervention_worker,
+        prediction_supervisor=_supervisor(),
+        intervention_supervisor=_supervisor(),
+        execution=validator.EXECUTION_START_COMMIT,
+    )
+    bundle = tmp_path / "bundle-production-path"
+    assembler.write_bundle(records, bundle)
+    result = validator.validate_bundle(bundle, validator.EXECUTION_START_COMMIT)
+    assert result == {
+        "status": "passed",
+        "artifact_count": 10,
+        "verdict": validator.COMPLETED_STATUS,
+        "point_count": point_count,
+        "api_call_count": point_count,
+    }
 
 
 def test_worker_detachment_survives_cleanup_and_preserves_equal_pair_lists() -> None:

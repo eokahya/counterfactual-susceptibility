@@ -38,8 +38,9 @@ from cfsus.stage1c_v3.serialization import (  # noqa: E402
 
 ALLOWLIST = validator.ALLOWLIST[:-1]
 BASE_COMMIT = validator.BASE_COMMIT
-BRANCH = validator.BRANCH
-COMPLETED_STATUS = "completed_stage1c_v3_preregistered_prospective_prediction"
+BRANCH = validator.EXECUTION_BRANCH
+EXECUTION_START_COMMIT = validator.EXECUTION_START_COMMIT
+COMPLETED_STATUS = validator.COMPLETED_STATUS
 CLAIM_BOUNDARY = {
     "behavioral_importance_result": "none",
     "mediation_result": "none",
@@ -379,12 +380,13 @@ def records(
         "schema_version": 3,
         "artifact_type": "stage1c_v3_final_bundle_run_manifest",
         "experiment_class": validator.EXPERIMENT_CLASS,
+        "execution_class": "stage1c_v4_protocol_preserving_execution",
         "final_bundle_type": validator.FINAL_BUNDLE_TYPE,
         "status": COMPLETED_STATUS,
         "verdict": COMPLETED_STATUS,
         "scientific_outcome": outcome,
         "branch": BRANCH,
-        "base_commit": BASE_COMMIT,
+        "base_commit": EXECUTION_START_COMMIT,
         "execution_commit": execution,
         "pre_intervention_commit": execution,
         "fresh_canonical_run": primary_count > 0,
@@ -396,8 +398,9 @@ def records(
         "claim_boundary": CLAIM_BOUNDARY,
         "readiness": {
             "stage1b_measurement_primitives": "completed",
-            "stage1c_v3_prospective_prediction": "completed",
-            "stage1c_v3_scientific_outcome": outcome,
+            "stage1c_v3_prediction_manifest": "frozen_reused_byte_identical",
+            "stage1c_v4_prospective_prediction": "completed",
+            "stage1c_v4_scientific_outcome": outcome,
             **CLAIM_BOUNDARY,
         },
     }

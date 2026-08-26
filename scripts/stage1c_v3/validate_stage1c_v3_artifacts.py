@@ -31,6 +31,10 @@ SCHEMA_VERSION = 3
 EXPERIMENT_CLASS = "stage1c_v3_preregistered_prospective_prediction"
 BRANCH = "stage-1c-v3-preregistered-prospective-prediction"
 BASE_COMMIT = "ee9cc944fbdabaa6437b7be3c997725fce5de0a6"
+EXECUTION_BRANCH = "stage-1c-v4-protocol-preserving-execution"
+EXECUTION_START_COMMIT = "92ba35cde279c46e1907f0a48ccb56ad378ccbd5"
+PREDICTION_FREEZE_COMMIT = "10f7234a036562e9337514fc085415a017e99102"
+COMPLETED_STATUS = "completed_stage1c_v4_prospective_prediction"
 PROMPT_ID = "capital_norway_preregistered_v3"
 PROMPT_TEXT = "The capital of Norway is"
 EXPECTED_TOKEN_IDS = [2, 818, 5279, 529, 32649, 563]
@@ -97,6 +101,9 @@ PROTOCOL_PATHS = (
     "scripts/stage1c_v3/validate_stage1c_v3_artifacts.py",
     "scripts/stage1c_v3/validate_stage1c_v3_denylist.py",
 )
+PREDICTION_PROTOCOL_MAP_SHA256 = (
+    "9ac9c59aeef736ed495d688bdeb6866250b089a191430c9d175661c702ec3db8"
+)
 FORBIDDEN_PREDICTION_FIELDS = frozenset(
     {
         "actual_bf16_value_passed",
@@ -113,7 +120,7 @@ FORBIDDEN_PREDICTION_FIELDS = frozenset(
 
 PREDICTION_TYPE = "stage1c_v3_prediction_manifest"
 WORKER_TYPE = "stage1c_v3_intervention_worker"
-FINAL_BUNDLE_TYPE = "stage1c_v3_final_bundle"
+FINAL_BUNDLE_TYPE = "stage1c_v4_protocol_preserving_execution_bundle"
 ALLOWLIST = (
     "run_manifest.json",
     "asset_manifest.json",
@@ -1140,9 +1147,9 @@ def scan_prediction(value: dict[str, Any]) -> list[dict[str, Any]]:
             or SHA256.fullmatch(protocol_digest) is None
         ):
             fail("prediction protocol hash is malformed")
-        raw = _open_regular(ROOT / name, maximum=MAX_FILE, scan_content=False)
-        if hashlib.sha256(raw).hexdigest() != protocol_digest:
-            fail(f"prediction protocol hash differs: {name}")
+    encoded_hashes = json.dumps(hashes, sort_keys=True, separators=(",", ":")).encode()
+    if hashlib.sha256(encoded_hashes).hexdigest() != PREDICTION_PROTOCOL_MAP_SHA256:
+        fail("prediction-freeze protocol hash map differs")
     if (
         value["config_sha256"]
         != hashes["configs/stage1c_v3_preregistered_prospective_prediction.yaml"]
@@ -1775,6 +1782,7 @@ def validate_sweeps(
             ):
                 fail("bisection midpoint is not deterministic")
             refined.append(point)
+            refined.sort(key=lambda value: value["realized_suppression"])
         if len(bisection_points) > int(
             prediction["protocol"]["schedule"]["maximum_bisection_steps"]
         ):
@@ -1965,8 +1973,9 @@ def _validate_artifacts(
         fail("run execution commit differs")
     if (
         run.get("final_bundle_type") != FINAL_BUNDLE_TYPE
-        or run.get("branch") != BRANCH
-        or run.get("base_commit") != BASE_COMMIT
+        or run.get("execution_class") != "stage1c_v4_protocol_preserving_execution"
+        or run.get("branch") != EXECUTION_BRANCH
+        or run.get("base_commit") != EXECUTION_START_COMMIT
     ):
         fail("run final-bundle identity differs")
     if run.get("pre_intervention_commit") != run.get("execution_commit"):
@@ -2052,8 +2061,8 @@ def _validate_artifacts(
         "scientific_outcome"
     ] or run.get("verdict") != run.get("status"):
         fail("run outcome/verdict differs")
-    if run.get("status") != "completed_stage1c_v3_preregistered_prospective_prediction":
-        fail("final bundle status is not completed v3")
+    if run.get("status") != COMPLETED_STATUS:
+        fail("final bundle status is not completed v4")
     if run.get("scientific_retry_count") != 0:
         fail("run scientific retry count is nonzero")
     if run.get("claim_boundary") != {
@@ -2066,8 +2075,9 @@ def _validate_artifacts(
         fail("claim boundary differs")
     expected_readiness = {
         "stage1b_measurement_primitives": "completed",
-        "stage1c_v3_prospective_prediction": "completed",
-        "stage1c_v3_scientific_outcome": run["scientific_outcome"],
+        "stage1c_v3_prediction_manifest": "frozen_reused_byte_identical",
+        "stage1c_v4_prospective_prediction": "completed",
+        "stage1c_v4_scientific_outcome": run["scientific_outcome"],
         **run["claim_boundary"],
     }
     if run.get("readiness") != expected_readiness:

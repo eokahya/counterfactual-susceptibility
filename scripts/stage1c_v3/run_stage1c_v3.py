@@ -175,7 +175,28 @@ def _validate_output_directory(path: Path, config: dict[str, Any]) -> Path:
     return resolved
 
 
-def _worker_command(args: argparse.Namespace, output_dir: Path) -> list[str]:
+def _attempt_lock_path(config: dict[str, Any]) -> Path:
+    generated = (
+        REPOSITORY_ROOT / str(config["artifacts"]["generated_directory"])
+    ).resolve(strict=False)
+    lock = (
+        REPOSITORY_ROOT / str(config["artifacts"]["canonical_attempt_lock"])
+    ).resolve(strict=False)
+    if (
+        lock.parent != generated
+        or lock.name != "canonical_attempt_v1.lock"
+        or generated.is_symlink()
+    ):
+        raise RuntimeError("v4 canonical-attempt path differs from frozen config")
+    generated.mkdir(parents=True, exist_ok=True)
+    if generated.is_symlink() or not generated.is_dir():
+        raise RuntimeError("v4 canonical-attempt directory is unsafe")
+    return lock
+
+
+def _worker_command(
+    args: argparse.Namespace, output_dir: Path, config: dict[str, Any]
+) -> list[str]:
     worker_name = (
         "run_stage1c_v3_prediction_worker.py"
         if args.phase == "prediction"
@@ -213,6 +234,10 @@ def _worker_command(args: argparse.Namespace, output_dir: Path) -> list[str]:
                 str(args.prediction_manifest),
                 "--prediction-manifest-sha256",
                 args.prediction_manifest_sha256,
+                "--attempt-lock",
+                str(_attempt_lock_path(config)),
+                "--point-journal",
+                str(output_dir / "point_journal.jsonl"),
             ]
         )
     elif (
@@ -222,37 +247,6 @@ def _worker_command(args: argparse.Namespace, output_dir: Path) -> list[str]:
     ):
         raise RuntimeError("prediction phase must not receive intervention identity")
     return command
-
-
-def _claim_canonical_attempt(config: dict[str, Any], args: argparse.Namespace) -> Path:
-    """Create the immutable local one-attempt marker after intervention preflight."""
-
-    if (
-        args.phase != "intervention"
-        or not args.pre_intervention_commit
-        or not args.prediction_manifest_sha256
-    ):
-        raise RuntimeError("canonical-attempt claim lacks frozen intervention identity")
-    generated = REPOSITORY_ROOT / str(config["artifacts"]["generated_directory"])
-    lock = REPOSITORY_ROOT / str(config["artifacts"]["canonical_attempt_lock"])
-    if lock.parent != generated or lock.name != "canonical_attempt_v1.lock":
-        raise RuntimeError("canonical-attempt lock path differs from the frozen path")
-    generated.mkdir(parents=True, exist_ok=True)
-    if generated.is_symlink() or not generated.is_dir():
-        raise RuntimeError("canonical-attempt lock directory is unsafe")
-    write_json_new(
-        lock,
-        {
-            "schema_version": 3,
-            "artifact_type": "stage1c_v3_local_canonical_attempt_lock",
-            "canonical_attempts": 1,
-            "scientific_retries": 0,
-            "pre_intervention_commit": args.pre_intervention_commit,
-            "prediction_manifest_sha256": args.prediction_manifest_sha256,
-            "claimed_at_unix": time.time(),
-        },
-    )
-    return lock
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -299,8 +293,6 @@ def main(argv: list[str] | None = None) -> int:
     preflight_record = json.loads(preflight_path.read_text(encoding="utf-8"))
     if preflight_record.get("status") != "passed":
         raise RuntimeError("v3 preflight did not pass")
-    if args.phase == "intervention":
-        _claim_canonical_attempt(config, args)
     limits = config["safety_limits"]
     timeout_key = (
         "prediction_timeout_seconds"
@@ -308,7 +300,7 @@ def main(argv: list[str] | None = None) -> int:
         else "canonical_timeout_seconds"
     )
     outcome = supervise_process_group(
-        _worker_command(args, output_dir),
+        _worker_command(args, output_dir, config),
         timeout_seconds=float(limits[timeout_key]),
         sample_interval_seconds=float(limits["sample_interval_seconds"]),
         sample_host=_host_sampler(limits, swap_used_bytes()),
