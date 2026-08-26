@@ -373,3 +373,47 @@ Never record a planned, configured, or partially scaffolded run as completed.
 - **Follow-up:** any retry must be a new explicitly versioned experiment class
   that fixes sweep serialization and proves a nonempty returned bundle before
   a new prediction freeze. No such retry began in this experiment.
+
+---
+
+## EXP-20260826-002 — Stage 1C-v2 held-out prospective prediction
+
+- **Status:** `blocked_engineering`; scientific outcome `none`
+- **Base/branch:** `cc47cb604fc2422deb50aacbc7fde77499b532c5` /
+  `stage-1c-v2-heldout-prospective-prediction`
+- **Engineering commit:** `dc71d1fbaff914f3d8fd48f9d2898cd4f13a9ba5`
+- **Protocol commits:** `d9e01c6412beee42b29ac9cdb130dd7afa0e9218`
+  and diagnostic hardening commit
+  `e3f11e8bb52511072f7b2b410e265196dffb456b`
+- **Prompt:** `The capital of Germany is`; token IDs
+  `[2, 818, 5279, 529, 9405, 563]`
+- **Engineering gate:** detached top-level and artifact sweep records survived
+  cleanup and passed the nonempty synthetic worker/assembler/standalone-
+  validator chain. Final checks were 70 focused v2 tests and 516 full offline
+  tests passed, with 2 explicit opt-in Stage 1A model tests skipped.
+- **Preflight:** exact offline assets, tokenizer, upstream provenance,
+  CPython 3.11.13, package lock, native MPS/BF16 operator, Apple M2 Max/32 GiB
+  host, memory, swap, thermal, no-fallback, no-authentication, and no-network
+  gates passed.
+- **Baseline-only attempts:** the first produced no worker or manifest and
+  exposed only a supervisor diagnostic-tail serialization defect, which was
+  fixed and retested before prediction freeze. The second reached the frozen
+  deterministic selection and failed closed because at least one selected
+  endpoint overlapped the historical v1 28-pair set.
+- **Disposition:** no pair was filtered or reranked, no prediction manifest was
+  committed, and no pre-intervention freeze/push or intervention attempt
+  occurred. Changing the selection behavior after this observed overlap was
+  rejected as post-outcome protocol adaptation.
+- **Attempts/API:** 2 invalidated baseline processes; 0 valid prediction
+  manifests; 0 canonical intervention attempts; 0 scientific retries; 0
+  source-suppression API calls.
+- **Safety:** the decisive failed baseline supervisor sampled 60 times; peak
+  process-group RSS 976,240,640 bytes, minimum available memory
+  13,203,570,688 bytes, zero swap growth, no timeout, safety termination, or
+  telemetry failure, and nominal thermal state.
+- **Artifacts:** no scientific result bundle or checksum manifest exists.
+  Temporary diagnostics are outside Git and are not evidence.
+- **Claim boundary:** no Counterfactual Susceptibility, crossing, behavior,
+  mediation, benchmark, Gemma 2, CLT, or paper result. Stage 1B measurement
+  primitives remain completed; official/reference reproductions remain
+  pending and paper Results readiness remains false.

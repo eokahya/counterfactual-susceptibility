@@ -5,6 +5,9 @@ Status date: 2026-08-26
 No valid Counterfactual Susceptibility intervention experiment has completed,
 and the paper Results section remains pending. Stage 1C froze a valid first
 prospective prediction, but its canonical intervention artifact failed closed.
+Stage 1C-v2 repaired that serialization path, then stopped before prediction
+freeze when the held-out baseline selection hit its frozen historical-endpoint
+guard.
 
 ## Current experiment classes
 
@@ -47,6 +50,15 @@ prospective prediction, but its canonical intervention artifact failed closed.
   point-level sweep row before serialization. The assembler and standalone
   validator rejected the incomplete bundle. No retry, post-outcome code
   change, susceptibility result, or gate-crossing result was accepted.
+- **Stage 1C-v2 — held-out prospective prediction:** `blocked_engineering`
+  with no scientific outcome. The detached serialization recovery passed a
+  nonempty synthetic worker/assembler/validator chain, and the exact Germany
+  prompt passed immutable offline tokenizer and MPS/BF16 preflight. A fresh
+  baseline-only selection then overlapped at least one historical v1 selected
+  endpoint and the frozen post-selection guard stopped publication. No pair
+  was filtered or reranked after this result; no prediction manifest,
+  pre-intervention commit, canonical intervention, suppression API call, or
+  scientific artifact bundle exists.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -61,6 +73,8 @@ stage1b_measurement_primitives: completed
 stage1c_first_prediction: failed
 stage1c_scientific_outcome: inconclusive_runtime
 stage1c_first_prediction_readiness: false
+stage1c_v2_prospective_prediction: blocked_engineering
+stage1c_v2_scientific_outcome: none
 stage1b_empirical_claim_readiness: false
 counterfactual_susceptibility_result: none
 gate_crossing_result: none
@@ -74,5 +88,7 @@ paper_results_readiness: false
 See `docs/STAGE_1B_MEASUREMENT_PRIMITIVES_REPORT.md` for the completed Stage 1B
 engineering evidence and
 `docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md` for the Stage 1C frozen
-prediction, invalidated canonical attempt, and exact claim boundary.
+prediction, invalidated canonical attempt, and exact claim boundary, and
+`docs/STAGE_1C_V2_HELDOUT_PROSPECTIVE_PREDICTION_REPORT.md` for the v2
+serialization recovery and held-out selection blocker.
 Historical reports remain unchanged and retain their original scope.

@@ -685,3 +685,23 @@ evidence, reconstruct missing points from aggregates, patch the frozen worker
 and rerun, or relax the artifact validator. Each would violate prospective
 separation, independent validation, or the one-canonical-run rule. A corrected
 run requires a new explicitly versioned experiment class and a new freeze.
+
+## D-036 — 2026-08-26 — Stop Stage 1C-v2 at the historical-endpoint guard
+
+**Decision:** Classify Stage 1C-v2 as `blocked_engineering` with no scientific
+outcome. Retain the validated serialization recovery and protocol commits, but
+do not publish a prediction manifest or run an inactive-target intervention.
+
+**Reason:** The new Germany-prompt baseline reached the prospectively frozen
+deterministic selection, and the post-selection-only guard detected at least
+one endpoint shared with the invalidated Stage 1C-v1 28-pair set. The guard
+failed before prediction publication and did not use historical intervention
+outcomes. Changing the guard, removing the selected row, or reranking after
+this observation would change the scientific selection protocol in response
+to a viewed baseline result.
+
+**Alternatives considered:** Permit the overlap outside the primary group,
+filter the historical endpoint and take the next-ranked pair, change the seed,
+or switch prompts. Each requires an outcome-dependent protocol change. A
+future attempt must use a newly specified experiment class with its disjoint
+selection behavior fixed before baseline execution.
