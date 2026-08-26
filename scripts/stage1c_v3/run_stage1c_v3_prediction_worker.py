@@ -573,7 +573,7 @@ def _execute(args: argparse.Namespace) -> dict[str, Any]:
                 "machine": platform.machine(),
                 "python": platform.python_version(),
                 "circuit-tracer": importlib.metadata.version("circuit-tracer"),
-                "torch": torch.__version__,
+                "torch": str(torch.__version__),
                 "nnsight": nnsight.__version__,
                 "transformers": transformers.__version__,
                 "mps_built": torch.backends.mps.is_built(),

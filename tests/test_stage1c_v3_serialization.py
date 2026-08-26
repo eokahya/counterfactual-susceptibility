@@ -144,6 +144,21 @@ def test_detachment_rejects_unsafe_values(value: object, message: str) -> None:
         detach_json(value)
 
 
+def test_torch_version_like_string_requires_explicit_builtin_normalization() -> None:
+    class TorchVersionLike(str):
+        pass
+
+    version = TorchVersionLike("2.6.0")
+    with pytest.raises(SerializationError, match="unsupported JSON type"):
+        detach_json({"environment": {"torch": version}})
+
+    normalized = str(version)
+    assert type(normalized) is str
+    assert detach_json({"environment": {"torch": normalized}}) == {
+        "environment": {"torch": "2.6.0"}
+    }
+
+
 def test_detachment_rejects_cycles() -> None:
     value: list[object] = []
     value.append(value)

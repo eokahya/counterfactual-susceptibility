@@ -163,6 +163,30 @@ def test_prediction_and_intervention_workers_freeze_the_same_protocol_files() ->
     assert intervention._protocol_hashes() == expected
 
 
+def test_workers_normalize_torch_version_to_builtin_string() -> None:
+    """Strict JSON publication must not receive TorchVersion subclasses."""
+
+    for filename in (
+        "run_stage1c_v3_prediction_worker.py",
+        "run_stage1c_v3_intervention_worker.py",
+    ):
+        tree = ast.parse((SCRIPTS / filename).read_text(encoding="utf-8"))
+        torch_values: list[ast.expr] = []
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Dict):
+                continue
+            for key, value in zip(node.keys, node.values, strict=True):
+                if isinstance(key, ast.Constant) and key.value == "torch":
+                    torch_values.append(value)
+        assert len(torch_values) == 1
+        value = torch_values[0]
+        assert isinstance(value, ast.Call)
+        assert isinstance(value.func, ast.Name)
+        assert value.func.id == "str"
+        assert len(value.args) == 1
+        assert ast.unparse(value.args[0]) == "torch.__version__"
+
+
 def test_preflight_package_version_lookup_is_fail_closed(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
