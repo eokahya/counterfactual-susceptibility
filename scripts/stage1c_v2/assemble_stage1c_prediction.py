@@ -143,11 +143,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--worker", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
+    head = _git("rev-parse", "HEAD")
     if (
-        _git("rev-parse", "HEAD") != BASE_COMMIT
-        or _git("branch", "--show-current") != BRANCH
+        _git("branch", "--show-current") != BRANCH
+        or head == BASE_COMMIT
+        or _git("status", "--porcelain", "--untracked-files=all")
     ):
-        raise RuntimeError("prediction assembly requires the exact v2 base branch")
+        raise RuntimeError("prediction assembly requires a clean v2 protocol commit")
+    _git("merge-base", "--is-ancestor", BASE_COMMIT, head)
     expected = (
         ROOT
         / "results/stage1c_v2_heldout_prospective_prediction/prediction_manifest.json"

@@ -1,9 +1,4 @@
-"""Immutable configuration contract for the Stage 1C-v2 held-out run.
-
-The prompt's tokenizer output is intentionally not checked into this initial
-configuration.  A preflight must supply the exact non-empty token list before
-the prediction or intervention workers are allowed to execute.
-"""
+"""Immutable configuration contract for the Stage 1C-v2 held-out run."""
 
 from __future__ import annotations
 
@@ -24,6 +19,8 @@ EXPERIMENT_CLASS = "stage1c_v2_heldout_prospective_prediction"
 COMPLETED_STATUS = "completed_stage1c_v2_heldout_prospective_prediction"
 PROMPT_ID = "capital_germany_heldout_v2"
 PROMPT_TEXT = "The capital of Germany is"
+EXPECTED_TOKEN_IDS = (2, 818, 5279, 529, 9405, 563)
+SELECTED_POSITIONS = (1, 2, 3, 4, 5)
 PAIR_SEED = "stage1c-v2-heldout-prospective-prediction"
 UPSTREAM_REVISION = "8f1e2438df612464e229e44c4a00ff637bf9379b"
 MODEL_REVISION = "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1"
@@ -224,26 +221,12 @@ def validate_stage1c_v2_config(
     prompt = _mapping(config.get("prompt"), "prompt")
     _require(prompt, "id", PROMPT_ID, "prompt")
     _require(prompt, "text", PROMPT_TEXT, "prompt")
-    if "expected_token_ids" in prompt:
-        _validate_token_ids(prompt["expected_token_ids"])
-    elif require_token_ids:
-        raise ScientificInputError("exact held-out tokenizer IDs are not frozen")
+    _require(prompt, "expected_token_ids", list(EXPECTED_TOKEN_IDS), "prompt")
+    _validate_token_ids(prompt["expected_token_ids"])
 
     scanner = _mapping(config.get("scanner"), "scanner")
     _require(scanner, "selected_layers", list(range(18)), "scanner")
-    positions = scanner.get("selected_positions")
-    if positions is not None and (
-        not isinstance(positions, list)
-        or any(
-            isinstance(item, bool) or not isinstance(item, int) or item < 1
-            for item in positions
-        )
-        or positions != list(range(1, len(positions) + 1))
-    ):
-        raise ScientificInputError(
-            "scanner.selected_positions must be omitted/null until tokenization "
-            "is frozen"
-        )
+    _require(scanner, "selected_positions", list(SELECTED_POSITIONS), "scanner")
     for key, expected in (
         ("feature_width", 16_384),
         ("dense_oracle_chunk_size", 16_384),
@@ -385,12 +368,14 @@ __all__ = [
     "BRANCH",
     "COMPLETED_STATUS",
     "CONFIG_PATH",
+    "EXPECTED_TOKEN_IDS",
     "EXPERIMENT_CLASS",
     "MODEL_REVISION",
     "PAIR_SEED",
     "PROMPT_ID",
     "PROMPT_TEXT",
     "SCHEMA_PATH",
+    "SELECTED_POSITIONS",
     "TRANSCODER_REVISION",
     "TRANSCODER_SUBFOLDER",
     "UPSTREAM_REVISION",

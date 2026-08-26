@@ -30,6 +30,7 @@ BRANCH = "stage-1c-v2-heldout-prospective-prediction"
 BASE_COMMIT = "cc47cb604fc2422deb50aacbc7fde77499b532c5"
 PROMPT_ID = "capital_germany_heldout_v2"
 PROMPT_TEXT = "The capital of Germany is"
+EXPECTED_TOKEN_IDS = [2, 818, 5279, 529, 9405, 563]
 PAIR_ID_SEED = "stage1c-v2-heldout-prospective-prediction"
 RUNTIME_FINGERPRINT = (
     "gemma3-270m@9b0cfec892e2/plt@fada11860ac1/"
@@ -331,11 +332,11 @@ def feature_key(
         fail(f"{label} is outside the frozen PLT domain")
     if token_count is not None and position >= token_count:
         fail(f"{label} is outside the frozen prompt token domain")
-    return result  # type: ignore[return-value]
+    return result
 
 
 def canonical_pair_id(
-    *, source: tuple[int, int, int], target: tuple[int, int, int], token_ids: list[int]
+    *, source: tuple[int, int, int], target: tuple[int, int, int]
 ) -> str:
     payload = {
         "experiment_class": EXPERIMENT_CLASS,
@@ -435,12 +436,8 @@ def scan_prediction(value: dict[str, Any]) -> list[dict[str, Any]]:
     ):
         fail("held-out prompt identity differs")
     token_ids = prompt.get("token_ids")
-    if (
-        type(token_ids) is not list
-        or len(token_ids) < 2
-        or any(type(item) is not int or item < 0 for item in token_ids)
-    ):
-        fail("frozen prompt token IDs are malformed")
+    if token_ids != EXPECTED_TOKEN_IDS:
+        fail("frozen prompt token IDs differ from immutable tokenizer preflight")
     runtime = value.get("runtime_identity")
     required_runtime = {
         "backend": "nnsight",
@@ -619,9 +616,7 @@ def scan_prediction(value: dict[str, Any]) -> list[dict[str, Any]]:
                 expected_status = "not_crossing"
             if row.get("predicted_status") != expected_status:
                 fail("prediction status differs")
-            if pair_id != canonical_pair_id(
-                source=source, target=target, token_ids=token_ids
-            ):
+            if pair_id != canonical_pair_id(source=source, target=target):
                 fail("prediction pair ID differs from v2 recomputation")
             if group == "primary" and not (
                 expected_status == "definitely_crossing"

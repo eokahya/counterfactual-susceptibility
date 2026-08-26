@@ -35,11 +35,11 @@ runtime:
 prompt:
   id: capital_germany_heldout_v2
   text: The capital of Germany is
-  # expected_token_ids is intentionally frozen by preflight before execution.
+  expected_token_ids: [2, 818, 5279, 529, 9405, 563]
 
 scanner:
   selected_layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
-  selected_positions: null
+  selected_positions: [1, 2, 3, 4, 5]
   feature_width: 16384
   dense_oracle_chunk_size: 16384
   canonical_chunk_size: 1024

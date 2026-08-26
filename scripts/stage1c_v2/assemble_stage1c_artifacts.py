@@ -99,9 +99,11 @@ def _compact_supervisor(value: dict[str, Any] | None) -> dict[str, Any] | None:
 def _asset_manifest(raw: dict[str, Any] | None) -> dict[str, Any]:
     if not isinstance(raw, dict) or raw.get("status") != "verified":
         raise ValueError("immutable asset evidence is missing")
-    model = raw.get("model") if isinstance(raw.get("model"), dict) else {}
-    transcoder = (
-        raw.get("transcoder") if isinstance(raw.get("transcoder"), dict) else {}
+    model_raw = raw.get("model")
+    transcoder_raw = raw.get("transcoder")
+    model: dict[str, Any] = model_raw if isinstance(model_raw, dict) else {}
+    transcoder: dict[str, Any] = (
+        transcoder_raw if isinstance(transcoder_raw, dict) else {}
     )
     return {
         "schema_version": 2,

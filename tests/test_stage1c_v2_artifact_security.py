@@ -24,7 +24,7 @@ def _protocol() -> dict[str, Any]:
     return {
         "scanner": {
             "selected_layers": list(range(18)),
-            "selected_positions": [1, 2, 3],
+            "selected_positions": [1, 2, 3, 4, 5],
             "feature_width": 16_384,
             "dense_oracle_chunk_size": 16_384,
             "canonical_chunk_size": 1_024,
@@ -110,7 +110,6 @@ def _row(
     response: float,
     alpha: float | None,
 ) -> dict[str, Any]:
-    token_ids = [2, 10, 11, 12]
     source_ref = dict(zip(("layer", "position", "feature_id"), source, strict=True))
     target_ref = dict(zip(("layer", "position", "feature_id"), target, strict=True))
     q = -2.0 * response
@@ -129,9 +128,7 @@ def _row(
         requested.extend((alpha - 0.015625, alpha, alpha + 0.015625))
     requested = sorted({max(0.0, min(1.0, value)) for value in requested})
     record = {
-        "pair_id": validator.canonical_pair_id(
-            source=source, target=target, token_ids=token_ids
-        ),
+        "pair_id": validator.canonical_pair_id(source=source, target=target),
         "group": group,
         "source": source_ref,
         "target": target_ref,
@@ -230,7 +227,7 @@ def _fixture() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         "prompt": {
             "id": validator.PROMPT_ID,
             "text": validator.PROMPT_TEXT,
-            "token_ids": [2, 10, 11, 12],
+            "token_ids": [2, 818, 5279, 529, 9405, 563],
         },
         "protocol": _protocol(),
         "baseline_pools": {"eligible_pair_count": 3},

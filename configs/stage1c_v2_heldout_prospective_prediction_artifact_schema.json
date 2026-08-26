@@ -1,7 +1,10 @@
 {
   "schema_version": 2,
   "experiment_class": "stage1c_v2_heldout_prospective_prediction",
-  "artifact_type": "stage1c_v2_heldout_prediction_manifest",
+  "artifact_type": "stage1c_v2_artifact_schema",
+  "prediction_manifest_type": "stage1c_v2_prediction_manifest",
+  "worker_artifact_type": "stage1c_v2_intervention_worker",
+  "final_bundle_type": "stage1c_v2_final_bundle",
   "maximum_bundle_bytes": 5242880,
   "maximum_file_bytes": 2097152,
   "required_files": [

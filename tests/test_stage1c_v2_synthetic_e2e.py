@@ -90,7 +90,7 @@ def _synthetic_prediction(config: dict[str, Any]) -> dict[str, Any]:
         "prompt": {
             "id": "capital_germany_heldout_v2",
             "text": "The capital of Germany is",
-            "token_ids": [1, 10],
+            "token_ids": [2, 818, 5279, 529, 9405, 563],
         },
         "runtime_identity": {
             "backend": "nnsight",
@@ -106,7 +106,7 @@ def _synthetic_prediction(config: dict[str, Any]) -> dict[str, Any]:
             "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b",
         },
         "protocol": {
-            "scanner": {**config["scanner"], "selected_positions": [1]},
+            "scanner": dict(config["scanner"]),
             "source_pool": dict(config["source_pool"]),
             "responses": dict(config["responses"]),
             "scoring": dict(config["scoring"]),
