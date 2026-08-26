@@ -205,6 +205,16 @@ suite result was `446 passed, 1 skipped, 1 deselected`. The prediction manifest
 then passed independent standard-library validation and exact pair-score,
 ordering, schedule, pair-ID, and protocol-identity recomputation.
 
+Three non-empirical validation-harness setup failures were also recorded. The
+first preflight ran inside a restricted sandbox that could not expose MPS; the
+same frozen preflight passed on the authorized local host. The runtime venv did
+not contain Ruff or pytest, while the development venv did not contain PyYAML
+or torch. The first two test-tool invocations therefore failed before testing
+the protocol. The final check used Ruff/MyPy from the development environment
+and the production MPS/BF16 dependencies with the pytest runner made visible;
+all checks then passed as reported above. These setup corrections changed no
+frozen code, prediction, schedule, or empirical attempt count.
+
 After the canonical process:
 
 - frozen assembler: failed closed because serialized sweep IDs did not match

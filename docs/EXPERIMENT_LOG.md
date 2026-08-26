@@ -359,7 +359,11 @@ Never record a planned, configured, or partially scaffolded run as completed.
 - **Tests:** pre-intervention Ruff, formatting, diff, strict MyPy, and full
   offline tests passed; full result `446 passed, 1 skipped, 1 deselected`.
   Prediction-only independent recomputation passed. Final artifact acceptance
-  failed as required.
+  failed as required. Non-empirical setup notes: an initial sandboxed preflight
+  could not expose MPS and passed on the authorized host; the first two test
+  invocations selected venvs missing either the test tools or PyYAML/torch and
+  stopped before protocol tests. The combined production-dependency/test-tool
+  invocation passed without a frozen-code or empirical retry.
 - **Artifacts:** only the validated 31,717-byte prediction manifest remains
   tracked. No final canonical bundle or checksum manifest was created, and no
   invalid worker record, weight, cache, graph, adjacency, dense tensor,
