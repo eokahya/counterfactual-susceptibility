@@ -1,0 +1,25 @@
+{
+  "artifact_type": "stage1d_run_manifest",
+  "base_commit": "d4fdcc2c2f0040654af17e21f396f1d26072aa0e",
+  "canonical_attempt_count": 1,
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending"
+  },
+  "completed_journal_points": 438,
+  "experiment_class": "stage1d_multiprompt_gate_benchmark",
+  "final_artifacts_rebuilt_from_journal_in_fresh_process": true,
+  "instrumented_evaluation_api_calls": 438,
+  "pre_run_commit": "d0cb2b9645aeef4f2ea6ccda11143a03bf26852d",
+  "prediction_freeze_commit": "d0cb2b9645aeef4f2ea6ccda11143a03bf26852d",
+  "project_decision": "retain_crossing_ranker_but_redesign_calibration",
+  "protocol_freeze_commit": "bad3d4f01a427068c212de5c7d6b99c5e94a9cd0",
+  "schema_version": 1,
+  "scientific_retry_count": 0,
+  "serialized_unique_point_rows": 438,
+  "standalone_recomputation_required": true,
+  "status": "completed_stage1d_multiprompt_gate_benchmark"
+}

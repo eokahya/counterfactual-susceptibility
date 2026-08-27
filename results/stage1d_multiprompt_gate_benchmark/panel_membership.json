@@ -1,0 +1,408 @@
+{
+  "artifact_type": "stage1d_panel_membership",
+  "experiment_class": "stage1d_multiprompt_gate_benchmark",
+  "prompts": [
+    {
+      "detailed_pair_ids": {
+        "B1": "7621d50ec4b0920d93055d207443bd0cfe7f7e76b1f29df034047a8872fd9d6d",
+        "B2": "789697e58dcd4503471850821f9f4dd04527666609c3c628fe922d103a9fcf7f",
+        "B3": "3de51d18170a70cd4c19f28c6830d2a63a6edeb3e54718000c0ecb8f2418aff5",
+        "near_boundary": "276570743870298c41a58b67060f96dba349999ff06c23450f75c98a03c2591b"
+      },
+      "directional_pair_ids": [
+        "0fdafd3a24ecb4bf23af6c97b16b94eb24c361e8b094d56c5b17f0396e0625bf",
+        "7e5106daa51cf756b576e9cd572cfd3adbee8fe4508e6fcf869e3e751e79fbd0"
+      ],
+      "id": "P01",
+      "method_pair_ids": {
+        "S": [
+          "938c743b76642ade071c599cb72f01615204f1267a10febaee904b3618fc4a02",
+          "fde6da576ff2081dddd651c36a651718a5adf04c672566ac1c1d67fa55aed1ab",
+          "e3f7f998feb25af3fea48e98a29e9d3671c37c9e3b3b1da7cbeee2e9c21b6a0c",
+          "2cffd01c7fa21b7dd3fb4c4984b599f40657cb2abbf44f124571d7150b8a8d28"
+        ],
+        "influence_only": [
+          "deb2ff8ece081e5d19dee65ded728c790218d17e12e2a57dff22435f86e35908",
+          "ccf1b9ee3675060c4d57c0611ec50904632765c5d5afe74e24ff98e6c1e94988",
+          "6d7f3fdb3eee7510962549311c45c77e70ada22e04a75c9c018a985838e28564",
+          "938c743b76642ade071c599cb72f01615204f1267a10febaee904b3618fc4a02"
+        ],
+        "margin_only": [
+          "9eb4e1db6eefe3b679da22908677b6faf5f6963a424c06833120edf4892f8499",
+          "7a2765510e45351d6b8bc7a9c87f4f22b6d9948be9c1cbd210e9f31d0faedab1",
+          "7f912b0b009032be76c2fdaa1ee8fd7497a5f280157a6442340911dcc48932d7",
+          "9bcaf5171d92997c01a536828f21dfcaf8ad4c045d22a2a83911deabef9da7a2"
+        ],
+        "random_positive": [
+          "846162c4223fe1d17630ff7b44f254d09bf5fb7a4da00e76a013a262b44abac3",
+          "6b23f8e4899fb9f7c183c8ff11780ee65f5bc82dcb06514f499f28834d1dcdc5",
+          "c0dad03445009e0a95fae9945c0da00a1001e39436e545cac96211a984fe52fa",
+          "39f0209a3ba0635e1d7019412e5f0de9c9863909aff8f1f730e0cd53c0c7c8dd"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "af84159e43bceb25ea6c47070223fe83cadb2d4f6a21d93888cac9fd44179362",
+        "B2": "30f6da819501f07443aa37d8750780e31b4b0d7605037840eb17d0026534a89b",
+        "B3": "1113f2ed7ad87664e5e2288e444d964bf7c35974e9bd3e3da5bf3c90866470c2",
+        "near_boundary": "fa15ef5cd108d3cb17270f4d884d95a9c71fa8a3eeb21d0a40ac1e975571ddb9"
+      },
+      "directional_pair_ids": [
+        "209e2589868e16351351de648af5e063808c5053e4f86932229efa13446c624a",
+        "4e657e44a5de525e4188e288b955487386a17c9617feb262e9c179e76d57977b"
+      ],
+      "id": "P02",
+      "method_pair_ids": {
+        "S": [
+          "4854db1fe2547e420f9b95f14a2fc42f7e94db117595f768d27f3f304a79a360",
+          "60aab7c08c4d60d0ea76b3e89f81ce97e5263716845a077a5952b1bb50df6ebe",
+          "cf5279f567bf6a0773d6f3be7e84f0c43182a3a2015c3da90a4facb773bc0c16",
+          "f9ab54e3fc81b3290572b113b68db50cea429ee57562cb2a3e3b2f01caf67b8a"
+        ],
+        "influence_only": [
+          "6bc9a055af70e378c8a6e3a8bb2c254c593d3138dcbd80c99924b3c317426c32",
+          "74b185fd9632a52aa60abe88cb031d7e7dd0eff26c16e808e23ce8edd40ff369",
+          "389b302eda9e99e066e4a749366cacb52e21eb95a6c2b3e6e7c93634a25d935b",
+          "cf5279f567bf6a0773d6f3be7e84f0c43182a3a2015c3da90a4facb773bc0c16"
+        ],
+        "margin_only": [
+          "be11709f9ac50789f19eacfb1594ded94db789dac41c515e3ed4c8b151f9d48e",
+          "e8430fddaee8917966af5457e6c8fc7caac84a83dad007e619603867554b60ff",
+          "64159db54c540d690b928012ee1ea2505d8cc8faec876614edb5e5b6706b364a",
+          "99bd07ddd3a468081f8db9d2abf6febff9966988de01aceea87a152db94a7418"
+        ],
+        "random_positive": [
+          "44abd5ab08f472f4551b0c46fd6e5bdcf5a31516d8573845cd5939c0e42e42a5",
+          "ff200d59f2debd80d3f959a891cb02625cbbff44bcfb61b00515e8266ba36b84",
+          "47cf27daac821c871eb893da7ee68e6f3317ad81c06c8514b0d43bceee28cee1",
+          "ac3a98b5f7b08292c7857d15d4d5bccfc15ace27edbb7fb092f2ee42a4b356d3"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "9d63086abc524c4acb88ad405cf7c4b6a19e6a9cea9825f06fe1a0e32ab46264",
+        "B2": "152ec4dcafd58377b383ad60d3ecf89d8337fb09083a913a2ee3e82aafd3abea",
+        "B3": "c602a69352025738fe50968ca06b60f510a155fdb6e0655bd9c1da30a2d73f13",
+        "near_boundary": "0d3c18221dded687fee48483bea384a8bcb28f5875724c84496d681b67b2e3c1"
+      },
+      "directional_pair_ids": [
+        "f382c0ddce186542e1bcce8f67b27055dc24db3339f5d05e9720d809e98b0e9b",
+        "728e4553d60e31076b8dfa614e834515aa7995da8dfe0629a25d31fee8e08d61"
+      ],
+      "id": "P03",
+      "method_pair_ids": {
+        "S": [
+          "b7743452181f30187d8e0df15c2fb9050965200a09073a7470d95ed774fbd816",
+          "532ec470a03f04284ae86429315621c1c6c7d754d115b65e0003a31c4241c509",
+          "2bce93c58add63e6b2616d5ccb5e4a1f1841e4c713cd8e7ed0769d222d7b7f2b",
+          "da359545c50fe46fc06a9e7678a64b683d4ce7f7c271e5ffde39da0247678bf3"
+        ],
+        "influence_only": [
+          "c1215d358354a80cf510388195663fbfdfa539cc7e9d5ff4ca6e2b781cbed52c",
+          "7f3048e75db1028c844fec63e06c1b73491aae9041a8b59dd2caafed95e7951e",
+          "a84cc246430a1b66d62c6651cfd67d48e9e46da236a04d1678d40b2a0ce3619f",
+          "3fafe9386850bb0df236ba7a53495878e9c6258489312a32cf86d66ac7653e5d"
+        ],
+        "margin_only": [
+          "f154443f67d55bed2fff382512cdb7aa058380dea0bc3177c74db192ee6149e0",
+          "04eec58cf811cb1b8552aab037ff688459ac1ba767303905f61b16330b0780e9",
+          "c79bb7499bd3854b04c221a7400dbf058ed408781ffdaa04ad2d256826c61178",
+          "c597f98a0ba5350936dceec4593ab6de74cdbf8cb18b7613e1cd40d922084e10"
+        ],
+        "random_positive": [
+          "edab0b7bbd7e56bed1ef92e5cc0de731024c2a3b0f7f9489acee3a5fb6a6bf51",
+          "7041712833090e28e804aa6ec8bbb1493f80093efb9213ef436ce1a71a34e849",
+          "adfb9121b8a8840c4bd6e329f2508327851a74cb92a434adea8cacc11bf07a43",
+          "b13fcd25820cfbd9262e4c8e67c4d518747082a0e6e7f03c2311b47a99a0cc8b"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "ce406872c41c67a817c77925929b08319d2301516d4920ac2c65c1cf6e25cd96",
+        "B2": "5726245732a3792d54b6fb09b3bd9a443a72811e79950a87bd00b70d81ff82db",
+        "B3": "8ab97a8d9c2b479c16159e5effb70776a57737378f3484c740c3cd1b5fd753de",
+        "near_boundary": "f3296735b9b6cf8259eeb6e11e8e71b07cf3f8cb9f4f3c74eae9ccb4538c7669"
+      },
+      "directional_pair_ids": [
+        "3a48059c878f022040b6e96319a836f13db84f2271cd76fee2cd437c499da330",
+        "bf518a633b40807bd48c76527c935dfc19993fd5c379aa329d836f695a637d65"
+      ],
+      "id": "P04",
+      "method_pair_ids": {
+        "S": [
+          "9341862fcc4f9e06a91871fa22560b07af3e5cc34aa36be36c43750393744629",
+          "16f0227cf9e6f41c76726f8708f31b4f198eee2b918507a81194f267092617d6",
+          "84197f663992847010af5d2ce1828989a650599e5803ccf0d49c5908d54534b5",
+          "4d3d8ca856dee7c112de7d4055208f22c44b44efc0067b6f106e542b7d7e3193"
+        ],
+        "influence_only": [
+          "742e8995b873e76478a7b51dec9f3d712ff164742060002789a9abb55d1222ee",
+          "a54f58b769ed5699656973e4a7dd255f3e0ac430b83e4ddf626543c7b0429d5c",
+          "42967e06ccc35d44bd2c9be0367ead7a183140d986e639badb89986406c35c58",
+          "4d3d8ca856dee7c112de7d4055208f22c44b44efc0067b6f106e542b7d7e3193"
+        ],
+        "margin_only": [
+          "c4f6e6e7a3ae58b8d8f064453051f8ece45edbd071c7a221d0c8f708608d6771",
+          "c42344617e665959cd78fa3ed4e5a23a99335aeab18ee76a1da74feedd8b01c6",
+          "6a750ad621e2824642419a86ed61f3bf26ed1e0e0f146248a8e3cf3472fa6f14",
+          "10488c1ed0af990e9e0124b7b2b9155d4bcc2fc7c6339a1806ccb40a8780ea1c"
+        ],
+        "random_positive": [
+          "ba32f2551386f0fe1c7f91cd9a9fc2e7e15e77849d1f5e1da93bc79367b4f142",
+          "a9c6668be8438e3229a825e7d14224b195f64318f37ea8212e53e2f0f88c1d5f",
+          "e0387bf71049c65b567ba9df0896ad9fbaea58be4660f18e93c186f6c18a2f0d",
+          "5f584fbf65a08e9cfa643f132a96c9712a7e2871097676eedf17df36fe3b2714"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "6936dc491fe3a602d1b436ea959a73b29ec45d2247d186c2c8860f3639714d1e",
+        "B2": "ae5c61fc3adf3ef4debc14d930cd4179c63de1dc9a7bb2a72036419b827468ed",
+        "B3": "283f4ca3d374ce82d07072f1c874c1099246cc31842029eb396f150a249ab4bd",
+        "near_boundary": "7aa598335c0acf33104ba1e822cf2fd0a19bf9bac63b02ff26f0597e46cf698c"
+      },
+      "directional_pair_ids": [
+        "bfb33cc51ad0a98b639fdfdcd64cf734765ac41f34454c32fdc728e2df35b731",
+        "fa00bd3d77f39bf49784287dc9d5206790ae0221dd5880e5d85cd4b5143299b5"
+      ],
+      "id": "P05",
+      "method_pair_ids": {
+        "S": [
+          "5d6801d5fe97b914dc8f801ef7f590336de8178303380767393521d523e6f5f3",
+          "f35984e647221ce731ada10c2cc02742b68d69ffbee8996250bb69f35b9d75e4",
+          "bffb2dc6eb59d6e0e2f9293c9405e4e917c559f275516416cdd1c7515d2ee2d8",
+          "2442da58142d9e3949a0d44487bfbb1833e2bc2b5dea163aab14416469ef409e"
+        ],
+        "influence_only": [
+          "67f833aa184530c64c276a2dc475f3066300641d812b2ac1230a68f19d867ec4",
+          "86cd48dcbb9e2394658a244e11726a92c1abd18a209755f840f9a5a969da5b7b",
+          "5d6801d5fe97b914dc8f801ef7f590336de8178303380767393521d523e6f5f3",
+          "3580b57a6523bc0c886bb6001f5ebb23ac8d91958dd6baa476741acd1371bda4"
+        ],
+        "margin_only": [
+          "fa82233f2dca9c07e12ca38d14f1257ac9681aa127e078157a1314c60e178d4b",
+          "fef1d585fe694d828ecd0579354b4ad0141eed1711794b6ece7740903f301387",
+          "698870dd42f8937f1ecfe1a7983709050f29fa1597594c58d9837c31cdda22aa",
+          "93fdf984cd7a60ed64df05c58a14a98676df657b0c58ccfa58253b22c78b143d"
+        ],
+        "random_positive": [
+          "35eab8aed8d1c46268db7856961748360e6b17135dbd546279a03ee147abf098",
+          "e2407fa72f2052108e2e623e99be197772e820bd42687d5a18228b5b6143bd37",
+          "d8c83a25fdeeabe32a9964f87d3cbac0701b584f8a8ab02afc3f1d483de95626",
+          "1344b510e3abe98ff022d7800afdd738a344aac6a62ad6c691957eafc2c57dd2"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "71989b6577a72c0d40329bdb8f21a9ea8ddd2ac991fc59eeaed557afdcba200c",
+        "B2": "9370028fc6fb28585b76cd03eb6c72b763eafd437d97e58ebc6107bd91097137",
+        "B3": "6b2453f1659b56f6765d9621a7031b6c3f3197493a971f2eb6f29b4c39a325dc",
+        "near_boundary": "1791f7c9e62c1c3a2fbf16376379d168d5f2a3c6172bc9aca8ca5d88f3682cd5"
+      },
+      "directional_pair_ids": [
+        "c37e88e08b887b85f254784320def2cc9948885ab6df1620799e5405dadbc494",
+        "1021c4785f00d3c2a388e843a36fc7ca592f86c61478a4b9f75472a37f7ebb7a"
+      ],
+      "id": "P06",
+      "method_pair_ids": {
+        "S": [
+          "9ad67712719fcf41d2c29a9f71fad2f6d7c891acffaf5252dbe6de3d9a5f9bbf",
+          "b2e5000462e2265bdce156594f1022b7f34249626e5b68fb22689d7271e6c3fd",
+          "85614dce89901dde03ba9da9092344abe72f90b0c2a60a044e2a858093208dfa",
+          "3751fa0ddc5f63add00efcc7bed3b6781c460865ccecbefd3c8b0e731972cdbe"
+        ],
+        "influence_only": [
+          "2289e23f14d6415a1426b8d77f8d05934f85bc9500edf5332bbe8bd767a5baae",
+          "473a6c648bda5b29ab30ac25b46f38563d8ca29fd69f5e679980c7dc0e7fd6ff",
+          "fb620d651cf122a6c8c4ced82aab413ee004a9c50c1b90b9c44909bbfe971c67",
+          "2f5ca2e6f95f85e58343b89c45368a7e257993895e0dc23a74ff4456f3e0f8c5"
+        ],
+        "margin_only": [
+          "efd472b08f5aeba2d12b71e6b3c864a1e477c95794839bebb17d5e2694e8b556",
+          "1b894d6339f4ac0be9e99a4573fbfb8847ce09abffda4381d96f30edcf4abbd6",
+          "39a35f20f1fca286027f1274808afb446c2419e8aabe831fb13abc3cdbf13513",
+          "1c90e2de249d00832f7ad7f9c8c64a00dca89cdbc8cea15d9d0603850ce86857"
+        ],
+        "random_positive": [
+          "112486cdfaf009d889e800c0fa86ac11ba18c111c97fe51939741dc5aea59a44",
+          "638e97b674925062f5c62e795a20d9df2d7e0f6bf9cfaacb1f45adc236c4186a",
+          "efa3ec7590482c51d86ec968baabc66c504124c00b1b42627174c368bf04a859",
+          "bc1bad2dcccbefb369b1217375a6c5fed4384dd7d2d64b7916f8c31a598a4733"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "f6784926cd68354d0997bb75c365572e37858fed7ca6c6e45518555a609a9f93",
+        "B2": "988365934d2efef6433820b9bd91e6b5c395368c9da5b59b348a93ef08f30c83",
+        "B3": "e111ec3eb562905168a535d4f50e97c3cad5dbdc482a764fbba260cb68e4eb74",
+        "near_boundary": "52d46abab6d97482cce2554a2b39483f60070d01e4640360ef610d1c35cc68ff"
+      },
+      "directional_pair_ids": [
+        "811d78d766159b591956ffebadd787d09ae8b339727595994bc543124b551f48",
+        "5237e404d2dd6c5946f74a1d8c1d9c7c0260efb040e3c03cd303c692f666355b"
+      ],
+      "id": "P07",
+      "method_pair_ids": {
+        "S": [
+          "7042bf738f2467e274d6674fb6ed03cdc521eeeeb817e64b765f7fb3332b729b",
+          "6d231a3af709f14e6b799e09e7db3cbf1ddf6746c71174fdc67475ac3740b242",
+          "679294cd73d2b8a8749b9744878104378bcd07392762cc87e0f3fbeb0071740a",
+          "7b9c11df30a9898275d249efe229721531450229b85b57e60a3f522cef9968e8"
+        ],
+        "influence_only": [
+          "a45ab41c67cc3886341b8f98abc631d4880f73e6df6f39925eb4f8836e025a1b",
+          "1209ed72ada42bb1bd55b96a79b238a1e5c86a0436d6f40a6efcf645484914ce",
+          "7042bf738f2467e274d6674fb6ed03cdc521eeeeb817e64b765f7fb3332b729b",
+          "c430e2c2ff3527bab955b1966fbbd76eb15cefab1f723a02b082d17c07f870d6"
+        ],
+        "margin_only": [
+          "edb9b13606ce71424ea845434963350e82baa86a71484e51f58d87c469432160",
+          "d503965da3b9ff43eb94a2221ea787bad96cb81893e16308f90f235f7fd9745f",
+          "95b968e447e3f855e60c58346ac6d9b58fc71c982fa88c7e78a06b87d4b4bf8e",
+          "35e8db03799ca32aae10755811c1d228eaaab6a39e0e5f32d9e2ec96f8a7689a"
+        ],
+        "random_positive": [
+          "8a01eb05bd944f7c54cbfa55d8e2dacccaef0edbfb595bb7eb7e2b72daf49422",
+          "10a5179f109568030f39a55a4dff23e6da15b920c2d07a985e1f2373ae625001",
+          "4f3ef842186fdf6ac2fc52bbf11e26e5cb8598f2fbc69ed038ab6678ea7ed2a0",
+          "5d422dba950363bca5a7489fb0f4c245b647b50bdbc8937eca3bdb090c5e4f04"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    },
+    {
+      "detailed_pair_ids": {
+        "B1": "ee6cfc89c53fc8eec6876090647b06f0e6cd2a64c3b32d10ac4dae4b2651c711",
+        "B2": "e3b1da54bc72c1a2e63d6831c566358c9db40e78c6f9f27bede5dbfc0a7feabe",
+        "B3": "bf480ce7960b0689b349df4c33622ba901b7ad52dfc5d0ad0b755085cfcb2b83",
+        "near_boundary": "592a2a3c26132373cbe4f99bc421a8fb2e9ad9b1bfe748ca5ab5aa4859a20810"
+      },
+      "directional_pair_ids": [
+        "50aa08ac82586a8a2990eefa3ce542649328425b7fe97cd6e36b783a1e059ff5",
+        "a45f97bac300445ccde354d7d130861f7b2887b65c995e4198f9aa0b19c5277e"
+      ],
+      "id": "P08",
+      "method_pair_ids": {
+        "S": [
+          "b499044a039987583ffd0643696fd42fb9fcc842749e3e533ddeb50f1793efb7",
+          "81b9299cd018e3436aec592f978bc3c08c0e6a6151c2d9dbbdd0d581029c0cd7",
+          "912d99b94e9d206437f852790b0ecda8095aab09cb10d3072de884550c3ae063",
+          "8472d70ba8c48cba2dfa74465938456a4e70594ca6e2276087a791b822f3135e"
+        ],
+        "influence_only": [
+          "81b9299cd018e3436aec592f978bc3c08c0e6a6151c2d9dbbdd0d581029c0cd7",
+          "9042f80fd0aef72017131bda6d5172d0f1e60a5bbf99039b2e336e381a90c40e",
+          "a44d0cc0dd194add8e8a1d44e100a7c9954d41bbb78096373b21a149d4547f85",
+          "912d99b94e9d206437f852790b0ecda8095aab09cb10d3072de884550c3ae063"
+        ],
+        "margin_only": [
+          "59298377f2bd17a9b75c254d3af286117f94dda40277bfb2aa1b333c53f11df6",
+          "9d059c09ec00ddd0695f119eb00d3e171d256efbbf33982ea81b863c4d5b64a8",
+          "02b94d4787671ac6ae8ec10b3f1d939520067f21d5d05168a8da228160a07333",
+          "c94f2523afc9f69e015b63b180cd5b660e5e9ebc71f68e301f6be53035a46810"
+        ],
+        "random_positive": [
+          "799bc2f6c7d18689054db41b4fa015874bfa5322737bccb10f9c74a0323e1b73",
+          "fe443b706d1620ea8daa8bfa1035055399939ba94e3045b604a4cf810ed4c6b9",
+          "f7b2fa30fb6c12b7d416ffe00f11dc7f6c3aaa8987835a721f0a281f787824e5",
+          "efafe4a6bd900f61371b1523d8ee0decae65dacafb5c30a27f4d5367dff82a03"
+        ]
+      },
+      "missing_strata": {
+        "S": null,
+        "detailed_B1": null,
+        "detailed_B2": null,
+        "detailed_B3": null,
+        "detailed_near_boundary": null,
+        "directional": null,
+        "influence_only": null,
+        "margin_only": null,
+        "random_positive": null
+      }
+    }
+  ],
+  "schema_version": 1,
+  "status": "passed"
+}
