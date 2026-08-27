@@ -1,0 +1,32 @@
+{
+  "artifact_type": "stage1f_protocol_manifest",
+  "base_commit": "f7aae1f3ce3b1b8d98e850093a3cb5ca480277ea",
+  "branch": "stage-1f-prospective-one-probe-confirmation",
+  "experiment_class": "stage1f_prospective_one_probe_confirmation",
+  "fresh_baseline_model_calls_before_freeze": 0,
+  "fresh_source_suppression_calls_before_freeze": 0,
+  "historical_stage1e_status_preserved": "completed_stage1e_offline_negative",
+  "protocol_commit": "588c1f233c072b89520693f556f25f470d852e8b",
+  "protocol_file_sha256": {
+    "configs/stage1f_prospective_one_probe_artifact_schema.json": "212cfc69f8abf37a9c0d9b70ba766d8d02c9c1789445c974451f22919875bcfc",
+    "configs/stage1f_prospective_one_probe_confirmation.json": "a4fe98741222f1ffc0ffcdc6c0fb65ce7820a98d2a87c39f12a59b3d710c71c4",
+    "scripts/stage1f.py": "21f3bd79a13267cc36c959cf475e8a1fdd76cae5b3bb6d7c1e365997d5f2a827",
+    "src/cfsus/stage1b_runtime.py": "c31f55841c11e1a6da2848fcedf939401e0ddd4fd882039ffece7bce5e54d9fa",
+    "src/cfsus/stage1c_v3/execution_journal.py": "ec24a14539d6a52f2f7f75c74fe9d4ab72af70486a3fb4148f22d4809e81ca49",
+    "src/cfsus/stage1c_v3/intervention.py": "e6b8586be54f4080f22911c202d7f335af7143c9c5b352790786f8c5574e747b",
+    "src/cfsus/stage1c_v3/intervention_runtime.py": "b3a2dc0a634addc597c0475e182910be9586dd3b2832868e27c721aa631ac976",
+    "src/cfsus/stage1c_v3/prediction.py": "e789161697e0795281d7ee4e973d608b4cf372707bd685f82fbab4afbf7924c4",
+    "src/cfsus/stage1c_v3/quantization_audit.py": "dbe933e2d423f01bfec8934a9a5dc9e25cfc6542a3f94b95ce42d57ac463da6f",
+    "src/cfsus/stage1c_v3/runtime.py": "ec759932bd84da7c026c8cd7047f7cfd78081aea7a1922ef34003a2b6809ce11",
+    "src/cfsus/stage1c_v3/serialization.py": "03f3d70af33a32ac162f01d9135c48826824d3a2cd502e123e13f444d60336c1",
+    "src/cfsus/stage1d/execution.py": "45d8c1e971125efcd00dfbefe2d48be67759fe1c2514d6fb85480ec280ed1aef",
+    "src/cfsus/stage1d/preflight.py": "389a8fb85d49942c24bcc59b7af18f29c2551f8ed893b145af7c6bb45ecd7e5d",
+    "src/cfsus/stage1e/offline.py": "f4901496bdfb5fe20fc7000eb3d55a1070c5fc5c1f41aecd70d6a333a1f6563f",
+    "src/cfsus/stage1f.py": "df651328fa06c95dc5932fbcf37bd1030b5cd523cd13f2ce478d44aec8e53ec8"
+  },
+  "protocol_map_sha256": "d1a7c7b458f399837cd150a3cd5a7fb2e249e71319e5aa80fc9fe1aa43fb9384",
+  "required_stage1e_ancestor": "f1cbaa29ba4d7ee0133a4b6c5011709f723e8980",
+  "schema_version": 1,
+  "scientific_attempt_started": false,
+  "status": "protocol_frozen_before_fresh_baseline"
+}

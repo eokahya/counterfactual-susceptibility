@@ -1,0 +1,5792 @@
+{
+  "artifact_type": "stage1f_prediction_manifest",
+  "base_commit": "f7aae1f3ce3b1b8d98e850093a3cb5ca480277ea",
+  "branch": "stage-1f-prospective-one-probe-confirmation",
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending",
+    "stage1e_historical_status": "completed_stage1e_offline_negative"
+  },
+  "experiment_class": "stage1f_prospective_one_probe_confirmation",
+  "prediction_execution_commit": "588c1f233c072b89520693f556f25f470d852e8b",
+  "prediction_only_guards": {
+    "discovery_ranker": "q",
+    "fresh_source_suppression_api_calls": 0,
+    "fresh_target_responses_inspected": false,
+    "graph_edge_input_used_for_inactive_predictions": false,
+    "historical_intervention_outcomes_used": false,
+    "network_accessed": false
+  },
+  "prompt_order": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10"
+  ],
+  "prompt_provenance": {
+    "exact_prompt_baseline_or_intervention_artifact_hits": 0,
+    "historical_candidate_pool_metadata_hits": {
+      "F02": 1
+    },
+    "historical_exact_prompt_source_target_exclusions": [],
+    "source": "binding_specification_fallback",
+    "tracked_authenticated_stage1e_phase_b_list_found": false
+  },
+  "prompts": [
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 31979,
+        "eligible_source_count": 1889,
+        "eligible_target_count": 102,
+        "pair_score_sha256": "4d14bd206d053da3792bca0b12bd29b5481cfd49729e3581c8c5caa0cedb7d33",
+        "q_sign_counts": {
+          "negative": 16497,
+          "positive": 15482
+        },
+        "raw_active_source_count": 2137,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 90
+        },
+        "source_pool_sha256": "4579106b645c42f607c1b38192aefa51eb36b37522d74d5e62c4b2b736d0953d",
+        "target_pool_sha256": "26dedbff7348e927a3aedaf5aa04610c0c1864583791e9e1c2af7c5bafb6335e"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "6a567639bd7908f72cddc79ae60bf08f1f0348ab2855923859172a04ecf0cb22",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02712094245275023,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 484.0,
+            "desired_source_activation": 483.0,
+            "expected_realized_probe_alpha": 0.12318840579710144,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "69615ee0e955b0f62ff6e8ef135c65877857478a73177af5858994b6133b7c2f",
+          "predicted_alpha_star": 0.02712094245275023,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 46.08984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 127,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 552.0,
+          "stratum": "B1",
+          "susceptibility": 36.8718749999705,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.08349609375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.029920523609163162,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 326.0,
+            "desired_source_activation": 325.5,
+            "expected_realized_probe_alpha": 0.12365591397849462,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "67ce3399236ac18cba16f5d017abfde760830496280db380db220034f19d8cf5",
+          "predicted_alpha_star": 0.029920523609163162,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 41.77734375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 316,
+            "layer": 5,
+            "position": 1
+          },
+          "source_activation": 372.0,
+          "stratum": "B1",
+          "susceptibility": 33.42187499997326,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.1123046875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.030816640986132512,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 154.0,
+            "desired_source_activation": 154.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "6e86c4690da4e4568712ea2ac784946104485fb5981089ba96fedf87aaef4bfa",
+          "predicted_alpha_star": 0.030816640986132512,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 40.5625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 1165,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 176.0,
+          "stratum": "B1",
+          "susceptibility": 32.44999999997404,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.23046875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.1222995951417004,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 108.0,
+            "desired_source_activation": 108.0625,
+            "expected_realized_probe_alpha": 0.1255060728744939,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.84375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "03d4694302f00130ef550663aaaba48a2840eb9bc7ff31d852e64622f4735cb9",
+          "predicted_alpha_star": 0.1222995951417004,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 15.07568359375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 149,
+            "layer": 0,
+            "position": 1
+          },
+          "source_activation": 123.5,
+          "stratum": "B2",
+          "susceptibility": 8.176641949148108,
+          "target": {
+            "feature_id": 3569,
+            "layer": 2,
+            "position": 1
+          },
+          "target_preactivation": 5.375,
+          "target_threshold": 7.21875,
+          "targeted_response": -0.1220703125
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10149332628518568,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 141.0,
+            "desired_source_activation": 140.875,
+            "expected_realized_probe_alpha": 0.12422360248447206,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "9bb907098cacf4ced0e9eade81b4b15a06522a8db3be63cb0221341a14c94b8a",
+          "predicted_alpha_star": 0.10149332628518568,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 14.779296875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 266,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 161.0,
+          "stratum": "B2",
+          "susceptibility": 9.852864583326765,
+          "target": {
+            "feature_id": 2173,
+            "layer": 10,
+            "position": 1
+          },
+          "target_preactivation": 38.5,
+          "target_threshold": 40.0,
+          "targeted_response": -0.091796875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.13551665725578768,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 154.0,
+            "desired_source_activation": 154.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "73cf99fab786204c07afa8fe83fda84c35c88ad3328ef4c9a1ca5e1d9c88c32d",
+          "predicted_alpha_star": 0.13551665725578768,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 13.8359375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 1165,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 176.0,
+          "stratum": "B2",
+          "susceptibility": 7.379166666662731,
+          "target": {
+            "feature_id": 14699,
+            "layer": 7,
+            "position": 1
+          },
+          "target_preactivation": 20.625,
+          "target_threshold": 22.5,
+          "targeted_response": -0.07861328125
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.11100271002710027,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 179.0,
+            "desired_source_activation": 179.375,
+            "expected_realized_probe_alpha": 0.12682926829268293,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "bf8f6a0274459b89ddc962270eef10f429988db4a9d52ae4ef67326550a7e684",
+          "predicted_alpha_star": 0.11100271002710027,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 13.51318359375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 761,
+            "layer": 9,
+            "position": 1
+          },
+          "source_activation": 205.0,
+          "stratum": "B2",
+          "susceptibility": 9.008789062493994,
+          "target": {
+            "feature_id": 2173,
+            "layer": 10,
+            "position": 1
+          },
+          "target_preactivation": 38.5,
+          "target_threshold": 40.0,
+          "targeted_response": -0.06591796875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41963773461191706,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 258.0,
+            "desired_source_activation": 257.25,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "e57180e5b8675c67947e896e5725a465e1c9df9c2d8364d2f8e7be41a3604c7f",
+          "predicted_alpha_star": 0.41963773461191706,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 4.4681396484375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 421,
+            "layer": 4,
+            "position": 1
+          },
+          "source_activation": 294.0,
+          "stratum": "B3",
+          "susceptibility": 2.383007812498729,
+          "target": {
+            "feature_id": 20,
+            "layer": 7,
+            "position": 1
+          },
+          "target_preactivation": 10.0625,
+          "target_threshold": 11.9375,
+          "targeted_response": -0.01519775390625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4185571224197834,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 408.0,
+            "desired_source_activation": 407.75,
+            "expected_realized_probe_alpha": 0.12446351931330468,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.75,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "5185ab784587a523c4f30fe25891abd2dc037ded858417ae419d8c73ebde5ead",
+          "predicted_alpha_star": 0.4185571224197834,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 4.1810302734375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 324,
+            "layer": 4,
+            "position": 3
+          },
+          "source_activation": 466.0,
+          "stratum": "B3",
+          "susceptibility": 2.3891601562486344,
+          "target": {
+            "feature_id": 965,
+            "layer": 9,
+            "position": 4
+          },
+          "target_preactivation": 21.625,
+          "target_threshold": 23.375,
+          "targeted_response": -0.00897216796875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.42870813397129187,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 70.0,
+            "desired_source_activation": 70.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.75,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "89f8135f8f7a0c8d4d25c8a25a2fc3ed615d7ef8973ffbde79205441ba657537",
+          "predicted_alpha_star": 0.42870813397129187,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 4.08203125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 7085,
+            "layer": 6,
+            "position": 4
+          },
+          "source_activation": 80.0,
+          "stratum": "B3",
+          "susceptibility": 2.332589285712953,
+          "target": {
+            "feature_id": 1239,
+            "layer": 9,
+            "position": 4
+          },
+          "target_preactivation": 23.25,
+          "target_threshold": 25.0,
+          "targeted_response": -0.051025390625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.46360014487504525,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 7.21875,
+            "desired_source_activation": 7.21875,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "ee77710c814c576b07bd77e886e2f18e8e267eb536033e51dc1e05709c99c439",
+          "predicted_alpha_star": 0.46360014487504525,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F01",
+          "q": 4.04443359375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 1199,
+            "layer": 2,
+            "position": 4
+          },
+          "source_activation": 8.25,
+          "stratum": "B3",
+          "susceptibility": 2.1570312499988495,
+          "target": {
+            "feature_id": 480,
+            "layer": 3,
+            "position": 4
+          },
+          "target_preactivation": 8.4375,
+          "target_threshold": 10.3125,
+          "targeted_response": -0.490234375
+        }
+      ],
+      "id": "F01",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 4332,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 11150,
+          "q_not_finite_positive": 16497
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "text": "The capital of Australia is",
+      "token_ids": [
+        2,
+        818,
+        5279,
+        529,
+        8187,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 35341,
+        "eligible_source_count": 1928,
+        "eligible_target_count": 107,
+        "pair_score_sha256": "e87a5de8972dea788e0ea42135f97ac9bf32218ebff627c9b270f1987f8faa7f",
+        "q_sign_counts": {
+          "negative": 18230,
+          "positive": 17111
+        },
+        "raw_active_source_count": 2177,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 90
+        },
+        "source_pool_sha256": "735b6dcf665011fecc6a623a645f508d44151475427527c5f7e38677ef001013",
+        "target_pool_sha256": "a02027804c536bf6c40b25f152d936f379676aac64ddbc27e4ee5d0231d9c3ae"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.029570306483905743,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 150.0,
+            "desired_source_activation": 150.5,
+            "expected_realized_probe_alpha": 0.12790697674418605,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "809c9b21a04de279e7e0a032b407e3c95292affaab270fd9f4f058d603928bb6",
+          "predicted_alpha_star": 0.029570306483905743,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 50.7265625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 14679,
+            "layer": 6,
+            "position": 4
+          },
+          "source_activation": 172.0,
+          "stratum": "B1",
+          "susceptibility": 33.81770833331078,
+          "target": {
+            "feature_id": 1836,
+            "layer": 7,
+            "position": 4
+          },
+          "target_preactivation": 13.625,
+          "target_threshold": 15.125,
+          "targeted_response": -0.294921875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.029593665106063233,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 828.0,
+            "desired_source_activation": 829.5,
+            "expected_realized_probe_alpha": 0.12658227848101267,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "77f8459ce19a6ca47c04d67065ee9a22fdd7c72f5fbae004bd43b11e3109be47",
+          "predicted_alpha_star": 0.029593665106063233,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 50.6865234375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 507,
+            "layer": 5,
+            "position": 4
+          },
+          "source_activation": 948.0,
+          "stratum": "B1",
+          "susceptibility": 33.79101562497747,
+          "target": {
+            "feature_id": 794,
+            "layer": 15,
+            "position": 5
+          },
+          "target_preactivation": 125.5,
+          "target_threshold": 127.0,
+          "targeted_response": -0.053466796875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "c87bef2b63549fb7d1c840a71774841f3ba12f3fc77c7ae051cd33a313f8829a",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02712094245275023,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 484.0,
+            "desired_source_activation": 483.0,
+            "expected_realized_probe_alpha": 0.12318840579710144,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "790401b8146d5875c16d0e4678a333eece21049dedfed21f57a8e243741da771",
+          "predicted_alpha_star": 0.02712094245275023,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 46.08984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 127,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 552.0,
+          "stratum": "B1",
+          "susceptibility": 36.8718749999705,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.08349609375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.12474849094567404,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 49.0,
+            "desired_source_activation": 49.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.9375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "3347295198a27f63de0cad1fe0f04da81ed7f1bda70d86bf37fc47ad2201f4a4",
+          "predicted_alpha_star": 0.12474849094567404,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 15.53125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 4413,
+            "layer": 5,
+            "position": 4
+          },
+          "source_activation": 56.0,
+          "stratum": "B2",
+          "susceptibility": 8.016129032253927,
+          "target": {
+            "feature_id": 11353,
+            "layer": 6,
+            "position": 4
+          },
+          "target_preactivation": 15.1875,
+          "target_threshold": 17.125,
+          "targeted_response": -0.27734375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.1222995951417004,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 108.0,
+            "desired_source_activation": 108.0625,
+            "expected_realized_probe_alpha": 0.1255060728744939,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.84375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "1266aa511cc83405beed7b4f284a51e790c836e5efdbd82c617e38122e7219d9",
+          "predicted_alpha_star": 0.1222995951417004,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 15.07568359375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 149,
+            "layer": 0,
+            "position": 1
+          },
+          "source_activation": 123.5,
+          "stratum": "B2",
+          "susceptibility": 8.176641949148108,
+          "target": {
+            "feature_id": 3569,
+            "layer": 2,
+            "position": 1
+          },
+          "target_preactivation": 5.375,
+          "target_threshold": 7.21875,
+          "targeted_response": -0.1220703125
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10149332628518568,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 141.0,
+            "desired_source_activation": 140.875,
+            "expected_realized_probe_alpha": 0.12422360248447206,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "c740486aa06614bd419e9af5286fdbd42766fd32b932dfeaf2a5c4859d970b58",
+          "predicted_alpha_star": 0.10149332628518568,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 14.779296875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 266,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 161.0,
+          "stratum": "B2",
+          "susceptibility": 9.852864583326765,
+          "target": {
+            "feature_id": 2173,
+            "layer": 10,
+            "position": 1
+          },
+          "target_preactivation": 38.5,
+          "target_threshold": 40.0,
+          "targeted_response": -0.091796875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10228748376785536,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 93.0,
+            "desired_source_activation": 93.1875,
+            "expected_realized_probe_alpha": 0.12676056338028174,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "946f615853ccb1bd79c3cfef69aa9b80d776573fd51f171b9359c1dbde1f1841",
+          "predicted_alpha_star": 0.10228748376785536,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 14.66455078125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 6845,
+            "layer": 12,
+            "position": 4
+          },
+          "source_activation": 106.5,
+          "stratum": "B2",
+          "susceptibility": 9.776367187493483,
+          "target": {
+            "feature_id": 10412,
+            "layer": 13,
+            "position": 4
+          },
+          "target_preactivation": 106.0,
+          "target_threshold": 107.5,
+          "targeted_response": -0.1376953125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4093570267969979,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 83.5,
+            "desired_source_activation": 83.5625,
+            "expected_realized_probe_alpha": 0.12565445026178013,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.9375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "bf1866e380741daacc56de39f346262f57f4fb49aeef807fdd92327ad1a038ab",
+          "predicted_alpha_star": 0.4093570267969979,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 4.7330322265625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 491,
+            "layer": 3,
+            "position": 4
+          },
+          "source_activation": 95.5,
+          "stratum": "B3",
+          "susceptibility": 2.4428553427406747,
+          "target": {
+            "feature_id": 11353,
+            "layer": 6,
+            "position": 4
+          },
+          "target_preactivation": 15.1875,
+          "target_threshold": 17.125,
+          "targeted_response": -0.049560546875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41963773461191706,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 258.0,
+            "desired_source_activation": 257.25,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "1f218f8e160459cd94642c8fc6a4006a68f9ca4348e318096aa57780f36682a6",
+          "predicted_alpha_star": 0.41963773461191706,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 4.4681396484375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 421,
+            "layer": 4,
+            "position": 1
+          },
+          "source_activation": 294.0,
+          "stratum": "B3",
+          "susceptibility": 2.383007812498729,
+          "target": {
+            "feature_id": 20,
+            "layer": 7,
+            "position": 1
+          },
+          "target_preactivation": 10.0625,
+          "target_threshold": 11.9375,
+          "targeted_response": -0.01519775390625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4408888888888889,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 65.5,
+            "desired_source_activation": 65.625,
+            "expected_realized_probe_alpha": 0.1266666666666667,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.9375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "3c06efb0f5e37d35b0dd4fbda48e34f12339066ac907f5d03c331a1edc1b8caf",
+          "predicted_alpha_star": 0.4408888888888889,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 4.39453125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 304,
+            "layer": 4,
+            "position": 4
+          },
+          "source_activation": 75.0,
+          "stratum": "B3",
+          "susceptibility": 2.268145161289152,
+          "target": {
+            "feature_id": 11353,
+            "layer": 6,
+            "position": 4
+          },
+          "target_preactivation": 15.1875,
+          "target_threshold": 17.125,
+          "targeted_response": -0.05859375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4094898363626069,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 11.125,
+            "desired_source_activation": 11.1015625,
+            "expected_realized_probe_alpha": 0.12315270935960587,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.765625,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "67b3f12b3e74eac0d9194daf68b54c81f72bf2e2c7b43257a33714db2154cb27",
+          "predicted_alpha_star": 0.4094898363626069,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F02",
+          "q": 4.311767578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 1138,
+            "layer": 0,
+            "position": 4
+          },
+          "source_activation": 12.6875,
+          "stratum": "B3",
+          "susceptibility": 2.442063053095962,
+          "target": {
+            "feature_id": 981,
+            "layer": 1,
+            "position": 4
+          },
+          "target_preactivation": 3.171875,
+          "target_threshold": 4.9375,
+          "targeted_response": -0.33984375
+        }
+      ],
+      "id": "F02",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 4553,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 12558,
+          "q_not_finite_positive": 18230
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "text": "The capital of Brazil is",
+      "token_ids": [
+        2,
+        818,
+        5279,
+        529,
+        14600,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 31960,
+        "eligible_source_count": 1973,
+        "eligible_target_count": 104,
+        "pair_score_sha256": "0e3183ded0c6e67c2ed51513eeff2234fbb193d3b25724a2069b66a19745518f",
+        "q_sign_counts": {
+          "negative": 16423,
+          "positive": 15537
+        },
+        "raw_active_source_count": 2360,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 90
+        },
+        "source_pool_sha256": "798967cc2eed3e88f287978cd3b3b479b9afc8183352a0659cca54b28c2ec073",
+        "target_pool_sha256": "675e435a978f3aea95b245c40b833d16bfda2791da127a9f592b146b2ff806be"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "711d6690849f82c5a25095c6340b06b682fda42113d4965ee4776d9a4c8d8f74",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02712094245275023,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 484.0,
+            "desired_source_activation": 483.0,
+            "expected_realized_probe_alpha": 0.12318840579710144,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "6cd256a1f5bd06cc5585af2ba9feee36b310cd9e0d47f50b65bf8802e75a9d7e",
+          "predicted_alpha_star": 0.02712094245275023,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 46.08984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 127,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 552.0,
+          "stratum": "B1",
+          "susceptibility": 36.8718749999705,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.08349609375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.029920523609163162,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 326.0,
+            "desired_source_activation": 325.5,
+            "expected_realized_probe_alpha": 0.12365591397849462,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "d705aeedfafeb912abca5a1d27e43d348e279b9d9240d561608e3699075fd5af",
+          "predicted_alpha_star": 0.029920523609163162,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 41.77734375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 316,
+            "layer": 5,
+            "position": 1
+          },
+          "source_activation": 372.0,
+          "stratum": "B1",
+          "susceptibility": 33.42187499997326,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.1123046875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.030816640986132512,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 154.0,
+            "desired_source_activation": 154.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "21171d38f61bcda1d5b1bc43660ecfb459e5d4419043572360e08eb1f43bdd34",
+          "predicted_alpha_star": 0.030816640986132512,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 40.5625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 1165,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 176.0,
+          "stratum": "B1",
+          "susceptibility": 32.44999999997404,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.23046875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10945576162967467,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 62.5,
+            "desired_source_activation": 62.5625,
+            "expected_realized_probe_alpha": 0.12587412587412583,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.40625,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "8a6d6ca34f3395fea04025781b1e854dbf63422b34674cb125d347f7d75ea663",
+          "predicted_alpha_star": 0.10945576162967467,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 12.84765625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 1316,
+            "layer": 4,
+            "position": 3
+          },
+          "source_activation": 71.5,
+          "stratum": "B2",
+          "susceptibility": 9.136111111104613,
+          "target": {
+            "feature_id": 247,
+            "layer": 6,
+            "position": 3
+          },
+          "target_preactivation": 4.375,
+          "target_threshold": 5.78125,
+          "targeted_response": -0.1796875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.11335184961558588,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 258.0,
+            "desired_source_activation": 257.25,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "6226cf829e7c6cb9d7d93bb491b442007563ecc2e58d180f314223c589fbda58",
+          "predicted_alpha_star": 0.11335184961558588,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 12.13037109375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 421,
+            "layer": 4,
+            "position": 1
+          },
+          "source_activation": 294.0,
+          "stratum": "B2",
+          "susceptibility": 8.822088068175402,
+          "target": {
+            "feature_id": 1157,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 19.125,
+          "target_threshold": 20.5,
+          "targeted_response": -0.041259765625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10350962316027819,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 100.0,
+            "desired_source_activation": 100.1875,
+            "expected_realized_probe_alpha": 0.1266375545851528,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "e3883b188aac620c4ddfaddf1758cd8c25bcf0b894797c7b5ca945403708ed93",
+          "predicted_alpha_star": 0.10350962316027819,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 12.076171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 3641,
+            "layer": 6,
+            "position": 2
+          },
+          "source_activation": 114.5,
+          "stratum": "B2",
+          "susceptibility": 9.66093749999227,
+          "target": {
+            "feature_id": 1277,
+            "layer": 9,
+            "position": 2
+          },
+          "target_preactivation": 19.75,
+          "target_threshold": 21.0,
+          "targeted_response": -0.10546875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10554524840239125,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 184.0,
+            "desired_source_activation": 183.75,
+            "expected_realized_probe_alpha": 0.12380952380952381,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "020fd2c51f90ae6d0586749c1f489f55e593c0b1c9e9c2c05e3b1e7572a1788d",
+          "predicted_alpha_star": 0.10554524840239125,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 11.84326171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 615,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 210.0,
+          "stratum": "B2",
+          "susceptibility": 9.47460937499242,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.056396484375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.423870300103484,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 14.25,
+            "desired_source_activation": 14.21875,
+            "expected_realized_probe_alpha": 0.12307692307692308,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "8c23ff7ec6ab862b50a8677a67e156057d372ebbfeca8ba8fa83e509032df76b",
+          "predicted_alpha_star": 0.423870300103484,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 3.538818359375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 11423,
+            "layer": 0,
+            "position": 2
+          },
+          "source_activation": 16.25,
+          "stratum": "B3",
+          "susceptibility": 2.3592122395817605,
+          "target": {
+            "feature_id": 5496,
+            "layer": 3,
+            "position": 3
+          },
+          "target_preactivation": 18.875,
+          "target_threshold": 20.375,
+          "targeted_response": -0.2177734375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4103733257338273,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 203.0,
+            "desired_source_activation": 203.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.40625,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "f5b61d0acfb28682bf7e2b294f45273e194577817141a5f903a42c37d8d496aa",
+          "predicted_alpha_star": 0.4103733257338273,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 3.4267578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 388,
+            "layer": 3,
+            "position": 2
+          },
+          "source_activation": 232.0,
+          "stratum": "B3",
+          "susceptibility": 2.4368055555538226,
+          "target": {
+            "feature_id": 247,
+            "layer": 6,
+            "position": 3
+          },
+          "target_preactivation": 4.375,
+          "target_threshold": 5.78125,
+          "targeted_response": -0.0147705078125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4495171202809482,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 22.25,
+            "desired_source_activation": 22.3125,
+            "expected_realized_probe_alpha": 0.12745098039215685,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "334320ac09319b711d65231197de387202e699b25c626eecbb05f0e7625d4717",
+          "predicted_alpha_star": 0.4495171202809482,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 3.3369140625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 14476,
+            "layer": 1,
+            "position": 2
+          },
+          "source_activation": 25.5,
+          "stratum": "B3",
+          "susceptibility": 2.2246093749985167,
+          "target": {
+            "feature_id": 5496,
+            "layer": 3,
+            "position": 3
+          },
+          "target_preactivation": 18.875,
+          "target_threshold": 20.375,
+          "targeted_response": -0.130859375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.42221000549752613,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 27.875,
+            "desired_source_activation": 27.890625,
+            "expected_realized_probe_alpha": 0.12549019607843137,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.40625,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "0556678bd946ee6fbc20a85935c5008f325970dbda3f2253764d1237e4efb25b",
+          "predicted_alpha_star": 0.42221000549752613,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F03",
+          "q": 3.3306884765625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 335,
+            "layer": 2,
+            "position": 2
+          },
+          "source_activation": 31.875,
+          "stratum": "B3",
+          "susceptibility": 2.368489583331649,
+          "target": {
+            "feature_id": 247,
+            "layer": 6,
+            "position": 3
+          },
+          "target_preactivation": 4.375,
+          "target_threshold": 5.78125,
+          "targeted_response": -0.1044921875
+        }
+      ],
+      "id": "F03",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 4124,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 11413,
+          "q_not_finite_positive": 16423
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "text": "The currency of Switzerland is",
+      "token_ids": [
+        2,
+        818,
+        15130,
+        529,
+        24687,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 51272,
+        "eligible_source_count": 3033,
+        "eligible_target_count": 105,
+        "pair_score_sha256": "3899498979097d21c628d74fc3dfb0a2c5b7f69515bda9b9906dac9bff7b8fca",
+        "q_sign_counts": {
+          "negative": 25839,
+          "positive": 25433
+        },
+        "raw_active_source_count": 3345,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 108
+        },
+        "source_pool_sha256": "18785fd1571a4dd5c9a4d5810e18135e23fa89225bdf78ab4e85ceb62880237a",
+        "target_pool_sha256": "18836043563473a902f38007b6439a6d1449e0a2359167d3a46e8e5057506f6c"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02005405193686107,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 370.0,
+            "desired_source_activation": 369.25,
+            "expected_realized_probe_alpha": 0.12322274881516593,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "295bbe5cb18ee7a1dfea676e8cb9381b0bffaaa161366194ad2a3397f99d5d90",
+          "predicted_alpha_star": 0.02005405193686107,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 49.865234375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 16112,
+            "layer": 13,
+            "position": 3
+          },
+          "source_activation": 422.0,
+          "stratum": "B1",
+          "susceptibility": 49.86523437495013,
+          "target": {
+            "feature_id": 1966,
+            "layer": 17,
+            "position": 3
+          },
+          "target_preactivation": 193.0,
+          "target_threshold": 194.0,
+          "targeted_response": -0.1181640625
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "890444f52f6ad89215d6d94c6c5c7255fdf5f48927965931fcf73c32cbf74f00",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02140468227424749,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 364.0,
+            "desired_source_activation": 364.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "3e7307ef162934c37facb823db00d9020ddcba3cc7795171b2a463b6c09173f0",
+          "predicted_alpha_star": 0.02140468227424749,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 46.71875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 172,
+            "layer": 10,
+            "position": 4
+          },
+          "source_activation": 416.0,
+          "stratum": "B1",
+          "susceptibility": 46.718749999953275,
+          "target": {
+            "feature_id": 590,
+            "layer": 12,
+            "position": 4
+          },
+          "target_preactivation": 59.25,
+          "target_threshold": 60.25,
+          "targeted_response": -0.1123046875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02712094245275023,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 484.0,
+            "desired_source_activation": 483.0,
+            "expected_realized_probe_alpha": 0.12318840579710144,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "73ad8674c49f980ccba31eb795a37732b2b3819e5469deb296cb9111b8c678c5",
+          "predicted_alpha_star": 0.02712094245275023,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 46.08984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 127,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 552.0,
+          "stratum": "B1",
+          "susceptibility": 36.8718749999705,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.08349609375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.11335184961558588,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 258.0,
+            "desired_source_activation": 257.25,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "bbdcf750ee924960a73f80bd1d4ed821b879a14ba9a861698ac05193638c4452",
+          "predicted_alpha_star": 0.11335184961558588,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 12.13037109375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 421,
+            "layer": 4,
+            "position": 1
+          },
+          "source_activation": 294.0,
+          "stratum": "B2",
+          "susceptibility": 8.822088068175402,
+          "target": {
+            "feature_id": 1157,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 19.125,
+          "target_threshold": 20.5,
+          "targeted_response": -0.041259765625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10554524840239125,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 184.0,
+            "desired_source_activation": 183.75,
+            "expected_realized_probe_alpha": 0.12380952380952381,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "94440b80376783a3128defe455834b42c5b935ea0c4060c0053701d70c9112b5",
+          "predicted_alpha_star": 0.10554524840239125,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 11.84326171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 615,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 210.0,
+          "stratum": "B2",
+          "susceptibility": 9.47460937499242,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.056396484375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10794855576639258,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 134.0,
+            "desired_source_activation": 133.875,
+            "expected_realized_probe_alpha": 0.12418300653594772,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "9dfd677ac5bb60c1c569e797043fe1573c2d1948b4021cb927bc6ee56141703e",
+          "predicted_alpha_star": 0.10794855576639258,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 11.57958984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 304,
+            "layer": 4,
+            "position": 1
+          },
+          "source_activation": 153.0,
+          "stratum": "B2",
+          "susceptibility": 9.263671874992589,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.07568359375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.11173184357541899,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 314.0,
+            "desired_source_activation": 313.25,
+            "expected_realized_probe_alpha": 0.12290502793296088,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "40f2d30428301e3e7abfaf286c6ca0173d9001c8fa35da11cbc235c0cf7f2e2a",
+          "predicted_alpha_star": 0.11173184357541899,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 11.1875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 546,
+            "layer": 5,
+            "position": 1
+          },
+          "source_activation": 358.0,
+          "stratum": "B2",
+          "susceptibility": 8.949999999992839,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.03125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41515553589856996,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 58.25,
+            "desired_source_activation": 58.1875,
+            "expected_realized_probe_alpha": 0.12406015037593987,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "4200dc8ebb6d76b941a80daab28ed8eb6053b8ed24bd72439b31c94075099b25",
+          "predicted_alpha_star": 0.41515553589856996,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 3.31201171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 13906,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 66.5,
+          "stratum": "B3",
+          "susceptibility": 2.4087357954527935,
+          "target": {
+            "feature_id": 1157,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 19.125,
+          "target_threshold": 20.5,
+          "targeted_response": -0.0498046875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4155844155844156,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 154.0,
+            "desired_source_activation": 154.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "1b523060d950d8d581eb0b13b7d802d6c8a8a1eac41b572f9077b1b861eed6e7",
+          "predicted_alpha_star": 0.4155844155844156,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 3.30859375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 1165,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 176.0,
+          "stratum": "B3",
+          "susceptibility": 2.40624999999825,
+          "target": {
+            "feature_id": 1157,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 19.125,
+          "target_threshold": 20.5,
+          "targeted_response": -0.018798828125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.43406551059730253,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 32.75,
+            "desired_source_activation": 32.8125,
+            "expected_realized_probe_alpha": 0.1266666666666667,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "0d78e49ac6595bc47c60fa40efa002c0f3f38a07e1e10b29461902b00385b943",
+          "predicted_alpha_star": 0.43406551059730253,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 3.167724609375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 5003,
+            "layer": 4,
+            "position": 1
+          },
+          "source_activation": 37.5,
+          "stratum": "B3",
+          "susceptibility": 2.3037997159074153,
+          "target": {
+            "feature_id": 1157,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 19.125,
+          "target_threshold": 20.5,
+          "targeted_response": -0.08447265625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4384926814076612,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 18.5,
+            "desired_source_activation": 18.484375,
+            "expected_realized_probe_alpha": 0.12426035502958577,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "c115218ba4f8d9d3ba0e7256f0e921ad8fa69fd0e70d39896bd10f29d9d68d98",
+          "predicted_alpha_star": 0.4384926814076612,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F04",
+          "q": 3.1357421875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 2189,
+            "layer": 0,
+            "position": 2
+          },
+          "source_activation": 21.125,
+          "stratum": "B3",
+          "susceptibility": 2.280539772725614,
+          "target": {
+            "feature_id": 105,
+            "layer": 3,
+            "position": 3
+          },
+          "target_preactivation": 18.875,
+          "target_threshold": 20.25,
+          "targeted_response": -0.1484375
+        }
+      ],
+      "id": "F04",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 7513,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 17920,
+          "q_not_finite_positive": 25839
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "text": "The chemical symbol for sodium is",
+      "token_ids": [
+        2,
+        818,
+        7395,
+        5404,
+        573,
+        17888,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 73390,
+        "eligible_source_count": 3790,
+        "eligible_target_count": 111,
+        "pair_score_sha256": "3296b67a27b666c2d4f716b0024af01440a40169253085831d4b6ea69c5d7d5e",
+        "q_sign_counts": {
+          "negative": 37029,
+          "positive": 36361
+        },
+        "raw_active_source_count": 4049,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 126
+        },
+        "source_pool_sha256": "f2ab7b4129cf89259a20483a18e130fa7854f5dc4e95213f13e0d8627af1dee9",
+        "target_pool_sha256": "3356b4d95ad5520b8fec552d7e5b55095a1600ed5337992ce8a4187a02825aec"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "c2cb3f34f33b7dbdd1eb46ca273979ea98cd951731ba3301f62fa0b78d64f51b",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.021325336332208754,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 528.0,
+            "desired_source_activation": 528.5,
+            "expected_realized_probe_alpha": 0.1258278145695364,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "53ec429d8c064c84518bb87f5b9b9ef4d08df6e90c5c18fc3f6f7723e2973f10",
+          "predicted_alpha_star": 0.021325336332208754,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 46.892578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 366,
+            "layer": 12,
+            "position": 2
+          },
+          "source_activation": 604.0,
+          "stratum": "B1",
+          "susceptibility": 46.892578124953104,
+          "target": {
+            "feature_id": 1351,
+            "layer": 14,
+            "position": 2
+          },
+          "target_preactivation": 93.5,
+          "target_threshold": 94.5,
+          "targeted_response": -0.07763671875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.024424567680381634,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 684.0,
+            "desired_source_activation": 682.5,
+            "expected_realized_probe_alpha": 0.12307692307692308,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "eb978aa815ce2d372286b3c578e0babcab43f9edfe4e84a7e84267a6a93c9181",
+          "predicted_alpha_star": 0.024424567680381634,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 40.9423828125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 181,
+            "layer": 15,
+            "position": 7
+          },
+          "source_activation": 780.0,
+          "stratum": "B1",
+          "susceptibility": 40.94238281245905,
+          "target": {
+            "feature_id": 11386,
+            "layer": 16,
+            "position": 7
+          },
+          "target_preactivation": 178.0,
+          "target_threshold": 179.0,
+          "targeted_response": -0.052490234375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025591043134902784,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 410.0,
+            "desired_source_activation": 409.5,
+            "expected_realized_probe_alpha": 0.12393162393162394,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "107572d0c7acfab4f12fd25031c7b6a281c48c66210b7b365547f5f55ebf8cdd",
+          "predicted_alpha_star": 0.025591043134902784,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 39.076171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 139,
+            "layer": 10,
+            "position": 5
+          },
+          "source_activation": 468.0,
+          "stratum": "B1",
+          "susceptibility": 39.07617187496092,
+          "target": {
+            "feature_id": 14301,
+            "layer": 13,
+            "position": 5
+          },
+          "target_preactivation": 97.0,
+          "target_threshold": 98.0,
+          "targeted_response": -0.08349609375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10439605252426393,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 176.0,
+            "desired_source_activation": 175.875,
+            "expected_realized_probe_alpha": 0.12437810945273631,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "36fedab733dfd9c934c0c9e1f124385f765f4aef809e1b9d4e48071789f36ab2",
+          "predicted_alpha_star": 0.10439605252426393,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 11.9736328125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 181,
+            "layer": 3,
+            "position": 3
+          },
+          "source_activation": 201.0,
+          "stratum": "B2",
+          "susceptibility": 9.578906249992336,
+          "target": {
+            "feature_id": 259,
+            "layer": 9,
+            "position": 3
+          },
+          "target_preactivation": 17.25,
+          "target_threshold": 18.5,
+          "targeted_response": -0.0595703125
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10452392617997713,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 274.0,
+            "desired_source_activation": 274.75,
+            "expected_realized_probe_alpha": 0.1273885350318471,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "48b8259ed9bd6867522dbca0de967e52c6b8b3ff2e1fcf6ae09c5da98ebcfe87",
+          "predicted_alpha_star": 0.10452392617997713,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 11.958984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 419,
+            "layer": 2,
+            "position": 3
+          },
+          "source_activation": 314.0,
+          "stratum": "B2",
+          "susceptibility": 9.567187499992345,
+          "target": {
+            "feature_id": 259,
+            "layer": 9,
+            "position": 3
+          },
+          "target_preactivation": 17.25,
+          "target_threshold": 18.5,
+          "targeted_response": -0.0380859375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10554524840239125,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 184.0,
+            "desired_source_activation": 183.75,
+            "expected_realized_probe_alpha": 0.12380952380952381,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "3446a2b09ebdb2b837a0b89094eac46e75fe9769538759b1f8256f47e582b828",
+          "predicted_alpha_star": 0.10554524840239125,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 11.84326171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 615,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 210.0,
+          "stratum": "B2",
+          "susceptibility": 9.47460937499242,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.056396484375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10571959529217427,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 63.5,
+            "desired_source_activation": 63.4375,
+            "expected_realized_probe_alpha": 0.12413793103448278,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "45e68c7998d543ca80ec36166b008ff3802242781c4e3701c9dfd40276341420",
+          "predicted_alpha_star": 0.10571959529217427,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 11.82373046875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 559,
+            "layer": 8,
+            "position": 3
+          },
+          "source_activation": 72.5,
+          "stratum": "B2",
+          "susceptibility": 9.458984374992433,
+          "target": {
+            "feature_id": 259,
+            "layer": 9,
+            "position": 3
+          },
+          "target_preactivation": 17.25,
+          "target_threshold": 18.5,
+          "targeted_response": -0.1630859375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40499920898591996,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 32.25,
+            "desired_source_activation": 32.15625,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "8cf73da4020061135ef4c021ac6bc4fd4a147eb0213ea433f09744de2863f59f",
+          "predicted_alpha_star": 0.40499920898591996,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 3.08642578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 1331,
+            "layer": 4,
+            "position": 3
+          },
+          "source_activation": 36.75,
+          "stratum": "B3",
+          "susceptibility": 2.4691406249980243,
+          "target": {
+            "feature_id": 259,
+            "layer": 9,
+            "position": 3
+          },
+          "target_preactivation": 17.25,
+          "target_threshold": 18.5,
+          "targeted_response": -0.083984375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40647824706255953,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 29.25,
+            "desired_source_activation": 29.3125,
+            "expected_realized_probe_alpha": 0.12686567164179108,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "619982bf56cfd1ae2505b451b8fc052ef160488aa39a4da1236caac4ed80cb83",
+          "predicted_alpha_star": 0.40647824706255953,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 3.0751953125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 8489,
+            "layer": 2,
+            "position": 3
+          },
+          "source_activation": 33.5,
+          "stratum": "B3",
+          "susceptibility": 2.4601562499980316,
+          "target": {
+            "feature_id": 259,
+            "layer": 9,
+            "position": 3
+          },
+          "target_preactivation": 17.25,
+          "target_threshold": 18.5,
+          "targeted_response": -0.091796875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4088313969736895,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 53.0,
+            "desired_source_activation": 52.9375,
+            "expected_realized_probe_alpha": 0.12396694214876036,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "77ad9541e2030683e381e268b6a860ad2b82b32b6f1c007cf004b0bf8621227a",
+          "predicted_alpha_star": 0.4088313969736895,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 3.0574951171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 233,
+            "layer": 5,
+            "position": 1
+          },
+          "source_activation": 60.5,
+          "stratum": "B3",
+          "susceptibility": 2.445996093748043,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.050537109375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4257796257796258,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 228.0,
+            "desired_source_activation": 227.5,
+            "expected_realized_probe_alpha": 0.12307692307692308,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "fa52ada7f69f77e0e3401c92b1d9035ab27822f42bb2573c81369be113da3a46",
+          "predicted_alpha_star": 0.4257796257796258,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F05",
+          "q": 2.935791015625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 137,
+            "layer": 4,
+            "position": 2
+          },
+          "source_activation": 260.0,
+          "stratum": "B3",
+          "susceptibility": 2.348632812498121,
+          "target": {
+            "feature_id": 259,
+            "layer": 9,
+            "position": 3
+          },
+          "target_preactivation": 17.25,
+          "target_threshold": 18.5,
+          "targeted_response": -0.01129150390625
+        }
+      ],
+      "id": "F05",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 7898,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 28463,
+          "q_not_finite_positive": 37029
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "text": "The author of Pride and Prejudice is",
+      "token_ids": [
+        2,
+        818,
+        3260,
+        529,
+        53917,
+        532,
+        233276,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 33893,
+        "eligible_source_count": 1741,
+        "eligible_target_count": 101,
+        "pair_score_sha256": "ce4f8bf8b8b29cbb0b89947efe72ed918247c7b6cac25608e9048284928f5824",
+        "q_sign_counts": {
+          "negative": 17597,
+          "positive": 16296
+        },
+        "raw_active_source_count": 1859,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 72
+        },
+        "source_pool_sha256": "f38d82651f69cdb704bc0f28a2e19a00455433283f1823696592b1f1fea2fd43",
+        "target_pool_sha256": "9da2ed495d20591023e15c0a7ff94ae66034d9237b0fd610a756f70142b04917"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.026251025430680888,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 744.0,
+            "desired_source_activation": 742.0,
+            "expected_realized_probe_alpha": 0.12264150943396224,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "9c482d706f87d514bd6cab043f062bdfe5b2d06abf4e13a8e30adb4781343d2b",
+          "predicted_alpha_star": 0.026251025430680888,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 76.1875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 423,
+            "layer": 10,
+            "position": 1
+          },
+          "source_activation": 848.0,
+          "stratum": "B1",
+          "susceptibility": 38.09374999998095,
+          "target": {
+            "feature_id": 2867,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 75.0,
+          "target_threshold": 77.0,
+          "targeted_response": -0.08984375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.03694750135305791,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 844.0,
+            "desired_source_activation": 843.5,
+            "expected_realized_probe_alpha": 0.12448132780082988,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "0463fed8c360b6b9f3ef378542514c40bbc8e6de48a82c41216f7d687435f50a",
+          "predicted_alpha_star": 0.03694750135305791,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 54.130859375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 444,
+            "layer": 8,
+            "position": 1
+          },
+          "source_activation": 964.0,
+          "stratum": "B1",
+          "susceptibility": 27.065429687486468,
+          "target": {
+            "feature_id": 68,
+            "layer": 9,
+            "position": 1
+          },
+          "target_preactivation": 34.5,
+          "target_threshold": 36.5,
+          "targeted_response": -0.05615234375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "b4502d69bc559a485e2f73848b486f10713def87fa342e21d4c7cc2a4258ddbb",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.04212085064374151,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 141.0,
+            "desired_source_activation": 140.875,
+            "expected_realized_probe_alpha": 0.12422360248447206,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "fec231658163c5737723ce3377336f695a63570f747aed466b6ed03b69610f6c",
+          "predicted_alpha_star": 0.04212085064374151,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 47.482421875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 266,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 161.0,
+          "stratum": "B1",
+          "susceptibility": 23.741210937488127,
+          "target": {
+            "feature_id": 68,
+            "layer": 9,
+            "position": 1
+          },
+          "target_preactivation": 34.5,
+          "target_threshold": 36.5,
+          "targeted_response": -0.294921875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10037001641794702,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 160.0,
+            "desired_source_activation": 160.125,
+            "expected_realized_probe_alpha": 0.12568306010928965,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "05bef92ecef661bdc2f792b3890435ed8daf9bed90496246a8cd7d6837a95c5a",
+          "predicted_alpha_star": 0.10037001641794702,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 19.92626953125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 5151,
+            "layer": 11,
+            "position": 4
+          },
+          "source_activation": 183.0,
+          "stratum": "B2",
+          "susceptibility": 9.963134765620017,
+          "target": {
+            "feature_id": 4614,
+            "layer": 12,
+            "position": 4
+          },
+          "target_preactivation": 101.5,
+          "target_threshold": 103.5,
+          "targeted_response": -0.10888671875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10203014073981816,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 324.0,
+            "desired_source_activation": 323.75,
+            "expected_realized_probe_alpha": 0.12432432432432428,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "04cacb7fb8ff3dd9410ae6992f4d7791e12f69c7b799084b2985d4688bd2bdbc",
+          "predicted_alpha_star": 0.10203014073981816,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 19.60205078125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 10852,
+            "layer": 14,
+            "position": 4
+          },
+          "source_activation": 370.0,
+          "stratum": "B2",
+          "susceptibility": 9.801025390620099,
+          "target": {
+            "feature_id": 6603,
+            "layer": 17,
+            "position": 4
+          },
+          "target_preactivation": 197.0,
+          "target_threshold": 199.0,
+          "targeted_response": -0.052978515625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10447913478216508,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 568.0,
+            "desired_source_activation": 567.0,
+            "expected_realized_probe_alpha": 0.12345679012345678,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "02f2164a9f6744e008bd37436d71291f85536f68834397b25d90214ee78e9f4c",
+          "predicted_alpha_star": 0.10447913478216508,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 19.142578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 375,
+            "layer": 4,
+            "position": 4
+          },
+          "source_activation": 648.0,
+          "stratum": "B2",
+          "susceptibility": 9.571289062495214,
+          "target": {
+            "feature_id": 6603,
+            "layer": 17,
+            "position": 4
+          },
+          "target_preactivation": 197.0,
+          "target_threshold": 199.0,
+          "targeted_response": -0.029541015625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10644490644490645,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 130.0,
+            "desired_source_activation": 129.5,
+            "expected_realized_probe_alpha": 0.1216216216216216,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "88a6b05975c99c8d476b72a54596c6032a0be333c5d810e96f671fa19bd553f3",
+          "predicted_alpha_star": 0.10644490644490645,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 18.7890625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 355,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 148.0,
+          "stratum": "B2",
+          "susceptibility": 9.394531249995302,
+          "target": {
+            "feature_id": 2867,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 75.0,
+          "target_threshold": 77.0,
+          "targeted_response": -0.126953125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40598671820794924,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 206.0,
+            "desired_source_activation": 206.5,
+            "expected_realized_probe_alpha": 0.1271186440677966,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "cd350899d87f0d3f9aadf8dfa89580c35a908881503912f2a19052b194136d65",
+          "predicted_alpha_star": 0.40598671820794924,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 4.92626953125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 5201,
+            "layer": 11,
+            "position": 4
+          },
+          "source_activation": 236.0,
+          "stratum": "B3",
+          "susceptibility": 2.4631347656237685,
+          "target": {
+            "feature_id": 4614,
+            "layer": 12,
+            "position": 4
+          },
+          "target_preactivation": 101.5,
+          "target_threshold": 103.5,
+          "targeted_response": -0.0208740234375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4124354940213971,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 398.0,
+            "desired_source_activation": 397.25,
+            "expected_realized_probe_alpha": 0.12334801762114533,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "6e169288a1a489db0cb200c53c9eed5ec0e45ed74d86fe0aef9d315e032efed8",
+          "predicted_alpha_star": 0.4124354940213971,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 4.8492431640625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 2243,
+            "layer": 11,
+            "position": 3
+          },
+          "source_activation": 454.0,
+          "stratum": "B3",
+          "susceptibility": 2.4246215820300376,
+          "target": {
+            "feature_id": 4614,
+            "layer": 12,
+            "position": 4
+          },
+          "target_preactivation": 101.5,
+          "target_threshold": 103.5,
+          "targeted_response": -0.01068115234375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 27.0,
+            "desired_source_activation": 27.015625,
+            "expected_realized_probe_alpha": 0.1255060728744939,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.9296875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "2afe24d6ebe5f9b05e76d8d0eae1bb05d548bde579b9b4901dd64dcd5d107a02",
+          "predicted_alpha_star": 0.4,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 4.82421875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 2212,
+            "layer": 1,
+            "position": 3
+          },
+          "source_activation": 30.875,
+          "stratum": "B3",
+          "susceptibility": 2.499999999998704,
+          "target": {
+            "feature_id": 209,
+            "layer": 2,
+            "position": 3
+          },
+          "target_preactivation": 1.0390625,
+          "target_threshold": 2.96875,
+          "targeted_response": -0.15625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41982268231435454,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 108.0,
+            "desired_source_activation": 108.0625,
+            "expected_realized_probe_alpha": 0.1255060728744939,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 2.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "70b1a155105e44e2614b3301aa77a1f615d8d346e770917c5fa49c21d6b9ecaa",
+          "predicted_alpha_star": 0.41982268231435454,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F06",
+          "q": 4.763916015625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 149,
+            "layer": 0,
+            "position": 1
+          },
+          "source_activation": 123.5,
+          "stratum": "B3",
+          "susceptibility": 2.381958007811309,
+          "target": {
+            "feature_id": 6603,
+            "layer": 17,
+            "position": 4
+          },
+          "target_preactivation": 197.0,
+          "target_threshold": 199.0,
+          "targeted_response": -0.03857421875
+        }
+      ],
+      "id": "F06",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 3634,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 12662,
+          "q_not_finite_positive": 17597
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "The largest ocean is",
+      "token_ids": [
+        2,
+        818,
+        7488,
+        12461,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 46861,
+        "eligible_source_count": 3057,
+        "eligible_target_count": 101,
+        "pair_score_sha256": "09eb2ff809db57753b35dbff51410fe76d5dfcd2f99a179554360895124b1c0a",
+        "q_sign_counts": {
+          "negative": 23669,
+          "positive": 23192
+        },
+        "raw_active_source_count": 3261,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 108
+        },
+        "source_pool_sha256": "93bdbf831f6cdf5f3e8881a74a0211d6ce23ad391f19d0917b546f8305394199",
+        "target_pool_sha256": "17f315dc6e2c0f97a3f4a44cda835c72c6b39beb2cd616ead4c6bacfc04b21cf"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025974025974025976,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 384.0,
+            "desired_source_activation": 385.0,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "e280b16e503922dcfb0b4a3481ed2ea4702ad8184c94f169da6a6b7fca731765",
+          "predicted_alpha_star": 0.025974025974025976,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 48.125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 537,
+            "layer": 3,
+            "position": 1
+          },
+          "source_activation": 440.0,
+          "stratum": "B1",
+          "susceptibility": 38.4999999999692,
+          "target": {
+            "feature_id": 30,
+            "layer": 8,
+            "position": 1
+          },
+          "target_preactivation": 10.375,
+          "target_threshold": 11.625,
+          "targeted_response": -0.109375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02712094245275023,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 484.0,
+            "desired_source_activation": 483.0,
+            "expected_realized_probe_alpha": 0.12318840579710144,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "d2e4c776f046ef30b7f330d6f53d308a16feb01b23fc2e075428c5fd64f4fd61",
+          "predicted_alpha_star": 0.02712094245275023,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 46.08984375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 127,
+            "layer": 6,
+            "position": 1
+          },
+          "source_activation": 552.0,
+          "stratum": "B1",
+          "susceptibility": 36.8718749999705,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.08349609375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.029920523609163162,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 326.0,
+            "desired_source_activation": 325.5,
+            "expected_realized_probe_alpha": 0.12365591397849462,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "16b59695d7e3f50fe7234c8431e30d60c699a46a423c9f40d16e9aa67d653b47",
+          "predicted_alpha_star": 0.029920523609163162,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 41.77734375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 316,
+            "layer": 5,
+            "position": 1
+          },
+          "source_activation": 372.0,
+          "stratum": "B1",
+          "susceptibility": 33.42187499997326,
+          "target": {
+            "feature_id": 774,
+            "layer": 11,
+            "position": 1
+          },
+          "target_preactivation": 58.75,
+          "target_threshold": 60.0,
+          "targeted_response": -0.1123046875
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.024267703099819887,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 960.0,
+            "desired_source_activation": 959.0,
+            "expected_realized_probe_alpha": 0.12408759124087587,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "d3f61540418c7f2404929786055b9a8aebd372c43db1ef17600fa856b8e3d474",
+          "predicted_alpha_star": 0.024267703099819887,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 41.20703125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 350,
+            "layer": 13,
+            "position": 4
+          },
+          "source_activation": 1096.0,
+          "stratum": "B1",
+          "susceptibility": 41.20703124995879,
+          "target": {
+            "feature_id": 13568,
+            "layer": 15,
+            "position": 4
+          },
+          "target_preactivation": 146.0,
+          "target_threshold": 147.0,
+          "targeted_response": -0.03759765625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10149332628518568,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 141.0,
+            "desired_source_activation": 140.875,
+            "expected_realized_probe_alpha": 0.12422360248447206,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "346ed96511bfd121d93378063cf49e7564589db8f5e6b2f1692e8500386275f8",
+          "predicted_alpha_star": 0.10149332628518568,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 14.779296875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 266,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 161.0,
+          "stratum": "B2",
+          "susceptibility": 9.852864583326765,
+          "target": {
+            "feature_id": 2173,
+            "layer": 10,
+            "position": 1
+          },
+          "target_preactivation": 38.5,
+          "target_threshold": 40.0,
+          "targeted_response": -0.091796875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10162763001190948,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 115.5,
+            "desired_source_activation": 115.5,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "7d508f9736edf0f8a5d32003f2a146375dbcdb123c48d88fa3b0c783689ac273",
+          "predicted_alpha_star": 0.10162763001190948,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 14.759765625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 1066,
+            "layer": 11,
+            "position": 3
+          },
+          "source_activation": 132.0,
+          "stratum": "B2",
+          "susceptibility": 9.83984374999344,
+          "target": {
+            "feature_id": 6254,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 106.0,
+          "target_threshold": 107.5,
+          "targeted_response": -0.11181640625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.1022977022977023,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 125.0,
+            "desired_source_activation": 125.125,
+            "expected_realized_probe_alpha": 0.12587412587412583,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "745eabc915cc413c53948884baf65a3420db26efa72b6fa587d744d4b89b52ea",
+          "predicted_alpha_star": 0.1022977022977023,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 14.6630859375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 508,
+            "layer": 10,
+            "position": 3
+          },
+          "source_activation": 143.0,
+          "stratum": "B2",
+          "susceptibility": 9.775390624993483,
+          "target": {
+            "feature_id": 1708,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 84.0,
+          "target_threshold": 85.5,
+          "targeted_response": -0.1025390625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.11010752688172043,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 136.0,
+            "desired_source_activation": 135.625,
+            "expected_realized_probe_alpha": 0.1225806451612903,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "635c853061e89251d54019c7977ba5ca9a9a6e0e69157483aec4e704c79dcc29",
+          "predicted_alpha_star": 0.11010752688172043,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 13.623046875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 9704,
+            "layer": 11,
+            "position": 3
+          },
+          "source_activation": 155.0,
+          "stratum": "B2",
+          "susceptibility": 9.082031249993944,
+          "target": {
+            "feature_id": 3049,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 83.0,
+          "target_threshold": 84.5,
+          "targeted_response": -0.087890625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4004431988528971,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 58.5,
+            "desired_source_activation": 58.625,
+            "expected_realized_probe_alpha": 0.12686567164179108,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "c2cd19ba7450bf7be30efdc81067be8df6bccd901abd280d3d1760f5e9b3680f",
+          "predicted_alpha_star": 0.4004431988528971,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 3.745849609375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 1155,
+            "layer": 6,
+            "position": 5
+          },
+          "source_activation": 67.0,
+          "stratum": "B3",
+          "susceptibility": 2.4972330729150016,
+          "target": {
+            "feature_id": 960,
+            "layer": 11,
+            "position": 5
+          },
+          "target_preactivation": 75.0,
+          "target_threshold": 76.5,
+          "targeted_response": -0.055908203125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4012015149536372,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 108.0,
+            "desired_source_activation": 108.0625,
+            "expected_realized_probe_alpha": 0.1255060728744939,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "a44d317196bffcff17afa7261faacd266bff8ccbc5b4f13cf71e0148d470a2c8",
+          "predicted_alpha_star": 0.4012015149536372,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 3.73876953125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 149,
+            "layer": 0,
+            "position": 1
+          },
+          "source_activation": 123.5,
+          "stratum": "B3",
+          "susceptibility": 2.4925130208316717,
+          "target": {
+            "feature_id": 3049,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 83.0,
+          "target_threshold": 84.5,
+          "targeted_response": -0.0302734375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4012539184952978,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 76.0,
+            "desired_source_activation": 76.125,
+            "expected_realized_probe_alpha": 0.12643678160919536,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "05cefc55663ecfb638318c5784b88f8b97fe8c6bf7227ccbf424a48a66679f74",
+          "predicted_alpha_star": 0.4012539184952978,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 3.73828125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 1939,
+            "layer": 9,
+            "position": 3
+          },
+          "source_activation": 87.0,
+          "stratum": "B3",
+          "susceptibility": 2.492187499998338,
+          "target": {
+            "feature_id": 3049,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 83.0,
+          "target_threshold": 84.5,
+          "targeted_response": -0.04296875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40129323013618107,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 77.5,
+            "desired_source_activation": 77.4375,
+            "expected_realized_probe_alpha": 0.12429378531073443,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "d0f7a9c6c8f09664a67f23d6e5eae8dc48a547860d8f2cc8aa50edde778e9ca2",
+          "predicted_alpha_star": 0.40129323013618107,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F07",
+          "q": 3.7379150390625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 474,
+            "layer": 9,
+            "position": 3
+          },
+          "source_activation": 88.5,
+          "stratum": "B3",
+          "susceptibility": 2.4919433593733387,
+          "target": {
+            "feature_id": 1324,
+            "layer": 10,
+            "position": 3
+          },
+          "target_preactivation": 39.75,
+          "target_threshold": 41.25,
+          "targeted_response": -0.042236328125
+        }
+      ],
+      "id": "F07",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 5383,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 17809,
+          "q_not_finite_positive": 23669
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "text": "The boiling point of water is",
+      "token_ids": [
+        2,
+        818,
+        31476,
+        1523,
+        529,
+        1813,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 61175,
+        "eligible_source_count": 3525,
+        "eligible_target_count": 104,
+        "pair_score_sha256": "aa97b5fd4d3d0441041a3f213dd9a825b927d3dd8a67be192923c6bfbb1e543e",
+        "q_sign_counts": {
+          "negative": 31387,
+          "positive": 29788
+        },
+        "raw_active_source_count": 4103,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 144
+        },
+        "source_pool_sha256": "4e96a3f6b084443f49c63b01f02333cbf47d3a85e6ba52f7b9cf5ac9e88f8f55",
+        "target_pool_sha256": "87211e32fd614a1e79b84b117f0ab681b46feaee400bef608ee2e880a7da3f2c"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.025882115054089577,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 165.0,
+            "desired_source_activation": 165.375,
+            "expected_realized_probe_alpha": 0.12698412698412698,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.75,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "f0ccd4c938ea8d5f0fc67a45b51e3f97f9f4288e07dab9b5d7c806edf2b0f198",
+          "predicted_alpha_star": 0.025882115054089577,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 28.9775390625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 122,
+            "layer": 10,
+            "position": 4
+          },
+          "source_activation": 189.0,
+          "stratum": "B1",
+          "susceptibility": 38.636718749948486,
+          "target": {
+            "feature_id": 110,
+            "layer": 11,
+            "position": 4
+          },
+          "target_preactivation": 59.5,
+          "target_threshold": 60.25,
+          "targeted_response": -0.1533203125
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.03050160848325986,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 382.0,
+            "desired_source_activation": 381.5,
+            "expected_realized_probe_alpha": 0.12385321100917435,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.75,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "7d9ef35192a1e32410621acbc7ffedf5d951930f7a6c62aaaa25e19eeca37ba8",
+          "predicted_alpha_star": 0.03050160848325986,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 24.5888671875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 423,
+            "layer": 10,
+            "position": 4
+          },
+          "source_activation": 436.0,
+          "stratum": "B1",
+          "susceptibility": 32.78515624995629,
+          "target": {
+            "feature_id": 110,
+            "layer": 11,
+            "position": 4
+          },
+          "target_preactivation": 59.5,
+          "target_threshold": 60.25,
+          "targeted_response": -0.056396484375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.020966420966420967,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 144.0,
+            "desired_source_activation": 144.375,
+            "expected_realized_probe_alpha": 0.12727272727272732,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "0d2b4c3b79afc3fee44adfb2e91639d0d0ac851048593c036ec0c6a60b1069d4",
+          "predicted_alpha_star": 0.020966420966420967,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 23.84765625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 976,
+            "layer": 10,
+            "position": 5
+          },
+          "source_activation": 165.0,
+          "stratum": "B1",
+          "susceptibility": 47.69531249990461,
+          "target": {
+            "feature_id": 6100,
+            "layer": 14,
+            "position": 5
+          },
+          "target_preactivation": 111.5,
+          "target_threshold": 112.0,
+          "targeted_response": -0.14453125
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.021164021164021163,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 224.0,
+            "desired_source_activation": 224.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.5,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "c81c4cf142e98f1bb21931056d743035d4db261150d54f8ce0a0aa127b5db7ed",
+          "predicted_alpha_star": 0.021164021164021163,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 23.625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 66,
+            "layer": 12,
+            "position": 1
+          },
+          "source_activation": 256.0,
+          "stratum": "B1",
+          "susceptibility": 47.249999999905505,
+          "target": {
+            "feature_id": 771,
+            "layer": 15,
+            "position": 1
+          },
+          "target_preactivation": 108.5,
+          "target_threshold": 109.0,
+          "targeted_response": -0.09228515625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.11372091731911822,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 38.0,
+            "desired_source_activation": 38.0625,
+            "expected_realized_probe_alpha": 0.12643678160919536,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "9495964da5c4f42b9a81e537df4b4515a4bf2e13cc1f53f0a2c855a400795a1e",
+          "predicted_alpha_star": 0.11372091731911822,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 8.79345703125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 1590,
+            "layer": 2,
+            "position": 7
+          },
+          "source_activation": 43.5,
+          "stratum": "B2",
+          "susceptibility": 8.793457031241205,
+          "target": {
+            "feature_id": 3816,
+            "layer": 3,
+            "position": 7
+          },
+          "target_preactivation": 22.125,
+          "target_threshold": 23.125,
+          "targeted_response": -0.2021484375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10740507656807216,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 258.0,
+            "desired_source_activation": 257.25,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "42015f67372adb9bd32c35bad81d3b5ecfe0a1fabb41ca449bc3193a05266ccb",
+          "predicted_alpha_star": 0.10740507656807216,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 8.146728515625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 466,
+            "layer": 4,
+            "position": 3
+          },
+          "source_activation": 294.0,
+          "stratum": "B2",
+          "susceptibility": 9.31054687498936,
+          "target": {
+            "feature_id": 9529,
+            "layer": 7,
+            "position": 3
+          },
+          "target_preactivation": 19.75,
+          "target_threshold": 20.625,
+          "targeted_response": -0.0277099609375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10830512887268941,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 18.25,
+            "desired_source_activation": 18.265625,
+            "expected_realized_probe_alpha": 0.12574850299401197,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.8125,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "b4444362ba827914cc906d8a9713906fc288b44a226b73deda6665aece3c41cf",
+          "predicted_alpha_star": 0.10830512887268941,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 7.501953125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 629,
+            "layer": 0,
+            "position": 2
+          },
+          "source_activation": 20.875,
+          "stratum": "B2",
+          "susceptibility": 9.233173076911713,
+          "target": {
+            "feature_id": 2538,
+            "layer": 5,
+            "position": 2
+          },
+          "target_preactivation": 14.9375,
+          "target_threshold": 15.75,
+          "targeted_response": -0.359375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.12512218963831867,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 272.0,
+            "desired_source_activation": 271.25,
+            "expected_realized_probe_alpha": 0.1225806451612903,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.9375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "bbbac1e6ce2db4713b087d95716755e88575d657c2613ecba2589d74e37ed87f",
+          "predicted_alpha_star": 0.12512218963831867,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 7.49267578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 4849,
+            "layer": 3,
+            "position": 6
+          },
+          "source_activation": 310.0,
+          "stratum": "B2",
+          "susceptibility": 7.992187499991475,
+          "target": {
+            "feature_id": 1918,
+            "layer": 7,
+            "position": 7
+          },
+          "target_preactivation": 14.4375,
+          "target_threshold": 15.375,
+          "targeted_response": -0.024169921875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4029909484454939,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 36.75,
+            "desired_source_activation": 36.75,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "9728e9abb186002cce086d2622ff5c97f08102d1b464cf45690215c767e4c3b3",
+          "predicted_alpha_star": 0.4029909484454939,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 2.4814453125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 773,
+            "layer": 1,
+            "position": 7
+          },
+          "source_activation": 42.0,
+          "stratum": "B3",
+          "susceptibility": 2.4814453124975184,
+          "target": {
+            "feature_id": 3816,
+            "layer": 3,
+            "position": 7
+          },
+          "target_preactivation": 22.125,
+          "target_threshold": 23.125,
+          "targeted_response": -0.05908203125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4277360066833751,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 13.75,
+            "desired_source_activation": 13.78125,
+            "expected_realized_probe_alpha": 0.12698412698412698,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "7ce776899f9ce3422f5b602bc7bfa6b89f2990adce9de5b8b84739c9636e1532",
+          "predicted_alpha_star": 0.4277360066833751,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 2.337890625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 6585,
+            "layer": 1,
+            "position": 7
+          },
+          "source_activation": 15.75,
+          "stratum": "B3",
+          "susceptibility": 2.337890624997662,
+          "target": {
+            "feature_id": 3816,
+            "layer": 3,
+            "position": 7
+          },
+          "target_preactivation": 22.125,
+          "target_threshold": 23.125,
+          "targeted_response": -0.1484375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.43303819215012557,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 141.0,
+            "desired_source_activation": 140.875,
+            "expected_realized_probe_alpha": 0.12422360248447206,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "172b07be73a912290f30bb2e93a5e41574d71b861024c186928cfed79e4cc95c",
+          "predicted_alpha_star": 0.43303819215012557,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 2.30926513671875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 266,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 161.0,
+          "stratum": "B3",
+          "susceptibility": 2.3092651367164407,
+          "target": {
+            "feature_id": 232,
+            "layer": 3,
+            "position": 2
+          },
+          "target_preactivation": 16.125,
+          "target_threshold": 17.125,
+          "targeted_response": -0.01434326171875
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41025641025641024,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 21.375,
+            "desired_source_activation": 21.328125,
+            "expected_realized_probe_alpha": 0.12307692307692308,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 0.9375,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "4f09199a640b8bf90c92e58a6cdd90bb77dced06a9d4f0eeb2898176eefa86b3",
+          "predicted_alpha_star": 0.41025641025641024,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F08",
+          "q": 2.28515625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 2162,
+            "layer": 6,
+            "position": 7
+          },
+          "source_activation": 24.375,
+          "stratum": "B3",
+          "susceptibility": 2.4374999999974,
+          "target": {
+            "feature_id": 1918,
+            "layer": 7,
+            "position": 7
+          },
+          "target_preactivation": 14.4375,
+          "target_threshold": 15.375,
+          "targeted_response": -0.09375
+        }
+      ],
+      "id": "F08",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 6460,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 23328,
+          "q_not_finite_positive": 31387
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "text": "The planet known as the Red Planet is",
+      "token_ids": [
+        2,
+        818,
+        13401,
+        3224,
+        618,
+        506,
+        4855,
+        38342,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 68941,
+        "eligible_source_count": 3109,
+        "eligible_target_count": 109,
+        "pair_score_sha256": "29183905d72035331f75ea2e14bf57cfaa17bc3e252a52422474f39b98ec22b5",
+        "q_sign_counts": {
+          "negative": 35444,
+          "positive": 33497
+        },
+        "raw_active_source_count": 3433,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 126
+        },
+        "source_pool_sha256": "f65add9002fda7f360f5d2d0305164685389cbf5bf2c5f82be1f004d6a376594",
+        "target_pool_sha256": "f8e8e9b7c2584dedf5f552ae25d260e70899859ab362ced5b953f8f2bf71509b"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.021069958847736627,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 944.0,
+            "desired_source_activation": 945.0,
+            "expected_realized_probe_alpha": 0.12592592592592589,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "e855a244a26c883e54fe57f0299202d0f633548551054eb0b5816e639c720a27",
+          "predicted_alpha_star": 0.021069958847736627,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 47.4609375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 15065,
+            "layer": 14,
+            "position": 2
+          },
+          "source_activation": 1080.0,
+          "stratum": "B1",
+          "susceptibility": 47.460937499952536,
+          "target": {
+            "feature_id": 3842,
+            "layer": 15,
+            "position": 2
+          },
+          "target_preactivation": 134.0,
+          "target_threshold": 135.0,
+          "targeted_response": -0.0439453125
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.023296023296023295,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 346.0,
+            "desired_source_activation": 346.5,
+            "expected_realized_probe_alpha": 0.1262626262626263,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "14ef904b4820045cd50775a2621ffdfbaa77541557cb862e01298d2339a43da6",
+          "predicted_alpha_star": 0.023296023296023295,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 42.92578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 423,
+            "layer": 10,
+            "position": 3
+          },
+          "source_activation": 396.0,
+          "stratum": "B1",
+          "susceptibility": 42.92578124995707,
+          "target": {
+            "feature_id": 873,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 69.0,
+          "target_threshold": 70.0,
+          "targeted_response": -0.1083984375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.023378995433789955,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 256.0,
+            "desired_source_activation": 255.5,
+            "expected_realized_probe_alpha": 0.12328767123287676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "7370597cb99410123b2ac324d381cf70dbddd2ff9469e731a98991b99b35c937",
+          "predicted_alpha_star": 0.023378995433789955,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 42.7734375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 3529,
+            "layer": 16,
+            "position": 4
+          },
+          "source_activation": 292.0,
+          "stratum": "B1",
+          "susceptibility": 42.773437499957225,
+          "target": {
+            "feature_id": 304,
+            "layer": 17,
+            "position": 4
+          },
+          "target_preactivation": 171.0,
+          "target_threshold": 172.0,
+          "targeted_response": -0.146484375
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.02503789916377329,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 1000.0,
+            "desired_source_activation": 1001.0,
+            "expected_realized_probe_alpha": 0.12587412587412583,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "655ed1cedee8dd50624affdcb81b02092d5ce3c00e2d8f0eb05d501cd7601159",
+          "predicted_alpha_star": 0.02503789916377329,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 39.939453125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 6859,
+            "layer": 12,
+            "position": 2
+          },
+          "source_activation": 1144.0,
+          "stratum": "B1",
+          "susceptibility": 39.93945312496006,
+          "target": {
+            "feature_id": 3842,
+            "layer": 15,
+            "position": 2
+          },
+          "target_preactivation": 134.0,
+          "target_threshold": 135.0,
+          "targeted_response": -0.034912109375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10002442002442002,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 184.0,
+            "desired_source_activation": 183.75,
+            "expected_realized_probe_alpha": 0.12380952380952381,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "1cfad9e68dfa33faae26dfc4e588c2fcddefc28fe77632fa0120d22f95289076",
+          "predicted_alpha_star": 0.10002442002442002,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 9.99755859375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 4406,
+            "layer": 13,
+            "position": 3
+          },
+          "source_activation": 210.0,
+          "stratum": "B2",
+          "susceptibility": 9.99755859374,
+          "target": {
+            "feature_id": 3542,
+            "layer": 14,
+            "position": 3
+          },
+          "target_preactivation": 111.5,
+          "target_threshold": 112.5,
+          "targeted_response": -0.047607421875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10040200019609766,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 95.0,
+            "desired_source_activation": 94.9375,
+            "expected_realized_probe_alpha": 0.12442396313364057,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "3c64b29485c0ce3d5c00da0d29364fa57587c0591147275b538696959ac96780",
+          "predicted_alpha_star": 0.10040200019609766,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 9.9599609375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 4330,
+            "layer": 11,
+            "position": 3
+          },
+          "source_activation": 108.5,
+          "stratum": "B2",
+          "susceptibility": 9.95996093749004,
+          "target": {
+            "feature_id": 873,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 69.0,
+          "target_threshold": 70.0,
+          "targeted_response": -0.091796875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10091155457009116,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 107.5,
+            "desired_source_activation": 107.625,
+            "expected_realized_probe_alpha": 0.1260162601626016,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "447ff8884a62958918d7e8f31b980684e0a115db343be5eb07a097ebd49efc8e",
+          "predicted_alpha_star": 0.10091155457009116,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 9.90966796875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 4663,
+            "layer": 3,
+            "position": 2
+          },
+          "source_activation": 123.0,
+          "stratum": "B2",
+          "susceptibility": 9.90966796874009,
+          "target": {
+            "feature_id": 873,
+            "layer": 12,
+            "position": 3
+          },
+          "target_preactivation": 69.0,
+          "target_threshold": 70.0,
+          "targeted_response": -0.08056640625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.1009861932938856,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 272.0,
+            "desired_source_activation": 273.0,
+            "expected_realized_probe_alpha": 0.1282051282051282,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "0b5358c8ddcc08b896a54736d2bda942f4690e81320f5e9682fb9324c31d0eb6",
+          "predicted_alpha_star": 0.1009861932938856,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 9.90234375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 911,
+            "layer": 15,
+            "position": 4
+          },
+          "source_activation": 312.0,
+          "stratum": "B2",
+          "susceptibility": 9.902343749990097,
+          "target": {
+            "feature_id": 304,
+            "layer": 17,
+            "position": 4
+          },
+          "target_preactivation": 171.0,
+          "target_threshold": 172.0,
+          "targeted_response": -0.03173828125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4237533623008483,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 19.625,
+            "desired_source_activation": 19.578125,
+            "expected_realized_probe_alpha": 0.12290502793296088,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "6511f3c53229ef25649c9fe5a15b992065d7a40042ac64881dc84738938cc01d",
+          "predicted_alpha_star": 0.4237533623008483,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 2.9498291015625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 3184,
+            "layer": 1,
+            "position": 4
+          },
+          "source_activation": 22.375,
+          "stratum": "B3",
+          "susceptibility": 2.3598632812481117,
+          "target": {
+            "feature_id": 1117,
+            "layer": 3,
+            "position": 4
+          },
+          "target_preactivation": 18.75,
+          "target_threshold": 20.0,
+          "targeted_response": -0.1318359375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41932841932841936,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 48.5,
+            "desired_source_activation": 48.5625,
+            "expected_realized_probe_alpha": 0.12612612612612617,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.1875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "0b50b16ff6377cbf2388c3d975774f7c2a93456854ef1079b903a4c1f39a1946",
+          "predicted_alpha_star": 0.41932841932841936,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 2.8319091796875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 448,
+            "layer": 3,
+            "position": 4
+          },
+          "source_activation": 55.5,
+          "stratum": "B3",
+          "susceptibility": 2.3847656249979914,
+          "target": {
+            "feature_id": 752,
+            "layer": 6,
+            "position": 4
+          },
+          "target_preactivation": 7.9375,
+          "target_threshold": 9.125,
+          "targeted_response": -0.051025390625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40456540825285336,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 298.0,
+            "desired_source_activation": 297.5,
+            "expected_realized_probe_alpha": 0.12352941176470589,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.125,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "8b06662157e0d8bd3da8aa360d25999df72fa5b8af044d17c1596975ab0f6e6a",
+          "predicted_alpha_star": 0.40456540825285336,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 2.78076171875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 299,
+            "layer": 3,
+            "position": 3
+          },
+          "source_activation": 340.0,
+          "stratum": "B3",
+          "susceptibility": 2.4717881944422473,
+          "target": {
+            "feature_id": 10764,
+            "layer": 9,
+            "position": 5
+          },
+          "target_preactivation": 27.125,
+          "target_threshold": 28.25,
+          "targeted_response": -0.0081787109375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4646098003629764,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 12.6875,
+            "desired_source_activation": 12.6875,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.25,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "ea637d1eac253a6913f4e2530803ba1886f8412a2fb4368a8f95cb56188ca529",
+          "predicted_alpha_star": 0.4646098003629764,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F09",
+          "q": 2.6904296875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 7773,
+            "layer": 0,
+            "position": 2
+          },
+          "source_activation": 14.5,
+          "stratum": "B3",
+          "susceptibility": 2.152343749998278,
+          "target": {
+            "feature_id": 1117,
+            "layer": 3,
+            "position": 4
+          },
+          "target_preactivation": 18.75,
+          "target_threshold": 20.0,
+          "targeted_response": -0.185546875
+        }
+      ],
+      "id": "F09",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 7707,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 25790,
+          "q_not_finite_positive": 35444
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "text": "The language primarily spoken in Brazil is",
+      "token_ids": [
+        2,
+        818,
+        5192,
+        13336,
+        22852,
+        528,
+        14600,
+        563
+      ]
+    },
+    {
+      "baseline_pools": {
+        "active_vjp_health_calibration": {
+          "graph_edge_input_used": false,
+          "intervention_calls": 0,
+          "pair_count": 4,
+          "pairwise_vs_many_source_exact_bf16_identity": true
+        },
+        "complete_derivative_matrix_persisted": false,
+        "dense_scanner_arrays_persisted": false,
+        "eligible_pair_count": 78054,
+        "eligible_source_count": 3503,
+        "eligible_target_count": 116,
+        "pair_score_sha256": "3c5380e56650451a96fa6f2a4de24c41478b48fd7232c1a03f5da5616e2cc9cc",
+        "q_sign_counts": {
+          "negative": 38609,
+          "positive": 39445
+        },
+        "raw_active_source_count": 3947,
+        "scanner_candidate_count": 128,
+        "scanner_dense_oracle_validation": {
+          "exact_identity_and_order": true,
+          "group_count": 144
+        },
+        "source_pool_sha256": "abb3134944de88ec374b7fdf1f8fa6deb64eb1083e3d801206e74594fedefab0",
+        "target_pool_sha256": "12f2aad4f3721de638681a44f99d64c72a1bdfa15dbb46f3f4b7f26b7e7f6ecf"
+      },
+      "execution_pairs": [
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.020249960449295997,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 688.0,
+            "desired_source_activation": 686.0,
+            "expected_realized_probe_alpha": 0.12244897959183676,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "53ff85a7168d8ed73dbe787087081d3642bea15002cb1b59c531c79ff10a6a19",
+          "predicted_alpha_star": 0.020249960449295997,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 49.3828125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 885,
+            "layer": 14,
+            "position": 3
+          },
+          "source_activation": 784.0,
+          "stratum": "B1",
+          "susceptibility": 49.38281249995061,
+          "target": {
+            "feature_id": 138,
+            "layer": 15,
+            "position": 3
+          },
+          "target_preactivation": 76.0,
+          "target_threshold": 77.0,
+          "targeted_response": -0.06298828125
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.020620217478856222,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 83.5,
+            "desired_source_activation": 83.5625,
+            "expected_realized_probe_alpha": 0.12565445026178013,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "923ec6421382e1c2200dc0e32c9ca0ca62d17745b1654a326e4381b162f6f5f7",
+          "predicted_alpha_star": 0.020620217478856222,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 48.49609375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 452,
+            "layer": 0,
+            "position": 6
+          },
+          "source_activation": 95.5,
+          "stratum": "B1",
+          "susceptibility": 48.4960937499515,
+          "target": {
+            "feature_id": 1561,
+            "layer": 12,
+            "position": 7
+          },
+          "target_preactivation": 74.0,
+          "target_threshold": 75.0,
+          "targeted_response": -0.5078125
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.020701924632055637,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 189.0,
+            "desired_source_activation": 189.0,
+            "expected_realized_probe_alpha": 0.125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "8af7fe7f1dba7e343e29954d798eab70a744d20251d12bf0642cc22c11ef6594",
+          "predicted_alpha_star": 0.020701924632055637,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 48.3046875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 689,
+            "layer": 11,
+            "position": 7
+          },
+          "source_activation": 216.0,
+          "stratum": "B1",
+          "susceptibility": 48.30468749995169,
+          "target": {
+            "feature_id": 1561,
+            "layer": 12,
+            "position": 7
+          },
+          "target_preactivation": 74.0,
+          "target_threshold": 75.0,
+          "targeted_response": -0.2236328125
+        },
+        {
+          "detailed_role": "B1",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.021386800334168756,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 300.0,
+            "desired_source_activation": 299.25,
+            "expected_realized_probe_alpha": 0.1228070175438597,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.0,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "b7892543491fac8261061d5fdd41478bad1b7356ba1300b60a8211e444b0ce1c",
+          "predicted_alpha_star": 0.021386800334168756,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 46.7578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 2,
+            "layer": 10,
+            "position": 7
+          },
+          "source_activation": 342.0,
+          "stratum": "B1",
+          "susceptibility": 46.75781249995324,
+          "target": {
+            "feature_id": 1561,
+            "layer": 12,
+            "position": 7
+          },
+          "target_preactivation": 74.0,
+          "target_threshold": 75.0,
+          "targeted_response": -0.13671875
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10253815667425584,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 77.5,
+            "desired_source_activation": 77.4375,
+            "expected_realized_probe_alpha": 0.12429378531073443,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.1875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "bfdf541ff6fde962fedc8e20a5b20e02cea161ad2548c7bc72545307bc21e691",
+          "predicted_alpha_star": 0.10253815667425584,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 11.5810546875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 7913,
+            "layer": 6,
+            "position": 5
+          },
+          "source_activation": 88.5,
+          "stratum": "B2",
+          "susceptibility": 9.752467105254945,
+          "target": {
+            "feature_id": 358,
+            "layer": 7,
+            "position": 5
+          },
+          "target_preactivation": 9.125,
+          "target_threshold": 10.3125,
+          "targeted_response": -0.130859375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10390942106387524,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 528.0,
+            "desired_source_activation": 528.5,
+            "expected_realized_probe_alpha": 0.1258278145695364,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.1875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "dea73c7779a9229b07a118c2272d5b0a984972befd7871896ab4bb17b4bcdaf1",
+          "predicted_alpha_star": 0.10390942106387524,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 11.42822265625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 380,
+            "layer": 3,
+            "position": 4
+          },
+          "source_activation": 604.0,
+          "stratum": "B2",
+          "susceptibility": 9.623766447360316,
+          "target": {
+            "feature_id": 358,
+            "layer": 7,
+            "position": 5
+          },
+          "target_preactivation": 9.125,
+          "target_threshold": 10.3125,
+          "targeted_response": -0.0189208984375
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10544800225464479,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 836.0,
+            "desired_source_activation": 836.5,
+            "expected_realized_probe_alpha": 0.12552301255230125,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.1875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "298b15427b11a5acfe6027dabfd94d19f64e634aee9e348ffb61ea4c2cb1e6be",
+          "predicted_alpha_star": 0.10544800225464479,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 11.261474609375,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 129,
+            "layer": 5,
+            "position": 5
+          },
+          "source_activation": 956.0,
+          "stratum": "B2",
+          "susceptibility": 9.483347039465697,
+          "target": {
+            "feature_id": 358,
+            "layer": 7,
+            "position": 5
+          },
+          "target_preactivation": 9.125,
+          "target_threshold": 10.3125,
+          "targeted_response": -0.01177978515625
+        },
+        {
+          "detailed_role": "B2",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.10310339426755868,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 164.0,
+            "desired_source_activation": 163.625,
+            "expected_realized_probe_alpha": 0.12299465240641716,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.125,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "e6f318a0b8029d3d2977cef88fd837c46bb8fbaa2f7f3b5a60298f0d578d72d3",
+          "predicted_alpha_star": 0.10310339426755868,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 10.911376953125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 281,
+            "layer": 5,
+            "position": 7
+          },
+          "source_activation": 187.0,
+          "stratum": "B2",
+          "susceptibility": 9.699001736102488,
+          "target": {
+            "feature_id": 466,
+            "layer": 9,
+            "position": 7
+          },
+          "target_preactivation": 18.375,
+          "target_threshold": 19.5,
+          "targeted_response": -0.058349609375
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.4132189278735876,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 34.5,
+            "desired_source_activation": 34.5625,
+            "expected_realized_probe_alpha": 0.12658227848101267,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.1875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "cae7173a485ceade6eb46579a61061ef666f920fd60977b0cfe864adc0121353",
+          "predicted_alpha_star": 0.4132189278735876,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 2.873779296875,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 1,
+          "source": {
+            "feature_id": 5742,
+            "layer": 3,
+            "position": 4
+          },
+          "source_activation": 39.5,
+          "stratum": "B3",
+          "susceptibility": 2.4200246710505935,
+          "target": {
+            "feature_id": 3799,
+            "layer": 4,
+            "position": 7
+          },
+          "target_preactivation": 7.6875,
+          "target_threshold": 8.875,
+          "targeted_response": -0.07275390625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.41670593274791173,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 141.0,
+            "desired_source_activation": 140.875,
+            "expected_realized_probe_alpha": 0.12422360248447206,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.1875,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "89febc91b91cfbe70187cc44f63d1099ca6314203f3235481696325e515eba9b",
+          "predicted_alpha_star": 0.41670593274791173,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 2.8497314453125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 2,
+          "source": {
+            "feature_id": 266,
+            "layer": 1,
+            "position": 1
+          },
+          "source_activation": 161.0,
+          "stratum": "B3",
+          "susceptibility": 2.3997738486821896,
+          "target": {
+            "feature_id": 358,
+            "layer": 7,
+            "position": 5
+          },
+          "target_preactivation": 9.125,
+          "target_threshold": 10.3125,
+          "targeted_response": -0.0177001953125
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40052151238591915,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 9.6875,
+            "desired_source_activation": 9.6796875,
+            "expected_realized_probe_alpha": 0.12429378531073443,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.125,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "988bc21e6bdf0e9570f039d0f824af128ed560798fe2dc66cefa1a3a34ec88e1",
+          "predicted_alpha_star": 0.40052151238591915,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 2.808837890625,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 3,
+          "source": {
+            "feature_id": 13429,
+            "layer": 0,
+            "position": 1
+          },
+          "source_activation": 11.0625,
+          "stratum": "B3",
+          "susceptibility": 2.496744791664447,
+          "target": {
+            "feature_id": 466,
+            "layer": 9,
+            "position": 7
+          },
+          "target_preactivation": 18.375,
+          "target_threshold": 19.5,
+          "targeted_response": -0.25390625
+        },
+        {
+          "detailed_role": "B3",
+          "discovery_ranker": "q",
+          "e0_predicted_alpha": 0.40688741721854305,
+          "e1_probe_mapping": {
+            "applied_bf16_source_activation": 132.0,
+            "desired_source_activation": 132.125,
+            "expected_realized_probe_alpha": 0.1258278145695364,
+            "nominal_requested_alpha": 0.125
+          },
+          "margin": 1.125,
+          "method_memberships": [
+            "influence_only"
+          ],
+          "pair_id": "384986e0d06090321852b9bbb022a5e1faee6c2f698769a30d0c78d07f507e45",
+          "predicted_alpha_star": 0.40688741721854305,
+          "predicted_status": "definitely_crossing",
+          "prompt_id": "F10",
+          "q": 2.764892578125,
+          "requested_alphas": [
+            0.0,
+            0.125,
+            1.0
+          ],
+          "selection_rank_in_stratum": 4,
+          "source": {
+            "feature_id": 692,
+            "layer": 5,
+            "position": 3
+          },
+          "source_activation": 151.0,
+          "stratum": "B3",
+          "susceptibility": 2.457682291664482,
+          "target": {
+            "feature_id": 1636,
+            "layer": 9,
+            "position": 8
+          },
+          "target_preactivation": 24.625,
+          "target_threshold": 25.75,
+          "targeted_response": -0.018310546875
+        }
+      ],
+      "id": "F10",
+      "panel_audit": {
+        "cross_bin_backfill_used": false,
+        "eligible_candidate_count": 10796,
+        "ineligibility_reason_counts": {
+          "e0_alpha_outside_0.02_0.95": 28649,
+          "q_not_finite_positive": 38609
+        },
+        "selected_count_by_stratum": {
+          "B1": 4,
+          "B2": 4,
+          "B3": 4
+        },
+        "shortfall_by_stratum": {
+          "B1": 0,
+          "B2": 0,
+          "B3": 0
+        }
+      },
+      "selected_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "text": "The square root of 81 is",
+      "token_ids": [
+        2,
+        818,
+        6281,
+        5989,
+        529,
+        236743,
+        236828,
+        236770,
+        563
+      ]
+    }
+  ],
+  "protocol_commit": "588c1f233c072b89520693f556f25f470d852e8b",
+  "protocol_map_sha256": "d1a7c7b458f399837cd150a3cd5a7fb2e249e71319e5aa80fc9fe1aa43fb9384",
+  "runtime_identity": {
+    "backend": "nnsight",
+    "circuit_tracer": "0.5.2",
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "fallback_allowed": false,
+    "feature_width": 16384,
+    "host_class": "Apple M2 Max, 32 GiB unified memory",
+    "layer_count": 18,
+    "model_identifier": "google/gemma-3-270m",
+    "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "nnsight": "0.6.1",
+    "offline_required": true,
+    "python": "3.11.13",
+    "torch": "2.6.0",
+    "transcoder_identifier": "mwhanna/gemma-scope-2-270m-pt",
+    "transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "transcoder_subfolder": "transcoder_all/width_16k_l0_small",
+    "transformers": "4.57.3",
+    "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b"
+  },
+  "schema_version": 1,
+  "selection_totals": {
+    "prompt_count": 10,
+    "selected_count_by_stratum": {
+      "B1": 40,
+      "B2": 40,
+      "B3": 40
+    },
+    "selected_pair_count": 120
+  },
+  "status": "prediction_frozen_ready_for_commit"
+}
