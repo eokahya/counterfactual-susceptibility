@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage 1F compact prospective one-probe bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_manifest.json", "prediction_manifest.json", "point_sweeps.json", "analysis_summary.json", "run_manifest.json", "environment_manifest.json"],
+  "properties": {
+    "protocol_manifest.json": {"type": "object"},
+    "prediction_manifest.json": {"type": "object"},
+    "point_sweeps.json": {"type": "object"},
+    "analysis_summary.json": {"type": "object"},
+    "run_manifest.json": {"type": "object"},
+    "environment_manifest.json": {"type": "object"}
+  }
+}

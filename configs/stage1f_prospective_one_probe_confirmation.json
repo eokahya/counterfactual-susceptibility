@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "experiment_class": "stage1f_prospective_one_probe_confirmation",
+  "branch": "stage-1f-prospective-one-probe-confirmation",
+  "base_commit": "f7aae1f3ce3b1b8d98e850093a3cb5ca480277ea",
+  "required_stage1e_ancestor": "f1cbaa29ba4d7ee0133a4b6c5011709f723e8980",
+  "phase": "protocol_frozen_before_fresh_baseline",
+  "runtime": {
+    "model_identifier": "google/gemma-3-270m",
+    "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "transcoder_identifier": "mwhanna/gemma-scope-2-270m-pt",
+    "transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "transcoder_subfolder": "transcoder_all/width_16k_l0_small",
+    "layer_count": 18,
+    "feature_width": 16384,
+    "backend": "nnsight",
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "python": "3.11.13",
+    "torch": "2.6.0",
+    "transformers": "4.57.3",
+    "nnsight": "0.6.1",
+    "circuit_tracer": "0.5.2",
+    "upstream_revision": "8f1e2438df612464e229e44c4a00ff637bf9379b",
+    "host_class": "Apple M2 Max, 32 GiB unified memory",
+    "fallback_allowed": false,
+    "offline_required": true
+  },
+  "prompt_provenance": {
+    "source": "binding_specification_fallback",
+    "tracked_authenticated_stage1e_phase_b_list_found": false,
+    "exact_prompt_baseline_or_intervention_artifact_hits": 0,
+    "historical_candidate_pool_metadata_hits": {
+      "F02": 1
+    },
+    "historical_exact_prompt_source_target_exclusions": []
+  },
+  "prompts": [
+    {"id": "F01", "text": "The capital of Australia is", "token_ids": [2, 818, 5279, 529, 8187, 563], "selected_positions": [1, 2, 3, 4, 5]},
+    {"id": "F02", "text": "The capital of Brazil is", "token_ids": [2, 818, 5279, 529, 14600, 563], "selected_positions": [1, 2, 3, 4, 5]},
+    {"id": "F03", "text": "The currency of Switzerland is", "token_ids": [2, 818, 15130, 529, 24687, 563], "selected_positions": [1, 2, 3, 4, 5]},
+    {"id": "F04", "text": "The chemical symbol for sodium is", "token_ids": [2, 818, 7395, 5404, 573, 17888, 563], "selected_positions": [1, 2, 3, 4, 5, 6]},
+    {"id": "F05", "text": "The author of Pride and Prejudice is", "token_ids": [2, 818, 3260, 529, 53917, 532, 233276, 563], "selected_positions": [1, 2, 3, 4, 5, 6, 7]},
+    {"id": "F06", "text": "The largest ocean is", "token_ids": [2, 818, 7488, 12461, 563], "selected_positions": [1, 2, 3, 4]},
+    {"id": "F07", "text": "The boiling point of water is", "token_ids": [2, 818, 31476, 1523, 529, 1813, 563], "selected_positions": [1, 2, 3, 4, 5, 6]},
+    {"id": "F08", "text": "The planet known as the Red Planet is", "token_ids": [2, 818, 13401, 3224, 618, 506, 4855, 38342, 563], "selected_positions": [1, 2, 3, 4, 5, 6, 7, 8]},
+    {"id": "F09", "text": "The language primarily spoken in Brazil is", "token_ids": [2, 818, 5192, 13336, 22852, 528, 14600, 563], "selected_positions": [1, 2, 3, 4, 5, 6, 7]},
+    {"id": "F10", "text": "The square root of 81 is", "token_ids": [2, 818, 6281, 5989, 529, 236743, 236828, 236770, 563], "selected_positions": [1, 2, 3, 4, 5, 6, 7, 8]}
+  ],
+  "scanner": {
+    "selected_layers": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+    "dense_oracle_chunk_size": 16384,
+    "canonical_chunk_size": 1024,
+    "top_k_per_group": 8,
+    "global_top_k": 128,
+    "tie_break": ["margin", "layer", "position", "feature_id"]
+  },
+  "source_pool": {
+    "maximum_active_sources": 10000,
+    "require_positive_activation": true,
+    "require_strictly_earlier_layer": true,
+    "require_causal_position": true
+  },
+  "responses": {
+    "method": "target_encoder_reverse_vjp_many_source_contraction",
+    "graph_edge_input": "forbidden",
+    "target_batch_size": 8,
+    "maximum_eligible_pairs": 500000,
+    "active_calibration_pair_count": 4
+  },
+  "scoring": {
+    "pair_seed": "stage1f-prospective-one-probe-confirmation-v1",
+    "epsilon": 1e-12,
+    "crossing_tolerance": 1e-9,
+    "discovery_ranker": "inhibitory_influence_q_descending",
+    "q_over_margin_discovery_forbidden": true
+  },
+  "panel": {
+    "q_strictly_positive": true,
+    "e0_alpha_minimum": 0.02,
+    "e0_alpha_maximum": 0.95,
+    "per_prompt_per_bin_maximum": 4,
+    "maximum_total_pairs": 120,
+    "cross_bin_backfill_allowed": false,
+    "bins": {
+      "B1": {"low": 0.02, "high": 0.10, "high_inclusive": false},
+      "B2": {"low": 0.10, "high": 0.40, "high_inclusive": false},
+      "B3": {"low": 0.40, "high": 0.95, "high_inclusive": true}
+    },
+    "tie_break": ["source_layer", "source_position", "source_feature_id", "target_layer", "target_position", "target_feature_id", "pair_id"]
+  },
+  "estimators": {
+    "E0": "alpha=margin/q for finite q>0",
+    "E1": "alpha=margin/((z_probe-z_baseline)/realized_probe_alpha)",
+    "e1_nominal_probe_grid": [0.125, 0.1875, 0.25],
+    "probe_selection": "first_nonzero_bf16_realized_value_in_nominal_order",
+    "e1_abstention_rule": "nonpositive_or_nonfinite_secant_drive",
+    "requested_alpha_used_for_estimation": false,
+    "realized_alpha_used_for_estimation": true
+  },
+  "intervention": {
+    "mapping": "desired=(1-alpha)*baseline",
+    "required_points": ["baseline_noop", "e1_probe", "full_ablation"],
+    "freeze_attention": true,
+    "constrained_layers": null,
+    "target_clamp_allowed": false,
+    "canonical_attempts": 1,
+    "scientific_retries": 0,
+    "attempt_boundary": "first_instrumented_source_suppression_api_call_on_frozen_stage1f_pair"
+  },
+  "refinement": {
+    "maximum_bisection_steps": 6,
+    "stop_bracket_width": 0.0625,
+    "deduplicate_applied_bf16": true,
+    "requires_full_ablation_crossing": true,
+    "requires_e1_accepted": true
+  },
+  "metrics": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": "stage1f-e1-confirmatory-prompt-bootstrap-v1",
+    "bootstrap_unit": "prompt",
+    "bootstrap_interval": "percentile_nearest_rank",
+    "confidence_level": 0.95,
+    "paired_reference": "same_e1_accepted_quantization_resolvable_monotonic_observed_crossing_pairs",
+    "e1_abstention_classified_as_no_crossing": true
+  },
+  "decision_rule": {
+    "minimum_paired_reference_pairs": 24,
+    "confirmed_coverage_minimum": 0.60,
+    "confirmed_e1_to_e0_median_error_ratio_maximum": 0.75,
+    "confirmed_paired_improvement_bootstrap_lower_strictly_greater_than": 0.0,
+    "confirmed_e1_spearman_minimum": 0.70,
+    "confirmed_e1_spearman_drop_from_e0_maximum": 0.05,
+    "confirmed_e1_classification_drop_from_e0_maximum": 0.02,
+    "mixed_median_error_improvement_minimum": 0.15,
+    "not_supported_e1_to_e0_median_error_ratio_strictly_greater_than": 0.90,
+    "material_classification_drop": 0.05,
+    "precedence": ["underpowered", "confirmed", "mixed", "not_supported"]
+  },
+  "safety_limits": {
+    "maximum_mps_driver_bytes": 25769803776,
+    "maximum_process_rss_bytes": 25769803776,
+    "maximum_swap_growth_bytes": 4294967296,
+    "minimum_available_memory_bytes": 4294967296,
+    "maximum_artifact_bundle_bytes": 5242880,
+    "maximum_artifact_file_bytes": 2097152,
+    "accepted_thermal_states": ["nominal", "fair"],
+    "sample_interval_seconds": 1.0,
+    "telemetry_failure_limit": 3,
+    "terminate_grace_seconds": 15.0,
+    "kill_grace_seconds": 5.0,
+    "prediction_timeout_seconds": 18000,
+    "canonical_timeout_seconds": 28800
+  },
+  "artifacts": {
+    "result_directory": "results/stage1f_prospective_one_probe_confirmation",
+    "generated_directory": "results/generated/stage1f_prospective_one_probe_confirmation",
+    "canonical_attempt_lock": "results/generated/stage1f_prospective_one_probe_confirmation/canonical_attempt.lock",
+    "required_files": ["protocol_manifest.json", "prediction_manifest.json", "point_sweeps.json", "analysis_summary.json", "run_manifest.json", "environment_manifest.json", "checksums.sha256"]
+  },
+  "claim_boundary": {
+    "stage1e_historical_status": "completed_stage1e_offline_negative",
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "reference_clt_reproduction": "pending",
+    "paper_results_readiness": false
+  }
+}
