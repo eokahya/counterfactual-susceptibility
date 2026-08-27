@@ -1,0 +1,81 @@
+{
+  "artifact_type": "stage1f_environment_manifest",
+  "experiment_class": "stage1f_prospective_one_probe_confirmation",
+  "privacy": {
+    "credential_values_read": false,
+    "network_accessed": false,
+    "private_paths_recorded": false,
+    "secret_values_recorded": false
+  },
+  "runtime": {
+    "circuit-tracer": "0.5.2",
+    "device": "mps:0",
+    "dtype": "torch.bfloat16",
+    "fallback_variable_present": false,
+    "host_cpu": "Apple M2 Max",
+    "machine": "arm64",
+    "metadata_device": "cpu",
+    "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "mps_available": true,
+    "mps_built": true,
+    "network_accessed": false,
+    "nnsight": "0.6.1",
+    "outer_autocast_enabled": false,
+    "packages": {
+      "circuit-tracer": "0.5.2",
+      "nnsight": "0.6.1",
+      "torch": "2.6.0",
+      "transformers": "4.57.3"
+    },
+    "physical_memory_bytes": 34359738368,
+    "python": "3.11.13",
+    "swap_used_bytes": 529992253,
+    "system": "Darwin",
+    "thermal_state": "nominal",
+    "torch": "2.6.0",
+    "transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "transformers": "4.57.3",
+    "upstream_revision_verified": true
+  },
+  "runtime_evidence": {
+    "assets": {
+      "actual_total_bytes": 2087816677,
+      "download_performed": false,
+      "exact_allowlist_hashes_verified": true,
+      "model_total_bytes": 575454257,
+      "network_accessed": false,
+      "status": "verified",
+      "transcoder_total_bytes": 1512362420
+    },
+    "module_guard": {
+      "floating_parameter_dtype": "torch.bfloat16",
+      "parameter_count": 290,
+      "parameter_device": "mps",
+      "source_mandated_fp32_buffers": [
+        "model.rotary_emb.inv_freq",
+        "model.rotary_emb_local.inv_freq"
+      ]
+    }
+  },
+  "schema_version": 1,
+  "status": "passed",
+  "telemetry": {
+    "attempt_peaks": {
+      "minimum_available_memory_bytes": 12914573312,
+      "mps_current_bytes": 591941120,
+      "mps_driver_bytes": 2865414144,
+      "process_rss_bytes": 1096122368,
+      "swap_growth_bytes": 0,
+      "swap_used_bytes": 529992253
+    },
+    "finished_at_unix": 1787850487.55844,
+    "sample_count": 1597,
+    "sampling_interval_seconds": 1.0,
+    "started_at_unix": 1787850138.698245,
+    "telemetry_failures": 0,
+    "thermal_states": [
+      "nominal"
+    ],
+    "violations": []
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "artifact_type": "stage1f_run_manifest",
+  "base_commit": "f7aae1f3ce3b1b8d98e850093a3cb5ca480277ea",
+  "branch": "stage-1f-prospective-one-probe-confirmation",
+  "canonical_attempt_count": 1,
+  "claim_boundary": {
+    "behavioral_importance_result": "none",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending",
+    "stage1e_historical_status": "completed_stage1e_offline_negative"
+  },
+  "experiment_class": "stage1f_prospective_one_probe_confirmation",
+  "final_artifacts_rebuilt_from_journal_in_fresh_process": true,
+  "historical_stage1e_status": "completed_stage1e_offline_negative",
+  "instrumented_source_suppression_api_calls": 512,
+  "journal_completed_point_count": 512,
+  "pre_run_commit": "4193151108e6ad86e775ffa347a42e9e70c3f311",
+  "prediction_freeze_commit": "4193151108e6ad86e775ffa347a42e9e70c3f311",
+  "project_decision": "retire_simple_critical_alpha_calibration",
+  "protocol_freeze_commit": "588c1f233c072b89520693f556f25f470d852e8b",
+  "schema_version": 1,
+  "scientific_retry_count": 0,
+  "serialized_unique_point_count": 512,
+  "standalone_recomputation_required": true,
+  "status": "completed_stage1f_e1_not_supported"
+}
