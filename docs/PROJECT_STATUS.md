@@ -10,7 +10,10 @@ byte-identical frozen Norway manifest once, producing an accepted `mixed`
 development-pilot result. Stage 1D then measured susceptibility against
 margin-only, influence-only, and random-positive panels on eight fresh prompts.
 It completed cleanly but did not justify continuing directly to behavioral or
-mediation work.
+mediation work. Stage 1E subsequently tested zero-, one-, and two-probe
+critical-alpha calibration entirely offline on the accepted Stage 1D
+serialized development set. Neither finite-probe estimator passed every frozen
+gate, so no fresh confirmatory model run began.
 
 ## Current experiment classes
 
@@ -91,6 +94,15 @@ mediation work.
   nonmonotonic. One canonical attempt produced 438 API calls, 438 completed
   journal points, and 438 serialized rows with zero scientific retries. The
   validated negative/mixed decision is not a runtime failure.
+- **Stage 1E — finite-probe calibration:**
+  `completed_stage1e_offline_negative` with project decision
+  `simple_finite_probe_calibration_not_supported`. On the same 12 accepted
+  Stage 1D critical-alpha reference pairs, E1 reduced median absolute error
+  from 0.1069 to 0.0587 and raised Spearman from 0.6941 to 0.7983, but produced
+  only 9 eligible estimates versus the frozen minimum of 10. E2 produced 7
+  estimates, 0.5833 coverage, and 0.6727 Spearman. Phase A and Phase B both
+  used zero model and intervention calls; the ten fresh confirmatory prompts
+  were not run.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -114,6 +126,11 @@ stage1c_v4_scientific_outcome: mixed
 stage1d_multiprompt_gate_benchmark: completed
 stage1d_project_decision: retain_crossing_ranker_but_redesign_calibration
 continue_first_order_to_behavioral_stage: false
+stage1e_finite_probe_calibration: completed_offline_negative
+stage1e_project_decision: simple_finite_probe_calibration_not_supported
+q_ranker_status: retained_for_candidate_discovery
+finite_probe_calibration_status: not_supported
+stage1f_behavioral_readiness: false
 stage1b_empirical_claim_readiness: false
 counterfactual_susceptibility_result: mixed
 gate_crossing_result: multiprompt_benchmark_completed
@@ -135,5 +152,7 @@ exact-pair-masked prediction and canonical runtime blocker,
 `docs/STAGE_1C_V4_PROTOCOL_PRESERVING_EXECUTION_REPORT.md` for the accepted v4
 development pilot, and
 `docs/STAGE_1D_MULTIPROMPT_GATE_BENCHMARK_REPORT.md` for the independently
-validated eight-prompt benchmark and frozen project decision.
+validated eight-prompt benchmark and frozen project decision, and
+`docs/STAGE_1E_FINITE_PROBE_CALIBRATION_REPORT.md` for the offline finite-probe
+comparison and the decision not to run a fresh confirmatory benchmark.
 Historical reports remain unchanged and retain their original scope.

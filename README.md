@@ -6,10 +6,14 @@ historical Stage 1C-v1/v2/v3 failures, Stage 1C-v4 completed the frozen Norway
 development pilot with a validated `mixed` result. Stage 1D then completed an
 eight-prompt held-out gate benchmark. Susceptibility beat margin-only and
 random-positive ranking, but trailed influence-only; critical-alpha evidence
-and monotonicity missed the frozen acceptance criteria. The project decision
-is `retain_crossing_ranker_but_redesign_calibration`, not a transition to
-behavioral or mediation experiments. The reference Stage 1A reproduction
-remains pending, and paper Results readiness remains false. See
+and monotonicity missed the frozen acceptance criteria. Stage 1E then compared
+zero-, one-, and two-probe calibration using only the accepted Stage 1D
+serialized trajectories. E1 improved development-set error but missed the
+minimum eligible-pair count; E2 missed coverage and correlation gates. Stage
+1E therefore ended `completed_stage1e_offline_negative` without a new model
+run. The project is not transitioning to behavioral or mediation experiments.
+The reference Stage 1A reproduction remains pending, and paper Results
+readiness remains false. See
 [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current experiment
 classes and readiness boundary.
 
@@ -110,6 +114,22 @@ accepted the experiment and its frozen decision
 This is gate-prediction evidence on the local PLT/MPS/BF16 runtime. It is not
 behavioral importance, mediation, an official BF16/reference-CLT reproduction,
 or a paper-ready result.
+
+## Stage 1E status
+
+Stage 1E reanalyzed all 32 detailed positive Stage 1D trajectories using
+BF16-realized rather than requested suppression. On the accepted 12-pair
+critical-alpha reference, E0/E1/E2 produced 12/9/7 eligible estimates. E1
+reduced median absolute error from 0.1069 to 0.0587 and increased Spearman from
+0.6941 to 0.7983, but failed the frozen minimum of 10 eligible pairs. E2 had
+0.5833 coverage and 0.6727 Spearman. Neither method passed every offline gate,
+so the result is `completed_stage1e_offline_negative` with decision
+`simple_finite_probe_calibration_not_supported`.
+
+No fresh prompt, model, NNsight, or intervention call was made. Inhibitory
+influence `q` remains the candidate-discovery ranker; finite-probe calibration
+is not supported for scaling, and Stage 1F behavioral readiness is false. See
+[`docs/STAGE_1E_FINITE_PROBE_CALIBRATION_REPORT.md`](docs/STAGE_1E_FINITE_PROBE_CALIBRATION_REPORT.md).
 
 Stage 1A selected the immutable model snapshot
 `google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the direct

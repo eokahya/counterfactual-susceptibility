@@ -515,3 +515,45 @@ Never record a planned, configured, or partially scaffolded run as completed.
   v4 prospective execution is complete with a mixed result. Behavioral
   importance and mediation remain `none`; official BF16 and reference CLT
   reproduction remain `pending`; paper Results readiness remains false.
+
+---
+
+## EXP-20260827-001 — Stage 1E finite-probe calibration
+
+- **Status:** `completed_stage1e_offline_negative`; project decision
+  `simple_finite_probe_calibration_not_supported`
+- **Base/branch:** `b71df55fdeb2fb66601af56207b6fbe5238e57d8` /
+  `stage-1e-finite-probe-calibration`
+- **Audited Stage 1D artifact ancestor:**
+  `2a5c3e63a838e7547fe1b30fe888610ec21ee46e`
+- **Code/artifact commit:** `f1cbaa29ba4d7ee0133a4b6c5011709f723e8980`
+- **Development evidence:** only the accepted Stage 1D serialized bundle. All
+  32 detailed positive trajectories were reconstructed with realized BF16
+  suppression. The critical-alpha reference retained the same 12 monotonic,
+  quantization-resolvable B1/B2/B3 crossing pairs used by Stage 1D.
+- **Metrics:** E0/E1/E2 eligible counts were 12/9/7, coverage 1.0/0.75/0.5833,
+  Spearman 0.6941/0.7983/0.6727, and median absolute error
+  0.1069/0.0587/0.0787. Full-ablation classification accuracy was
+  0.6563/0.7500/0.7188.
+- **Frozen gate:** E1 failed only the minimum eligible-pair count of 10. E2
+  failed eligible count, 0.60 coverage, and the required Spearman. Neither was
+  selected despite both reducing median error and preserving full-ablation
+  classification accuracy relative to E0.
+- **Calls:** zero Phase A model/NNsight/intervention calls and zero Phase B
+  model/intervention calls. The ten fresh confirmatory prompts, production
+  rehearsals, canonical attempt, and scientific retry were not run.
+- **Validation:** focused Stage 1E plus inherited Stage 1D tests passed 9/9;
+  the complete offline suite passed with 601 passed, 8 skipped, and 1
+  deselected. Ruff, format, scoped strict MyPy, dependencies, imports,
+  checksums, content safety, and standalone serialized-input recomputation
+  passed.
+- **Artifacts:** three allowlisted files totaling 249,897 bytes. No weight,
+  cache, graph, adjacency, dense activation, derivative matrix, gradient,
+  journal, secret, or private absolute path is tracked.
+- **Claim boundary:** `q` remains the candidate-discovery ranker; finite-probe
+  calibration is `not_supported`; Stage 1F behavioral readiness is false;
+  behavioral importance and mediation remain `none`; official/reference
+  reproductions remain pending; paper Results readiness remains false.
+- **Follow-up:** a later separate Goal may preregister a second-order/HVP or
+  multi-source redesign. Do not scale the simple finite-probe family or move
+  directly to behavioral importance from this result.
