@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://counterfactual-susceptibility.local/stage1d-bundle.schema.json",
+  "title": "Stage 1D compact benchmark bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_manifest.json",
+    "prediction_manifest.json",
+    "panel_membership.json",
+    "quantization_audit.json",
+    "full_ablation_points.json",
+    "calibration_sweeps.json",
+    "benchmark_summary.json",
+    "run_manifest.json",
+    "environment_manifest.json",
+    "checksums.sha256"
+  ],
+  "properties": {
+    "protocol_manifest.json": {"type": "object"},
+    "prediction_manifest.json": {"type": "object"},
+    "panel_membership.json": {"type": "object"},
+    "quantization_audit.json": {"type": "object"},
+    "full_ablation_points.json": {"type": "object"},
+    "calibration_sweeps.json": {"type": "object"},
+    "benchmark_summary.json": {"type": "object"},
+    "run_manifest.json": {"type": "object"},
+    "environment_manifest.json": {"type": "object"},
+    "checksums.sha256": {"type": "string"}
+  }
+}

@@ -22,19 +22,37 @@ class CanonicalExecutionJournal:
     def __init__(
         self,
         journal_path: Path,
-        attempt_lock_path: Path,
+        attempt_lock_path: Path | None,
         *,
         frozen_pair_ids: tuple[str, ...],
         pre_intervention_commit: str,
         prediction_manifest_sha256: str,
+        experiment_class: str | None = None,
+        attempt_boundary: str = (
+            "first_instrumented_source_suppression_api_call_on_frozen_pair"
+        ),
+        attempt_lock_artifact_type: str = ("stage1c_v4_local_scientific_attempt_lock"),
     ) -> None:
         if not frozen_pair_ids or len(set(frozen_pair_ids)) != len(frozen_pair_ids):
             raise SerializationError("frozen pair IDs must be nonempty and unique")
         self.journal_path = self._new_local_path(journal_path, "point journal")
-        self.attempt_lock_path = self._new_local_path(attempt_lock_path, "attempt lock")
+        self.attempt_lock_path = (
+            None
+            if attempt_lock_path is None
+            else self._new_local_path(attempt_lock_path, "attempt lock")
+        )
         self.frozen_pair_ids = frozenset(frozen_pair_ids)
         self.pre_intervention_commit = pre_intervention_commit
         self.prediction_manifest_sha256 = prediction_manifest_sha256
+        if (
+            (experiment_class is not None and not experiment_class.strip())
+            or not attempt_boundary.strip()
+            or not attempt_lock_artifact_type.strip()
+        ):
+            raise SerializationError("journal experiment identity must be nonempty")
+        self.experiment_class = experiment_class
+        self.attempt_boundary = attempt_boundary
+        self.attempt_lock_artifact_type = attempt_lock_artifact_type
         self._descriptor: int | None = None
         self._started = False
         self._started_calls: list[tuple[int, str]] = []
@@ -96,23 +114,27 @@ class CanonicalExecutionJournal:
         if call_index != expected:
             raise SerializationError("source-suppression call index is not contiguous")
         if not self._started:
-            write_json_new(
-                self.attempt_lock_path,
-                {
-                    "schema_version": 4,
-                    "artifact_type": "stage1c_v4_local_scientific_attempt_lock",
-                    "scientific_attempt_started": True,
-                    "boundary": (
-                        "first_instrumented_source_suppression_api_call_on_frozen_pair"
-                    ),
-                    "canonical_attempts": 1,
-                    "scientific_retries": 0,
-                    "first_pair_id": pair_id,
-                    "first_call_index": call_index,
-                    "pre_intervention_commit": self.pre_intervention_commit,
-                    "prediction_manifest_sha256": self.prediction_manifest_sha256,
-                },
-            )
+            if self.attempt_lock_path is not None:
+                write_json_new(
+                    self.attempt_lock_path,
+                    {
+                        "schema_version": 4,
+                        "artifact_type": self.attempt_lock_artifact_type,
+                        "scientific_attempt_started": True,
+                        "boundary": self.attempt_boundary,
+                        "canonical_attempts": 1,
+                        "scientific_retries": 0,
+                        "first_pair_id": pair_id,
+                        "first_call_index": call_index,
+                        "pre_intervention_commit": self.pre_intervention_commit,
+                        "prediction_manifest_sha256": self.prediction_manifest_sha256,
+                        **(
+                            {"experiment_class": self.experiment_class}
+                            if self.experiment_class is not None
+                            else {}
+                        ),
+                    },
+                )
             self._started = True
         self._append(
             {

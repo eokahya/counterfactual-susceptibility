@@ -1,0 +1,180 @@
+schema_version: 1
+experiment_class: stage1d_multiprompt_gate_benchmark
+completed_status: completed_stage1d_multiprompt_gate_benchmark
+branch: stage-1d-multiprompt-gate-benchmark
+base_commit: d4fdcc2c2f0040654af17e21f396f1d26072aa0e
+phase: protocol_frozen_before_baseline
+
+runtime:
+  model_identifier: google/gemma-3-270m
+  model_revision: 9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1
+  transcoder_identifier: mwhanna/gemma-scope-2-270m-pt
+  transcoder_revision: fada11860ac1d337c1e41e9da308798405b94c8e
+  transcoder_subfolder: transcoder_all/width_16k_l0_small
+  layer_count: 18
+  feature_width: 16384
+  backend: nnsight
+  device: mps:0
+  dtype: torch.bfloat16
+  python: 3.11.13
+  torch: 2.6.0
+  transformers: 4.57.3
+  nnsight: 0.6.1
+  circuit_tracer: 0.5.2
+  upstream_revision: 8f1e2438df612464e229e44c4a00ff637bf9379b
+  host_class: Apple M2 Max, 32 GiB unified memory
+  fallback_allowed: false
+  offline_required: true
+
+prompts:
+  - id: P01
+    text: The capital of Sweden is
+    token_ids: [2, 818, 5279, 529, 27556, 563]
+    selected_positions: [1, 2, 3, 4, 5]
+  - id: P02
+    text: The capital of Canada is
+    token_ids: [2, 818, 5279, 529, 7203, 563]
+    selected_positions: [1, 2, 3, 4, 5]
+  - id: P03
+    text: The capital of Japan is
+    token_ids: [2, 818, 5279, 529, 6056, 563]
+    selected_positions: [1, 2, 3, 4, 5]
+  - id: P04
+    text: The currency of Japan is
+    token_ids: [2, 818, 15130, 529, 6056, 563]
+    selected_positions: [1, 2, 3, 4, 5]
+  - id: P05
+    text: The chemical symbol for oxygen is
+    token_ids: [2, 818, 7395, 5404, 573, 12123, 563]
+    selected_positions: [1, 2, 3, 4, 5, 6]
+  - id: P06
+    text: The largest planet in the Solar System is
+    token_ids: [2, 818, 7488, 13401, 528, 506, 29277, 1804, 563]
+    selected_positions: [1, 2, 3, 4, 5, 6, 7, 8]
+  - id: P07
+    text: The author of Hamlet was
+    token_ids: [2, 818, 3260, 529, 124600, 691]
+    selected_positions: [1, 2, 3, 4, 5]
+  - id: P08
+    text: Water freezes at a temperature of
+    token_ids: [2, 17390, 126521, 657, 496, 4022, 529]
+    selected_positions: [1, 2, 3, 4, 5, 6]
+
+scanner:
+  selected_layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  dense_oracle_chunk_size: 16384
+  canonical_chunk_size: 1024
+  top_k_per_group: 8
+  global_top_k: 128
+  tie_break: [margin, layer, position, feature_id]
+source_pool:
+  maximum_active_sources: 10000
+  require_positive_activation: true
+  require_strictly_earlier_layer: true
+  require_causal_position: true
+responses:
+  method: target_encoder_reverse_vjp_many_source_contraction
+  graph_edge_input: forbidden
+  target_batch_size: 8
+  maximum_eligible_pairs: 500000
+  active_calibration_pair_count: 4
+scoring:
+  epsilon: 1.0e-12
+  crossing_tolerance: 1.0e-9
+  pair_seed: stage1d-multiprompt-gate-benchmark-v1
+  scores: [susceptibility, margin_only, influence_only]
+quantization_resolvability:
+  predicted_alpha_minimum: 0.02
+  predicted_alpha_maximum: 0.95
+  minimum_distinct_nonzero_at_or_below_twice_alpha: 3
+  predicted_alpha_application_must_not_be_noop: true
+  finite_fields: [source_activation, desired_values, realized_alphas, margin, derivative]
+full_ablation_panel:
+  per_method_k: 4
+  methods: [S, margin_only, influence_only, random_positive]
+  directional_k: 2
+  random_hash_domain: stage1d-random-positive-v1
+  precision_denominator: 4
+  missing_slots_count_as_non_crossings: true
+  tie_break: [prompt_id, source, target, pair_id]
+detailed_panel:
+  bins:
+    B1: [0.02, 0.10]
+    B2: [0.10, 0.40]
+    B3: [0.40, 0.95]
+  interval_convention: B1=[low,high);B2=[low,high);B3=[low,high]
+  highest_s_per_bin: 1
+  near_boundary_alpha_range: [1.05, 2.00]
+  near_boundary_per_prompt: 1
+  near_boundary_order: [predicted_alpha_asc, susceptibility_desc, tie_break]
+schedules:
+  full_ablation: [1.0]
+  detailed_coarse: [0.0, 0.25, 0.5, 0.75, 1.0]
+  alpha_multipliers: [0.5, 1.0, 1.5]
+  maximum_bisection_steps: 6
+  deduplicate_applied_bf16: true
+metrics:
+  bootstrap_resamples: 10000
+  bootstrap_seed: stage1d-prompt-bootstrap-v1
+  bootstrap_unit: prompt
+  bootstrap_interval: percentile_nearest_rank
+  confidence_level: 0.95
+  exact_binomial_confidence_level: 0.95
+  panel_only_auprc_forbidden: true
+decision_rule:
+  precedence: [continue_all_criteria, redesign_if_neither_baseline_or_directional_failure, retain_otherwise]
+  s_minimum_absolute_advantage: 0.10
+  critical_spearman_minimum: 0.50
+  critical_pair_count_minimum: 20
+  directional_violation_fraction_maximum: 0.10
+  detailed_nonmonotonic_fraction_maximum: 0.20
+intervention:
+  mapping: desired=(1-alpha)*baseline
+  freeze_attention: true
+  constrained_layers: null
+  target_clamp_allowed: false
+  canonical_attempts: 1
+  scientific_retries: 0
+  attempt_boundary: first_instrumented_source_suppression_api_call_on_stage1d_evaluation_pair
+engineering_rehearsal:
+  prompt_id: development_norway_v4
+  prompt: The capital of Norway is
+  token_ids: [2, 818, 5279, 529, 32649, 563]
+  exact_evaluation_pair_overlap_allowed: false
+  requested_alphas: [0.0, 0.25]
+  scientific_attempt_lock_allowed: false
+safety_limits:
+  maximum_mps_driver_bytes: 25769803776
+  maximum_process_rss_bytes: 25769803776
+  maximum_swap_growth_bytes: 4294967296
+  minimum_available_memory_bytes: 4294967296
+  maximum_artifact_bundle_bytes: 5242880
+  maximum_artifact_file_bytes: 2097152
+  accepted_thermal_states: [nominal, fair]
+  sample_interval_seconds: 1.0
+  telemetry_failure_limit: 3
+  terminate_grace_seconds: 15.0
+  kill_grace_seconds: 5.0
+  prediction_timeout_seconds: 14400
+  canonical_timeout_seconds: 21600
+artifacts:
+  result_directory: results/stage1d_multiprompt_gate_benchmark
+  generated_directory: results/generated/stage1d_multiprompt_gate_benchmark
+  canonical_attempt_lock: results/generated/stage1d_multiprompt_gate_benchmark/canonical_attempt.lock
+  required_files:
+    - protocol_manifest.json
+    - prediction_manifest.json
+    - panel_membership.json
+    - quantization_audit.json
+    - full_ablation_points.json
+    - calibration_sweeps.json
+    - benchmark_summary.json
+    - run_manifest.json
+    - environment_manifest.json
+    - checksums.sha256
+claim_boundary:
+  behavioral_importance_result: none
+  mediation_result: none
+  official_bf16_reproduction: pending
+  reference_clt_reproduction: pending
+  paper_results_readiness: false

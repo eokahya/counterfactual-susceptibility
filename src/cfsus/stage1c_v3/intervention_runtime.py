@@ -64,6 +64,8 @@ class Stage1CVersion3InterventionBackend:
         torch: Any,
         token_count: int | None = None,
         attempt_recorder: AttemptRecorder | None = None,
+        prompt_id: str = "capital_norway_preregistered_v3",
+        call_index_offset: int = 0,
     ) -> None:
         self.model = model
         self.prompt = prompt
@@ -87,13 +89,21 @@ class Stage1CVersion3InterventionBackend:
             )
         self.token_count = token_count
         self.transcoders = getattr(model.transcoders, "_module", model.transcoders)
+        if not prompt_id.strip():
+            raise ScientificInputError("intervention prompt ID must be nonempty")
+        if (
+            isinstance(call_index_offset, bool)
+            or not isinstance(call_index_offset, int)
+            or call_index_offset < 0
+        ):
+            raise ScientificInputError("intervention call offset is invalid")
         self._measurement_backend = NNSightPLTMeasurementBackend(
             model,
             prompt=prompt,
-            prompt_id="capital_norway_preregistered_v3",
+            prompt_id=prompt_id,
             torch=torch,
         )
-        self.source_suppression_api_calls = 0
+        self.source_suppression_api_calls = call_index_offset
         self._attempt_recorder = attempt_recorder
 
     def measure_states(

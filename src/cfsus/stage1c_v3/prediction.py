@@ -221,15 +221,21 @@ def canonical_v3_pair_id(
     runtime_fingerprint: str,
     prompt_id: str = PROMPT_ID,
     seed: str = PAIR_SEED,
+    experiment_class: str = EXPERIMENT_CLASS,
 ) -> str:
     """Hash the explicit v3 class/prompt/runtime endpoint identity only."""
 
-    if not seed.strip() or not prompt_id.strip() or not runtime_fingerprint.strip():
+    if (
+        not seed.strip()
+        or not prompt_id.strip()
+        or not runtime_fingerprint.strip()
+        or not experiment_class.strip()
+    ):
         raise ScientificInputError("v3 pair identity strings must be non-empty")
     if not isinstance(source, FeatureRef) or not isinstance(target, FeatureRef):
         raise ScientificInputError("v3 pair endpoints must be FeatureRef values")
     payload = {
-        "experiment_class": EXPERIMENT_CLASS,
+        "experiment_class": experiment_class,
         "prompt_id": prompt_id,
         "runtime_fingerprint": runtime_fingerprint,
         "seed": seed,
@@ -250,6 +256,7 @@ def build_prospective_pair(
     runtime_fingerprint: str,
     epsilon: float,
     tolerance: float,
+    experiment_class: str = EXPERIMENT_CLASS,
 ) -> ProspectivePair:
     """Build one signed score from fresh baseline scalar measurements."""
 
@@ -275,6 +282,7 @@ def build_prospective_pair(
             source=source.feature,
             target=target.feature,
             runtime_fingerprint=runtime_fingerprint,
+            experiment_class=experiment_class,
         ),
         source=source.feature,
         target=target.feature,
