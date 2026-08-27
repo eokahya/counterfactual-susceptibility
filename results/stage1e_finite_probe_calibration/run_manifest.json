@@ -1,0 +1,34 @@
+{
+  "artifact_type": "stage1e_run_manifest",
+  "audited_stage1d_artifact_commit": "2a5c3e63a838e7547fe1b30fe888610ec21ee46e",
+  "base_commit": "b71df55fdeb2fb66601af56207b6fbe5238e57d8",
+  "branch": "stage-1e-finite-probe-calibration",
+  "claim_boundary": {
+    "counterfactual_behavioral_importance_result": "none",
+    "finite_probe_calibration_status": "not_supported",
+    "mediation_result": "none",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "q_ranker_status": "retained_for_candidate_discovery",
+    "reference_clt_reproduction": "pending",
+    "stage1f_behavioral_readiness": false
+  },
+  "experiment_class": "stage1e_finite_probe_calibration",
+  "offline_analysis_sha256": "696fcc97bf757b643f6bd428e85bfa6f5b210722a70920449567ed29801e8e26",
+  "phase_a": {
+    "intervention_api_calls": 0,
+    "model_calls": 0,
+    "status": "completed"
+  },
+  "phase_b": {
+    "canonical_attempt_count": 0,
+    "intervention_api_calls": 0,
+    "model_calls": 0,
+    "scientific_retry_count": 0,
+    "status": "not_run_offline_gate_failed"
+  },
+  "project_decision": "simple_finite_probe_calibration_not_supported",
+  "schema_version": 1,
+  "selected_estimator": null,
+  "status": "completed_stage1e_offline_negative"
+}
