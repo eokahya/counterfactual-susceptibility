@@ -1,16 +1,16 @@
 # Project status
 
-Status date: 2026-08-26
+Status date: 2026-08-27
 
-No valid Counterfactual Susceptibility intervention experiment has completed,
-and the paper Results section remains pending. Stage 1C froze a valid first
-prospective prediction, but its canonical intervention artifact failed closed.
-Stage 1C-v2 repaired that serialization path, then stopped before prediction
-freeze when the held-out baseline selection hit its frozen historical-endpoint
-guard. Stage 1C-v3 corrected that exclusion policy and froze an independently
-validated preregistered prediction, but its sole canonical process failed
-before the first intervention API call because the frozen adapter lacked the
-required baseline-remeasurement method.
+A valid Counterfactual Susceptibility intervention experiment and a subsequent
+eight-prompt gate benchmark have now completed, while the paper Results section
+remains pending. Stage 1C-v1/v2/v3 retain their historical failed or blocked
+outcomes. Stage 1C-v4 repaired only the production interface and executed the
+byte-identical frozen Norway manifest once, producing an accepted `mixed`
+development-pilot result. Stage 1D then measured susceptibility against
+margin-only, influence-only, and random-positive panels on eight fresh prompts.
+It completed cleanly but did not justify continuing directly to behavioral or
+mediation work.
 
 ## Current experiment classes
 
@@ -72,6 +72,25 @@ required baseline-remeasurement method.
   intervention adapter lacked `measure_states`. It made zero suppression API
   calls and serialized zero points. No retry or post-freeze protocol change
   occurred.
+- **Stage 1C-v4 — protocol-preserving execution:**
+  `completed_stage1c_v4_prospective_prediction` with scientific outcome
+  `mixed`. The minimal adapter repair preserved the Norway prediction manifest
+  byte-for-byte. One canonical attempt completed and independently validated
+  248 suppression calls/points over all 28 frozen pairs. Ten of 12 primary
+  pairs crossed under full ablation, 2/12 met the complete supporting-primary
+  definition, 6/8 near-boundary controls crossed, and 0/8 directional controls
+  violated direction. Critical-alpha Spearman was 0.385. This accepted result
+  is a development pilot, not held-out benchmark evidence.
+- **Stage 1D — multiprompt gate benchmark:**
+  `completed_stage1d_multiprompt_gate_benchmark` with project decision
+  `retain_crossing_ranker_but_redesign_calibration`. Across eight fresh
+  prompts, susceptibility precision@4 was 0.84375 versus 0.50 margin-only,
+  1.00 influence-only, and 0.3125 random-positive. Directional violations were
+  0/16. Critical-alpha Spearman was 0.694 on 12 qualifying pairs, below the
+  frozen minimum count of 20, while 10/32 detailed positive pairs were
+  nonmonotonic. One canonical attempt produced 438 API calls, 438 completed
+  journal points, and 438 serialized rows with zero scientific retries. The
+  validated negative/mixed decision is not a runtime failure.
 
 Stage 1A-S is development runtime validation, not a replacement for Stage 1A-R.
 PLT and CLT results are not interchangeable. The exact Stage 1A-S assets remain
@@ -90,9 +109,14 @@ stage1c_v2_prospective_prediction: blocked_engineering
 stage1c_v2_scientific_outcome: none
 stage1c_v3_prospective_prediction: failed_runtime
 stage1c_v3_scientific_outcome: inconclusive_runtime
+stage1c_v4_prospective_prediction: completed
+stage1c_v4_scientific_outcome: mixed
+stage1d_multiprompt_gate_benchmark: completed
+stage1d_project_decision: retain_crossing_ranker_but_redesign_calibration
+continue_first_order_to_behavioral_stage: false
 stage1b_empirical_claim_readiness: false
-counterfactual_susceptibility_result: none
-gate_crossing_result: none
+counterfactual_susceptibility_result: mixed
+gate_crossing_result: multiprompt_benchmark_completed
 behavioral_importance_result: none
 mediation_result: none
 official_bf16_reproduction: pending
@@ -107,5 +131,9 @@ prediction, invalidated canonical attempt, and exact claim boundary, and
 `docs/STAGE_1C_V2_HELDOUT_PROSPECTIVE_PREDICTION_REPORT.md` for the v2
 serialization recovery and held-out selection blocker, and
 `docs/STAGE_1C_V3_PREREGISTERED_PROSPECTIVE_PREDICTION_REPORT.md` for the v3
-exact-pair-masked prediction and canonical runtime blocker.
+exact-pair-masked prediction and canonical runtime blocker,
+`docs/STAGE_1C_V4_PROTOCOL_PRESERVING_EXECUTION_REPORT.md` for the accepted v4
+development pilot, and
+`docs/STAGE_1D_MULTIPROMPT_GATE_BENCHMARK_REPORT.md` for the independently
+validated eight-prompt benchmark and frozen project decision.
 Historical reports remain unchanged and retain their original scope.

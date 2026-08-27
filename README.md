@@ -1,14 +1,15 @@
 # Counterfactual Susceptibility
 
 **Status:** Stage 1B measurement primitives remain completed on the pinned
-local Gemma 3 270M + 18-PLT NNsight runtime on Apple MPS/BF16. Stage 1C froze
-its first baseline-only prospective prediction, but the only permitted
-canonical intervention process lost all point-level sweep evidence during
-worker cleanup. The final assembler and standalone validator rejected the
-incomplete bundle, so Stage 1C is `failed_runtime` with
-`inconclusive_runtime`; no susceptibility or gate-crossing result is accepted.
-The reference Stage 1A reproduction remains pending, and paper Results
-readiness remains false. See
+local Gemma 3 270M + 18-PLT NNsight runtime on Apple MPS/BF16. After the
+historical Stage 1C-v1/v2/v3 failures, Stage 1C-v4 completed the frozen Norway
+development pilot with a validated `mixed` result. Stage 1D then completed an
+eight-prompt held-out gate benchmark. Susceptibility beat margin-only and
+random-positive ranking, but trailed influence-only; critical-alpha evidence
+and monotonicity missed the frozen acceptance criteria. The project decision
+is `retain_crossing_ranker_but_redesign_calibration`, not a transition to
+behavioral or mediation experiments. The reference Stage 1A reproduction
+remains pending, and paper Results readiness remains false. See
 [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current experiment
 classes and readiness boundary.
 
@@ -80,6 +81,35 @@ zero rows. The frozen assembler and standalone validator failed closed, no
 canonical result bundle was committed, and the scientific outcome is
 `inconclusive_runtime`. See
 [`docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md`](docs/STAGE_1C_FIRST_PROSPECTIVE_PREDICTION_REPORT.md).
+
+Stage 1C-v2 repaired detached serialization but stopped before prediction
+freeze when its frozen endpoint-overlap guard fired. Stage 1C-v3 corrected the
+exclusion policy and froze a valid Norway prediction, then failed before its
+first suppression call because the adapter lacked baseline remeasurement.
+Those historical outcomes remain unchanged.
+
+Stage 1C-v4 made the minimal production-path repair and executed the same
+byte-identical Norway prediction once. Its complete 248-point bundle passed
+independent reconstruction and produced an accepted `mixed` development-pilot
+result. See
+[`docs/STAGE_1C_V4_PROTOCOL_PRESERVING_EXECUTION_REPORT.md`](docs/STAGE_1C_V4_PROTOCOL_PRESERVING_EXECUTION_REPORT.md).
+
+## Stage 1D status
+
+Stage 1D reused the validated v4 production path on eight fresh prompts. The
+single canonical attempt completed 438 evaluation calls and 438 durable,
+serialized points over 169 unique prompt/pair identities. Full-ablation
+precision@4 was 0.84375 for susceptibility, 0.50 for margin-only, 1.00 for
+influence-only, and 0.3125 for deterministic random-positive selection.
+Critical-alpha Spearman was 0.6941 on only 12 qualifying pairs, and 10/32
+detailed positive pairs were nonmonotonic. The standalone validator therefore
+accepted the experiment and its frozen decision
+`retain_crossing_ranker_but_redesign_calibration`. See
+[`docs/STAGE_1D_MULTIPROMPT_GATE_BENCHMARK_REPORT.md`](docs/STAGE_1D_MULTIPROMPT_GATE_BENCHMARK_REPORT.md).
+
+This is gate-prediction evidence on the local PLT/MPS/BF16 runtime. It is not
+behavioral importance, mediation, an official BF16/reference-CLT reproduction,
+or a paper-ready result.
 
 Stage 1A selected the immutable model snapshot
 `google/gemma-2-2b@c5ebcd40d208330abc697524c919956e692655cf` and the direct
