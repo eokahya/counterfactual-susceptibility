@@ -15,6 +15,8 @@ from cfsus.stage1c_v3.quantization_audit import bf16_round
 from cfsus.stage1g import (
     EXPERIMENT_CLASS,
     RUNTIME_FINGERPRINT,
+    behavior_resolution_audit,
+    bf16_logit_resolution,
     build_protocol_manifest,
     build_records,
     classify_terminal,
@@ -195,56 +197,125 @@ class FakeBackend:
 
 
 def _sensitivity() -> dict[str, Any]:
-    rows = [
+    derivative_rows = [
         {
             "feature": {"layer": index + 1, "position": 2, "feature_id": index},
             "baseline_activation": 1.0,
-            "autograd_g_i": float(index + 1),
-            "requested_low": 0.9375,
-            "requested_high": 1.0625,
-            "applied_bf16_low": 0.9375,
-            "applied_bf16_high": 1.0625,
-            "behavior_low": 1.0,
-            "behavior_high": 1.0 + 0.125 * float(index + 1),
-            "finite_secant": float(index + 1),
+            "batched_vjp_g_i": float(index + 1),
+            "raw_answer_logit_edge": float(index + 1),
+            "raw_contrast_logit_edge": 0.0,
+            "raw_edge_activation_denominator": 1.0,
+            "independent_reference_g_i": float(index + 1),
             "sign_agreement": True,
             "symmetric_normalized_error": 0.0,
         }
         for index in range(8)
     ]
+    amplitudes = [0.0625, 0.125, 0.25, 0.5, 1.0, 2.0]
+    resolution_rows = []
+    for derivative in derivative_rows:
+        ladder = []
+        for amplitude in amplitudes:
+            answer = bf16_round(3.0 + amplitude)
+            behavior = answer - 1.0
+            ladder.append(
+                {
+                    "relative_activation_change": amplitude,
+                    "requested_target_activation": 1.0 + amplitude,
+                    "actual_bf16_target_activation": bf16_round(1.0 + amplitude),
+                    "answer_logit": answer,
+                    "contrast_logit": 1.0,
+                    "behavior_T": behavior,
+                    "answer_logit_change": answer - 3.0,
+                    "contrast_logit_change": 0.0,
+                    "behavior_response": behavior - 2.0,
+                    "bf16_distinct_nonzero_behavior_response": behavior != 2.0,
+                }
+            )
+        resolution_rows.append(
+            {
+                "feature": derivative["feature"],
+                "baseline_activation": 1.0,
+                "first_resolvable_relative_activation_change": 0.0625,
+                "ladder": ladder,
+            }
+        )
+    baseline = {
+        "answer_logit": 3.0,
+        "contrast_logit": 1.0,
+        "behavior_T": 2.0,
+        "answer_in_top64": True,
+        "logits_finite": True,
+        "logits_shape": [1, 3, 128],
+    }
     return {
-        "schema_version": 1,
-        "artifact_type": "stage1g_output_sensitivity_validation",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_output_sensitivity_and_resolution_validation",
         "status": "passed",
         "prompt_id": "development_norway_stage1g_output_sensitivity",
         "prompt": "The capital of Norway is",
         "token_ids": [2, 3, 4],
         "answer_token_id": 10,
         "contrast_token_id": 11,
-        "baseline_behavior": {},
+        "baseline_behavior": baseline,
+        "baseline_repeat_behavior": baseline,
         "selected_feature_count": 8,
         "selection_rule": (
-            "descending_absolute_autograd_g_then_feature_coordinate_with_"
+            "descending_absolute_batched_vjp_then_feature_coordinate_with_"
             "unique_layer_preference"
         ),
-        "central_relative_half_width": 0.0625,
-        "rows": rows,
-        "metrics": {
+        "independent_reference": {
+            "method": (
+                "raw_unnormalized_feature_to_answer_and_contrast_logit_edges_"
+                "divided_by_positive_activation"
+            ),
+            "source_api_rationale": (
+                "pinned_circuit_tracer_0_5_2_exposes_signed_raw_unnormalized_"
+                "output_edge_rows_without_consuming_"
+                "OutputSensitivityVJPContext_compute"
+            ),
+            "selected_before_runtime_result": True,
+            "batched_vjp_result_consumed": False,
+            "raw_edges_are_signed_and_unnormalized": True,
+        },
+        "derivative_rows": derivative_rows,
+        "derivative_metrics": {
             "all_finite": True,
             "sign_agreement": 1.0,
             "spearman": 1.0,
             "median_symmetric_normalized_error": 0.0,
+            "p95_symmetric_normalized_error": 0.0,
         },
-        "frozen_tolerances": {
-            "sign_agreement_minimum": 0.9,
-            "spearman_minimum": 0.9,
-            "median_symmetric_normalized_error_maximum": 0.05,
+        "frozen_derivative_tolerances": {
+            "sign_agreement_minimum": 1.0,
+            "spearman_minimum": 0.99,
+            "median_symmetric_normalized_error_maximum": 0.01,
+            "p95_symmetric_normalized_error_maximum": 0.03,
         },
-        "instrumented_target_injection_calls": 16,
+        "bf16_resolution_audit": {
+            "status": "passed",
+            "derivative_truth_or_validation_used": False,
+            "scientific_selection_ranking_or_threshold_tuning_used": False,
+            "baseline_repeat_behavior_error": 0.0,
+            "max_abs_baseline_repeat_behavior_error": 0.0,
+            "answer_logit_bf16_resolution": bf16_logit_resolution(3.0),
+            "contrast_logit_bf16_resolution": bf16_logit_resolution(1.0),
+            "behavior_resolution_floor": 0.09375,
+            "floor_formula": (
+                "max(1e-4,5*prompt_max_abs_baseline_repeat_behavior_error,"
+                "4*(answer_logit_BF16_ULP+contrast_logit_BF16_ULP))"
+            ),
+            "relative_activation_changes": amplitudes,
+            "features_with_resolvable_response": 8,
+            "any_finite_nonzero_bf16_behavior_response_by_maximum_ladder": True,
+            "rows": resolution_rows,
+        },
+        "instrumented_target_injection_calls": 48,
         "scientific_attempt_consumed": False,
         "scientific_pair_overlap": False,
         "gradient_tensor_persisted": False,
         "full_logits_persisted": False,
+        "finite_response_presented_as_derivative_validation": False,
     }
 
 
@@ -282,6 +353,7 @@ def _prediction(
             "logits_finite": True,
             "logits_shape": [1, 3, 128],
         }
+        resolution = behavior_resolution_audit(baseline, baseline, config)
         eligibility.append(
             common
             | {
@@ -292,7 +364,9 @@ def _prediction(
                 "answer_token_id": 10,
                 "contrast_token_id": 11,
                 "baseline_behavior": baseline,
-                "model_calls": 1,
+                "baseline_repeat_behavior": baseline,
+                "behavior_resolution_audit": resolution,
+                "model_calls": 2,
             }
         )
         candidates: list[dict[str, Any]] = []
@@ -302,6 +376,8 @@ def _prediction(
             target = FeatureRef(index + 10, 2, prompt_index * 100 + 50 + index)
             q_value = 0.2 + index * 0.05
             g_value = 1.0 + index
+            predicted = g_value * (0.9 + q_value)
+            floor = float(resolution["behavior_resolution_floor"])
             candidates.append(
                 {
                     "pair_id": canonical_v3_pair_id(
@@ -331,7 +407,19 @@ def _prediction(
                     "g_i": g_value,
                     "predicted_full_ablation_crossing": True,
                     "predicted_target_activation": 0.9 + q_value,
-                    "predicted_signed_mediation": g_value * (0.9 + q_value),
+                    "predicted_signed_mediation": predicted,
+                    "predicted_abs_mediation_to_bf16_resolution_floor_ratio": (
+                        abs(predicted) / floor
+                    ),
+                    "predicted_abs_mediation_exceeds_resolution_floor": {
+                        "1x": abs(predicted) > floor,
+                        "2x": abs(predicted) > 2.0 * floor,
+                        "4x": abs(predicted) > 4.0 * floor,
+                        "8x": abs(predicted) > 8.0 * floor,
+                    },
+                    (
+                        "bf16_resolution_metadata_used_for_panel_ranking_or_exclusion"
+                    ): False,
                     "q_over_margin_computed_or_used": False,
                     "intervention_outcome_used": False,
                 }
@@ -369,6 +457,16 @@ def _prediction(
                     "predicted_full_ablation_crossing": False,
                     "predicted_target_activation": 0.0,
                     "predicted_signed_mediation": 0.0,
+                    "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+                    "predicted_abs_mediation_exceeds_resolution_floor": {
+                        "1x": False,
+                        "2x": False,
+                        "4x": False,
+                        "8x": False,
+                    },
+                    (
+                        "bf16_resolution_metadata_used_for_panel_ranking_or_exclusion"
+                    ): False,
                     "q_over_margin_computed_or_used": False,
                     "intervention_outcome_used": False,
                 }
@@ -390,6 +488,8 @@ def _prediction(
                 "answer_token_id": 10,
                 "contrast_token_id": 11,
                 "baseline_behavior": baseline,
+                "baseline_repeat_behavior": baseline,
+                "behavior_resolution_audit": resolution,
                 "baseline_pools": {},
                 "panel_audit": audit,
                 "execution_pairs": selected,
@@ -397,6 +497,7 @@ def _prediction(
         )
     totals = {
         "eligible_prompt_count": 8,
+        "scientific_baseline_model_calls": 16,
         "execution_pair_count": sum(
             len(prompt["execution_pairs"]) for prompt in prompts
         ),
@@ -415,8 +516,8 @@ def _prediction(
         },
     }
     prediction = {
-        "schema_version": 1,
-        "artifact_type": "stage1g_prediction_manifest",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_prediction_manifest",
         "status": "prediction_frozen_ready_for_commit",
         "experiment_class": EXPERIMENT_CLASS,
         "branch": config["branch"],
@@ -433,9 +534,12 @@ def _prediction(
         "prediction_only_guards": {
             "fresh_scientific_intervention_api_calls": 0,
             "historical_intervention_outcomes_used": False,
-            "graph_edge_input_used": False,
+            "independent_reference_raw_edges_used": True,
+            "graph_edge_input_used_for_candidate_discovery_or_batched_vjp": False,
+            "finite_ladder_used_for_derivative_validation_selection_or_tuning": False,
             "q_over_margin_discovery_used": False,
             "E1_or_E2_computed": False,
+            "diagnostic_fp32_shadow_T_used": False,
             "network_accessed": False,
         },
         "claim_boundary": config["claim_boundary"],
@@ -458,10 +562,10 @@ def test_frozen_classifier_classes() -> None:
         "directional_violation_fraction": 0.0,
         "rules": rules,
     }
-    assert classify_terminal(**common)[0] == "supported_behavioral_mediation_pilot"
+    assert classify_terminal(**common)[0] == "completed_stage1g_v2_supported"
     assert (
         classify_terminal(**(common | {"B_crossing_count": 20}))[0]
-        == "underpowered_behavioral_mediation_pilot"
+        == "completed_stage1g_v2_underpowered"
     )
     negative = common | {
         "B_sign_accuracy": 0.0,
@@ -472,9 +576,7 @@ def test_frozen_classifier_classes() -> None:
         "B_injection_sign_agreement": 0.0,
         "directional_violation_fraction": 1.0,
     }
-    assert (
-        classify_terminal(**negative)[0] == "not_supported_behavioral_mediation_pilot"
-    )
+    assert classify_terminal(**negative)[0] == "completed_stage1g_v2_not_supported"
 
 
 def test_synthetic_worker_journal_assembler_validator(tmp_path: Path) -> None:

@@ -37,7 +37,6 @@ from cfsus.stage1g import (  # noqa: E402
     CONFIG_PATH,
     EXPERIMENT_CLASS,
     RUNTIME_FINGERPRINT,
-    Stage1GPredictionBackend,
     build_prediction_manifest,
     build_protocol_manifest,
     build_records,
@@ -52,6 +51,7 @@ from cfsus.stage1g import (  # noqa: E402
     validate_protocol,
     verify_git,
 )
+from cfsus.stage1g_runtime import Stage1GPredictionBackend  # noqa: E402
 
 CREDENTIAL_VARIABLES = {
     "HF_TOKEN",
@@ -239,8 +239,8 @@ def _prediction_worker(args: argparse.Namespace) -> None:
         write_json_new(
             output,
             {
-                "schema_version": 1,
-                "artifact_type": "stage1g_prediction_worker",
+                "schema_version": 2,
+                "artifact_type": "stage1g_v2_prediction_worker",
                 "status": "passed",
                 "output_sensitivity_validation": sensitivity,
                 "prediction_manifest": prediction,
@@ -273,7 +273,7 @@ def _assemble_prediction(args: argparse.Namespace) -> None:
     git = verify_git(ROOT)
     validate_protocol(ROOT, protocol, config)
     if (
-        worker.get("artifact_type") != "stage1g_prediction_worker"
+        worker.get("artifact_type") != "stage1g_v2_prediction_worker"
         or worker.get("status") != "passed"
     ):
         raise RuntimeError("Stage 1G prediction worker did not pass")
@@ -385,8 +385,8 @@ def _real_rehearsal(args: argparse.Namespace) -> None:
             target=target.feature,
             runtime_fingerprint=RUNTIME_FINGERPRINT,
             prompt_id=settings["real_prompt_id"],
-            seed="stage1g-real-multiedit-rehearsal-v1",
-            experiment_class="stage1g_real_multiedit_rehearsal",
+            seed="stage1g-v2-real-multiedit-rehearsal",
+            experiment_class="stage1g_v2_real_multiedit_rehearsal",
         )
         if pair_id in scientific_ids:
             raise RuntimeError("Stage 1G rehearsal overlaps a scientific pair")
@@ -422,9 +422,9 @@ def _real_rehearsal(args: argparse.Namespace) -> None:
             frozen_pair_ids=(pair_id,),
             pre_intervention_commit=commit,
             prediction_manifest_sha256=sha256_file(prediction_path),
-            experiment_class="stage1g_real_multiedit_rehearsal",
+            experiment_class="stage1g_v2_real_multiedit_rehearsal",
             attempt_boundary="engineering_rehearsal_not_scientific_attempt",
-            attempt_lock_artifact_type="stage1g_rehearsal_no_lock",
+            attempt_lock_artifact_type="stage1g_v2_rehearsal_no_lock",
         ) as journal:
             sweeps, calls = execute_frozen_pairs(
                 model=model,
@@ -442,8 +442,8 @@ def _real_rehearsal(args: argparse.Namespace) -> None:
         write_json_new(
             output,
             {
-                "schema_version": 1,
-                "artifact_type": "stage1g_real_multiedit_rehearsal",
+                "schema_version": 2,
+                "artifact_type": "stage1g_v2_real_multiedit_rehearsal",
                 "status": "passed",
                 "scientific_attempt_consumed": False,
                 "scientific_pair_overlap": False,
@@ -471,7 +471,7 @@ def _validate_real_rehearsal(args: argparse.Namespace) -> None:
     points = read_completed_journal(journal_path)
     conditions = {point["condition"] for point in points}
     if (
-        output.get("artifact_type") != "stage1g_real_multiedit_rehearsal"
+        output.get("artifact_type") != "stage1g_v2_real_multiedit_rehearsal"
         or output.get("status") != "passed"
         or output.get("scientific_attempt_consumed") is not False
         or output.get("scientific_pair_overlap") is not False
@@ -488,6 +488,25 @@ def _validate_real_rehearsal(args: argparse.Namespace) -> None:
         }
     ):
         raise RuntimeError("Stage 1G real rehearsal evidence differs")
+    condition_map = {point["condition"]: point for point in points}
+    baseline_behavior = float(condition_map["baseline_noop"]["behavior_T"])
+    if not any(
+        float(point["behavior_T"]) != baseline_behavior
+        for point in points
+        if point["condition"] != "baseline_repeat"
+    ):
+        raise RuntimeError("Stage 1G-v2 rehearsal has no BF16 behavior change")
+    clamp = condition_map["source_ablation_target_clamp"]
+    full = condition_map["source_full_ablation"]
+    injection = condition_map["target_only_injection"]
+    if (
+        clamp["actual_bf16_source_activation"] != 0.0
+        or clamp["actual_bf16_target_activation"] != 0.0
+        or injection["actual_bf16_source_activation"] is not None
+        or injection["actual_bf16_target_activation"]
+        != full["target_natural_activation"]
+    ):
+        raise RuntimeError("Stage 1G-v2 rehearsal multi-edit mapping differs")
     print(json.dumps({"status": "passed", "call_count": len(points)}, sort_keys=True))
 
 
@@ -525,7 +544,7 @@ def _intervention_worker(args: argparse.Namespace) -> None:
         prediction_manifest_sha256=prediction_sha,
         experiment_class=EXPERIMENT_CLASS,
         attempt_boundary=config["intervention"]["attempt_boundary"],
-        attempt_lock_artifact_type="stage1g_local_scientific_attempt_lock",
+        attempt_lock_artifact_type="stage1g_v2_local_scientific_attempt_lock",
     ) as journal:
         try:
             model, torch, sampler, environment, runtime_evidence = _load_runtime(
@@ -547,8 +566,8 @@ def _intervention_worker(args: argparse.Namespace) -> None:
             write_json_new(
                 output,
                 {
-                    "schema_version": 1,
-                    "artifact_type": "stage1g_intervention_worker",
+                    "schema_version": 2,
+                    "artifact_type": "stage1g_v2_intervention_worker",
                     "status": "passed",
                     "prediction_manifest_sha256": prediction_sha,
                     "prediction_freeze_commit": prediction_commit,
@@ -593,7 +612,7 @@ def _assemble(args: argparse.Namespace) -> None:
     validate_output_sensitivity(sensitivity, config)
     validate_prediction(prediction, config, protocol)
     if (
-        worker.get("artifact_type") != "stage1g_intervention_worker"
+        worker.get("artifact_type") != "stage1g_v2_intervention_worker"
         or worker.get("status") != "passed"
     ):
         raise RuntimeError("Stage 1G intervention worker did not pass")

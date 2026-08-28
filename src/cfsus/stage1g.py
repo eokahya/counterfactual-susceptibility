@@ -1,4 +1,4 @@
-"""Prospective Stage 1G behavioral-importance and mediation pilot.
+"""Stage 1G-v2 quantization-aware behavioral mediation.
 
 This module is intentionally a thin scientific layer over the accepted
 Stage 1C-v4/Stage 1D/Stage 1F runtime, journal, scanner, and targeted-VJP
@@ -15,6 +15,7 @@ import math
 import os
 import random
 import re
+import struct
 import subprocess
 from collections import Counter, defaultdict
 from collections.abc import Callable, Mapping, Sequence
@@ -42,13 +43,13 @@ from cfsus.types import FeatureActivity, FeatureRef
 
 CONFIG_PATH = Path("configs/stage1g_behavioral_mediation_pilot.json")
 SCHEMA_PATH = Path("configs/stage1g_behavioral_mediation_artifact_schema.json")
-EXPERIMENT_CLASS = "stage1g_behavioral_mediation_pilot"
-BRANCH = "stage-1g-behavioral-mediation-pilot"
-BASE_COMMIT = "c1bb6a3bbab3de945767eded4503b17343ba88e6"
-SOURCE_BRANCH = "stage-1f-prospective-one-probe-confirmation"
+EXPERIMENT_CLASS = "stage1g_v2_quantization_aware_behavioral_mediation"
+BRANCH = "stage-1g-v2-quantization-aware-behavioral-mediation"
+BASE_COMMIT = "6a5bc86c24c35b6920c9682f82ee7874c80bdf58"
+SOURCE_BRANCH = "stage-1g-behavioral-mediation-pilot"
 RUNTIME_FINGERPRINT = (
     "gemma3-270m@9b0cfec892e2/plt@fada11860ac1/"
-    "circuit-tracer@8f1e2438df61/nnsight/mps/bf16/stage1g"
+    "circuit-tracer@8f1e2438df61/nnsight/mps/bf16/stage1g-v2"
 )
 JSON_ARTIFACTS = (
     "protocol_manifest.json",
@@ -81,8 +82,13 @@ PROTECTED_ORIGIN_REFS = {
     ),
     "stage-1d-multiprompt-gate-benchmark": ("b71df55fdeb2fb66601af56207b6fbe5238e57d8"),
     "stage-1e-finite-probe-calibration": ("f7aae1f3ce3b1b8d98e850093a3cb5ca480277ea"),
-    SOURCE_BRANCH: "6434e72964d8fc9d14e2a6b4cdd9109d7c29e273",
+    "stage-1f-prospective-one-probe-confirmation": (
+        "6434e72964d8fc9d14e2a6b4cdd9109d7c29e273"
+    ),
+    SOURCE_BRANCH: BASE_COMMIT,
 }
+V1_REPORT_SHA256 = "ebd3f45cc6b7c6bbf5b4783ed286617bcb4d1646fb116024d349476a04cbf27d"
+V1_PREFLIGHT_SHA256 = "0e15393e060ceb0f2ec448c19b8281a216ca0adb02304e7b5603246f766fd16f"
 SHA40 = re.compile(r"\A[0-9a-f]{40}\Z")
 SHA64 = re.compile(r"\A[0-9a-f]{64}\Z")
 PANEL_ORDER = ("B", "Q", "G", "D")
@@ -146,7 +152,7 @@ def load_config(path: str | Path = CONFIG_PATH) -> dict[str, Any]:
         ):
             raise ScientificInputError("Stage 1G prompt triple differs")
     if config["prompt_ordering"] != {
-        "domain": "stage1g-behavior-v1",
+        "domain": "stage1g-behavior-v2",
         "formula": "SHA256(base_commit|domain|prompt_id)",
         "ascending_hex": True,
         "take_first_eligible": 8,
@@ -199,9 +205,29 @@ def load_config(path: str | Path = CONFIG_PATH) -> dict[str, Any]:
     validation = config["output_sensitivity_validation"]
     if (
         validation["minimum_active_features"] < 8
-        or validation["sign_agreement_minimum"] != 0.9
-        or validation["spearman_minimum"] != 0.9
-        or validation["median_symmetric_normalized_error_maximum"] != 0.05
+        or validation["independent_reference"]
+        != (
+            "raw_unnormalized_feature_to_answer_and_contrast_logit_edges_"
+            "divided_by_positive_activation"
+        )
+        or validation["reference_selected_before_runtime_result"] is not True
+        or validation["sign_agreement_minimum"] != 1.0
+        or validation["spearman_minimum"] != 0.99
+        or validation["median_symmetric_normalized_error_maximum"] != 0.01
+        or validation["p95_symmetric_normalized_error_maximum"] != 0.03
+        or validation["bf16_resolution_audit"]
+        != {
+            "minimum_floor": 0.0001,
+            "baseline_repeat_multiplier": 5.0,
+            "logit_ulp_sum_multiplier": 4.0,
+            "relative_activation_changes": [0.0625, 0.125, 0.25, 0.5, 1.0, 2.0],
+            "response_definition": (
+                "target_only_injection_behavior_T_minus_engineering_baseline_behavior_T"
+            ),
+            "derivative_validation_use": "forbidden",
+            "scientific_selection_or_threshold_tuning_use": "forbidden",
+            "require_any_finite_nonzero_bf16_behavior_response_by_maximum_ladder": True,
+        }
     ):
         raise ScientificInputError("Stage 1G output-sensitivity tolerances differ")
     expected_files = [*JSON_ARTIFACTS, "checksums.sha256"]
@@ -320,6 +346,40 @@ def _historical_prompt_evidence(
     }
 
 
+def _historical_stage1g_v1_evidence(repository: Path) -> dict[str, Any]:
+    report = repository / "reports/stage1g_behavioral_mediation_pilot.md"
+    preflight_path = (
+        repository / "results/stage1g_behavioral_mediation_pilot/preflight_failure.json"
+    )
+    if sha256_file(report) != V1_REPORT_SHA256:
+        raise RuntimeError("historical Stage 1G-v1 report digest differs")
+    if sha256_file(preflight_path) != V1_PREFLIGHT_SHA256:
+        raise RuntimeError("historical Stage 1G-v1 preflight digest differs")
+    preflight = read_json_strict(preflight_path)
+    if (
+        not isinstance(preflight, dict)
+        or preflight.get("status") != "inconclusive_runtime"
+        or preflight.get("stage1g_scientific_prompt_baseline_calls") != 0
+        or preflight.get("stage1g_scientific_source_suppression_calls") != 0
+        or preflight.get("scientific_attempt_started") is not False
+        or preflight.get("prediction_manifest_created") is not False
+    ):
+        raise RuntimeError("historical Stage 1G-v1 freshness evidence differs")
+    return {
+        "branch": SOURCE_BRANCH,
+        "commit": BASE_COMMIT,
+        "terminal_class": "inconclusive_runtime",
+        "report_sha256": V1_REPORT_SHA256,
+        "preflight_sha256": V1_PREFLIGHT_SHA256,
+        "G01_G20_scientific_baseline_calls": 0,
+        "scientific_source_suppression_calls": 0,
+        "scientific_attempt_started": False,
+        "prediction_manifest_created": False,
+        "prompt_pool_reuse_is_historically_fresh": True,
+        "hypothetical_or_untracked_scientific_outputs_read": False,
+    }
+
+
 def protocol_hashes(repository: Path) -> dict[str, str]:
     return {relative: sha256_file(repository / relative) for relative in PROTOCOL_FILES}
 
@@ -335,11 +395,12 @@ def build_protocol_manifest(
     if SHA40.fullmatch(protocol_commit) is None:
         raise ValueError("Stage 1G protocol commit is malformed")
     config = load_config(repository / CONFIG_PATH)
+    validation = config["output_sensitivity_validation"]
     hashes = protocol_hashes(repository)
     order = ordered_prompts(config)
     return {
-        "schema_version": 1,
-        "artifact_type": "stage1g_protocol_manifest",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_protocol_manifest",
         "status": "protocol_frozen_before_any_stage1g_baseline_model_call",
         "experiment_class": EXPERIMENT_CLASS,
         "branch": BRANCH,
@@ -353,12 +414,46 @@ def build_protocol_manifest(
             str(row["id"]): prompt_digest(str(row["id"]), config) for row in order
         },
         "historical_prompt_evidence": _historical_prompt_evidence(repository, config),
+        "historical_stage1g_v1_evidence": _historical_stage1g_v1_evidence(repository),
+        "independent_derivative_reference": {
+            "method": validation["independent_reference"],
+            "source_api_rationale": validation["independent_reference_rationale"],
+            "selected_before_runtime_result": True,
+            "batched_vjp_result_consumed_by_reference": False,
+            "ui_normalized_absolute_pruned_or_influence_normalized_edges": False,
+        },
+        "derivative_validation_thresholds": {
+            "minimum_active_features": validation["minimum_active_features"],
+            "all_values_finite": True,
+            "sign_agreement_minimum": validation["sign_agreement_minimum"],
+            "spearman_minimum": validation["spearman_minimum"],
+            "median_symmetric_normalized_error_maximum": validation[
+                "median_symmetric_normalized_error_maximum"
+            ],
+            "p95_symmetric_normalized_error_maximum": validation[
+                "p95_symmetric_normalized_error_maximum"
+            ],
+        },
+        "bf16_resolution_audit": validation["bf16_resolution_audit"],
+        "scientific_protocol": {
+            "scanner": config["scanner"],
+            "source_pool": config["source_pool"],
+            "responses": config["responses"],
+            "scoring": config["scoring"],
+            "panels": config["panels"],
+            "intervention": config["intervention"],
+            "metrics": config["metrics"],
+            "decision_rule": config["decision_rule"],
+            "artifacts": config["artifacts"],
+            "claim_boundary": config["claim_boundary"],
+        },
         "stage1g_baseline_model_calls_before_freeze": 0,
         "stage1g_scientific_intervention_calls_before_freeze": 0,
         "scientific_attempt_started": False,
         "historical_stage1f_terminal_class_preserved": (
             "completed_stage1f_e1_not_supported"
         ),
+        "historical_stage1g_v1_terminal_class_preserved": "inconclusive_runtime",
         "simple_critical_alpha_calibration": "retired",
     }
 
@@ -367,8 +462,8 @@ def validate_protocol(
     repository: Path, protocol: dict[str, Any], config: dict[str, Any]
 ) -> None:
     if (
-        protocol.get("schema_version") != 1
-        or protocol.get("artifact_type") != "stage1g_protocol_manifest"
+        protocol.get("schema_version") != 2
+        or protocol.get("artifact_type") != "stage1g_v2_protocol_manifest"
         or protocol.get("status")
         != "protocol_frozen_before_any_stage1g_baseline_model_call"
         or protocol.get("experiment_class") != EXPERIMENT_CLASS
@@ -380,6 +475,8 @@ def validate_protocol(
         or protocol.get("scientific_attempt_started") is not False
         or protocol.get("historical_stage1f_terminal_class_preserved")
         != "completed_stage1f_e1_not_supported"
+        or protocol.get("historical_stage1g_v1_terminal_class_preserved")
+        != "inconclusive_runtime"
         or protocol.get("simple_critical_alpha_calibration") != "retired"
     ):
         raise ValueError("Stage 1G protocol identity or freeze boundary differs")
@@ -407,6 +504,47 @@ def validate_protocol(
         repository, config
     ):
         raise ValueError("Stage 1G historical prompt evidence differs")
+    if protocol.get(
+        "historical_stage1g_v1_evidence"
+    ) != _historical_stage1g_v1_evidence(repository):
+        raise ValueError("Stage 1G-v1 historical evidence differs")
+    validation = config["output_sensitivity_validation"]
+    if protocol.get("independent_derivative_reference") != {
+        "method": validation["independent_reference"],
+        "source_api_rationale": validation["independent_reference_rationale"],
+        "selected_before_runtime_result": True,
+        "batched_vjp_result_consumed_by_reference": False,
+        "ui_normalized_absolute_pruned_or_influence_normalized_edges": False,
+    }:
+        raise ValueError("Stage 1G-v2 independent reference freeze differs")
+    if protocol.get("bf16_resolution_audit") != validation["bf16_resolution_audit"]:
+        raise ValueError("Stage 1G-v2 BF16 resolution protocol differs")
+    if protocol.get("derivative_validation_thresholds") != {
+        "minimum_active_features": validation["minimum_active_features"],
+        "all_values_finite": True,
+        "sign_agreement_minimum": validation["sign_agreement_minimum"],
+        "spearman_minimum": validation["spearman_minimum"],
+        "median_symmetric_normalized_error_maximum": validation[
+            "median_symmetric_normalized_error_maximum"
+        ],
+        "p95_symmetric_normalized_error_maximum": validation[
+            "p95_symmetric_normalized_error_maximum"
+        ],
+    }:
+        raise ValueError("Stage 1G-v2 derivative thresholds differ")
+    if protocol.get("scientific_protocol") != {
+        "scanner": config["scanner"],
+        "source_pool": config["source_pool"],
+        "responses": config["responses"],
+        "scoring": config["scoring"],
+        "panels": config["panels"],
+        "intervention": config["intervention"],
+        "metrics": config["metrics"],
+        "decision_rule": config["decision_rule"],
+        "artifacts": config["artifacts"],
+        "claim_boundary": config["claim_boundary"],
+    }:
+        raise ValueError("Stage 1G-v2 scientific protocol freeze differs")
 
 
 def _coordinate_key(row: Mapping[str, Any]) -> tuple[Any, ...]:
@@ -660,13 +798,13 @@ def _pair_pool_digest(rows: Sequence[dict[str, Any]]) -> str:
 
 
 def _validation_feature_order(
-    candidates: Sequence[tuple[Any, float, float, float]], *, count: int
-) -> list[tuple[Any, float, float, float]]:
+    candidates: Sequence[tuple[Any, float]], *, count: int
+) -> list[tuple[Any, float]]:
     ordered = sorted(
         candidates,
         key=lambda item: (-abs(item[1]), item[0].feature),
     )
-    selected: list[tuple[Any, float, float, float]] = []
+    selected: list[tuple[Any, float]] = []
     layers: set[int] = set()
     for item in ordered:
         if item[0].feature.layer in layers:
@@ -684,13 +822,94 @@ def _validation_feature_order(
     return selected
 
 
+def bf16_logit_resolution(value: float) -> dict[str, float]:
+    """Return exact adjacent BF16 values and a conservative one-step ULP."""
+
+    rounded = bf16_round(value)
+    if rounded != value:
+        raise ValueError("behavior logit is not exactly BF16-representable")
+    bits32 = struct.unpack(">I", struct.pack(">f", rounded))[0]
+    bits16 = bits32 >> 16
+    if bits16 in {0x7F80, 0xFF80}:
+        raise ValueError("behavior logit must be finite")
+
+    def decode(raw: int) -> float:
+        return float(struct.unpack(">f", struct.pack(">I", raw << 16))[0])
+
+    if bits16 in {0x0000, 0x8000}:
+        below = decode(0x8001)
+        above = decode(0x0001)
+    elif bits16 & 0x8000:
+        below = decode(bits16 + 1)
+        above = decode(bits16 - 1)
+    else:
+        below = decode(bits16 - 1)
+        above = decode(bits16 + 1)
+    if not below < rounded < above:
+        raise ValueError("adjacent BF16 logit ordering differs")
+    return {
+        "value": rounded,
+        "adjacent_below": below,
+        "adjacent_above": above,
+        "ulp": max(rounded - below, above - rounded),
+    }
+
+
+def behavior_resolution_audit(
+    baseline: Mapping[str, Any],
+    baseline_repeat: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Compute the frozen prompt-level BF16 behavior-resolution floor."""
+
+    answer = _finite(baseline.get("answer_logit"), "baseline answer logit")
+    contrast = _finite(baseline.get("contrast_logit"), "baseline contrast logit")
+    behavior = _finite(baseline.get("behavior_T"), "baseline behavior")
+    repeat_answer = _finite(
+        baseline_repeat.get("answer_logit"), "baseline repeat answer logit"
+    )
+    repeat_contrast = _finite(
+        baseline_repeat.get("contrast_logit"), "baseline repeat contrast logit"
+    )
+    repeat_behavior = _finite(
+        baseline_repeat.get("behavior_T"), "baseline repeat behavior"
+    )
+    if (
+        behavior != answer - contrast
+        or repeat_behavior != repeat_answer - repeat_contrast
+        or bf16_round(repeat_answer) != repeat_answer
+        or bf16_round(repeat_contrast) != repeat_contrast
+    ):
+        raise ValueError("baseline behavior subtraction differs")
+    answer_resolution = bf16_logit_resolution(answer)
+    contrast_resolution = bf16_logit_resolution(contrast)
+    repeat_error = abs(repeat_behavior - behavior)
+    audit = config["output_sensitivity_validation"]["bf16_resolution_audit"]
+    floor = max(
+        float(audit["minimum_floor"]),
+        float(audit["baseline_repeat_multiplier"]) * repeat_error,
+        float(audit["logit_ulp_sum_multiplier"])
+        * (answer_resolution["ulp"] + contrast_resolution["ulp"]),
+    )
+    return {
+        "answer_logit_bf16_resolution": answer_resolution,
+        "contrast_logit_bf16_resolution": contrast_resolution,
+        "baseline_repeat_behavior_error": repeat_error,
+        "max_abs_baseline_repeat_behavior_error": repeat_error,
+        "behavior_resolution_floor": floor,
+        "floor_formula": config["metrics"]["no_effect_floor"],
+        "primary_behavior_metric": "bf16_answer_minus_contrast_logit",
+        "diagnostic_fp32_shadow_T_used": False,
+    }
+
+
 def run_output_sensitivity_validation(
     model: Any,
     torch: Any,
     sampler: Any,
     config: dict[str, Any],
 ) -> dict[str, Any]:
-    """Validate independent output VJPs against disjoint BF16 finite edits."""
+    """Validate the batched VJP independently, then audit BF16 resolution."""
 
     settings = config["output_sensitivity_validation"]
     prompt = str(settings["prompt"])
@@ -719,6 +938,10 @@ def run_output_sensitivity_validation(
         baseline = backend.baseline_behavior(
             answer_token_id=answer_id, contrast_token_id=contrast_id
         )
+    with sampler.stage("stage1g_output_sensitivity_baseline_repeat"):
+        baseline_repeat = backend.baseline_behavior(
+            answer_token_id=answer_id, contrast_token_id=contrast_id
+        )
     groups = tuple((layer, position) for layer in range(18))
     with sampler.stage("stage1g_output_sensitivity_active_pool"):
         active = backend.collect_active_sources(
@@ -737,34 +960,60 @@ def run_output_sensitivity_validation(
                 maximum_targets=target_batch,
             )
         g_rows.extend(zip(active[start : start + target_batch], values, strict=True))
-    half_width = float(settings["central_relative_half_width"])
-    candidates: list[tuple[Any, float, float, float]] = []
+    candidates: list[tuple[Any, float]] = []
     for state, g_value in sorted(
         g_rows, key=lambda item: (-abs(item[1]), item[0].feature)
     )[: int(settings["candidate_limit"])]:
-        low = float(
-            torch.tensor(
-                state.activation * (1.0 - half_width),
-                device="mps",
-                dtype=torch.bfloat16,
-            ).item()
-        )
-        high = float(
-            torch.tensor(
-                state.activation * (1.0 + half_width),
-                device="mps",
-                dtype=torch.bfloat16,
-            ).item()
-        )
-        if low < high and all(math.isfinite(item) for item in (g_value, low, high)):
-            candidates.append((state, float(g_value), low, high))
+        if (
+            state.activation > 0.0
+            and bf16_round(float(state.activation)) == float(state.activation)
+            and math.isfinite(float(g_value))
+        ):
+            candidates.append((state, float(g_value)))
     count = int(settings["minimum_active_features"])
     selected = _validation_feature_order(candidates, count=count)
     if len(selected) < count:
-        raise RuntimeError("insufficient BF16-resolvable output-sensitivity features")
+        raise RuntimeError("insufficient active output-sensitivity reference features")
+    canonical_targets = tuple(sorted(item[0].feature for item in selected))
+    with sampler.stage("stage1g_output_sensitivity_raw_edge_reference"):
+        raw_reference = backend.raw_output_edge_sensitivity_reference(
+            canonical_targets,
+            answer_token_id=answer_id,
+            contrast_token_id=contrast_id,
+        )
+    reference_by_feature = dict(zip(canonical_targets, raw_reference, strict=True))
+    answer_resolution = bf16_logit_resolution(float(baseline["answer_logit"]))
+    contrast_resolution = bf16_logit_resolution(float(baseline["contrast_logit"]))
+    repeat_error = abs(
+        float(baseline_repeat["behavior_T"]) - float(baseline["behavior_T"])
+    )
+    audit_settings = settings["bf16_resolution_audit"]
+    resolution_floor = max(
+        float(audit_settings["minimum_floor"]),
+        float(audit_settings["baseline_repeat_multiplier"]) * repeat_error,
+        float(audit_settings["logit_ulp_sum_multiplier"])
+        * (answer_resolution["ulp"] + contrast_resolution["ulp"]),
+    )
     validation_rows: list[dict[str, Any]] = []
+    resolution_rows: list[dict[str, Any]] = []
     call_count = 0
-    for index, (state, g_value, low, high) in enumerate(selected):
+    for index, (state, g_value) in enumerate(selected):
+        reference = reference_by_feature[state.feature]
+        reference_g = float(reference["reference_g_i"])
+        error = symmetric_normalized_error(g_value, reference_g)
+        validation_rows.append(
+            {
+                "feature": _feature_record(state.feature),
+                "baseline_activation": float(state.activation),
+                "batched_vjp_g_i": g_value,
+                "raw_answer_logit_edge": float(reference["raw_answer_logit_edge"]),
+                "raw_contrast_logit_edge": float(reference["raw_contrast_logit_edge"]),
+                "raw_edge_activation_denominator": float(reference["activation"]),
+                "independent_reference_g_i": reference_g,
+                "sign_agreement": _sign(g_value) == _sign(reference_g),
+                "symmetric_normalized_error": error,
+            }
+        )
         source_state = next(
             item
             for item in active
@@ -776,8 +1025,8 @@ def run_output_sensitivity_validation(
             target=state.feature,
             runtime_fingerprint=RUNTIME_FINGERPRINT,
             prompt_id=prompt_id,
-            seed="stage1g-output-sensitivity-validation-v1",
-            experiment_class="stage1g_output_sensitivity_validation",
+            seed="stage1g-v2-bf16-resolution-audit",
+            experiment_class="stage1g_v2_bf16_resolution_audit",
         )
         pair = {
             "pair_id": pair_id,
@@ -794,70 +1043,89 @@ def run_output_sensitivity_validation(
             token_count=len(token_ids),
             call_index_offset=call_count,
         )
-        with sampler.stage(f"stage1g_output_sensitivity_fd_{index}_low"):
-            low_point = intervention.measure_condition(
-                pair,
-                condition="target_only_injection",
-                desired_source_activation=None,
-                desired_target_activation=low,
-                stage=f"validation_{index}_low",
+        ladder: list[dict[str, Any]] = []
+        first_resolvable: float | None = None
+        for amplitude in audit_settings["relative_activation_changes"]:
+            relative_change = float(amplitude)
+            requested = float(state.activation) * (1.0 + relative_change)
+            with sampler.stage(f"stage1g_bf16_resolution_{index}_{relative_change:g}"):
+                point = intervention.measure_condition(
+                    pair,
+                    condition="target_only_injection",
+                    desired_source_activation=None,
+                    desired_target_activation=requested,
+                    stage=f"resolution_{index}_{relative_change:g}",
+                )
+            response = float(point["behavior_T"]) - float(baseline["behavior_T"])
+            answer_change = float(point["answer_logit"]) - float(
+                baseline["answer_logit"]
             )
-        with sampler.stage(f"stage1g_output_sensitivity_fd_{index}_high"):
-            high_point = intervention.measure_condition(
-                pair,
-                condition="target_only_injection",
-                desired_source_activation=None,
-                desired_target_activation=high,
-                stage=f"validation_{index}_high",
+            contrast_change = float(point["contrast_logit"]) - float(
+                baseline["contrast_logit"]
+            )
+            if not all(
+                math.isfinite(item)
+                for item in (requested, response, answer_change, contrast_change)
+            ):
+                raise RuntimeError("BF16 resolution ladder response is non-finite")
+            distinct = response != 0.0
+            if distinct and first_resolvable is None:
+                first_resolvable = relative_change
+            ladder.append(
+                {
+                    "relative_activation_change": relative_change,
+                    "requested_target_activation": requested,
+                    "actual_bf16_target_activation": float(
+                        point["actual_bf16_target_activation"]
+                    ),
+                    "answer_logit": float(point["answer_logit"]),
+                    "contrast_logit": float(point["contrast_logit"]),
+                    "behavior_T": float(point["behavior_T"]),
+                    "answer_logit_change": answer_change,
+                    "contrast_logit_change": contrast_change,
+                    "behavior_response": response,
+                    "bf16_distinct_nonzero_behavior_response": distinct,
+                }
             )
         call_count = intervention.source_suppression_api_calls
-        applied_low = float(low_point["actual_bf16_target_activation"])
-        applied_high = float(high_point["actual_bf16_target_activation"])
-        finite_response = (
-            float(high_point["behavior_T"]) - float(low_point["behavior_T"])
-        ) / (applied_high - applied_low)
-        validation_rows.append(
+        resolution_rows.append(
             {
                 "feature": _feature_record(state.feature),
-                "baseline_activation": state.activation,
-                "autograd_g_i": g_value,
-                "requested_low": low,
-                "requested_high": high,
-                "applied_bf16_low": applied_low,
-                "applied_bf16_high": applied_high,
-                "behavior_low": float(low_point["behavior_T"]),
-                "behavior_high": float(high_point["behavior_T"]),
-                "finite_secant": finite_response,
-                "sign_agreement": _sign(g_value) == _sign(finite_response),
-                "symmetric_normalized_error": symmetric_normalized_error(
-                    g_value, finite_response
-                ),
+                "baseline_activation": float(state.activation),
+                "first_resolvable_relative_activation_change": first_resolvable,
+                "ladder": ladder,
             }
         )
-        del intervention, low_point, high_point
+        del intervention
         gc.collect()
         torch.mps.empty_cache()
-    autograd = [float(row["autograd_g_i"]) for row in validation_rows]
-    finite = [float(row["finite_secant"]) for row in validation_rows]
+    batched = [float(row["batched_vjp_g_i"]) for row in validation_rows]
+    independent = [float(row["independent_reference_g_i"]) for row in validation_rows]
+    errors = [float(row["symmetric_normalized_error"]) for row in validation_rows]
     sign_accuracy = sum(bool(row["sign_agreement"]) for row in validation_rows) / len(
         validation_rows
     )
-    rank_result = spearman(autograd, finite)
+    rank_result = spearman(batched, independent)
     if rank_result is None:
         raise RuntimeError("Stage 1G output-sensitivity rank correlation is undefined")
     rank_correlation = float(rank_result)
-    median_error = float(
-        median(float(row["symmetric_normalized_error"]) for row in validation_rows)
-    )
-    passed = (
-        all(math.isfinite(item) for item in (*autograd, *finite))
+    median_error = float(median(errors))
+    p95_error = _percentile(errors, 0.95)
+    derivative_passed = (
+        all(math.isfinite(item) for item in (*batched, *independent))
         and sign_accuracy >= float(settings["sign_agreement_minimum"])
         and rank_correlation >= float(settings["spearman_minimum"])
         and median_error <= float(settings["median_symmetric_normalized_error_maximum"])
+        and p95_error <= float(settings["p95_symmetric_normalized_error_maximum"])
     )
+    resolution_passed = any(
+        row["first_resolvable_relative_activation_change"] is not None
+        for row in resolution_rows
+    )
+    passed = derivative_passed and resolution_passed
     record = {
-        "schema_version": 1,
-        "artifact_type": "stage1g_output_sensitivity_validation",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_output_sensitivity_and_resolution_validation",
         "status": "passed" if passed else "failed",
         "prompt_id": prompt_id,
         "prompt": prompt,
@@ -865,55 +1133,105 @@ def run_output_sensitivity_validation(
         "answer_token_id": answer_id,
         "contrast_token_id": contrast_id,
         "baseline_behavior": baseline,
+        "baseline_repeat_behavior": baseline_repeat,
         "selected_feature_count": len(validation_rows),
         "selection_rule": settings["selection"],
-        "central_relative_half_width": half_width,
-        "rows": validation_rows,
-        "metrics": {
+        "independent_reference": {
+            "method": settings["independent_reference"],
+            "source_api_rationale": settings["independent_reference_rationale"],
+            "selected_before_runtime_result": True,
+            "batched_vjp_result_consumed": False,
+            "raw_edges_are_signed_and_unnormalized": True,
+        },
+        "derivative_rows": validation_rows,
+        "derivative_metrics": {
             "all_finite": True,
             "sign_agreement": sign_accuracy,
             "spearman": rank_correlation,
             "median_symmetric_normalized_error": median_error,
+            "p95_symmetric_normalized_error": p95_error,
         },
-        "frozen_tolerances": {
+        "frozen_derivative_tolerances": {
             "sign_agreement_minimum": settings["sign_agreement_minimum"],
             "spearman_minimum": settings["spearman_minimum"],
             "median_symmetric_normalized_error_maximum": settings[
                 "median_symmetric_normalized_error_maximum"
             ],
+            "p95_symmetric_normalized_error_maximum": settings[
+                "p95_symmetric_normalized_error_maximum"
+            ],
+        },
+        "bf16_resolution_audit": {
+            "status": "passed" if resolution_passed else "failed",
+            "derivative_truth_or_validation_used": False,
+            "scientific_selection_ranking_or_threshold_tuning_used": False,
+            "baseline_repeat_behavior_error": repeat_error,
+            "max_abs_baseline_repeat_behavior_error": repeat_error,
+            "answer_logit_bf16_resolution": answer_resolution,
+            "contrast_logit_bf16_resolution": contrast_resolution,
+            "behavior_resolution_floor": resolution_floor,
+            "floor_formula": config["metrics"]["no_effect_floor"],
+            "relative_activation_changes": list(
+                audit_settings["relative_activation_changes"]
+            ),
+            "features_with_resolvable_response": sum(
+                row["first_resolvable_relative_activation_change"] is not None
+                for row in resolution_rows
+            ),
+            "any_finite_nonzero_bf16_behavior_response_by_maximum_ladder": (
+                resolution_passed
+            ),
+            "rows": resolution_rows,
         },
         "instrumented_target_injection_calls": call_count,
         "scientific_attempt_consumed": False,
         "scientific_pair_overlap": False,
         "gradient_tensor_persisted": False,
         "full_logits_persisted": False,
+        "finite_response_presented_as_derivative_validation": False,
     }
-    if not passed:
-        raise RuntimeError("Stage 1G output-sensitivity validation failed")
+    if not derivative_passed:
+        raise RuntimeError("Stage 1G-v2 independent derivative validation failed")
+    if not resolution_passed:
+        raise RuntimeError("Stage 1G-v2 BF16 behavior resolution audit failed")
     return record
 
 
 def validate_output_sensitivity(value: dict[str, Any], config: dict[str, Any]) -> None:
     settings = config["output_sensitivity_validation"]
-    rows = value.get("rows")
-    metrics = value.get("metrics")
+    rows = value.get("derivative_rows")
+    metrics = value.get("derivative_metrics")
+    audit = value.get("bf16_resolution_audit")
     if (
-        value.get("schema_version") != 1
-        or value.get("artifact_type") != "stage1g_output_sensitivity_validation"
+        value.get("schema_version") != 2
+        or value.get("artifact_type")
+        != "stage1g_v2_output_sensitivity_and_resolution_validation"
         or value.get("status") != "passed"
         or value.get("prompt_id") != settings["prompt_id"]
         or value.get("prompt") != settings["prompt"]
         or value.get("selected_feature_count") < settings["minimum_active_features"]
+        or value.get("selected_feature_count") != len(rows or [])
+        or value.get("selection_rule") != settings["selection"]
+        or value.get("independent_reference")
+        != {
+            "method": settings["independent_reference"],
+            "source_api_rationale": settings["independent_reference_rationale"],
+            "selected_before_runtime_result": True,
+            "batched_vjp_result_consumed": False,
+            "raw_edges_are_signed_and_unnormalized": True,
+        }
         or value.get("scientific_attempt_consumed") is not False
         or value.get("scientific_pair_overlap") is not False
         or value.get("gradient_tensor_persisted") is not False
         or value.get("full_logits_persisted") is not False
+        or value.get("finite_response_presented_as_derivative_validation") is not False
         or not isinstance(rows, list)
         or not isinstance(metrics, dict)
+        or not isinstance(audit, dict)
     ):
         raise ValueError("Stage 1G output-sensitivity identity differs")
-    autograd: list[float] = []
-    finite: list[float] = []
+    batched: list[float] = []
+    independent: list[float] = []
     errors: list[float] = []
     signs = 0
     features: set[tuple[int, int, int]] = set()
@@ -925,25 +1243,36 @@ def validate_output_sensitivity(value: dict[str, Any], config: dict[str, Any]) -
         if key in features or feature.layer <= 0:
             raise ValueError("Stage 1G validation feature identity differs")
         features.add(key)
-        g_value = _finite(row.get("autograd_g_i"), "validation g")
-        secant = _finite(row.get("finite_secant"), "validation secant")
-        low = _finite(row.get("applied_bf16_low"), "validation low")
-        high = _finite(row.get("applied_bf16_high"), "validation high")
-        if low >= high:
-            raise ValueError("Stage 1G validation BF16 perturbation collapsed")
-        expected_sign = _sign(g_value) == _sign(secant)
-        expected_error = symmetric_normalized_error(g_value, secant)
+        activation = _finite(row.get("baseline_activation"), "validation activation")
+        denominator = _finite(
+            row.get("raw_edge_activation_denominator"), "edge activation"
+        )
+        answer_edge = _finite(row.get("raw_answer_logit_edge"), "answer edge")
+        contrast_edge = _finite(row.get("raw_contrast_logit_edge"), "contrast edge")
+        g_value = _finite(row.get("batched_vjp_g_i"), "validation VJP")
+        reference = _finite(
+            row.get("independent_reference_g_i"), "validation reference"
+        )
+        if (
+            activation <= 0.0
+            or activation != denominator
+            or bf16_round(activation) != activation
+            or reference != (answer_edge - contrast_edge) / denominator
+        ):
+            raise ValueError("Stage 1G raw-edge reference scalar differs")
+        expected_sign = _sign(g_value) == _sign(reference)
+        expected_error = symmetric_normalized_error(g_value, reference)
         if (
             row.get("sign_agreement") is not expected_sign
             or _finite(row.get("symmetric_normalized_error"), "validation error")
             != expected_error
         ):
             raise ValueError("Stage 1G validation derived value differs")
-        autograd.append(g_value)
-        finite.append(secant)
+        batched.append(g_value)
+        independent.append(reference)
         errors.append(expected_error)
         signs += int(expected_sign)
-    rank_result = spearman(autograd, finite)
+    rank_result = spearman(batched, independent)
     if rank_result is None:
         raise ValueError("Stage 1G output-sensitivity rank correlation is undefined")
     expected_metrics = {
@@ -951,6 +1280,7 @@ def validate_output_sensitivity(value: dict[str, Any], config: dict[str, Any]) -
         "sign_agreement": signs / len(rows),
         "spearman": float(rank_result),
         "median_symmetric_normalized_error": float(median(errors)),
+        "p95_symmetric_normalized_error": _percentile(errors, 0.95),
     }
     if metrics != expected_metrics:
         raise ValueError("Stage 1G output-sensitivity aggregate differs")
@@ -959,8 +1289,135 @@ def validate_output_sensitivity(value: dict[str, Any], config: dict[str, Any]) -
         or expected_metrics["spearman"] < settings["spearman_minimum"]
         or expected_metrics["median_symmetric_normalized_error"]
         > settings["median_symmetric_normalized_error_maximum"]
+        or expected_metrics["p95_symmetric_normalized_error"]
+        > settings["p95_symmetric_normalized_error_maximum"]
     ):
         raise ValueError("Stage 1G output-sensitivity gate failed")
+    if value.get("frozen_derivative_tolerances") != {
+        "sign_agreement_minimum": settings["sign_agreement_minimum"],
+        "spearman_minimum": settings["spearman_minimum"],
+        "median_symmetric_normalized_error_maximum": settings[
+            "median_symmetric_normalized_error_maximum"
+        ],
+        "p95_symmetric_normalized_error_maximum": settings[
+            "p95_symmetric_normalized_error_maximum"
+        ],
+    }:
+        raise ValueError("Stage 1G-v2 frozen derivative tolerances differ")
+
+    baseline = value.get("baseline_behavior")
+    baseline_repeat = value.get("baseline_repeat_behavior")
+    if not isinstance(baseline, dict) or not isinstance(baseline_repeat, dict):
+        raise ValueError("Stage 1G-v2 baseline resolution evidence is missing")
+    for label, behavior in (("baseline", baseline), ("repeat", baseline_repeat)):
+        answer = _finite(behavior.get("answer_logit"), f"{label} answer logit")
+        contrast = _finite(behavior.get("contrast_logit"), f"{label} contrast logit")
+        if (
+            _finite(behavior.get("behavior_T"), f"{label} behavior")
+            != answer - contrast
+            or bf16_round(answer) != answer
+            or bf16_round(contrast) != contrast
+        ):
+            raise ValueError("Stage 1G-v2 baseline BF16 behavior differs")
+    answer_resolution = bf16_logit_resolution(float(baseline["answer_logit"]))
+    contrast_resolution = bf16_logit_resolution(float(baseline["contrast_logit"]))
+    repeat_error = abs(
+        float(baseline_repeat["behavior_T"]) - float(baseline["behavior_T"])
+    )
+    audit_settings = settings["bf16_resolution_audit"]
+    floor = max(
+        float(audit_settings["minimum_floor"]),
+        float(audit_settings["baseline_repeat_multiplier"]) * repeat_error,
+        float(audit_settings["logit_ulp_sum_multiplier"])
+        * (answer_resolution["ulp"] + contrast_resolution["ulp"]),
+    )
+    resolution_rows = audit.get("rows")
+    if (
+        audit.get("status") != "passed"
+        or audit.get("derivative_truth_or_validation_used") is not False
+        or audit.get("scientific_selection_ranking_or_threshold_tuning_used")
+        is not False
+        or audit.get("baseline_repeat_behavior_error") != repeat_error
+        or audit.get("max_abs_baseline_repeat_behavior_error") != repeat_error
+        or audit.get("answer_logit_bf16_resolution") != answer_resolution
+        or audit.get("contrast_logit_bf16_resolution") != contrast_resolution
+        or audit.get("behavior_resolution_floor") != floor
+        or audit.get("floor_formula") != config["metrics"]["no_effect_floor"]
+        or audit.get("relative_activation_changes")
+        != audit_settings["relative_activation_changes"]
+        or not isinstance(resolution_rows, list)
+        or len(resolution_rows) != len(rows)
+    ):
+        raise ValueError("Stage 1G-v2 BF16 resolution audit identity differs")
+    derivative_by_feature = {
+        tuple(row["feature"][key] for key in ("layer", "position", "feature_id")): row
+        for row in rows
+    }
+    resolvable = 0
+    for resolution in resolution_rows:
+        if not isinstance(resolution, dict) or not isinstance(
+            resolution.get("feature"), dict
+        ):
+            raise ValueError("Stage 1G-v2 resolution row is malformed")
+        feature_key = tuple(
+            resolution["feature"][key] for key in ("layer", "position", "feature_id")
+        )
+        derivative = derivative_by_feature.get(feature_key)
+        ladder = resolution.get("ladder")
+        if (
+            derivative is None
+            or resolution.get("baseline_activation")
+            != derivative["baseline_activation"]
+            or not isinstance(ladder, list)
+            or [point.get("relative_activation_change") for point in ladder]
+            != audit_settings["relative_activation_changes"]
+        ):
+            raise ValueError("Stage 1G-v2 resolution feature or ladder differs")
+        first: float | None = None
+        for point, relative in zip(
+            ladder, audit_settings["relative_activation_changes"], strict=True
+        ):
+            if not isinstance(point, dict):
+                raise ValueError("Stage 1G-v2 resolution point is malformed")
+            requested = float(derivative["baseline_activation"]) * (
+                1.0 + float(relative)
+            )
+            actual = bf16_round(requested)
+            answer_change = _finite(point.get("answer_logit_change"), "answer change")
+            contrast_change = _finite(
+                point.get("contrast_logit_change"), "contrast change"
+            )
+            response = _finite(point.get("behavior_response"), "behavior response")
+            distinct = response != 0.0
+            if (
+                point.get("requested_target_activation") != requested
+                or point.get("actual_bf16_target_activation") != actual
+                or answer_change
+                != _finite(point.get("answer_logit"), "ladder answer")
+                - float(baseline["answer_logit"])
+                or contrast_change
+                != _finite(point.get("contrast_logit"), "ladder contrast")
+                - float(baseline["contrast_logit"])
+                or response
+                != _finite(point.get("behavior_T"), "ladder behavior")
+                - float(baseline["behavior_T"])
+                or point.get("bf16_distinct_nonzero_behavior_response") is not distinct
+            ):
+                raise ValueError("Stage 1G-v2 resolution point scalar differs")
+            if distinct and first is None:
+                first = float(relative)
+        if resolution.get("first_resolvable_relative_activation_change") != first:
+            raise ValueError("Stage 1G-v2 first-resolvable amplitude differs")
+        resolvable += int(first is not None)
+    if (
+        resolvable < 1
+        or audit.get("features_with_resolvable_response") != resolvable
+        or audit.get("any_finite_nonzero_bf16_behavior_response_by_maximum_ladder")
+        is not True
+        or value.get("instrumented_target_injection_calls")
+        != len(rows) * len(audit_settings["relative_activation_changes"])
+    ):
+        raise ValueError("Stage 1G-v2 BF16 resolution gate failed")
 
 
 def _prompt_prediction(
@@ -974,6 +1431,9 @@ def _prompt_prediction(
     prompt_text = str(prompt["text"])
     answer_id = int(prompt["answer_token_id"])
     contrast_id = int(prompt["contrast_token_id"])
+    resolution_floor = float(
+        prompt["behavior_resolution_audit"]["behavior_resolution_floor"]
+    )
     token_ids = [int(item) for item in prompt["token_ids"]]
     positions = list(range(1, len(token_ids)))
     backend = Stage1GPredictionBackend(
@@ -1083,6 +1543,8 @@ def _prompt_prediction(
                 predicted_activation = (
                     target_state.preactivation + q_value if predicted_crossing else 0.0
                 )
+                predicted_mediation = g_value * predicted_activation
+                resolution_ratio = abs(predicted_mediation) / resolution_floor
                 row = {
                     "pair_id": canonical_v3_pair_id(
                         source=source_state.feature,
@@ -1103,7 +1565,19 @@ def _prompt_prediction(
                     "g_i": g_value,
                     "predicted_full_ablation_crossing": predicted_crossing,
                     "predicted_target_activation": predicted_activation,
-                    "predicted_signed_mediation": g_value * predicted_activation,
+                    "predicted_signed_mediation": predicted_mediation,
+                    "predicted_abs_mediation_to_bf16_resolution_floor_ratio": (
+                        resolution_ratio
+                    ),
+                    "predicted_abs_mediation_exceeds_resolution_floor": {
+                        "1x": abs(predicted_mediation) > resolution_floor,
+                        "2x": abs(predicted_mediation) > 2.0 * resolution_floor,
+                        "4x": abs(predicted_mediation) > 4.0 * resolution_floor,
+                        "8x": abs(predicted_mediation) > 8.0 * resolution_floor,
+                    },
+                    "bf16_resolution_metadata_used_for_panel_ranking_or_exclusion": (
+                        False
+                    ),
                     "q_over_margin_computed_or_used": False,
                     "intervention_outcome_used": False,
                 }
@@ -1153,6 +1627,8 @@ def _prompt_prediction(
         "answer_token_id": answer_id,
         "contrast_token_id": contrast_id,
         "baseline_behavior": prompt["baseline_behavior"],
+        "baseline_repeat_behavior": prompt["baseline_repeat_behavior"],
+        "behavior_resolution_audit": prompt["behavior_resolution_audit"],
         "baseline_pools": {
             "scanner_candidate_count": len(scanner.global_candidates),
             "eligible_target_count": len(targets),
@@ -1240,6 +1716,8 @@ def build_prediction_manifest(
             for item in model.ensure_tokenized(str(row["text"])).detach().cpu().tolist()
         ]
         baseline: dict[str, Any] | None = None
+        baseline_repeat: dict[str, Any] | None = None
+        resolution: dict[str, Any] | None = None
         if not reasons and answer_id is not None and contrast_id is not None:
             backend = Stage1GPredictionBackend(
                 model,
@@ -1251,6 +1729,11 @@ def build_prediction_manifest(
                 baseline = backend.baseline_behavior(
                     answer_token_id=answer_id, contrast_token_id=contrast_id
                 )
+            with sampler.stage(f"{row['id']}_eligibility_baseline_repeat"):
+                baseline_repeat = backend.baseline_behavior(
+                    answer_token_id=answer_id, contrast_token_id=contrast_id
+                )
+            resolution = behavior_resolution_audit(baseline, baseline_repeat, config)
             if float(baseline["behavior_T"]) <= 0.0:
                 reasons.append("baseline_answer_minus_contrast_not_positive")
             if baseline["answer_in_top64"] is not True:
@@ -1270,7 +1753,9 @@ def build_prediction_manifest(
                 "answer_token_id": answer_id,
                 "contrast_token_id": contrast_id,
                 "baseline_behavior": baseline,
-                "model_calls": 0 if baseline is None else 1,
+                "baseline_repeat_behavior": baseline_repeat,
+                "behavior_resolution_audit": resolution,
+                "model_calls": 0 if baseline is None else 2,
             }
         )
         if is_eligible:
@@ -1280,6 +1765,8 @@ def build_prediction_manifest(
                     "answer_token_id": answer_id,
                     "contrast_token_id": contrast_id,
                     "baseline_behavior": baseline,
+                    "baseline_repeat_behavior": baseline_repeat,
+                    "behavior_resolution_audit": resolution,
                 }
             )
             eligible.append(row)
@@ -1290,6 +1777,9 @@ def build_prediction_manifest(
     total_pairs = sum(len(prompt["execution_pairs"]) for prompt in prompts)
     totals = {
         "eligible_prompt_count": len(prompts),
+        "scientific_baseline_model_calls": sum(
+            int(row["model_calls"]) for row in eligibility_rows
+        ),
         "execution_pair_count": total_pairs,
         "membership_count_by_panel": {
             panel: sum(
@@ -1307,8 +1797,8 @@ def build_prediction_manifest(
         },
     }
     return {
-        "schema_version": 1,
-        "artifact_type": "stage1g_prediction_manifest",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_prediction_manifest",
         "status": (
             "prediction_frozen_ready_for_commit"
             if len(prompts) >= minimum
@@ -1329,9 +1819,12 @@ def build_prediction_manifest(
         "prediction_only_guards": {
             "fresh_scientific_intervention_api_calls": 0,
             "historical_intervention_outcomes_used": False,
-            "graph_edge_input_used": False,
+            "independent_reference_raw_edges_used": True,
+            "graph_edge_input_used_for_candidate_discovery_or_batched_vjp": False,
+            "finite_ladder_used_for_derivative_validation_selection_or_tuning": False,
             "q_over_margin_discovery_used": False,
             "E1_or_E2_computed": False,
+            "diagnostic_fp32_shadow_T_used": False,
             "network_accessed": False,
         },
         "claim_boundary": config["claim_boundary"],
@@ -1345,8 +1838,8 @@ def validate_prediction(
 
     minimum = int(config["prompt_ordering"]["minimum_eligible"])
     if (
-        prediction.get("schema_version") != 1
-        or prediction.get("artifact_type") != "stage1g_prediction_manifest"
+        prediction.get("schema_version") != 2
+        or prediction.get("artifact_type") != "stage1g_v2_prediction_manifest"
         or prediction.get("status")
         not in {
             "prediction_frozen_ready_for_commit",
@@ -1362,9 +1855,12 @@ def validate_prediction(
         != {
             "fresh_scientific_intervention_api_calls": 0,
             "historical_intervention_outcomes_used": False,
-            "graph_edge_input_used": False,
+            "independent_reference_raw_edges_used": True,
+            "graph_edge_input_used_for_candidate_discovery_or_batched_vjp": False,
+            "finite_ladder_used_for_derivative_validation_selection_or_tuning": False,
             "q_over_margin_discovery_used": False,
             "E1_or_E2_computed": False,
+            "diagnostic_fp32_shadow_T_used": False,
             "network_accessed": False,
         }
         or prediction.get("claim_boundary") != config["claim_boundary"]
@@ -1409,11 +1905,15 @@ def validate_prediction(
         if not isinstance(prompt, dict):
             raise ValueError("Stage 1G prediction prompt is malformed")
         eligibility_row = next(row for row in eligibility if row["id"] == prompt["id"])
+        if eligibility_row.get("model_calls") != 2:
+            raise ValueError("Stage 1G-v2 eligible baseline call count differs")
         for key in (
             "token_ids",
             "answer_token_id",
             "contrast_token_id",
             "baseline_behavior",
+            "baseline_repeat_behavior",
+            "behavior_resolution_audit",
         ):
             if prompt.get(key) != eligibility_row.get(key):
                 raise ValueError(f"Stage 1G prompt {prompt['id']} {key} differs")
@@ -1421,6 +1921,12 @@ def validate_prediction(
         audit = prompt.get("panel_audit")
         if not isinstance(rows, list) or len(rows) > 14 or not isinstance(audit, dict):
             raise ValueError("Stage 1G prompt execution panel differs")
+        expected_resolution = behavior_resolution_audit(
+            prompt["baseline_behavior"], prompt["baseline_repeat_behavior"], config
+        )
+        if prompt.get("behavior_resolution_audit") != expected_resolution:
+            raise ValueError("Stage 1G-v2 prompt BF16 resolution audit differs")
+        resolution_floor = float(expected_resolution["behavior_resolution_floor"])
         prompt_pairs: dict[str, dict[str, Any]] = {}
         by_panel: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for row in rows:
@@ -1466,6 +1972,7 @@ def validate_prediction(
             predicted_crossing = q_value > 0.0 and z_value + q_value > threshold
             predicted_activation = z_value + q_value if predicted_crossing else 0.0
             predicted_mediation = g_value * predicted_activation
+            resolution_ratio = abs(predicted_mediation) / resolution_floor
             memberships = row.get("method_memberships")
             ranks = row.get("panel_ranks")
             if (
@@ -1482,6 +1989,22 @@ def validate_prediction(
                 != predicted_activation
                 or _finite(row.get("predicted_signed_mediation"), "predicted M")
                 != predicted_mediation
+                or _finite(
+                    row.get("predicted_abs_mediation_to_bf16_resolution_floor_ratio"),
+                    "predicted resolution ratio",
+                )
+                != resolution_ratio
+                or row.get("predicted_abs_mediation_exceeds_resolution_floor")
+                != {
+                    "1x": abs(predicted_mediation) > resolution_floor,
+                    "2x": abs(predicted_mediation) > 2.0 * resolution_floor,
+                    "4x": abs(predicted_mediation) > 4.0 * resolution_floor,
+                    "8x": abs(predicted_mediation) > 8.0 * resolution_floor,
+                }
+                or row.get(
+                    "bf16_resolution_metadata_used_for_panel_ranking_or_exclusion"
+                )
+                is not False
                 or row.get("q_over_margin_computed_or_used") is not False
                 or row.get("intervention_outcome_used") is not False
                 or not isinstance(memberships, list)
@@ -1557,6 +2080,9 @@ def validate_prediction(
     totals = prediction.get("selection_totals")
     if not isinstance(totals, dict) or totals != {
         "eligible_prompt_count": len(prompts),
+        "scientific_baseline_model_calls": sum(
+            int(row["model_calls"]) for row in eligibility
+        ),
         "execution_pair_count": len(all_pairs),
         "membership_count_by_panel": membership_totals,
         "shortfall_by_panel": shortfall_totals,
@@ -1999,6 +2525,18 @@ def _mean(values: Sequence[float]) -> float:
     return sum(values) / len(values) if values else 0.0
 
 
+def _resolution_ratio_stratum(ratio: float) -> str:
+    if ratio < 1.0:
+        return "lt_1x"
+    if ratio < 2.0:
+        return "1x_to_lt_2x"
+    if ratio < 4.0:
+        return "2x_to_lt_4x"
+    if ratio < 8.0:
+        return "4x_to_lt_8x"
+    return "ge_8x"
+
+
 def _pair_effect(
     pair: dict[str, Any], points: Sequence[dict[str, Any]], floor: float
 ) -> dict[str, Any]:
@@ -2022,6 +2560,9 @@ def _pair_effect(
         if abs(source_effect) > 10.0 * floor:
             fraction = mediation / source_effect
     predicted = float(pair["predicted_signed_mediation"])
+    predicted_resolution_ratio = float(
+        pair["predicted_abs_mediation_to_bf16_resolution_floor_ratio"]
+    )
     return {
         "prompt_id": pair["prompt_id"],
         "pair_id": pair["pair_id"],
@@ -2038,6 +2579,16 @@ def _pair_effect(
         "mediation_effect_M": mediation,
         "target_injection_effect_I": injection,
         "predicted_signed_mediation": predicted,
+        "bf16_behavior_resolution_floor": floor,
+        "predicted_abs_mediation_to_bf16_resolution_floor_ratio": (
+            predicted_resolution_ratio
+        ),
+        "predicted_effect_resolution_stratum": _resolution_ratio_stratum(
+            predicted_resolution_ratio
+        ),
+        "observed_abs_mediation_to_bf16_resolution_floor_ratio": (
+            None if mediation is None else abs(mediation) / floor
+        ),
         "oracle_amplitude_prediction": oracle,
         "above_no_effect_floor": (mediation is not None and abs(mediation) > floor),
         "prospective_sign_correct": (
@@ -2214,25 +2765,25 @@ def classify_terminal(
     passed = sum(checks.values())
     if not powered:
         return (
-            "underpowered_behavioral_mediation_pilot",
-            "report_why_do_not_expand_frozen_prompt_pool",
+            "completed_stage1g_v2_underpowered",
+            "require_higher_precision_or_reference_runtime_without_another_small_probe_protocol",
             checks,
         )
     if passed == int(rules["supported_criteria_count"]):
         return (
-            "supported_behavioral_mediation_pilot",
-            "proceed_to_reference_model_or_clt_replication_before_paper_claim",
+            "completed_stage1g_v2_supported",
+            "continue_to_reference_model_or_clt_replication_before_paper_claim",
             checks,
         )
     if passed >= int(rules["mixed_minimum_supported_criteria"]):
         return (
-            "mixed_behavioral_mediation_pilot",
-            "inspect_feature_group_or_split_mediation_before_scaling",
+            "completed_stage1g_v2_mixed",
+            "continue_to_reference_replication_for_provisional_mixed_result",
             checks,
         )
     return (
-        "not_supported_behavioral_mediation_pilot",
-        "stop_behavioral_mediation_claim_and_reconsider_paper_contribution",
+        "completed_stage1g_v2_not_supported",
+        "stop_critical_alpha_finite_probe_and_hvp_work_on_this_runtime_and_redirect",
         checks,
     )
 
@@ -2248,17 +2799,35 @@ def compute_analysis(
         for prompt in prediction["prompts"]
         for pair in prompt["execution_pairs"]
     }
-    floors: dict[str, float] = {}
-    for prompt_id in prompt_ids:
-        errors = [
-            abs(
-                float(_condition_map(grouped[pair_id])["baseline_repeat"]["behavior_T"])
-                - float(_condition_map(grouped[pair_id])["baseline_noop"]["behavior_T"])
-            )
-            for pair_id, pair in pair_map.items()
-            if pair["prompt_id"] == prompt_id
-        ]
-        floors[prompt_id] = max(1e-4, 5.0 * max(errors, default=0.0))
+    prompt_map = {str(prompt["id"]): prompt for prompt in prediction["prompts"]}
+    floors = {
+        prompt_id: float(
+            prompt_map[prompt_id]["behavior_resolution_audit"][
+                "behavior_resolution_floor"
+            ]
+        )
+        for prompt_id in prompt_ids
+    }
+    canonical_repeat_error_by_prompt = {
+        prompt_id: max(
+            (
+                abs(
+                    float(
+                        _condition_map(grouped[pair_id])["baseline_repeat"][
+                            "behavior_T"
+                        ]
+                    )
+                    - float(
+                        _condition_map(grouped[pair_id])["baseline_noop"]["behavior_T"]
+                    )
+                )
+                for pair_id, pair in pair_map.items()
+                if pair["prompt_id"] == prompt_id
+            ),
+            default=0.0,
+        )
+        for prompt_id in prompt_ids
+    }
     effects = [
         _pair_effect(pair, grouped[pair_id], floors[str(pair["prompt_id"])])
         for pair_id, pair in pair_map.items()
@@ -2370,9 +2939,146 @@ def compute_analysis(
         directional_violation_fraction=directional_fraction,
         rules=config["decision_rule"],
     )
+    positive_effects = [
+        row
+        for row in effects
+        if any(panel in row["method_memberships"] for panel in ("B", "Q", "G"))
+    ]
+    stratum_order = (
+        "lt_1x",
+        "1x_to_lt_2x",
+        "2x_to_lt_4x",
+        "4x_to_lt_8x",
+        "ge_8x",
+    )
+
+    def summarize_resolution_rows(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
+        crossings = [row for row in rows if row["observed_crossing"]]
+        analyzable = [row for row in crossings if row["mediation_effect_M"] is not None]
+        above = [row for row in analyzable if row["above_no_effect_floor"]]
+        return {
+            "execution_pair_count": len(rows),
+            "crossing_count": len(crossings),
+            "crossing_prompt_count": len({row["prompt_id"] for row in crossings}),
+            "analyzable_mediation_count": len(analyzable),
+            "mean_abs_mediation": _mean(
+                [abs(float(row["mediation_effect_M"])) for row in analyzable]
+            ),
+            "median_abs_mediation": (
+                float(
+                    median(abs(float(row["mediation_effect_M"])) for row in analyzable)
+                )
+                if analyzable
+                else 0.0
+            ),
+            "above_bf16_resolution_floor_fraction": _mean(
+                [float(bool(row["above_no_effect_floor"])) for row in analyzable]
+            ),
+            "predicted_vs_observed_sign_accuracy_above_floor": _mean(
+                [float(bool(row["prospective_sign_correct"])) for row in above]
+            ),
+            "target_injection_sign_agreement": _mean(
+                [float(bool(row["injection_sign_agrees_with_M"])) for row in analyzable]
+            ),
+        }
+
+    resolution_stratification = {
+        "all_positive_execution_pairs": {
+            stratum: summarize_resolution_rows(
+                [
+                    row
+                    for row in positive_effects
+                    if row["predicted_effect_resolution_stratum"] == stratum
+                ]
+            )
+            for stratum in stratum_order
+        },
+        "by_panel": {
+            panel: {
+                stratum: summarize_resolution_rows(
+                    [
+                        row
+                        for row in positive_effects
+                        if panel in row["method_memberships"]
+                        and row["predicted_effect_resolution_stratum"] == stratum
+                    ]
+                )
+                for stratum in stratum_order
+            }
+            for panel in ("B", "Q", "G")
+        },
+    }
+    sign_metrics_by_panel: dict[str, Any] = {}
+    for panel in ("B", "Q", "G"):
+        rows = [
+            row
+            for row in effects
+            if panel in row["method_memberships"]
+            and row["observed_crossing"]
+            and row["above_no_effect_floor"]
+        ]
+        successes = sum(bool(row["prospective_sign_correct"]) for row in rows)
+        sign_metrics_by_panel[panel] = {
+            "denominator_above_floor": len(rows),
+            "success_count": successes,
+            "accuracy": successes / len(rows) if rows else 0.0,
+            "exact_binomial_95_interval": clopper_pearson(successes, len(rows)),
+        }
+    membership_pattern_counts = Counter(
+        "+".join(row["method_memberships"]) for row in effects
+    )
+    panel_overlap = {
+        "membership_pattern_counts": dict(sorted(membership_pattern_counts.items())),
+        "pairwise_unique_execution_pair_overlap": {
+            f"{left}_{right}": sum(
+                left in row["method_memberships"] and right in row["method_memberships"]
+                for row in effects
+            )
+            for left, right in (("B", "Q"), ("B", "G"), ("Q", "G"))
+        },
+    }
+    absolute_mediation = [abs(item) for item in observed_M]
+    absolute_distribution = {
+        "count": len(absolute_mediation),
+        "minimum": min(absolute_mediation) if absolute_mediation else None,
+        "p25": _percentile(absolute_mediation, 0.25) if absolute_mediation else None,
+        "median": float(median(absolute_mediation)) if absolute_mediation else None,
+        "p75": _percentile(absolute_mediation, 0.75) if absolute_mediation else None,
+        "p95": _percentile(absolute_mediation, 0.95) if absolute_mediation else None,
+        "maximum": max(absolute_mediation) if absolute_mediation else None,
+    }
+    if terminal in {
+        "completed_stage1g_v2_supported",
+        "completed_stage1g_v2_mixed",
+    }:
+        interpretation = {
+            "behavioral_importance_result": "provisional_positive_or_mixed",
+            "mediation_result": "provisional_positive_or_mixed",
+            "next": (
+                "replicate_on_stronger_reference_model_or_clt_before_paper_ready_claims"
+            ),
+        }
+    elif terminal == "completed_stage1g_v2_not_supported":
+        interpretation = {
+            "behavioral_importance_result": "not_supported_on_small_model_plt",
+            "mediation_result": "not_supported_on_small_model_plt",
+            "next": (
+                "stop_local_calibration_and_either_test_q_discovery_on_"
+                "reference_runtime_or_narrow_claims"
+            ),
+        }
+    else:
+        interpretation = {
+            "behavioral_importance_result": "underpowered_on_mps_bf16",
+            "mediation_result": "underpowered_on_mps_bf16",
+            "next": (
+                "require_higher_precision_or_reference_runtime_without_"
+                "new_small_probe_protocol"
+            ),
+        }
     return {
-        "schema_version": 1,
-        "artifact_type": "stage1g_analysis_summary",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_analysis_summary",
         "status": "passed",
         "experiment_class": EXPERIMENT_CLASS,
         "terminal_class": terminal,
@@ -2380,6 +3086,11 @@ def compute_analysis(
         "eligible_prompt_count": len(prompt_ids),
         "unique_execution_pair_count": len(effects),
         "no_effect_floor_by_prompt": floors,
+        "canonical_baseline_repeat_error_by_prompt_diagnostic": (
+            canonical_repeat_error_by_prompt
+        ),
+        "primary_behavior_metric": "actual_bf16_answer_minus_contrast_logit",
+        "diagnostic_fp32_shadow_T_used": False,
         "panel_metrics": panel_metrics,
         "prompt_panel_metrics": prompt_stats,
         "prompt_level_panel_differences": prompt_differences,
@@ -2391,6 +3102,7 @@ def compute_analysis(
             "exact_binomial_95_interval": clopper_pearson(
                 sign_success, len(B_sign_rows)
             ),
+            "by_panel": sign_metrics_by_panel,
         },
         "necessity_and_sufficiency": {
             "B_injection_denominator": len(injection_rows),
@@ -2430,6 +3142,9 @@ def compute_analysis(
             "movement_toward_gate_violation_count": directional_violations,
             "movement_toward_gate_violation_fraction": directional_fraction,
         },
+        "absolute_signed_mediation_distribution": absolute_distribution,
+        "panel_overlap": panel_overlap,
+        "effect_to_bf16_resolution_stratification": resolution_stratification,
         "coverage": {
             "panel_shortfalls": prediction["selection_totals"]["shortfall_by_panel"],
             "noncrossing_membership_count_by_panel": {
@@ -2442,6 +3157,7 @@ def compute_analysis(
         },
         "supported_criteria": checks,
         "supported_criteria_passed": sum(checks.values()),
+        "project_interpretation": interpretation,
         "pair_effects": effects,
         "claim_boundary": config["claim_boundary"],
     }
@@ -2464,8 +3180,8 @@ def build_records(
     _validate_schedules(pairs, grouped)
     analysis = compute_analysis(prediction, grouped, config)
     point_record = {
-        "schema_version": 1,
-        "artifact_type": "stage1g_point_records",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_point_records",
         "status": "passed",
         "experiment_class": EXPERIMENT_CLASS,
         "point_count": len(points),
@@ -2484,8 +3200,8 @@ def build_records(
     }
     telemetry = worker["telemetry"]
     environment = {
-        "schema_version": 1,
-        "artifact_type": "stage1g_environment_manifest",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_environment_manifest",
         "status": "passed",
         "experiment_class": EXPERIMENT_CLASS,
         "runtime": worker["environment"],
@@ -2510,8 +3226,8 @@ def build_records(
         },
     }
     run = {
-        "schema_version": 1,
-        "artifact_type": "stage1g_run_manifest",
+        "schema_version": 2,
+        "artifact_type": "stage1g_v2_run_manifest",
         "status": analysis["terminal_class"],
         "project_decision": analysis["project_decision"],
         "experiment_class": EXPERIMENT_CLASS,
@@ -2523,11 +3239,17 @@ def build_records(
         "canonical_attempt_count": 1,
         "scientific_retry_count": 0,
         "instrumented_intervention_api_calls": len(points),
+        "scientific_baseline_model_calls": prediction["selection_totals"][
+            "scientific_baseline_model_calls"
+        ],
         "journal_completed_point_count": len(points),
         "serialized_point_count": len(points),
         "final_artifacts_rebuilt_from_journal_in_fresh_process": True,
         "standalone_recomputation_required": True,
         "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
+        "historical_stage1g_v1_terminal_class": "inconclusive_runtime",
+        "historical_stage1g_v1_report_sha256": V1_REPORT_SHA256,
+        "historical_stage1g_v1_preflight_sha256": V1_PREFLIGHT_SHA256,
         "simple_critical_alpha_calibration": "retired",
         "claim_boundary": config["claim_boundary"],
     }
@@ -2621,8 +3343,8 @@ def validate_bundle(repository: Path, output: Path) -> dict[str, Any]:
     point_artifact = cast(dict[str, Any], records["point_records.json"])
     sweeps = point_artifact.get("sweeps")
     if (
-        point_artifact.get("schema_version") != 1
-        or point_artifact.get("artifact_type") != "stage1g_point_records"
+        point_artifact.get("schema_version") != 2
+        or point_artifact.get("artifact_type") != "stage1g_v2_point_records"
         or point_artifact.get("status") != "passed"
         or point_artifact.get("experiment_class") != EXPERIMENT_CLASS
         or not isinstance(sweeps, list)
@@ -2669,22 +3391,29 @@ def validate_bundle(repository: Path, output: Path) -> dict[str, Any]:
         raise ValueError("Stage 1G analysis differs from standalone recomputation")
     run = cast(dict[str, Any], records["run_manifest.json"])
     if (
-        run.get("status") != recomputed["terminal_class"]
+        run.get("schema_version") != 2
+        or run.get("artifact_type") != "stage1g_v2_run_manifest"
+        or run.get("status") != recomputed["terminal_class"]
         or run.get("project_decision") != recomputed["project_decision"]
         or run.get("canonical_attempt_count") != 1
         or run.get("scientific_retry_count") != 0
         or run.get("instrumented_intervention_api_calls") != len(points)
+        or run.get("scientific_baseline_model_calls")
+        != prediction["selection_totals"]["scientific_baseline_model_calls"]
         or run.get("journal_completed_point_count") != len(points)
         or run.get("serialized_point_count") != len(points)
         or run.get("final_artifacts_rebuilt_from_journal_in_fresh_process") is not True
         or run.get("standalone_recomputation_required") is not True
+        or run.get("historical_stage1g_v1_terminal_class") != "inconclusive_runtime"
+        or run.get("historical_stage1g_v1_report_sha256") != V1_REPORT_SHA256
+        or run.get("historical_stage1g_v1_preflight_sha256") != V1_PREFLIGHT_SHA256
         or run.get("claim_boundary") != config["claim_boundary"]
     ):
         raise ValueError("Stage 1G run manifest differs")
     environment = cast(dict[str, Any], records["environment_manifest.json"])
     telemetry = environment.get("telemetry")
     if (
-        environment.get("artifact_type") != "stage1g_environment_manifest"
+        environment.get("artifact_type") != "stage1g_v2_environment_manifest"
         or environment.get("status") != "passed"
         or not isinstance(telemetry, dict)
         or telemetry.get("violations") != []

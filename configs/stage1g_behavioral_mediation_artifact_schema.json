@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "experiment_class": "stage1g_behavioral_mediation_pilot",
+  "experiment_class": "stage1g_v2_quantization_aware_behavioral_mediation",
   "required_files": [
     "protocol_manifest.json",
     "output_sensitivity_validation.json",

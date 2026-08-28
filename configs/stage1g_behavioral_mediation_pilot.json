@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "experiment_class": "stage1g_behavioral_mediation_pilot",
-  "branch": "stage-1g-behavioral-mediation-pilot",
-  "base_commit": "c1bb6a3bbab3de945767eded4503b17343ba88e6",
-  "source_branch": "stage-1f-prospective-one-probe-confirmation",
+  "experiment_class": "stage1g_v2_quantization_aware_behavioral_mediation",
+  "branch": "stage-1g-v2-quantization-aware-behavioral-mediation",
+  "base_commit": "6a5bc86c24c35b6920c9682f82ee7874c80bdf58",
+  "source_branch": "stage-1g-behavioral-mediation-pilot",
   "phase": "protocol_frozen_before_any_stage1g_baseline_model_call",
   "runtime": {
     "model_identifier": "google/gemma-3-270m",
@@ -27,7 +27,7 @@
     "offline_required": true
   },
   "prompt_ordering": {
-    "domain": "stage1g-behavior-v1",
+    "domain": "stage1g-behavior-v2",
     "formula": "SHA256(base_commit|domain|prompt_id)",
     "ascending_hex": true,
     "take_first_eligible": 8,
@@ -98,16 +98,29 @@
     "contrast": " Stockholm",
     "minimum_active_features": 8,
     "candidate_limit": 64,
-    "selection": "descending_absolute_autograd_g_then_feature_coordinate_with_unique_layer_preference",
-    "central_relative_half_width": 0.0625,
-    "require_distinct_bf16_low_and_high": true,
-    "sign_agreement_minimum": 0.9,
-    "spearman_minimum": 0.9,
-    "median_symmetric_normalized_error_maximum": 0.05,
+    "selection": "descending_absolute_batched_vjp_then_feature_coordinate_with_unique_layer_preference",
+    "independent_reference": "raw_unnormalized_feature_to_answer_and_contrast_logit_edges_divided_by_positive_activation",
+    "independent_reference_rationale": "pinned_circuit_tracer_0_5_2_exposes_signed_raw_unnormalized_output_edge_rows_without_consuming_OutputSensitivityVJPContext_compute",
+    "reference_selected_before_runtime_result": true,
+    "graph_edge_values_allowed_only_for_engineering_reference": true,
+    "sign_agreement_minimum": 1.0,
+    "spearman_minimum": 0.99,
+    "median_symmetric_normalized_error_maximum": 0.01,
+    "p95_symmetric_normalized_error_maximum": 0.03,
+    "bf16_resolution_audit": {
+      "minimum_floor": 0.0001,
+      "baseline_repeat_multiplier": 5.0,
+      "logit_ulp_sum_multiplier": 4.0,
+      "relative_activation_changes": [0.0625, 0.125, 0.25, 0.5, 1.0, 2.0],
+      "response_definition": "target_only_injection_behavior_T_minus_engineering_baseline_behavior_T",
+      "derivative_validation_use": "forbidden",
+      "scientific_selection_or_threshold_tuning_use": "forbidden",
+      "require_any_finite_nonzero_bf16_behavior_response_by_maximum_ladder": true
+    },
     "scientific_attempt_consumed": false
   },
   "scoring": {
-    "pair_seed": "stage1g-behavioral-mediation-v1",
+    "pair_seed": "stage1g-quantization-aware-behavioral-mediation-v2",
     "epsilon": 1e-12,
     "crossing_tolerance": 1e-9,
     "discovery_ranker": "inhibitory_influence_q",
@@ -154,10 +167,10 @@
   },
   "metrics": {
     "behavior_metric": "answer_minus_contrast_next_token_logit",
-    "no_effect_floor": "max(1e-4,5*prompt_max_abs_baseline_repeat_behavior_error)",
+    "no_effect_floor": "max(1e-4,5*prompt_max_abs_baseline_repeat_behavior_error,4*(answer_logit_BF16_ULP+contrast_logit_BF16_ULP))",
     "empty_crossing_prompt_statistic": 0.0,
     "bootstrap_resamples": 10000,
-    "bootstrap_seed": "stage1g-behavioral-mediation-prompt-bootstrap-v1",
+    "bootstrap_seed": "stage1g-quantization-aware-behavioral-mediation-prompt-bootstrap-v2",
     "bootstrap_unit": "prompt",
     "bootstrap_interval": "percentile_nearest_rank",
     "confidence_level": 0.95,
@@ -196,9 +209,9 @@
     "canonical_timeout_seconds": 28800
   },
   "artifacts": {
-    "result_directory": "results/stage1g_behavioral_mediation_pilot",
-    "generated_directory": "results/generated/stage1g_behavioral_mediation_pilot",
-    "canonical_attempt_lock": "results/generated/stage1g_behavioral_mediation_pilot/canonical_attempt.lock",
+    "result_directory": "results/stage1g_v2_quantization_aware_behavioral_mediation",
+    "generated_directory": "results/generated/stage1g_v2_quantization_aware_behavioral_mediation",
+    "canonical_attempt_lock": "results/generated/stage1g_v2_quantization_aware_behavioral_mediation/canonical_attempt.lock",
     "required_files": [
       "protocol_manifest.json",
       "output_sensitivity_validation.json",
@@ -211,6 +224,7 @@
     ]
   },
   "claim_boundary": {
+    "historical_stage1g_v1_terminal_class": "inconclusive_runtime",
     "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
     "simple_critical_alpha_calibration": "retired",
     "official_bf16_reproduction": "pending",

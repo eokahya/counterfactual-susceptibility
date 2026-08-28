@@ -241,6 +241,136 @@ class Stage1GPredictionBackend(Stage1CVersion3PredictionBackend):
             gc.collect()
             torch.mps.empty_cache()
 
+    def raw_output_edge_sensitivity_reference(
+        self,
+        targets: Sequence[FeatureRef],
+        *,
+        answer_token_id: int,
+        contrast_token_id: int,
+    ) -> tuple[dict[str, float], ...]:
+        """Compute an independent signed raw-edge reference for active targets.
+
+        This path deliberately uses the pinned attribution context's raw,
+        unnormalized feature-to-logit edge rows.  It never calls, reads, or
+        accepts output from :meth:`output_sensitivities` or
+        :class:`OutputSensitivityVJPContext`.
+        """
+
+        if (
+            not targets
+            or tuple(targets) != tuple(sorted(set(targets)))
+            or answer_token_id == contrast_token_id
+        ):
+            raise ScientificInputError("raw output-edge reference targets differ")
+        torch = self.torch
+        input_ids = self.model.ensure_tokenized(self.prompt)
+        final_position = int(input_ids.shape[-1]) - 1
+        if final_position < 1:
+            raise ScientificInputError("raw output-edge behavior position differs")
+        context: Any = None
+        raw_rows: Any = None
+        selected_edges: Any = None
+        selected_indices: Any = None
+        try:
+            context = self.model.setup_attribution(input_ids)
+            activation_matrix = context.activation_matrix.coalesce()
+            if (
+                activation_matrix.device.type != "cpu"
+                or activation_matrix.dtype != torch.bfloat16
+                or activation_matrix.ndim != 3
+            ):
+                raise ScientificInputError(
+                    "raw output-edge activation metadata differs"
+                )
+            coordinates = activation_matrix.indices().T.tolist()
+            activations = activation_matrix.values().tolist()
+            lookup = {
+                (int(layer), int(position), int(feature_id)): (
+                    index,
+                    float(activation),
+                )
+                for index, ((layer, position, feature_id), activation) in enumerate(
+                    zip(coordinates, activations, strict=True)
+                )
+            }
+            matched: list[tuple[int, float]] = []
+            for target in targets:
+                value = lookup.get((target.layer, target.position, target.feature_id))
+                if value is None or value[1] <= 0.0 or not math.isfinite(value[1]):
+                    raise ScientificInputError(
+                        "raw output-edge target is not baseline active"
+                    )
+                matched.append(value)
+            logit_vectors = torch.stack(
+                (
+                    self.model.unembed_weight[answer_token_id],
+                    self.model.unembed_weight[contrast_token_id],
+                )
+            )
+            if (
+                logit_vectors.device.type != "mps"
+                or logit_vectors.dtype != torch.bfloat16
+                or not bool(torch.isfinite(logit_vectors).all().item())
+            ):
+                raise ScientificInputError("raw output-edge logit vectors differ")
+            with self.model.trace() as tracer:
+                with tracer.invoke(input_ids.expand(2, -1)):
+                    pass
+                barrier = tracer.barrier(2)
+                self.model.configure_gradient_flow(tracer)
+                self.model.configure_skip_connection(tracer, barrier=barrier)
+                context.cache_residual(self.model, tracer, barrier=barrier)
+            raw_rows = context.compute_batch(
+                layers=torch.full((2,), 18, dtype=torch.long),
+                positions=torch.full((2,), final_position, dtype=torch.long),
+                inject_values=logit_vectors,
+                retain_graph=False,
+            )
+            if (
+                raw_rows.device.type != "mps"
+                or raw_rows.dtype != torch.bfloat16
+                or tuple(raw_rows.shape[:1]) != (2,)
+                or not bool(torch.isfinite(raw_rows).all().item())
+            ):
+                raise ScientificInputError("raw output-edge rows differ")
+            selected_indices = torch.tensor(
+                [index for index, _ in matched], device="mps", dtype=torch.long
+            )
+            selected_edges = raw_rows.index_select(1, selected_indices)
+            scalar_edges = selected_edges.detach().cpu().tolist()
+            result: list[dict[str, float]] = []
+            for column, (_, activation) in enumerate(matched):
+                answer_edge = float(scalar_edges[0][column])
+                contrast_edge = float(scalar_edges[1][column])
+                reference = (answer_edge - contrast_edge) / activation
+                if not all(
+                    math.isfinite(item)
+                    for item in (activation, answer_edge, contrast_edge, reference)
+                ):
+                    raise ScientificInputError(
+                        "raw output-edge reference scalar is non-finite"
+                    )
+                result.append(
+                    {
+                        "activation": activation,
+                        "raw_answer_logit_edge": answer_edge,
+                        "raw_contrast_logit_edge": contrast_edge,
+                        "reference_g_i": reference,
+                    }
+                )
+            return tuple(result)
+        finally:
+            if selected_edges is not None:
+                del selected_edges
+            if selected_indices is not None:
+                del selected_indices
+            if raw_rows is not None:
+                del raw_rows
+            if context is not None:
+                del context
+            gc.collect()
+            torch.mps.empty_cache()
+
 
 class Stage1GInterventionBackend(Stage1CVersion3InterventionBackend):
     """Apply absolute source/target edits and retain only scalar behavior evidence."""
