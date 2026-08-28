@@ -1,0 +1,4243 @@
+{
+  "absolute_signed_mediation_distribution": {
+    "count": 73,
+    "maximum": 0.1875,
+    "median": 0.0625,
+    "minimum": 0.0,
+    "p25": 0.0,
+    "p75": 0.125,
+    "p95": 0.125
+  },
+  "artifact_type": "stage1g_v2_analysis_summary",
+  "bootstrap": {
+    "B_prospective_sign_accuracy": {
+      "defined_resamples": 10000,
+      "lower": 0.0,
+      "requested_resamples": 10000,
+      "upper": 0.0
+    },
+    "panel_differences": {
+      "B_minus_G_above_floor_fraction": {
+        "defined_resamples": 10000,
+        "lower": 0.0,
+        "requested_resamples": 10000,
+        "upper": 0.0
+      },
+      "B_minus_G_clamp_reduction_fraction": {
+        "defined_resamples": 10000,
+        "lower": -0.16666666666666669,
+        "requested_resamples": 10000,
+        "upper": 0.38541666666666663
+      },
+      "B_minus_G_mean_abs_M": {
+        "defined_resamples": 10000,
+        "lower": -0.006510416666666669,
+        "requested_resamples": 10000,
+        "upper": 0.059895833333333336
+      },
+      "B_minus_G_median_abs_M": {
+        "defined_resamples": 10000,
+        "lower": -0.01171875,
+        "requested_resamples": 10000,
+        "upper": 0.0625
+      },
+      "B_minus_Q_above_floor_fraction": {
+        "defined_resamples": 10000,
+        "lower": 0.0,
+        "requested_resamples": 10000,
+        "upper": 0.0
+      },
+      "B_minus_Q_clamp_reduction_fraction": {
+        "defined_resamples": 10000,
+        "lower": 0.13541666666666666,
+        "requested_resamples": 10000,
+        "upper": 0.5625
+      },
+      "B_minus_Q_mean_abs_M": {
+        "defined_resamples": 10000,
+        "lower": 0.041015625,
+        "requested_resamples": 10000,
+        "upper": 0.05989583333333333
+      },
+      "B_minus_Q_median_abs_M": {
+        "defined_resamples": 10000,
+        "lower": 0.0390625,
+        "requested_resamples": 10000,
+        "upper": 0.07421875
+      }
+    }
+  },
+  "canonical_baseline_repeat_error_by_prompt_diagnostic": {
+    "G01": 0.0,
+    "G02": 0.0,
+    "G04": 0.0,
+    "G07": 0.0,
+    "G08": 0.0,
+    "G10": 0.0,
+    "G18": 0.0,
+    "G19": 0.0
+  },
+  "claim_boundary": {
+    "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
+    "historical_stage1g_v1_terminal_class": "inconclusive_runtime",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending",
+    "simple_critical_alpha_calibration": "retired"
+  },
+  "coverage": {
+    "missing_condition_count": 0,
+    "noncrossing_membership_count_by_panel": {
+      "B": 3,
+      "D": 15,
+      "G": 19,
+      "Q": 0
+    },
+    "panel_shortfalls": {
+      "B": 0,
+      "D": 0,
+      "G": 0,
+      "Q": 0
+    },
+    "quantization_collapse_count": 0
+  },
+  "diagnostic_fp32_shadow_T_used": false,
+  "directional_controls": {
+    "membership_count": 16,
+    "movement_toward_gate_violation_count": 3,
+    "movement_toward_gate_violation_fraction": 0.1875
+  },
+  "effect_to_bf16_resolution_stratification": {
+    "all_positive_execution_pairs": {
+      "1x_to_lt_2x": {
+        "above_bf16_resolution_floor_fraction": 0.0,
+        "analyzable_mediation_count": 0,
+        "crossing_count": 0,
+        "crossing_prompt_count": 0,
+        "execution_pair_count": 0,
+        "mean_abs_mediation": 0.0,
+        "median_abs_mediation": 0.0,
+        "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+        "target_injection_sign_agreement": 0.0
+      },
+      "2x_to_lt_4x": {
+        "above_bf16_resolution_floor_fraction": 0.0,
+        "analyzable_mediation_count": 0,
+        "crossing_count": 0,
+        "crossing_prompt_count": 0,
+        "execution_pair_count": 0,
+        "mean_abs_mediation": 0.0,
+        "median_abs_mediation": 0.0,
+        "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+        "target_injection_sign_agreement": 0.0
+      },
+      "4x_to_lt_8x": {
+        "above_bf16_resolution_floor_fraction": 0.0,
+        "analyzable_mediation_count": 0,
+        "crossing_count": 0,
+        "crossing_prompt_count": 0,
+        "execution_pair_count": 0,
+        "mean_abs_mediation": 0.0,
+        "median_abs_mediation": 0.0,
+        "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+        "target_injection_sign_agreement": 0.0
+      },
+      "ge_8x": {
+        "above_bf16_resolution_floor_fraction": 0.0,
+        "analyzable_mediation_count": 0,
+        "crossing_count": 0,
+        "crossing_prompt_count": 0,
+        "execution_pair_count": 0,
+        "mean_abs_mediation": 0.0,
+        "median_abs_mediation": 0.0,
+        "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+        "target_injection_sign_agreement": 0.0
+      },
+      "lt_1x": {
+        "above_bf16_resolution_floor_fraction": 0.0,
+        "analyzable_mediation_count": 73,
+        "crossing_count": 73,
+        "crossing_prompt_count": 8,
+        "execution_pair_count": 95,
+        "mean_abs_mediation": 0.059931506849315065,
+        "median_abs_mediation": 0.0625,
+        "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+        "target_injection_sign_agreement": 0.4383561643835616
+      }
+    },
+    "by_panel": {
+      "B": {
+        "1x_to_lt_2x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "2x_to_lt_4x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "4x_to_lt_8x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "ge_8x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "lt_1x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 29,
+          "crossing_count": 29,
+          "crossing_prompt_count": 8,
+          "execution_pair_count": 32,
+          "mean_abs_mediation": 0.08836206896551724,
+          "median_abs_mediation": 0.0625,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.5172413793103449
+        }
+      },
+      "G": {
+        "1x_to_lt_2x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "2x_to_lt_4x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "4x_to_lt_8x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "ge_8x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "lt_1x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 13,
+          "crossing_count": 13,
+          "crossing_prompt_count": 7,
+          "execution_pair_count": 32,
+          "mean_abs_mediation": 0.0625,
+          "median_abs_mediation": 0.0625,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.3076923076923077
+        }
+      },
+      "Q": {
+        "1x_to_lt_2x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "2x_to_lt_4x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "4x_to_lt_8x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "ge_8x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 0,
+          "crossing_count": 0,
+          "crossing_prompt_count": 0,
+          "execution_pair_count": 0,
+          "mean_abs_mediation": 0.0,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.0
+        },
+        "lt_1x": {
+          "above_bf16_resolution_floor_fraction": 0.0,
+          "analyzable_mediation_count": 32,
+          "crossing_count": 32,
+          "crossing_prompt_count": 8,
+          "execution_pair_count": 32,
+          "mean_abs_mediation": 0.037109375,
+          "median_abs_mediation": 0.0,
+          "predicted_vs_observed_sign_accuracy_above_floor": 0.0,
+          "target_injection_sign_agreement": 0.4375
+        }
+      }
+    }
+  },
+  "eligible_prompt_count": 8,
+  "experiment_class": "stage1g_v2_quantization_aware_behavioral_mediation",
+  "necessity_and_sufficiency": {
+    "B_injection_denominator": 29,
+    "B_injection_exact_binomial_95_interval": [
+      0.3253149963614562,
+      0.7055144170481589
+    ],
+    "B_injection_sign_agreement": 0.5172413793103449,
+    "B_injection_sign_successes": 15,
+    "M_vs_I_spearman": 0.18810553585838474,
+    "oracle_amplitude_diagnostic_M_vs_observed_M_spearman": 0.32369014796715856,
+    "oracle_amplitude_diagnostic_median_symmetric_normalized_error": 1.9876045256126076,
+    "predicted_M_median_symmetric_normalized_error": 1.9852892250893963,
+    "predicted_M_vs_observed_M_spearman": 0.33078350099501597
+  },
+  "no_effect_floor_by_prompt": {
+    "G01": 0.75,
+    "G02": 0.75,
+    "G04": 0.75,
+    "G07": 0.75,
+    "G08": 0.75,
+    "G10": 0.75,
+    "G18": 0.75,
+    "G19": 1.0
+  },
+  "pair_effects": [
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "7405db2d5177a564f7288c92589fd3ef6854af77c61d3d8673356ad702a2b5f3",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.75,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "597301f967f2fa085f5892ac4f700c35f7c3dc4a8ccd7e47ddb36d4d50cbfb8e",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.75,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "c6a057f08131502f72929d7d2e56a3f2c6cf9105ba7770b85dd1d57ea8cf21a2",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.01266292855143547,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.009497196413576603,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.75,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "e065ac9adefce4924b8c68999e2da92c51ad39c5a8411b92c2c6f4f56262a6d5",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.004708110975722472,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.003531083231791854,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.9375,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "a8ecd40b89fe2460c1948760c1e6233653e26371a461a58a0e2b6b3e58518bc4",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.007654484361410141,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.005740863271057606,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": -0.25,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "e1df50d9b7a298af2ac7bf7a6a7a7e6299761f574a4c3d045aac620f94e4c1e7",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.004425467147181432,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0033191003603860736,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.875,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.010584354400634766,
+      "pair_id": "55e4cd75d3df5cb74d26818591ed1fc4a5c406191b992bb6461dd0083b393ff6",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.014402253553271294,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.01080169016495347,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.875,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 18.875,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.017078399658203125,
+      "pair_id": "29b14cfd33d958bb9f1ca4423bf09742e7f3f5a719c87543e0f7e5c0915287de",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.018574923276901245,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.013931192457675934,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 1.1875,
+      "source_effect": 0.3125,
+      "target_amplitude_under_source_ablation": 37.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.012475967407226562,
+      "pair_id": "0befd1628a08e50d7f7219de373731f2abd2aeb230e6590bb290f687d4487038",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.015273208419481913,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.011454906314611435,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 1.0625,
+      "source_effect": 0.1875,
+      "target_amplitude_under_source_ablation": 31.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0009104609489440918,
+      "pair_id": "2a211bbc7b4eb9fceb64473df322e07af41dd443da4d1cc99ac2a5b330b61a44",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0011730256179968517,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0008797692134976387,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.9375,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.1875,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B",
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.25,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.09459304809570312,
+      "pair_id": "56fcf7daeb98661dbbfd1d5956668e957dbd81ddc41f5eb074d0d37f0d77472d",
+      "panel_ranks": {
+        "B": 1,
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.12294483184814453,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0922086238861084,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 1.4375,
+      "source_effect": 0.5625,
+      "target_amplitude_under_source_ablation": 181.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0009140968322753906,
+      "pair_id": "cf48c6ecaa9d1d78330c927cfbb5fa2a7d483320b7e6c1c048308b4a2d85b3f6",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0011720247566699982,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0008790185675024986,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.9375,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 213.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.875,
+      "baseline_repeat_behavior_T": 0.875,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0,
+      "pair_id": "4c788177d5df9c1dff43c603376e03808d5a4f3b49b0c88eda9fdfc15f1a3395",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G10",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.8125,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 227.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "a735b95930d69700281db52dca9061f5d17437afa2b43b0862df7aa1382e5d68",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.025945927016437054,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.01945944526232779,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.375,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.027996063232421875,
+      "pair_id": "1bb4f9ca8f04b37d1485bf9732ff97637c64dc29748a3982c1975c2ed1f436ad",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.036206092375020184,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.02715456928126514,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.375,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 20.5,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "5fa4fbaef9101d5dbb2006eb600a5215f5b1c55df635527d6c4081576bab2f18",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.007206321849177281,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.005404741386882961,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.5,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "0df9fb7eb373d08f1b51a011f9ddb718c3b4c9857d8fb7fd103a0f19e2e69fb2",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.5,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": true,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "9c35650bc0fefeca92746b455c3358dd8f96fec176204a41f9a480f1d06f04bb",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.5,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 18.75,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "17033a491b7512e19e236528405d4b60baa2af871642ec0be8454fbaff3bb0fd",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.010596046845118204,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.007947035133838654,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.4375,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0355072021484375,
+      "pair_id": "c49a247e242702efa6649b82606c595624b3c59e2055d40a2448f89391165613",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.04926517605781555,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.036948882043361664,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.375,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 26.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.022513389587402344,
+      "pair_id": "dc7260f4a3897151f7d31e6e75726ea65dc2758205529bc8dc0a28967855a337",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.026934564113616943,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.020200923085212708,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.5,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 22.875,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.030364990234375,
+      "pair_id": "e866f65758b8fe4becdddcae10ca6e266aacf21e340fe250468555bed764f64d",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.04028402268886566,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.030213017016649246,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.25,
+      "source_effect": -0.3125,
+      "target_amplitude_under_source_ablation": 40.0,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "2f6446faedca804d00178a5fca2bdbf331f188f12ed9ea9128e8d76cceab392e",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.032804906368255615,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.02460367977619171,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.4375,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0014415979385375977,
+      "pair_id": "d1eb807718d4ea99a47e892c8060b4f9ce5af12137e420caf7c404f2b33d829d",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0019304491579532623,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0014478368684649467,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.5,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 139.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0015267729759216309,
+      "pair_id": "a5b18da74cf74d673a032a5cec3f771498674b123c321785de9f7f370cb4fbb9",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0019670737286408744,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0014753052964806557,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.4375,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 4.94588166475296e-05,
+      "pair_id": "019e2c9bfa7518d93af64f7386ea0c626fb3b3a4bacb895ae3adb2a43e94d67a",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 7.830817291202645e-05,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 5.8731129684019834e-05,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.4375,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 6.5625,
+      "baseline_repeat_behavior_T": 6.5625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0,
+      "pair_id": "02066f1433170a3abc4e6c80fbaa39cec16a1b0ceddc66c8d34ecfa9fea620f7",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G01",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.5,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 274.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.009589672088623047,
+      "pair_id": "174903b33fd9a6b19be90545db8b63ff9c142b3633d690d195bb0fd9b9c80672",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.008199136704206467,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.00614935252815485,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 5.6875,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.00669407844543457,
+      "pair_id": "9a8fb2fb5c6e0cdf26f1c6583dcb71995a8bf52e39e3238fbeaa94b325b71c1d",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.008251046761870384,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.006188285071402788,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 5.96875,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "2b9cd6e25fb97560b536382488c78dafd106e36bb768d71e5293df95f9350235",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "14ba3e8afa2e8fae21ae99c6b0e0bad21f63b83b47adee43c2f159de6ef55428",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.048248291015625,
+      "pair_id": "ace10bc46de6e3b97ec15fbdb78de6a2de61dd6ca7f22f336674506f0633d8e4",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.06484172493219376,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.04863129369914532,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 17.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "5dea1d944e7ed07e9bfee7ec382c634f2e339c1c8b3104f234a8e06e0e56c1ba",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0057349835212032,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0043012376409024,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.05747222900390625,
+      "pair_id": "49292ab62a6a1704a700f8bf85cc2d6d243ab82591a0599ef27333c9f6c73f9f",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.08309304714202881,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.062319785356521606,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 20.25,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.022762298583984375,
+      "pair_id": "42f7d0ca83a67b099136294a8b64c899d1d5b62d96933ffb82024cb297f260a4",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.030279815196990967,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.022709861397743225,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.3125,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 39.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0008823573589324951,
+      "pair_id": "0d9e6d6d2f3554d67d040172451e08d396c68127d39f458f40eef72c974b55c9",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.001181568019092083,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0008861760143190622,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 139.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.002129077911376953,
+      "pair_id": "059b9f24b20448a2c4e8677cf8d2579a9602d18715c036ebbc684b5fa985c262",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0027430752913157144,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.002057306468486786,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.021903038024902344,
+      "pair_id": "bf215a6d6a256319fcdfd9726f59906ea15dc757673036164bfdb44d45010121",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.03544939557711283,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.026587046682834625,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 96.5,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0485076904296875,
+      "pair_id": "0985c39dbbc3cb084c12505ff5716052ae1812bcccf85c3e13aeddc072077cd2",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.06458032131195068,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.04843524098396301,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.625,
+      "source_effect": 0.1875,
+      "target_amplitude_under_source_ablation": 136.0,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0010567009449005127,
+      "pair_id": "697e2c47e71b8109d7539cc9a8ce9f0541634b418daee46da57fefc3659a36ec",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0016730752152701218,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0012548064114525914,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.4375,
+      "baseline_repeat_behavior_T": 5.4375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0,
+      "pair_id": "becacfdfe6ceb1bfb060d9e35ce40d1c5a24d5047c854ac303d17c6b05c31b7e",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G02",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 274.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.005116939544677734,
+      "pair_id": "e7936fb67e9047d150b026970da70b5efe44debe64fb12bb42e3d41641ba935a",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.004313744138926268,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0032353081041947007,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.3125,
+      "source_effect": -0.3125,
+      "target_amplitude_under_source_ablation": 4.5625,
+      "target_injection_effect_I": -0.1875
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "f2b743bbd08b0e959a530333e96b02dd18fbf8c2abcbefa9cc4dbc66f618e6f0",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.3125,
+      "source_effect": -0.3125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "a340f8fb31a1fb1d90f1d575a75ee7d16986ba1fb1d4dd3e17b47e3092010022",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.5,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "fe73fff41bf03f0492783eb9fc33a443ee88b9d4b5dd3a9364350d569120a467",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.006802915285031001,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.005102186463773251,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "7a6e270c5f3e4ac4080842f6118251b5aaaa910072a5d93fe50c76f5ff1f30b6",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.047161269932985306,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.03537095244973898,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "4a7dbdc151ed86d2ea93e478581a38d623014db1e6df48b71aed5dc6860b6323",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.00790560245513916,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.00592920184135437,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.375,
+      "source_effect": -0.25,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.06306838989257812,
+      "pair_id": "ef887caacccb4befa6a607495e369014b046e788ea1701df550af691948a04db",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0681087076663971,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.05108153074979782,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.375,
+      "source_effect": -0.25,
+      "target_amplitude_under_source_ablation": 41.75,
+      "target_injection_effect_I": -0.1875
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.042572021484375,
+      "pair_id": "6a90cb67f1bd3ebfd7ba4c094864c10ed57f2dbed77fc3d101cca9b9a848c858",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.056248406569163,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.04218630492687225,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 144.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.013113021850585938,
+      "pair_id": "2e41e1b8a05cff59c5ee8b74d554eb29d1f0ff4944be52ddb6de7887a2691d69",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.023128092288970947,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.01734606921672821,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 6.3125,
+      "source_effect": -1.3125,
+      "target_amplitude_under_source_ablation": 125.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 4.869652912020683e-06,
+      "pair_id": "e98eea3f0711695480e529421e5a2fe2231aff8cb3ba39047abf7c03b1555827",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 6.2739951924110455e-06,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 4.705496394308284e-06,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.029314041137695312,
+      "pair_id": "022d1c4126575d63716cee8521d6a4dc90721d0f02c671512836b64101074154",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0399608314037323,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.029970623552799225,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.5,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 109.0,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.03978729248046875,
+      "pair_id": "a2d6850d700db67d02a9db43ea84906c93a22daa46a3a133a092bb82e0ba0855",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.053147077560424805,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.039860308170318604,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.4375,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 149.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0001765117049217224,
+      "pair_id": "0c05281ee077cdb3c31904b934c62479f77c435a68ff31005b50d26de5524fd0",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.00027947108416507643,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0002096033131238073,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.625,
+      "baseline_repeat_behavior_T": 7.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0,
+      "pair_id": "7a062b9307393f583edde4994e7e4513f22b5890b4076480688719170ef7cdc4",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G08",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 252.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "e9d231d64cf1b509717ef4a888239b868e0e2f889ca460bae79dc536866920c3",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.005422837411363919,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.00406712805852294,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.4375,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": true,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "8c5194d494e0b47c919d140c784c21fc2daee809b7b580125b435cd7a7258b21",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": true,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "6a0ba2eea89dd00ebca2ecb91509d39256a1ff78bcf304f4dd1cff0b7360d18e",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "e7a5bdb6f22151005cddf905e88270153e5d51f18d3510246224804f723c8053",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.05373617013295492,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.040302127599716187,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.1875,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.25,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0070896148681640625,
+      "pair_id": "090b07de1612eaecb8d6cabc71cb5187218ca53e93aab2624f963ac5fa07ddf6",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.010664254426956177,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.007998190820217133,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.9375,
+      "source_effect": 0.3125,
+      "target_amplitude_under_source_ablation": 5.53125,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.041439056396484375,
+      "pair_id": "dcbff8405c4a0b15abf09d9fca5f4ddb3a83a43410f840ddc4d338126c6d2f4e",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.06147724390029907,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.046107932925224304,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.9375,
+      "source_effect": 0.3125,
+      "target_amplitude_under_source_ablation": 19.125,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "8a782ed00ba60e5a81776e5dc436f259794424404346b73a95fcafe4d49d668d",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.08230336507161458,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.06172752380371094,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.9375,
+      "source_effect": 0.3125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.015630722045898438,
+      "pair_id": "ab9cd1ce57a0abb6e9d720f88c13648b71fc9a15daf1cff0aad11f79f9185b79",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.01984998087088267,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.014887485653162003,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.9375,
+      "source_effect": 0.3125,
+      "target_amplitude_under_source_ablation": 27.5,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.057689666748046875,
+      "pair_id": "a6897d55acd86f8c5b4a029303b6357786f352871ac473f4ae0ebb190ac87eb9",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.06659928957621257,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.049949467182159424,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.75,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 26.625,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.03046417236328125,
+      "pair_id": "a8471001762482092a868d88ba72660a15b1ca9d34c6aa74c3e42806a59ae4d5",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.042713701725006104,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.03203527629375458,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.75,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 121.0,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0005840957164764404,
+      "pair_id": "b38f500c52a5202c8a318f121470fe4519331d3f8362e201a73bfaa27d26550f",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0007821647450327873,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0005866235587745905,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 139.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0012186169624328613,
+      "pair_id": "daa386a838fb040137cea560f965c4f212762c6e49a34b91e6e792ae53cd3e4a",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.001570049673318863,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0011775372549891472,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0003885626792907715,
+      "pair_id": "b4585960ad195baa918ac773b1e1230a8b7780362f129235386f8df23ae7a96b",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0006152115141352018,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.00046140863560140133,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 5.625,
+      "baseline_repeat_behavior_T": 5.625,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0,
+      "pair_id": "9412e4e704f66ac7102c84ce5cde3acb17281a3cf081bf516a2e9c9d4f40ffcb",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G04",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 5.5625,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 274.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.00850677490234375,
+      "pair_id": "9c5e8b559e0eecf435d9eaa5b9d3a035fac428b2209b9abb50cc1ba24560e4e7",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0100212295850118,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.00751592218875885,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.0625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 6.96875,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "3f1bc132a476fe2ac92112de154f66e8e1bcd951c14fb1203cd011c7e09887b9",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.025453008245676756,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.019089756184257567,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.0625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "a04b56ee367354639619f5db8878e206ba0ae9257e819ef9da3b62d86dfc653b",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.0625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "e4d3735cb016836b337f70512062dc68d961889bbb25923987f0a5c258f70ac7",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.1875,
+      "source_effect": 0.25,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0041037797927856445,
+      "pair_id": "8690a0fe7b6b17fc63c2c1c5297003286847596d2084466fc1c6b54f37a31aa2",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.005456793587654829,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.004092595190741122,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.1875,
+      "source_effect": 0.25,
+      "target_amplitude_under_source_ablation": 4.78125,
+      "target_injection_effect_I": 0.1875
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "0d8a01af08416f3a3ed24104b493b7d3b3c520bb750548a8794908506f16220d",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.04272419214248657,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.03204314410686493,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.1875,
+      "source_effect": 0.25,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.032245635986328125,
+      "pair_id": "94af9531a4adf048e4c278c866281c0ec2d14c0ceda80b1a5f9efd9ef49c6567",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.04698422799507777,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.03523817099630833,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.3125,
+      "source_effect": 0.375,
+      "target_amplitude_under_source_ablation": 19.75,
+      "target_injection_effect_I": 0.1875
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.00039756298065185547,
+      "pair_id": "45188a35960cd3cfed901b255878ef5e31e9e55af94567e29f46c020d4b2d37e",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0004891775703678528,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.00036688317777588964,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.1875,
+      "source_effect": 0.25,
+      "target_amplitude_under_source_ablation": 92.0,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0005053877830505371,
+      "pair_id": "55220edd51f49845db3bc968c906b310b193a556ae1c260871012a1d567b5bfc",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0006767666588226954,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0005075749941170216,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.0,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 139.0,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.038146018981933594,
+      "pair_id": "0890becea17699a7efa72d2da1dbba0b733ad94598d8449f5cb9278a11aa6bfa",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.05106702446937561,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.03830026835203171,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.125,
+      "source_effect": 0.1875,
+      "target_amplitude_under_source_ablation": 99.5,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.00013044103980064392,
+      "pair_id": "453e56a2bf20fbb1986b439b53a1791753e9b29d649eadff2f0b027b46f19a63",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.00016805847796301046,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.00012604385847225785,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.0625,
+      "source_effect": 0.125,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.032830238342285156,
+      "pair_id": "81725ce994125152a4f6c06e41b948e87cea743847d3a0a992813037c2cf58e9",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.044029757380485535,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.03302231803536415,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.125,
+      "source_effect": 0.1875,
+      "target_amplitude_under_source_ablation": 112.5,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.036151885986328125,
+      "pair_id": "7c230736bfcd5329c036da3bd9b62986da3abf5182a89cc2eb71c2833c9b455a",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.05007583647966385,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.03755687735974789,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 1.9375,
+      "source_effect": -1.0,
+      "target_amplitude_under_source_ablation": 162.0,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 2.9375,
+      "baseline_repeat_behavior_T": 2.9375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 1.8417485989630222e-06,
+      "pair_id": "e3d9df09cc56a2632f2fa584bcb0a76ab97b2395ec4e2bbcdd2b785d7eee9d2d",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 2.916041618542901e-06,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 2.1870312139071757e-06,
+      "prompt_id": "G07",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 3.0,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": 0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "2f87a3f548765eba7e57cc60c467b386e6cd31ff052ba70e58d19535d517637c",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.028901908081024885,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.028901908081024885,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "fb5b31b68dd31607237a545ec726a0df252337174a30829c536ca3d5c6b3c540",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.03129211254417896,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.03129211254417896,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.023369789123535156,
+      "pair_id": "150ac79a3a07ed356ceb97d0f6bd19c1992184419f712e0234a130e59e8f9c90",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.02328505041077733,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.02328505041077733,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 21.125,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "b0ec47aebc6a1dec4f088ce18b50f578704c5aed4437e6c040384cc2bbe468c1",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "70e673e7e03c1392e9b7a7bd1ad6a9b7465e983495e7951ee3214d070181c18d",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.007055044174194336,
+      "pair_id": "5311ce71b131699db72a88220beecd1070f0d8ba1ee998a345ea89d978018e85",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.006873724050819874,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.006873724050819874,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 7.28125,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.03139019012451172,
+      "pair_id": "8f92d6808fc1180fe8ecb4b687b23e45e7923df3ab38f137bcabc831ab060b4b",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.03465712070465088,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.03465712070465088,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 28.375,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.01318359375,
+      "pair_id": "63dd56bdd2230a68598fad66a8bd7b8a659a7c2ce4d6084cba4917abacc7623e",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.016439437866210938,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.016439437866210938,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 27.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.038886070251464844,
+      "pair_id": "2ac6b328c4b2856e4d8f38e970282168dc2e6df2e369c101569f560a84d5cb00",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.03275258932262659,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.03275258932262659,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 29.125,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.03437995910644531,
+      "pair_id": "3f6b48768ae08cbc2252f710d39701f502cb4b5bcadd1cd56327e6e1545ad128",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.038185250014066696,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.038185250014066696,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 25.75,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.000766366720199585,
+      "pair_id": "b79f74160281b7c2d422353dcc89aed9778b4cbaa51b25431ff9c43a83627ab6",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0007696833927184343,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0007696833927184343,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.5,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 139.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.125,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0011205673217773438,
+      "pair_id": "a096b96ddd92c3b6dd5c56454202cb9dabbf2e1c62f340a71de99737c528f680",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.00108279287815094,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.00108279287815094,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.0,
+      "pair_id": "cb93af843feb7bebc786b7a904aff029c8e8c7d8ac435a6fe1cee2c7d5a78ed2",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.625,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 191.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 0.625,
+      "baseline_repeat_behavior_T": 0.625,
+      "bf16_behavior_resolution_floor": 1.0,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -1.0217539966106415e-05,
+      "pair_id": "0401457275f13db0391dc02ab32eb52637d7bd08a5b34a462e6fc274160c3915",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 1.2133077689213678e-05,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -1.2133077689213678e-05,
+      "prompt_id": "G19",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 0.5,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "56586a2da1de351b738a7859d17a36abd9749d209a1bf868243c537e01365537",
+      "panel_ranks": {
+        "D": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.25,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "D"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "43add42aadffd8f5d289bbd07d414b14d0ef58645d9ae3c97db22b86c6a60cb2",
+      "panel_ranks": {
+        "D": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.0,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.3125,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "c023ec22693962e72c0297994348ac8b52b81283772ee0289ea11d4ade785703",
+      "panel_ranks": {
+        "G": 2
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.026461732263366382,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.019846299197524786,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.125,
+      "source_effect": -0.25,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "a8c9b2ece1ade062cf19006ef24289ed29ac76cdfa90e5412cba6407d1d2b4c3",
+      "panel_ranks": {
+        "G": 4
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.009010028714934984,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.006757521536201239,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.1875,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.010700225830078125,
+      "pair_id": "cc39537b13d4d548a7768eea80c5a546045e573b9fd641ab141ed3f1133206ca",
+      "panel_ranks": {
+        "G": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.013883779446283976,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.010412834584712982,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.1875,
+      "source_effect": -0.1875,
+      "target_amplitude_under_source_ablation": 5.15625,
+      "target_injection_effect_I": 0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "G"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.01367950439453125,
+      "pair_id": "d72831306449fca57a42d35761e747cd3c6d61a6352c0d4b616517adf8f3978f",
+      "panel_ranks": {
+        "G": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.014530830085277557,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.010898122563958168,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.4375,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 11.0,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0010243356227874756,
+      "pair_id": "23d44bc1365fba870cfb00213b8d18cacd5308e6eb89a8604fbf06916e3e17ef",
+      "panel_ranks": {
+        "Q": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0015565697103738785,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0011674272827804089,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 201.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.05606269836425781,
+      "pair_id": "a044ef6403f2721ab826723937369236324a638ef64e28fc2ad0e339c9ca2729",
+      "panel_ranks": {
+        "B": 2
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.06161670386791229,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.04621252790093422,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.3125,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 29.75,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": null,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": null,
+      "observed_crossing": false,
+      "oracle_amplitude_prediction": null,
+      "pair_id": "b68cc1b39a83577e63d76035f4461597e4e27bf328c52e89d918b54383e81704",
+      "panel_ranks": {
+        "B": 1
+      },
+      "point_count": 3,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.06430372595787048,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.04822779446840286,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.3125,
+      "source_effect": -0.0625,
+      "target_amplitude_under_source_ablation": 0.0,
+      "target_injection_effect_I": null
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.016878604888916016,
+      "pair_id": "caf47b5c8c7aa13f905bc1240620939caf880e67bfe2f44f0a768ca7a058a8fa",
+      "panel_ranks": {
+        "B": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.025007039308547974,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.01875527948141098,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 51.75,
+      "target_injection_effect_I": -0.0625
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": true,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": -0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.00041218101978302,
+      "pair_id": "467afa64dbc9a686825c80e2f115c40a31eacdeb7aa6645736970b6f0f1d6eb4",
+      "panel_ranks": {
+        "Q": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0005519531356791655,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.00041396485175937414,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.25,
+      "source_effect": -0.125,
+      "target_amplitude_under_source_ablation": 139.0,
+      "target_injection_effect_I": 0.0
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": true,
+      "mediation_effect_M": -0.125,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "B"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.16666666666666666,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": 0.03357696533203125,
+      "pair_id": "f944aa770f631b0c173a0575ccf8625258ef8d9cc76a3b00986cb17011e88002",
+      "panel_ranks": {
+        "B": 3
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.04423290739456812,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": 0.033174680545926094,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.4375,
+      "source_effect": 0.0625,
+      "target_amplitude_under_source_ablation": 108.0,
+      "target_injection_effect_I": -0.1875
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.0,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0008649379014968872,
+      "pair_id": "b8620978fa1b0b1be7725bf00c1c957f36cbb43fd999ff6956c4a7e0994e6424",
+      "panel_ranks": {
+        "Q": 1
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.001114374337097009,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0008357807528227568,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 235.0,
+      "target_injection_effect_I": -0.125
+    },
+    {
+      "above_no_effect_floor": false,
+      "baseline_behavior_T": 7.375,
+      "baseline_repeat_behavior_T": 7.375,
+      "bf16_behavior_resolution_floor": 0.75,
+      "clamp_reduces_absolute_source_effect": false,
+      "directional_movement_toward_gate_violation": false,
+      "injection_sign_agrees_with_M": false,
+      "mediation_effect_M": 0.0625,
+      "mediation_fraction": null,
+      "method_memberships": [
+        "Q"
+      ],
+      "no_op_absolute_error": 0.0,
+      "observed_abs_mediation_to_bf16_resolution_floor_ratio": 0.08333333333333333,
+      "observed_crossing": true,
+      "oracle_amplitude_prediction": -0.0003269612789154053,
+      "pair_id": "ddae0856dd387608b33d093057aea6df82d2c6531748317e6326c86f6b41ee64",
+      "panel_ranks": {
+        "Q": 4
+      },
+      "point_count": 5,
+      "predicted_abs_mediation_to_bf16_resolution_floor_ratio": 0.0005176779814064503,
+      "predicted_effect_resolution_stratum": "lt_1x",
+      "predicted_signed_mediation": -0.0003882584860548377,
+      "prompt_id": "G18",
+      "prospective_sign_correct": false,
+      "source_ablation_behavior_T": 7.375,
+      "source_effect": 0.0,
+      "target_amplitude_under_source_ablation": 159.0,
+      "target_injection_effect_I": 0.0
+    }
+  ],
+  "panel_metrics": {
+    "B": {
+      "above_floor_fraction": 0.0,
+      "analyzable_mediation_count": 29,
+      "clamp_reduction_fraction": 0.4827586206896552,
+      "crossing_count": 29,
+      "crossing_prompt_count": 8,
+      "crossing_rate": 0.90625,
+      "mean_abs_M": 0.08836206896551724,
+      "median_abs_M": 0.0625,
+      "membership_count": 32
+    },
+    "D": {
+      "above_floor_fraction": 0.0,
+      "analyzable_mediation_count": 0,
+      "clamp_reduction_fraction": 0.0,
+      "crossing_count": 1,
+      "crossing_prompt_count": 1,
+      "crossing_rate": 0.0625,
+      "mean_abs_M": 0.0,
+      "median_abs_M": 0.0,
+      "membership_count": 16
+    },
+    "G": {
+      "above_floor_fraction": 0.0,
+      "analyzable_mediation_count": 13,
+      "clamp_reduction_fraction": 0.38461538461538464,
+      "crossing_count": 13,
+      "crossing_prompt_count": 7,
+      "crossing_rate": 0.40625,
+      "mean_abs_M": 0.0625,
+      "median_abs_M": 0.0625,
+      "membership_count": 32
+    },
+    "Q": {
+      "above_floor_fraction": 0.0,
+      "analyzable_mediation_count": 32,
+      "clamp_reduction_fraction": 0.125,
+      "crossing_count": 32,
+      "crossing_prompt_count": 8,
+      "crossing_rate": 1.0,
+      "mean_abs_M": 0.037109375,
+      "median_abs_M": 0.0,
+      "membership_count": 32
+    }
+  },
+  "panel_overlap": {
+    "membership_pattern_counts": {
+      "B": 31,
+      "B+Q": 1,
+      "D": 16,
+      "G": 32,
+      "Q": 31
+    },
+    "pairwise_unique_execution_pair_overlap": {
+      "B_G": 0,
+      "B_Q": 1,
+      "Q_G": 0
+    }
+  },
+  "primary_behavior_metric": "actual_bf16_answer_minus_contrast_logit",
+  "project_decision": "stop_critical_alpha_finite_probe_and_hvp_work_on_this_runtime_and_redirect",
+  "project_interpretation": {
+    "behavioral_importance_result": "not_supported_on_small_model_plt",
+    "mediation_result": "not_supported_on_small_model_plt",
+    "next": "stop_local_calibration_and_either_test_q_discovery_on_reference_runtime_or_narrow_claims"
+  },
+  "prompt_level_panel_differences": {
+    "B_minus_G": {
+      "above_floor_fraction": 0.0,
+      "clamp_reduction_fraction": 0.10416666666666666,
+      "mean_abs_M": 0.030598958333333332,
+      "median_abs_M": 0.03125
+    },
+    "B_minus_Q": {
+      "above_floor_fraction": 0.0,
+      "clamp_reduction_fraction": 0.35416666666666663,
+      "mean_abs_M": 0.049479166666666664,
+      "median_abs_M": 0.05859375
+    }
+  },
+  "prompt_panel_metrics": {
+    "G01": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.3333333333333333,
+        "crossing_membership_count": 3.0,
+        "mean_abs_M": 0.041666666666666664,
+        "median_abs_M": 0.0625
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 1.0,
+        "mean_abs_M": 0.0625,
+        "median_abs_M": 0.0625
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.0,
+        "median_abs_M": 0.0
+      }
+    },
+    "G02": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.75,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.09375,
+        "median_abs_M": 0.09375
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 3.0,
+        "mean_abs_M": 0.041666666666666664,
+        "median_abs_M": 0.0
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.046875,
+        "median_abs_M": 0.03125
+      }
+    },
+    "G04": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.6666666666666666,
+        "crossing_membership_count": 3.0,
+        "mean_abs_M": 0.08333333333333333,
+        "median_abs_M": 0.0625
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 1.0,
+        "crossing_membership_count": 2.0,
+        "mean_abs_M": 0.15625,
+        "median_abs_M": 0.15625
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.25,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.03125,
+        "median_abs_M": 0.0
+      }
+    },
+    "G07": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.75,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.09375,
+        "median_abs_M": 0.09375
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.5,
+        "crossing_membership_count": 2.0,
+        "mean_abs_M": 0.03125,
+        "median_abs_M": 0.03125
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.015625,
+        "median_abs_M": 0.0
+      }
+    },
+    "G08": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.5,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.09375,
+        "median_abs_M": 0.09375
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 1.0,
+        "crossing_membership_count": 1.0,
+        "mean_abs_M": 0.0625,
+        "median_abs_M": 0.0625
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.046875,
+        "median_abs_M": 0.03125
+      }
+    },
+    "G10": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.5,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.078125,
+        "median_abs_M": 0.0625
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 0.0,
+        "mean_abs_M": 0.0,
+        "median_abs_M": 0.0
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.25,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.046875,
+        "median_abs_M": 0.0
+      }
+    },
+    "G18": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.3333333333333333,
+        "crossing_membership_count": 3.0,
+        "mean_abs_M": 0.08333333333333333,
+        "median_abs_M": 0.0625
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.5,
+        "crossing_membership_count": 2.0,
+        "mean_abs_M": 0.03125,
+        "median_abs_M": 0.03125
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.25,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.046875,
+        "median_abs_M": 0.0625
+      }
+    },
+    "G19": {
+      "B": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.125,
+        "median_abs_M": 0.125
+      },
+      "G": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.0,
+        "crossing_membership_count": 2.0,
+        "mean_abs_M": 0.0625,
+        "median_abs_M": 0.0625
+      },
+      "Q": {
+        "above_floor_fraction": 0.0,
+        "clamp_reduction_fraction": 0.25,
+        "crossing_membership_count": 4.0,
+        "mean_abs_M": 0.0625,
+        "median_abs_M": 0.0625
+      }
+    }
+  },
+  "prospective_sign": {
+    "accuracy": 0.0,
+    "by_panel": {
+      "B": {
+        "accuracy": 0.0,
+        "denominator_above_floor": 0,
+        "exact_binomial_95_interval": [
+          0.0,
+          1.0
+        ],
+        "success_count": 0
+      },
+      "G": {
+        "accuracy": 0.0,
+        "denominator_above_floor": 0,
+        "exact_binomial_95_interval": [
+          0.0,
+          1.0
+        ],
+        "success_count": 0
+      },
+      "Q": {
+        "accuracy": 0.0,
+        "denominator_above_floor": 0,
+        "exact_binomial_95_interval": [
+          0.0,
+          1.0
+        ],
+        "success_count": 0
+      }
+    },
+    "eligible_above_floor_count": 0,
+    "exact_binomial_95_interval": [
+      0.0,
+      1.0
+    ],
+    "success_count": 0
+  },
+  "schema_version": 2,
+  "status": "passed",
+  "supported_criteria": {
+    "B_above_no_effect_floor_fraction": false,
+    "B_minus_Q_prompt_mean_abs_M": true,
+    "B_prospective_sign_accuracy": false,
+    "B_target_injection_sign_agreement": false,
+    "directional_movement_toward_gate_violation": false,
+    "minimum_B_crossing_memberships_and_prompts": true,
+    "minimum_eligible_prompts": true
+  },
+  "supported_criteria_passed": 3,
+  "terminal_class": "completed_stage1g_v2_not_supported",
+  "unique_execution_pair_count": 111
+}

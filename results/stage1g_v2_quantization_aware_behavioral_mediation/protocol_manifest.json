@@ -1,0 +1,326 @@
+{
+  "artifact_type": "stage1g_v2_protocol_manifest",
+  "base_commit": "6a5bc86c24c35b6920c9682f82ee7874c80bdf58",
+  "bf16_resolution_audit": {
+    "baseline_repeat_multiplier": 5.0,
+    "derivative_validation_use": "forbidden",
+    "logit_ulp_sum_multiplier": 4.0,
+    "minimum_floor": 0.0001,
+    "relative_activation_changes": [
+      0.0625,
+      0.125,
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "require_any_finite_nonzero_bf16_behavior_response_by_maximum_ladder": true,
+    "response_definition": "target_only_injection_behavior_T_minus_engineering_baseline_behavior_T",
+    "scientific_selection_or_threshold_tuning_use": "forbidden"
+  },
+  "branch": "stage-1g-v2-quantization-aware-behavioral-mediation",
+  "derivative_validation_thresholds": {
+    "all_values_finite": true,
+    "median_symmetric_normalized_error_maximum": 0.01,
+    "minimum_active_features": 8,
+    "p95_symmetric_normalized_error_maximum": 0.03,
+    "sign_agreement_minimum": 1.0,
+    "spearman_minimum": 0.99
+  },
+  "experiment_class": "stage1g_v2_quantization_aware_behavioral_mediation",
+  "historical_prompt_evidence": {
+    "fresh_exact_prompt_overlap": [],
+    "historical_prompt_texts": {
+      "results/stage1c_v4_protocol_preserving_execution/prediction_manifest.json": [
+        "The capital of Norway is"
+      ],
+      "results/stage1d_multiprompt_gate_benchmark/prediction_manifest.json": [
+        "The author of Hamlet was",
+        "The capital of Canada is",
+        "The capital of Japan is",
+        "The capital of Sweden is",
+        "The chemical symbol for oxygen is",
+        "The currency of Japan is",
+        "The largest planet in the Solar System is",
+        "Water freezes at a temperature of"
+      ],
+      "results/stage1f_prospective_one_probe_confirmation/prediction_manifest.json": [
+        "The author of Pride and Prejudice is",
+        "The boiling point of water is",
+        "The capital of Australia is",
+        "The capital of Brazil is",
+        "The chemical symbol for sodium is",
+        "The currency of Switzerland is",
+        "The language primarily spoken in Brazil is",
+        "The largest ocean is",
+        "The planet known as the Red Planet is",
+        "The square root of 81 is"
+      ]
+    },
+    "intervention_outcomes_read": false,
+    "manifest_sha256": {
+      "results/stage1c_v4_protocol_preserving_execution/prediction_manifest.json": "b2c489317852a2f54d50db783abc17dfdc08590353b0473dbab01ec3d04574cc",
+      "results/stage1d_multiprompt_gate_benchmark/prediction_manifest.json": "56ed1466309813c6f42443b69eb1932c9c02cf83721dd2ee592be12a442aec52",
+      "results/stage1f_prospective_one_probe_confirmation/prediction_manifest.json": "7af0512d1d601b0f429e8c02894c34ac5b2193ce00f81fba3e5018d982976723"
+    }
+  },
+  "historical_stage1f_terminal_class_preserved": "completed_stage1f_e1_not_supported",
+  "historical_stage1g_v1_evidence": {
+    "G01_G20_scientific_baseline_calls": 0,
+    "branch": "stage-1g-behavioral-mediation-pilot",
+    "commit": "6a5bc86c24c35b6920c9682f82ee7874c80bdf58",
+    "hypothetical_or_untracked_scientific_outputs_read": false,
+    "prediction_manifest_created": false,
+    "preflight_sha256": "0e15393e060ceb0f2ec448c19b8281a216ca0adb02304e7b5603246f766fd16f",
+    "prompt_pool_reuse_is_historically_fresh": true,
+    "report_sha256": "ebd3f45cc6b7c6bbf5b4783ed286617bcb4d1646fb116024d349476a04cbf27d",
+    "scientific_attempt_started": false,
+    "scientific_source_suppression_calls": 0,
+    "terminal_class": "inconclusive_runtime"
+  },
+  "historical_stage1g_v1_terminal_class_preserved": "inconclusive_runtime",
+  "independent_derivative_reference": {
+    "batched_vjp_result_consumed_by_reference": false,
+    "method": "raw_unnormalized_feature_to_answer_and_contrast_logit_edges_divided_by_positive_activation",
+    "selected_before_runtime_result": true,
+    "source_api_rationale": "pinned_circuit_tracer_0_5_2_exposes_signed_raw_unnormalized_output_edge_rows_without_consuming_OutputSensitivityVJPContext_compute",
+    "ui_normalized_absolute_pruned_or_influence_normalized_edges": false
+  },
+  "prompt_order": [
+    "G10",
+    "G16",
+    "G01",
+    "G15",
+    "G02",
+    "G14",
+    "G08",
+    "G04",
+    "G07",
+    "G11",
+    "G19",
+    "G18",
+    "G06",
+    "G17",
+    "G09",
+    "G13",
+    "G03",
+    "G12",
+    "G05",
+    "G20"
+  ],
+  "prompt_order_sha256": {
+    "G01": "142e19b1a67cbae6c67f14b91202ad7b56f18089749d5a7c21f718ce1ecbf380",
+    "G02": "316e86c55b8df320b8e02135a7b6c58318ed88966cf8886852fcf6f96fe27d1d",
+    "G03": "c335ccd270fd890ef3b24ac89bc3558e67745775951015b557eeced8078b945a",
+    "G04": "7b4a68e24ddcd8180dde950ba9f3a20a1f0d737961797482fbe102b8e2d871dc",
+    "G05": "c7f9bd632e3538d08cfcba5f25eae2bbca55da9645aa39048d035597242f53e5",
+    "G06": "af6c61962804ee7a84008f46fe6fec4d6e8d898ab0ea48c4c025b8e6aff37b2f",
+    "G07": "7bbc5c210445d8dd3c082f252f1e23c660b9107d506db6319ae6b891c1b550a1",
+    "G08": "63ae225337a4849be02ae0f3a23a3b60f1b3aa39b6f56e39171b2078de36a324",
+    "G09": "bea37936eb0454df26b7b134bee314604eaf4271ad83913a6d17c1ef898327db",
+    "G10": "06f92a3f9a8f1736bf4f9692b23ca50dc8ab5d940b2c428e980c0aa9d70073b6",
+    "G11": "9ecb84c07badb588dc500d7a9679e92a73a3ca7d2bd4c23b298cf83e2d7d33c6",
+    "G12": "c55ba9bc11a536027046b75c7d2b8eda6a8a2b8c749bd2735f2e42fa091c8656",
+    "G13": "c1585667009455de8de7385d41266bfdb60db2812d5a77ef5ed2d99b507a6877",
+    "G14": "4418d4823f3d2562b5a67e994122f765295dd3cdb7c033168b5a716d6111619e",
+    "G15": "2cc61a5287588efeae8c519d02c5ddc89c63a09ae6029eec9c06ca8659a5d2dc",
+    "G16": "0a5559fb03eb4263195e4af637432931149498492347f4df8a3fd39e72ac42d5",
+    "G17": "b858b5faa2d25ea1dfd8d1ec51ad570c5b6c9e7337670cfcda80e908521ad3c1",
+    "G18": "ac2235896d57365dc8f03464f0bc844933282b2cb76dfa1f9283c3a67c8b750b",
+    "G19": "a1c63450bd6562b3df07eb9d3bef1c858704311e5453b979a6619c066a95dd20",
+    "G20": "c870dc8b26fc48fc606e58d1eedb946c1028a48a332791d60ef4f2d4cae04d96"
+  },
+  "protocol_commit": "0cb28982ce44c4a20fd3c70c62339c7df6e32cbf",
+  "protocol_file_sha256": {
+    "configs/stage1g_behavioral_mediation_artifact_schema.json": "640789efd309716dfe218d0abff3bc8603cacf3213adcfa09d613cc20ee28b6b",
+    "configs/stage1g_behavioral_mediation_pilot.json": "40407b315c2685203672c8968753b4c28b596e1191d9a4f7063fcacb15458a37",
+    "scripts/stage1g.py": "dded279084154e357f93b2c8b0d1c4ddb0698a96cf544f8da71395578437b397",
+    "scripts/validate_stage1g_artifacts.py": "d711a27764836ac0a7cdb722706d5b74a1fc8539bfffee2cb8f4daa8dcf0346e",
+    "src/cfsus/stage1b_runtime.py": "c31f55841c11e1a6da2848fcedf939401e0ddd4fd882039ffece7bce5e54d9fa",
+    "src/cfsus/stage1c_v3/execution_journal.py": "ec24a14539d6a52f2f7f75c74fe9d4ab72af70486a3fb4148f22d4809e81ca49",
+    "src/cfsus/stage1c_v3/intervention_runtime.py": "b3a2dc0a634addc597c0475e182910be9586dd3b2832868e27c721aa631ac976",
+    "src/cfsus/stage1c_v3/prediction.py": "e789161697e0795281d7ee4e973d608b4cf372707bd685f82fbab4afbf7924c4",
+    "src/cfsus/stage1c_v3/runtime.py": "ec759932bd84da7c026c8cd7047f7cfd78081aea7a1922ef34003a2b6809ce11",
+    "src/cfsus/stage1c_v3/serialization.py": "03f3d70af33a32ac162f01d9135c48826824d3a2cd502e123e13f444d60336c1",
+    "src/cfsus/stage1d/metrics.py": "2f74341dbb9e3859f1e9a097e3049c9d621bac45d29570cb9781ce03ac48e809",
+    "src/cfsus/stage1g.py": "8728d3beba67fadf20579f3126b96c7e467cc5ff8ef0f80e038d97257d631236",
+    "src/cfsus/stage1g_runtime.py": "edf36016ee32e3976e128cd68aa810892613fce82cbbdc379dfc042747e5e285"
+  },
+  "protocol_map_sha256": "cf359292fa91908ad3dc2c73a14a59fd5611a4a26155fdcb23c446682b4cc9c9",
+  "schema_version": 2,
+  "scientific_attempt_started": false,
+  "scientific_protocol": {
+    "artifacts": {
+      "canonical_attempt_lock": "results/generated/stage1g_v2_quantization_aware_behavioral_mediation/canonical_attempt.lock",
+      "generated_directory": "results/generated/stage1g_v2_quantization_aware_behavioral_mediation",
+      "required_files": [
+        "protocol_manifest.json",
+        "output_sensitivity_validation.json",
+        "prediction_manifest.json",
+        "point_records.json",
+        "analysis_summary.json",
+        "run_manifest.json",
+        "environment_manifest.json",
+        "checksums.sha256"
+      ],
+      "result_directory": "results/stage1g_v2_quantization_aware_behavioral_mediation"
+    },
+    "claim_boundary": {
+      "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
+      "historical_stage1g_v1_terminal_class": "inconclusive_runtime",
+      "official_bf16_reproduction": "pending",
+      "paper_results_readiness": false,
+      "reference_clt_reproduction": "pending",
+      "simple_critical_alpha_calibration": "retired"
+    },
+    "decision_rule": {
+      "B_above_floor_fraction_minimum": 0.5,
+      "B_injection_sign_agreement_minimum": 0.65,
+      "B_minus_Q_mean_abs_mediation_bootstrap_lower_strictly_greater_than": 0.0,
+      "B_sign_accuracy_minimum": 0.7,
+      "B_sign_bootstrap_lower_strictly_greater_than": 0.5,
+      "directional_movement_toward_gate_violation_fraction_maximum": 0.1,
+      "minimum_B_crossing_memberships": 24,
+      "minimum_B_crossing_prompts": 6,
+      "minimum_eligible_prompts": 6,
+      "mixed_minimum_supported_criteria": 4,
+      "precedence": [
+        "inconclusive_runtime",
+        "underpowered",
+        "supported",
+        "mixed",
+        "not_supported"
+      ],
+      "supported_criteria_count": 7
+    },
+    "intervention": {
+      "apply_activation_function": false,
+      "attempt_boundary": "first_instrumented_intervention_api_call_on_frozen_stage1g_pair",
+      "canonical_attempts": 1,
+      "conditional_clamp_and_injection": "only_if_strict_source_ablation_crossing",
+      "conditions": [
+        "baseline_noop",
+        "baseline_repeat",
+        "source_full_ablation",
+        "source_ablation_target_clamp",
+        "target_only_injection"
+      ],
+      "constrained_layers": null,
+      "directional_conditions": [
+        "baseline_noop",
+        "baseline_repeat",
+        "source_full_ablation"
+      ],
+      "freeze_attention": true,
+      "scientific_retries": 0,
+      "source_full_ablation_desired": 0.0,
+      "target_clamp_desired": 0.0,
+      "target_injection_amplitude": "exact_bf16_realized_target_activation_observed_under_source_ablation"
+    },
+    "metrics": {
+      "behavior_metric": "answer_minus_contrast_next_token_logit",
+      "bootstrap_interval": "percentile_nearest_rank",
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": "stage1g-quantization-aware-behavioral-mediation-prompt-bootstrap-v2",
+      "bootstrap_unit": "prompt",
+      "confidence_level": 0.95,
+      "empty_crossing_prompt_statistic": 0.0,
+      "exact_binomial_interval": "clopper_pearson",
+      "mediation_fraction_minimum_source_effect_floor_multiple": 10.0,
+      "no_effect_floor": "max(1e-4,5*prompt_max_abs_baseline_repeat_behavior_error,4*(answer_logit_BF16_ULP+contrast_logit_BF16_ULP))",
+      "signed_effects_primary": true
+    },
+    "panels": {
+      "B": {
+        "quota": 4,
+        "rank": "descending_abs_predicted_signed_mediation"
+      },
+      "D": {
+        "quota": 2,
+        "rank": "descending_abs_g_among_q_nonpositive_causal_pairs"
+      },
+      "G": {
+        "quota": 4,
+        "rank": "descending_abs_g_among_predicted_crossings"
+      },
+      "Q": {
+        "quota": 4,
+        "rank": "descending_positive_q"
+      },
+      "execution_deduplication": "prompt_source_target_identity",
+      "target_preference": "two_pass_unique_target_then_ranked_fill",
+      "tie_break": [
+        "source_layer",
+        "source_position",
+        "source_feature_id",
+        "target_layer",
+        "target_position",
+        "target_feature_id",
+        "pair_id"
+      ],
+      "unique_full_identity_within_panel": true
+    },
+    "responses": {
+      "active_j_health_pair_count": 4,
+      "graph_edge_input": "forbidden",
+      "maximum_eligible_pairs": 500000,
+      "output_g_method": "answer_minus_contrast_prelogit_reverse_vjp_target_decoder_contraction",
+      "output_target_batch_size": 32,
+      "target_batch_size": 8,
+      "targeted_j_method": "target_encoder_reverse_vjp_many_source_contraction"
+    },
+    "scanner": {
+      "canonical_chunk_size": 1024,
+      "dense_oracle_chunk_size": 16384,
+      "global_top_k": 128,
+      "selected_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "tie_break": [
+        "margin",
+        "layer",
+        "position",
+        "feature_id"
+      ],
+      "top_k_per_group": 8
+    },
+    "scoring": {
+      "crossing_tolerance": 1e-09,
+      "discovery_ranker": "inhibitory_influence_q",
+      "epsilon": 1e-12,
+      "pair_seed": "stage1g-quantization-aware-behavioral-mediation-v2",
+      "predicted_full_ablation_gate": "target_preactivation+q>target_threshold",
+      "predicted_signed_mediation": "g_i*predicted_target_activation",
+      "predicted_target_activation": "target_preactivation+q_if_strict_gate_else_zero",
+      "q_over_margin_discovery_forbidden": true
+    },
+    "source_pool": {
+      "maximum_active_sources": 10000,
+      "require_causal_position": true,
+      "require_positive_activation": true,
+      "require_strictly_earlier_layer": true
+    }
+  },
+  "simple_critical_alpha_calibration": "retired",
+  "source_branch": "stage-1g-behavioral-mediation-pilot",
+  "stage1g_baseline_model_calls_before_freeze": 0,
+  "stage1g_scientific_intervention_calls_before_freeze": 0,
+  "status": "protocol_frozen_before_any_stage1g_baseline_model_call"
+}

@@ -1,0 +1,33 @@
+{
+  "artifact_type": "stage1g_v2_run_manifest",
+  "base_commit": "6a5bc86c24c35b6920c9682f82ee7874c80bdf58",
+  "branch": "stage-1g-v2-quantization-aware-behavioral-mediation",
+  "canonical_attempt_count": 1,
+  "claim_boundary": {
+    "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
+    "historical_stage1g_v1_terminal_class": "inconclusive_runtime",
+    "official_bf16_reproduction": "pending",
+    "paper_results_readiness": false,
+    "reference_clt_reproduction": "pending",
+    "simple_critical_alpha_calibration": "retired"
+  },
+  "execution_commit": "a8717bef2bd6c76ee3f926ad81e10bea02e35ac4",
+  "experiment_class": "stage1g_v2_quantization_aware_behavioral_mediation",
+  "final_artifacts_rebuilt_from_journal_in_fresh_process": true,
+  "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
+  "historical_stage1g_v1_preflight_sha256": "0e15393e060ceb0f2ec448c19b8281a216ca0adb02304e7b5603246f766fd16f",
+  "historical_stage1g_v1_report_sha256": "ebd3f45cc6b7c6bbf5b4783ed286617bcb4d1646fb116024d349476a04cbf27d",
+  "historical_stage1g_v1_terminal_class": "inconclusive_runtime",
+  "instrumented_intervention_api_calls": 479,
+  "journal_completed_point_count": 479,
+  "prediction_freeze_commit": "a8717bef2bd6c76ee3f926ad81e10bea02e35ac4",
+  "project_decision": "stop_critical_alpha_finite_probe_and_hvp_work_on_this_runtime_and_redirect",
+  "protocol_freeze_commit": "0cb28982ce44c4a20fd3c70c62339c7df6e32cbf",
+  "schema_version": 2,
+  "scientific_baseline_model_calls": 20,
+  "scientific_retry_count": 0,
+  "serialized_point_count": 479,
+  "simple_critical_alpha_calibration": "retired",
+  "standalone_recomputation_required": true,
+  "status": "completed_stage1g_v2_not_supported"
+}
