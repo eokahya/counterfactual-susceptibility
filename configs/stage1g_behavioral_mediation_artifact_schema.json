@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_class": "stage1g_behavioral_mediation_pilot",
+  "required_files": [
+    "protocol_manifest.json",
+    "output_sensitivity_validation.json",
+    "prediction_manifest.json",
+    "point_records.json",
+    "analysis_summary.json",
+    "run_manifest.json",
+    "environment_manifest.json",
+    "checksums.sha256"
+  ],
+  "forbidden_payload_classes": [
+    "model_weights",
+    "transcoder_weights",
+    "tokenizer_payload",
+    "cache",
+    "raw_graph",
+    "adjacency",
+    "dense_activation_tensor",
+    "dense_gradient_tensor",
+    "dense_derivative_tensor",
+    "journal",
+    "private_absolute_path",
+    "secret"
+  ]
+}
