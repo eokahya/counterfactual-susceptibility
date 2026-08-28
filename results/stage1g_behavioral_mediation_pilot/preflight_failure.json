@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "artifact_type": "stage1g_output_sensitivity_preflight_failure",
+  "status": "inconclusive_runtime",
+  "experiment_class": "stage1g_behavioral_mediation_pilot",
+  "branch": "stage-1g-behavioral-mediation-pilot",
+  "base_commit": "c1bb6a3bbab3de945767eded4503b17343ba88e6",
+  "protocol_freeze_commit": "75ee2e2b12e174676a3fbf74360a132835ba0230",
+  "protocol_manifest_sha256": "d2c36906a545718e7c8750ec7b0e30cea6cf8fbdb3b2de5bf2fbb5a38d30d4d0",
+  "blocker": "output_sensitivity_validation_quantized_zero_finite_responses",
+  "preflight_prompt_id": "development_norway_stage1g_output_sensitivity",
+  "preflight_prompt": "The capital of Norway is",
+  "selected_feature_count": 8,
+  "central_relative_half_width": 0.0625,
+  "autograd_g_i": [
+    0.000965118408203125,
+    0.00083160400390625,
+    0.000762939453125,
+    0.000637054443359375,
+    0.000560760498046875,
+    0.00054931640625,
+    -0.000530242919921875,
+    0.0005035400390625
+  ],
+  "bf16_finite_secant": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+  "observed_metrics": {
+    "all_values_finite": true,
+    "autograd_unique_value_count": 8,
+    "finite_secant_unique_value_count": 1,
+    "sign_agreement": 0.0,
+    "spearman": null,
+    "median_symmetric_normalized_error": 2.0
+  },
+  "frozen_acceptance_thresholds": {
+    "sign_agreement_minimum": 0.9,
+    "spearman_minimum": 0.9,
+    "median_symmetric_normalized_error_maximum": 0.05
+  },
+  "gate_passed": false,
+  "thresholds_or_protocol_changed_after_observation": false,
+  "stage1g_scientific_prompt_baseline_calls": 0,
+  "stage1g_scientific_source_suppression_calls": 0,
+  "scientific_attempt_started": false,
+  "prediction_manifest_created": false,
+  "canonical_intervention_created": false,
+  "engineering_diagnostic_repetition": {
+    "count": 1,
+    "purpose": "distinguish a VJP implementation failure from BF16 finite-response quantization",
+    "scientific_prompt_or_pair_used": false,
+    "scientific_attempt_consumed": false,
+    "result": "reproduced_nonconstant_finite_vjp_and_all_zero_bf16_finite_secants"
+  },
+  "asset_preflight": {
+    "status": "verified",
+    "actual_total_bytes": 2087816677,
+    "download_performed": false,
+    "network_accessed": false,
+    "authentication_used": false,
+    "exact_model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "exact_transcoder_revision": "fada11860ac1d337c1e41e9da308798405b94c8e",
+    "exact_transcoder_subfolder": "transcoder_all/width_16k_l0_small"
+  },
+  "offline_validation": {
+    "ruff": "passed",
+    "mypy_strict_stage1g_modules": "passed",
+    "stage1g_synthetic_tests": "2_passed",
+    "full_offline_suite": "610_passed_4_skipped",
+    "synthetic_worker_journal_assembler_fresh_process_validator": "passed"
+  },
+  "claim_boundary": {
+    "behavioral_mediation_result": "none",
+    "historical_stage1f_terminal_class": "completed_stage1f_e1_not_supported",
+    "simple_critical_alpha_calibration": "retired",
+    "official_bf16_reproduction": "pending",
+    "reference_clt_reproduction": "pending",
+    "paper_results_readiness": false
+  }
+}
